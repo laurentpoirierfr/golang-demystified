@@ -8,6 +8,7 @@ cible="./docs"
 
 # Vérifier si le répertoire de destination existe, sinon le créer
 mkdir -p "$cible"
+mkdir -p "$cible/assets"
 
 # Parcours des fichiers Markdown dans le répertoire spécifié
 for fichier_md in "$repertoire"/*.md; do
@@ -26,5 +27,6 @@ for fichier_md in "$repertoire"/*.md; do
 done
 
 mv $repertoire/*.html $cible
+cp $repertoire/assets/*.* $cible/assets
 
 echo "Conversion de tous les fichiers Markdown terminée."
