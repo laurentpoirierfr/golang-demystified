@@ -1,3 +1,5 @@
 # golang-demystified
 
-* [Project](https://laurentpoirierfr.github.io/golang-demystified/)
+* [Html](https://laurentpoirierfr.github.io/golang-demystified/)
+
+* [Pdf](./book/book.pdf)

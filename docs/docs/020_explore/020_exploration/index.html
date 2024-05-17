@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Exploration - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.2abe4f9deee2e3e8ec440009003f7bb21c5c60b7915a1cf8ec38e682289bee57.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img width="70" height="70" alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img  width="70" height="70" alt="Logo" src="/images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Exploration</h1>
+<div class="content ">
+  <h1 id="exploration">Exploration</h1>
+<h3 id="goroot">$GOROOT</h3>
+<p>Voici une explication rapide des répertoires principaux présents dans <strong>$GOROOT</strong>, qui est le répertoire où est installé Go :</p>
+<ul>
+<li>
+<p><strong>bin/</strong> : Ce répertoire contient les exécutables binaires de Go, y compris le binaire de l&rsquo;interpréteur Go (go) et d&rsquo;autres outils comme le formateur de code (gofmt), l&rsquo;outil de gestion de modules (go mod), etc.</p>
+</li>
+<li>
+<p><strong>pkg/</strong> : Ce répertoire contient les packages précompilés, c&rsquo;est-à-dire les fichiers objets résultant de la compilation des fichiers source Go. Ces fichiers sont utilisés lors de la construction de programmes Go pour accélérer les temps de compilation.</p>
+</li>
+<li>
+<p><strong>src/</strong> : Bien que souvent vide dans le répertoire <strong>$GOROOT</strong> standard, ce répertoire est destiné à contenir les fichiers source des packages standard de Go. Ces fichiers source sont généralement inclus dans le code source de Go lors de l&rsquo;installation.</p>
+</li>
+<li>
+<p><strong>include/</strong> : Ce répertoire contient les fichiers d&rsquo;en-tête nécessaires pour la construction de programmes Go qui utilisent des paquets C, C++ ou autres langages compatibles avec Go. Ces fichiers d&rsquo;en-tête sont utilisés par le compilateur Go lors de la liaison avec des bibliothèques externes.</p>
+</li>
+<li>
+<p><strong>misc/</strong> : Ce répertoire contient diverses ressources et outils supplémentaires liés à Go, tels que des exemples de code, des scripts de test, etc. Ces ressources peuvent être utiles pour explorer et apprendre Go plus en profondeur.</p>
+</li>
+</ul>
+<p>Ces répertoires constituent l&rsquo;infrastructure de base de l&rsquo;installation de Go dans le répertoire <strong>$GOROOT</strong>, et chacun joue un rôle spécifique dans le fonctionnement et le développement avec Go.</p>
+<h3 id="gopath">$GOPATH</h3>
+<p>Voici une explication rapide des répertoires principaux présents dans <strong>$GOPATH</strong>, qui est le répertoire où sont stockés les projets et les dépendances pour les applications Go :</p>
+<ul>
+<li>
+<p><strong>bin/</strong> : Ce répertoire contient les exécutables binaires des programmes Go que vous avez installés localement à l&rsquo;aide de la commande <strong>go install</strong>. Les binaires installés ici sont généralement des outils Go tiers que vous utilisez dans votre workflow de développement.</p>
+</li>
+<li>
+<p><strong>pkg/</strong> : Similaire au répertoire <strong>pkg/</strong> dans <strong>$GOROOT</strong>, ce répertoire contient les packages précompilés des projets Go que vous avez construits. Ces packages sont compilés à partir du code source des projets situés dans le répertoire <strong>src/</strong>.</p>
+</li>
+<li>
+<p><strong>src/</strong> : C&rsquo;est le répertoire principal où vous stockez le code source de vos projets Go. Chaque sous-répertoire de src/ correspond généralement à un chemin d&rsquo;importation pour les packages Go. Par exemple, si votre projet est <strong>github.com/utilisateur/monprojet</strong>, vous créerez un répertoire <strong>github.com/utilisateur/monprojet</strong> dans <strong>src/</strong> et placerez votre code source là-dedans.</p>
+</li>
+<li>
+<p><strong>pkg/mod/</strong> : À partir de Go 1.11, ce répertoire est utilisé pour stocker les modules Go téléchargés. Lorsque vous utilisez les modules Go pour gérer les dépendances de vos projets, les fichiers source et les dépendances téléchargées sont stockés ici pour une gestion efficace des dépendances.</p>
+</li>
+<li>
+<p><strong>bin/</strong> (à l&rsquo;intérieur de <strong>$GOPATH/pkg/mod/</strong>) : Ce sous-répertoire contient également des binaires, mais spécifiquement pour les modules Go téléchargés. Ces binaires sont souvent des outils associés à des modules particuliers que vous avez téléchargés et qui sont nécessaires pour la construction ou la gestion de projets Go.</p>
+</li>
+</ul>
+<p>Ces répertoires forment la structure de base de <strong>$GOPATH</strong> et sont utilisés pour stocker les projets, les dépendances et les binaires associés à votre environnement de développement Go.</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.ec19db7e4836c12e2c5e3697d926bc3e4c22005167d9826aab54feca08f0c093.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>

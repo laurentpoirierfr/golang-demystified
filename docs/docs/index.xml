@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview on Golang Demystified</title>
+    <link>https://laurentpoirierfr.github.io/golang-demystified/docs/</link>
+    <description>Recent content in Overview on Golang Demystified</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <atom:link href="https://laurentpoirierfr.github.io/golang-demystified/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/</guid>
+      <description>Introduction Démystifier Go : Exploration de l&amp;rsquo;Écosystème d&amp;rsquo;un Langage de Programmation Révolutionnaire Dans le paysage des langages de programmation, émergent parfois des solutions qui résonnent avec la communauté des développeurs d&amp;rsquo;une manière unique. Go, souvent désigné sous le nom de Golang, est l&amp;rsquo;un de ces langages. Conçu par Google, Go a rapidement gagné en popularité pour sa simplicité, ses performances élevées et sa robustesse. Cependant, au-delà de ces caractéristiques techniques, Go possède un écosystème dynamique et en constante évolution qui mérite d&amp;rsquo;être exploré et compris.</description>
+    </item>
+    <item>
+      <title>Installation</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/</guid>
+      <description>Installation Téléchargement de Go : Rendez-vous sur le site officiel de Go à l&amp;rsquo;adresse https://golang.org/dl/. Téléchargez la version appropriée pour votre système d&amp;rsquo;exploitation (Linux, macOS, Windows, etc.). Une fois le téléchargement terminé, extrayez l&amp;rsquo;archive dans le répertoire $HOME/Community/go. Configuration des variables d&amp;rsquo;environnement : Ouvrez ou créez le fichier de profil de votre shell (~/.bash_profile, ~/.bashrc, ~/.zshrc, etc.). Ajoutez les lignes suivantes pour définir les variables d&amp;rsquo;environnement GOROOT, GOPATH, et mettre les binaires de GOPATH/bin dans le PATH : export GOROOT=$HOME/Community/go export GOPATH=$HOME/Community/gopath export PATH=$PATH:$GOROOT/bin:$GOPATH/bin Vérification de l&amp;rsquo;installation : Ouvrez un nouveau terminal.</description>
+    </item>
+    <item>
+      <title>Exploration</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/</guid>
+      <description>Exploration $GOROOT Voici une explication rapide des répertoires principaux présents dans $GOROOT, qui est le répertoire où est installé Go :&#xA;bin/ : Ce répertoire contient les exécutables binaires de Go, y compris le binaire de l&amp;rsquo;interpréteur Go (go) et d&amp;rsquo;autres outils comme le formateur de code (gofmt), l&amp;rsquo;outil de gestion de modules (go mod), etc.&#xA;pkg/ : Ce répertoire contient les packages précompilés, c&amp;rsquo;est-à-dire les fichiers objets résultant de la compilation des fichiers source Go.</description>
+    </item>
+    <item>
+      <title>Commandes</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/</guid>
+      <description>Commandes Voici une explication rapide des commandes les plus couramment utilisées avec Go :&#xA;go mod init : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné. Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé &amp;ldquo;monprojet&amp;rdquo;. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.</description>
+    </item>
+  </channel>
+</rss>

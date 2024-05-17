@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Commandes - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.2abe4f9deee2e3e8ec440009003f7bb21c5c60b7915a1cf8ec38e682289bee57.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img width="70" height="70" alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img  width="70" height="70" alt="Logo" src="/images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Commandes</h1>
+<div class="content ">
+  <h1 id="commandes">Commandes</h1>
+<p>Voici une explication rapide des commandes les plus couramment utilisées avec Go :</p>
+<ul>
+<li><strong>go mod init</strong> : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné.</li>
+</ul>
+<p>Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé <strong>&ldquo;monprojet&rdquo;</strong>. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.</p>
+<ul>
+<li>Créez un nouveau répertoire pour votre projet et accédez-y dans votre terminal :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir monprojet
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> monprojet
+</span></span></code></pre></div><ul>
+<li>Initialisez un nouveau module Go en utilisant go mod init avec le nom de votre module. Par exemple, si vous avez l&rsquo;intention de publier votre code sous <strong>github.com/utilisateur/monprojet</strong>, vous pouvez utiliser :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go mod init github.com/utilisateur/monprojet
+</span></span></code></pre></div><ul>
+<li>Après avoir exécuté cette commande, un fichier <strong>go.mod</strong> sera créé dans le répertoire de votre projet. Ce fichier contient des informations sur votre module, y compris son chemin d&rsquo;importation et les dépendances (initialisées à ce stade comme étant les dépendances standard de Go).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">module</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">utilisateur</span><span class="o">/</span><span class="nx">monprojet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">go</span> <span class="mf">1.22</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">require</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">pkg1</span> <span class="nx">v1</span><span class="mf">.2.3</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">pkg2</span> <span class="nx">v0</span><span class="mf">.4.0</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">replace</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">pkg2</span> <span class="p">=&gt;</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">utilisateur</span><span class="o">/</span><span class="nx">pkg2</span> <span class="nx">v0</span><span class="mf">.4.1</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>module github.com/utilisateur/monprojet</strong> : Cette ligne spécifie le chemin d&rsquo;importation de votre module Go. Cela permet à d&rsquo;autres programmes Go de référencer votre module en important ce chemin.</p>
+</li>
+<li>
+<p><strong>go 1.22</strong> : Cette ligne spécifie la version minimale de Go requise pour construire votre projet.</p>
+</li>
+<li>
+<p><strong>require</strong> : Cette section liste les dépendances de votre projet, avec leurs noms de module et leurs versions. Par exemple, <strong>github.com/pkg1 v1.2.3</strong> signifie que votre projet dépend de la version 1.2.3 du module github.com/pkg1.</p>
+</li>
+<li>
+<p><strong>replace</strong> : Cette section permet de remplacer les dépendances par d&rsquo;autres. Cela peut être utile pour utiliser des versions modifiées ou locales de dépendances. Par exemple, <strong>github.com/pkg2 =&gt; github.com/utilisateur/pkg2 v0.4.1</strong> remplace la dépendance github.com/pkg2 par github.com/utilisateur/pkg2 à la version v0.4.1.</p>
+</li>
+<li>
+<p>Vous pouvez maintenant commencer à développer votre projet en Go ! Vous pouvez ajouter des dépendances à l&rsquo;aide de la commande <strong>go get</strong> et utiliser des packages externes sans crainte de perturber votre environnement de développement grâce à la gestion des modules.</p>
+</li>
+</ul>
+<p>Cet exemple illustre comment utiliser <strong>go mod init</strong> pour initialiser un nouveau module Go dans un projet et démarrer le développement avec la gestion des modules.</p>
+<ul>
+<li>
+<p><strong>go mod tidy</strong> : Analyse les dépendances de votre projet et met à jour le fichier go.mod et, le cas échéant, le fichier go.sum pour refléter les dépendances réellement utilisées par votre code. Il supprime également les dépendances qui ne sont plus nécessaires.</p>
+</li>
+<li>
+<p><strong>go mod vendor</strong> : Copie les dépendances de votre projet dans le répertoire <strong>vendor/</strong> de votre projet. Cela permet de garantir que toutes les dépendances nécessaires sont présentes localement et que le code peut être construit et exécuté de manière isolée.</p>
+</li>
+<li>
+<p><strong>go run</strong> : Compile et exécute immédiatement le fichier Go spécifié. Cela permet d&rsquo;exécuter rapidement un programme Go sans avoir à le construire séparément.</p>
+</li>
+<li>
+<p><strong>go install</strong> : Compile et installe le package ou le programme Go spécifié. Si le package ou le programme est un exécutable, il sera installé dans le répertoire <strong>bin/</strong> de votre <strong>$GOPATH</strong> ou de votre module.</p>
+</li>
+<li>
+<p><strong>go test</strong> : Exécute les tests unitaires pour le package Go spécifié. Il recherche les fichiers <strong>_test.go</strong> dans le package et exécute les fonctions de test qu&rsquo;ils contiennent.</p>
+</li>
+</ul>
+<p>Ces commandes constituent un ensemble de base pour gérer les dépendances, construire, exécuter et tester des programmes Go. Elles sont largement utilisées dans le développement quotidien avec Go.</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.ec19db7e4836c12e2c5e3697d926bc3e4c22005167d9826aab54feca08f0c093.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>

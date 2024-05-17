@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Installation - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.2abe4f9deee2e3e8ec440009003f7bb21c5c60b7915a1cf8ec38e682289bee57.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img width="70" height="70" alt="Logo" src="/images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/"><img  width="70" height="70" alt="Logo" src="/images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Installation</h1>
+<div class="content ">
+  <h1 id="installation">Installation</h1>
+<h3 id="téléchargement-de-go-">Téléchargement de Go :</h3>
+<ul>
+<li>Rendez-vous sur le site officiel de Go à l&rsquo;adresse <a href="https://golang.org/dl/">https://golang.org/dl/</a>.</li>
+<li>Téléchargez la version appropriée pour votre système d&rsquo;exploitation (Linux, macOS, Windows, etc.).</li>
+<li>Une fois le téléchargement terminé, extrayez l&rsquo;archive dans le répertoire <strong>$HOME/Community/go</strong>.</li>
+</ul>
+<h3 id="configuration-des-variables-denvironnement-">Configuration des variables d&rsquo;environnement :</h3>
+<ul>
+<li>Ouvrez ou créez le fichier de profil de votre shell (<strong>~/.bash_profile</strong>, <strong>~/.bashrc</strong>, <strong>~/.zshrc</strong>, etc.).</li>
+<li>Ajoutez les lignes suivantes pour définir les variables d&rsquo;environnement <strong>GOROOT</strong>, <strong>GOPATH</strong>, et mettre les binaires de <strong>GOPATH/bin</strong> dans le <strong>PATH</strong> :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GOROOT</span><span class="o">=</span><span class="nv">$HOME</span>/Community/go
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/Community/gopath
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOROOT</span>/bin:<span class="nv">$GOPATH</span>/bin
+</span></span></code></pre></div><h3 id="vérification-de-linstallation-">Vérification de l&rsquo;installation :</h3>
+<ul>
+<li>Ouvrez un nouveau terminal.</li>
+<li>Tapez <strong>go version</strong> pour vérifier que Go est correctement installé et configuré.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">elfeo@elfeo:~/Project/golang-demystified$ go version
+</span></span><span class="line"><span class="cl">go version go1.22.2 linux/amd64
+</span></span></code></pre></div><p>Avec ces configurations, vous pourrez utiliser Go et ses outils associés de manière fluide, en ayant accès aux binaires des packages installés dans <strong>$HOME/Community/gopath/bin</strong>.</p>
+<h3 id="téléchargement-de-visual-studio-code-">Téléchargement de Visual Studio Code :</h3>
+<ul>
+<li>Rendez-vous sur le site officiel de Visual Studio Code à l&rsquo;adresse <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>.</li>
+<li>Téléchargez la version appropriée pour votre système d&rsquo;exploitation (Linux, macOS, Windows, etc.).</li>
+<li>Suivez les instructions pour installer Visual Studio Code sur votre système.</li>
+</ul>
+<h3 id="installation-dextensions-pour-go-">Installation d&rsquo;extensions pour Go :</h3>
+<p><img src="assets/010_installation_000.png" alt="help"></p>
+<ul>
+<li>Recherchez &ldquo;Go&rdquo; dans la barre de recherche des extensions.</li>
+<li>Installez l&rsquo;extension <strong>&ldquo;Go&rdquo;</strong> proposée par Microsoft, en cliquant sur le bouton <strong>&ldquo;Installer&rdquo;</strong>.</li>
+</ul>
+<h3 id="configuration-de-lenvironnement-go-">Configuration de l&rsquo;environnement Go :</h3>
+<ul>
+<li>Ouvrez les paramètres de Visual Studio Code en appuyant sur Ctrl+, ou en sélectionnant <strong>&ldquo;Fichier&rdquo; &gt; &ldquo;Préférences&rdquo; &gt; &ldquo;Paramètres&rdquo;</strong>.</li>
+<li>Recherchez &ldquo;go.gopath&rdquo; dans la barre de recherche des paramètres.</li>
+<li>Spécifiez le chemin du répertoire gopath que vous avez configuré précédemment, par exemple <strong>&quot;$HOME/Community/gopath&quot;</strong>.</li>
+<li>Enregistrez les modifications.</li>
+</ul>
+<h3 id="vérification-de-linstallation--1">Vérification de l&rsquo;installation :</h3>
+<ul>
+<li>Redémarrez Visual Studio Code pour appliquer les paramètres.</li>
+<li>Créez un nouveau fichier Go ou ouvrez un projet existant.</li>
+<li>Visual Studio Code devrait automatiquement détecter que c&rsquo;est un projet Go et proposer des suggestions d&rsquo;installation d&rsquo;outils supplémentaires si nécessaire.</li>
+<li>Vous êtes maintenant prêt à coder en Go avec Visual Studio Code !</li>
+</ul>
+<p>Avec Visual Studio Code et l&rsquo;extension Go, vous bénéficierez d&rsquo;un environnement de développement puissant et convivial pour vos projets en Go.</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.ec19db7e4836c12e2c5e3697d926bc3e4c22005167d9826aab54feca08f0c093.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>

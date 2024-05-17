@@ -1,0 +1,17 @@
+[
+    {
+        "page": "../workspace/docs/content/_index.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/000_intro/000_introduction.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/010_install/010_installation.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/020_explore/020_exploration.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/030_commandes/030_commandes.md"
+    }
+]
