@@ -18,6 +18,10 @@ titlepage-rule-color: "FFFFFF"
 titlepage-rule-height: 2
 ...
 
+
+![Golang Demystified](assets/mic-drop.png)
+
+---
 "Découvrez la puissance et la simplicité de Go, le langage de programmation conçu pour conquérir les défis du développement moderne avec efficacité et élégance."
 
 # Introduction
