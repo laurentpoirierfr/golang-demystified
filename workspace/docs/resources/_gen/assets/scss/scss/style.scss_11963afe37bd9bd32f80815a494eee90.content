@@ -13746,9 +13746,10 @@ p {
         width: 60%; } }
   .page-home .terminal {
     border-radius: 3px;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-top: -170px; }
     .page-home .terminal img {
-      width: 100%;
+      width: 50%;
       height: auto; }
 
 body {
