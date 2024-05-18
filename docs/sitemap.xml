@@ -2,20 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/golang-demystified/docs/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/docs/</loc>
   </url><url>
-    <loc>/golang-demystified/docs/000_intro/000_introduction/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/</loc>
   </url><url>
-    <loc>/golang-demystified/docs/010_install/010_installation/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/</loc>
   </url><url>
-    <loc>/golang-demystified/docs/020_explore/020_exploration/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/</loc>
   </url><url>
-    <loc>/golang-demystified/docs/030_commandes/030_commandes/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/</loc>
   </url><url>
-    <loc>/golang-demystified/categories/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/categories/</loc>
   </url><url>
-    <loc>/golang-demystified/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/</loc>
   </url><url>
-    <loc>/golang-demystified/tags/</loc>
+    <loc>https://laurentpoirierfr.github.io/golang-demystified/tags/</loc>
   </url>
 </urlset>
