@@ -1,5 +1,5 @@
 #baseURL = "https://laurentpoirierfr.github.io/golang-demystified/"
-baseURL = "golang-demystified/"
+baseURL = "/golang-demystified"
 languageCode = "fr-fr"
 title = "Golang Demystified"
 themesDir = "themes"
