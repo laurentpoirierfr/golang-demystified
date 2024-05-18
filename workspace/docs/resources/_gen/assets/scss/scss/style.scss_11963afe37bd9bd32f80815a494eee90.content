@@ -13746,8 +13746,7 @@ p {
         width: 60%; } }
   .page-home .terminal {
     border-radius: 3px;
-    margin: 0 auto;
-    margin-top: -200px; }
+    margin: 0 auto; }
     .page-home .terminal img {
       width: 100%;
       height: auto; }
