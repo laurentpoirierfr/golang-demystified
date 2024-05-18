@@ -19,7 +19,7 @@ titlepage-rule-height: 2
 ...
 
 
-![Golang Demystified](assets/mic-drop.png)
+![Golang Demystified](golang-demystified/assets/mic-drop.png)
 
 ---
 "Découvrez la puissance et la simplicité de Go, le langage de programmation conçu pour conquérir les défis du développement moderne avec efficacité et élégance."
@@ -84,7 +84,7 @@ Avec ces configurations, vous pourrez utiliser Go et ses outils associés de man
 
 ### Installation d'extensions pour Go :
 
-![help](assets/010_installation_000.png)
+![Help](/golang-demystified/assets/010_installation_000.png)
 
 - Recherchez "Go" dans la barre de recherche des extensions.
 - Installez l'extension **"Go"** proposée par Microsoft, en cliquant sur le bouton **"Installer"**.

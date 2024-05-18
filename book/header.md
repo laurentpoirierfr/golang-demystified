@@ -19,6 +19,6 @@ titlepage-rule-height: 2
 ...
 
 
-![Golang Demystified](assets/mic-drop.png)
+![Golang Demystified](golang-demystified/assets/mic-drop.png)
 
 ---
