@@ -31,7 +31,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 - Tapez **go version** pour vérifier que Go est correctement installé et configuré.
 
 ```bash
-elfeo@elfeo:~/Project/golang-demystified$ go version
+elfeo@elfeo:~/Project,golang-demystified$ go version
 go version go1.22.2 linux/amd64
 ```
 Avec ces configurations, vous pourrez utiliser Go et ses outils associés de manière fluide, en ayant accès aux binaires des packages installés dans **$HOME/Community/gopath/bin**.

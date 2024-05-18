@@ -1,6 +1,6 @@
 ---
 title: "Golang Demystified"
-author: [Laurent Poirier]
+author: [The Gand of Three]
 date: ""
 subject: "Golang Demystified"
 keywords: [Golang, Ecosystem]
@@ -10,7 +10,7 @@ book: true
 toc: true
 toc-own-page: true
 
-page-background: "assets/background.pdf"
+page-background: "golang-demystified/assets/background.pdf"
 titlepage: true
 titlepage-color: "3C9F53"
 titlepage-text-color: "FFFFFF"
