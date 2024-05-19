@@ -139,7 +139,7 @@ func PrintMessage(msg string) {
 Cette organisation permet de structurer votre projet de manière modulaire et claire, en séparant les différentes responsabilités et en facilitant la maintenance et la scalabilité du code.
 
 
-## Exemple d'organisation pour un projet web
+## Exemple d'organisation pour un projet web
 
 
 Voici une structure et un exemple de code pour un projet Go utilisant le framework web Gin. Cette organisation inclut des packages pour les API, les services, les dépôts de données, et les connecteurs de données.
