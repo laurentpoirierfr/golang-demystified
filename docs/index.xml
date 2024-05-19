@@ -46,6 +46,17 @@ go mod init : Initialise un nouveau module Go dans le répertoire courant. Un mo
     </item>
     
     <item>
+      <title>Language</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/040_language/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/040_language/</guid>
+      <description>Language Les types En Go, les principaux types sont les types de base (comme int, float64, string), les types composites (comme les tableaux, les tranches, les cartes, les structures et les interfaces) et les types définis par l&amp;rsquo;utilisateur (alias de types et types structurés).
+Voici un exemple d&amp;rsquo;instanciation pour quelques types :
+Type de base : var age int = 30 Type tableau : var numbers [5]int Type slice : var fruits []string Type map : var person map[string]string Type structure : type Person struct { Name string Age int } var john Person Type interface : type Shape interface { Area() float64 } Alias de type : type Celsius float64 var temperature Celsius = 25.</description>
+    </item>
+    
+    <item>
       <title>Packages</title>
       <link>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
