@@ -45,5 +45,15 @@ pkg/ : Ce répertoire contient les packages précompilés, c&amp;rsquo;est-à-di
 go mod init : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné. Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé &amp;ldquo;monprojet&amp;rdquo;. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.</description>
     </item>
     
+    <item>
+      <title>Packages</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/</guid>
+      <description>Packages Exemple de structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── service/ │ │ └── service.go │ └── repository/ │ └── repository.go ├── pkg/ │ └── myproject/ │ ├── models/ │ │ └── models.go │ └── utils/ │ └── utils.go └── go.mod Description des packages cmd :
+Ce répertoire contient les programmes exécutables de votre projet. Chaque sous-répertoire dans cmd contient un point d&amp;rsquo;entrée principal (main.</description>
+    </item>
+    
   </channel>
 </rss>

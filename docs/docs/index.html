@@ -106,6 +106,10 @@
       <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
     </li>
     
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Packages</a>
+    </li>
+    
   </ul>
 </div>
 
@@ -150,6 +154,14 @@ pkg/ : Ce répertoire contient les packages précompilés, c&rsquo;est-à-dire l
   <h2 class="title-summary"><a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a></h2>
   <p>Commandes Voici une explication rapide des commandes les plus couramment utilisées avec Go :
 go mod init : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné. Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé &ldquo;monprojet&rdquo;. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.</p>
+</div>
+
+
+<div class="summary mb-2">
+  
+  <h2 class="title-summary"><a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Packages</a></h2>
+  <p>Packages Exemple de structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── service/ │ │ └── service.go │ └── repository/ │ └── repository.go ├── pkg/ │ └── myproject/ │ ├── models/ │ │ └── models.go │ └── utils/ │ └── utils.go └── go.mod Description des packages cmd :
+Ce répertoire contient les programmes exécutables de votre projet. Chaque sous-répertoire dans cmd contient un point d&rsquo;entrée principal (main.</p>
 </div>
 
 

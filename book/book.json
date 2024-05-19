@@ -13,5 +13,8 @@
     },
     {
         "page": "../workspace/docs/content/docs/030_commandes/030_commandes.md"
+    },
+    {
+        "page" : "../workspace/docs/content/docs/050_packages/050_packages.md"
     }
 ]

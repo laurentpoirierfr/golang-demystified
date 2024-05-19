@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Packages - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.56f0491693eed9599d8ab7a88824ee081534092eefa574facfc1ba62bd99f9b6.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img  width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Packages</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Packages</h1>
+<div class="content ">
+  <h1 id="packages">Packages</h1>
+<h2 id="exemple-de-structure-du-projet">Exemple de structure du projet</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">myproject/
+</span></span><span class="line"><span class="cl">├── cmd/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       └── main.go
+</span></span><span class="line"><span class="cl">├── internal/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       ├── service/
+</span></span><span class="line"><span class="cl">│       │   └── service.go
+</span></span><span class="line"><span class="cl">│       └── repository/
+</span></span><span class="line"><span class="cl">│           └── repository.go
+</span></span><span class="line"><span class="cl">├── pkg/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       ├── models/
+</span></span><span class="line"><span class="cl">│       │   └── models.go
+</span></span><span class="line"><span class="cl">│       └── utils/
+</span></span><span class="line"><span class="cl">│           └── utils.go
+</span></span><span class="line"><span class="cl">└── go.mod
+</span></span></code></pre></div><h3 id="description-des-packages">Description des packages</h3>
+<ul>
+<li>
+<p><strong>cmd</strong> :</p>
+<ul>
+<li>
+<p>Ce répertoire contient les programmes exécutables de votre projet. Chaque sous-répertoire dans <strong>cmd</strong> contient un point d&rsquo;entrée principal (<strong>main.go</strong>) pour un binaire spécifique.</p>
+</li>
+<li>
+<p>Exemple : <strong>cmd/myproject/main.go</strong> est le point d&rsquo;entrée de l&rsquo;application principale.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>internal</strong> :</p>
+<ul>
+<li>
+<p>Ce répertoire contient le code qui est destiné à être utilisé uniquement au sein de votre projet. Les packages dans <strong>internal</strong> ne peuvent pas être importés par des projets externes.</p>
+</li>
+<li>
+<p>Exemple :</p>
+<ul>
+<li><strong>internal/myproject/service/service.go</strong> contient la logique métier de votre application.</li>
+<li><strong>internal/myproject/repository/repository.go</strong> contient la logique d&rsquo;accès aux données (par exemple, accès à la base de données).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>pkg</strong> :</p>
+<ul>
+<li>
+<p>Ce répertoire contient les packages qui peuvent être utilisés par d&rsquo;autres projets ou par plusieurs composants de votre projet. Ces packages sont réutilisables et exportables.</p>
+</li>
+<li>
+<p>Exemple :</p>
+<ul>
+<li><strong>pkg/myproject/models/models.go</strong> contient les définitions de structures de données utilisées dans votre application.</li>
+<li><strong>pkg/myproject/utils/utils.go</strong> contient des fonctions utilitaires réutilisables.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="exemple-de-code">Exemple de code</h3>
+<p><strong>cmd/myproject/main.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/service&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Starting myproject&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">service</span><span class="p">.</span><span class="nf">StartService</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/service/service.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/repository&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/pkg/myproject/models&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">StartService</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Service started&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetUserByID</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;User: %+v\n&#34;</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/repository/repository.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">repository</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;myproject/pkg/myproject/models&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetUserByID</span><span class="p">(</span><span class="nx">id</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Simuler une récupération de base de données
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;John Doe&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>pkg/myproject/models/models.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">models</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>pkg/myproject/utils/utils.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">utils</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">PrintMessage</span><span class="p">(</span><span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="explications-supplémentaires">Explications supplémentaires</h3>
+<ul>
+<li>
+<p><strong>cmd</strong> : Contient l&rsquo;implémentation des points d&rsquo;entrée principaux de votre application. Vous pouvez avoir plusieurs sous-répertoires dans cmd pour différentes applications/binaries.</p>
+</li>
+<li>
+<p><strong>internal</strong> : Organise le code interne de votre application qui ne doit pas être exposé ou utilisé en dehors de ce projet. Cela assure l&rsquo;encapsulation et la sécurité du code interne.</p>
+</li>
+<li>
+<p><strong>pkg</strong> : Contient du code exportable et réutilisable. D&rsquo;autres projets peuvent importer et utiliser les packages ici définis.</p>
+</li>
+</ul>
+<p>Cette organisation permet de structurer votre projet de manière modulaire et claire, en séparant les différentes responsabilités et en facilitant la maintenance et la scalabilité du code.</p>
+<p>## Exemple d&rsquo;organisation pour un projet web</p>
+<p>Voici une structure et un exemple de code pour un projet Go utilisant le framework web Gin. Cette organisation inclut des packages pour les API, les services, les dépôts de données, et les connecteurs de données.</p>
+<h3 id="structure-du-projet">Structure du projet</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">myproject/
+</span></span><span class="line"><span class="cl">├── cmd/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       └── main.go
+</span></span><span class="line"><span class="cl">├── internal/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       ├── api/
+</span></span><span class="line"><span class="cl">│       │   ├── handlers/
+</span></span><span class="line"><span class="cl">│       │   │   └── user_handler.go
+</span></span><span class="line"><span class="cl">│       │   └── router.go
+</span></span><span class="line"><span class="cl">│       ├── service/
+</span></span><span class="line"><span class="cl">│       │   └── user_service.go
+</span></span><span class="line"><span class="cl">│       ├── repository/
+</span></span><span class="line"><span class="cl">│       │   ├── user_repository.go
+</span></span><span class="line"><span class="cl">│       │   └── db.go
+</span></span><span class="line"><span class="cl">│       └── config/
+</span></span><span class="line"><span class="cl">│           └── config.go
+</span></span><span class="line"><span class="cl">├── pkg/
+</span></span><span class="line"><span class="cl">│   └── myproject/
+</span></span><span class="line"><span class="cl">│       ├── models/
+</span></span><span class="line"><span class="cl">│       │   └── user.go
+</span></span><span class="line"><span class="cl">│       ├── utils/
+</span></span><span class="line"><span class="cl">│       │   └── utils.go
+</span></span><span class="line"><span class="cl">│       └── connectors/
+</span></span><span class="line"><span class="cl">│           ├── redis/
+</span></span><span class="line"><span class="cl">│           │   └── redis_client.go
+</span></span><span class="line"><span class="cl">│           └── sqldb/
+</span></span><span class="line"><span class="cl">│               └── sqldb_client.go
+</span></span><span class="line"><span class="cl">└── go.mod
+</span></span></code></pre></div><h3 id="exemple-de-code-1">Exemple de code</h3>
+<p><strong>cmd/myproject/main.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/api&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/config&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Charger la configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">conf</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">config</span><span class="p">.</span><span class="nf">LoadConfig</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not load config: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Initialiser le routeur
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">api</span><span class="p">.</span><span class="nf">NewRouter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Démarrer le serveur
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Starting server on %s&#34;</span><span class="p">,</span> <span class="nx">conf</span><span class="p">.</span><span class="nx">ServerAddress</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="nx">conf</span><span class="p">.</span><span class="nx">ServerAddress</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;Could not start server: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/api/router.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">api</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/api/handlers&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewRouter</span><span class="p">()</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Définir les routes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/users/:id&#34;</span><span class="p">,</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">GetUser</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">r</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/api/handlers/user_handler.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">handlers</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/service&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;strconv&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetUser</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">id</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">Atoi</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;Invalid user ID&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">service</span><span class="p">.</span><span class="nf">GetUserByID</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/service/user_service.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">service</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/internal/myproject/repository&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;myproject/pkg/myproject/models&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetUserByID</span><span class="p">(</span><span class="nx">id</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">repository</span><span class="p">.</span><span class="nf">GetUserByID</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/repository/user_repository.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">repository</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;myproject/pkg/myproject/models&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GetUserByID</span><span class="p">(</span><span class="nx">id</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Simuler une récupération de base de données
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;John Doe&#34;</span><span class="p">},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>internal/myproject/config/config.go</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Config</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ServerAddress</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">LoadConfig</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">Config</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ServerAddress</span><span class="p">:</span> <span class="nf">getEnv</span><span class="p">(</span><span class="s">&#34;SERVER_ADDRESS&#34;</span><span class="p">,</span> <span class="s">&#34;:8080&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getEnv</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">exists</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">LookupEnv</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span> <span class="nx">exists</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">defaultValue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="explication-des-packages">Explication des packages</h3>
+<ul>
+<li>
+<p><strong>cmd</strong> :</p>
+<ul>
+<li>Contient les programmes exécutables de votre projet. Le fichier main.go initialise la configuration et démarre le serveur Gin.</li>
+</ul>
+</li>
+<li>
+<p><strong>internal</strong> :</p>
+<ul>
+<li>
+<p><strong>api</strong> :</p>
+<ul>
+<li><strong>handlers</strong> : Contient les gestionnaires de requêtes (handlers) pour les différentes routes de l&rsquo;API.</li>
+<li><strong>router.go</strong> : Initialise le routeur Gin et définit les routes.</li>
+</ul>
+</li>
+<li>
+<p><strong>service</strong> : Contient la logique métier de l&rsquo;application.</p>
+</li>
+<li>
+<p><strong>repository</strong> : Contient la logique d&rsquo;accès aux données.</p>
+</li>
+<li>
+<p><strong>config</strong> : Gère la configuration de l&rsquo;application.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>pkg</strong> :</p>
+<ul>
+<li><strong>models</strong> : Contient les définitions de structures de données.</li>
+<li><strong>utils</strong> : Contient des fonctions utilitaires réutilisables.</li>
+<li><strong>connectors</strong> : Contient les connecteurs de données pour les différentes sources de données (par exemple, Redis, SQL).</li>
+</ul>
+</li>
+</ul>
+<p>Cette structure organise clairement les différentes parties de votre application web, en séparant les responsabilités et en assurant une modularité et une extensibilité efficaces.</p>
+<p>￼
+￼
+￼
+￼
+￼
+￼</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>
