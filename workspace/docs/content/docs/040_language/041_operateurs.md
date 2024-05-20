@@ -381,7 +381,7 @@ func main() {
 }
 ```
 
-#### Affectation et division (/=)
+#### Affectation et division (/=)
 
 * Divise la variable de gauche par la valeur de droite.
 * Exemple :
