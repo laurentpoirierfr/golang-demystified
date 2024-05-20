@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Type Interface - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.56f0491693eed9599d8ab7a88824ee081534092eefa574facfc1ba62bd99f9b6.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img  width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/040_language/">Language</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/041_operateurs/">Opérateurs</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/042_interface/">Type Interface</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/043_structure/">Type Structure</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Organisation packages standard</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/">Organisation packages web</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Type Interface</h1>
+<div class="content ">
+  <h3 id="type-interface">Type interface</h3>
+<p>En Go, une interface est un type qui spécifie un ensemble de méthodes que d&rsquo;autres types doivent implémenter. Les interfaces sont utilisées pour définir le comportement attendu sans spécifier l&rsquo;implémentation concrète. Un type qui implémente toutes les méthodes d&rsquo;une interface est considéré comme une instance de cette interface.</p>
+<h4 id="définition-dune-interface">Définition d&rsquo;une interface</h4>
+<p>Une interface est définie en listant les méthodes qu&rsquo;elle contient. Voici un exemple d&rsquo;interface simple :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Speaker</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="implémentation-de-linterface">Implémentation de l&rsquo;interface</h4>
+<p>Un type implémente une interface en définissant toutes les méthodes de cette interface. Il n&rsquo;y a pas de mot-clé explicite pour indiquer qu&rsquo;un type implémente une interface ; cela se fait implicitement.</p>
+<h4 id="exemple-complet">Exemple complet</h4>
+<p>Voici un exemple complet montrant la définition d&rsquo;une interface, l&rsquo;implémentation de cette interface par différents types, et l&rsquo;utilisation de l&rsquo;interface :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Définition de l&#39;interface Speaker
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Speaker</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Type Dog qui implémente l&#39;interface Speaker
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Dog</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="nx">Dog</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Woof! My name is &#34;</span> <span class="o">+</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Type Cat qui implémente l&#39;interface Speaker
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Cat</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">Cat</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Meow! My name is &#34;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Fonction qui prend un Speaker en paramètre
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">s</span> <span class="nx">Speaker</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nf">Speak</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Création d&#39;instances de Dog et Cat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">dog</span> <span class="o">:=</span> <span class="nx">Dog</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Buddy&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cat</span> <span class="o">:=</span> <span class="nx">Cat</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Whiskers&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Utilisation de la fonction MakeSpeak avec différentes implémentations de Speaker
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">dog</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">cat</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="explications">Explications</h4>
+<ul>
+<li>Définition de l&rsquo;interface Speaker :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Speaker</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>L&rsquo;interface Speaker contient une seule méthode Speak qui retourne une chaîne de caractères.</p>
+<ul>
+<li>Implémentation de l&rsquo;interface par le type Dog :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Dog</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="nx">Dog</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Woof! My name is &#34;</span> <span class="o">+</span> <span class="nx">d</span><span class="p">.</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Le type Dog implémente la méthode Speak définie par l&rsquo;interface Speaker.</p>
+<ul>
+<li>Implémentation de l&rsquo;interface par le type Cat :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Cat</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">Cat</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Meow! My name is &#34;</span> <span class="o">+</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Le type Cat implémente également la méthode Speak.</p>
+<ul>
+<li>Utilisation de l&rsquo;interface :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">s</span> <span class="nx">Speaker</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nf">Speak</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>La fonction <strong>MakeSpeak</strong> prend un paramètre de type <strong>Speaker</strong> et appelle la méthode <strong>Speak</strong> sur ce paramètre.</p>
+<ul>
+<li>Appel de la fonction avec différentes implémentations :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">dog</span> <span class="o">:=</span> <span class="nx">Dog</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Buddy&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cat</span> <span class="o">:=</span> <span class="nx">Cat</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Whiskers&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">dog</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">MakeSpeak</span><span class="p">(</span><span class="nx">cat</span><span class="p">)</span>
+</span></span></code></pre></div><p>Les instances de <strong>Dog</strong> et <strong>Cat</strong> sont passées à la fonction <strong>MakeSpeak</strong>, démontrant le polymorphisme en Go.</p>
+<h4 id="résultat-attendu">Résultat attendu</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Woof</span><span class="p">!</span> <span class="nx">My</span> <span class="nx">name</span> <span class="nx">is</span> <span class="nx">Buddy</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Meow</span><span class="p">!</span> <span class="nx">My</span> <span class="nx">name</span> <span class="nx">is</span> <span class="nx">Whiskers</span>
+</span></span></code></pre></div><p>Dans cet exemple, l&rsquo;interface <strong>Speaker</strong> est utilisée pour abstraire le comportement de <strong>Dog</strong> et <strong>Cat</strong>, permettant de traiter des instances de ces types de manière uniforme via l&rsquo;interface.</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>

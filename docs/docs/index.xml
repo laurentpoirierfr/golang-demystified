@@ -51,19 +51,60 @@ go mod init : Initialise un nouveau module Go dans le répertoire courant. Un mo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/040_language/</guid>
-      <description>Language Les types En Go, les principaux types sont les types de base (comme int, float64, string), les types composites (comme les tableaux, les tranches, les cartes, les structures et les interfaces) et les types définis par l&amp;rsquo;utilisateur (alias de types et types structurés).
-Voici un exemple d&amp;rsquo;instanciation pour quelques types :
-Type de base : var age int = 30 Type tableau : var numbers [5]int Type slice : var fruits []string Type map : var person map[string]string Type structure : type Person struct { Name string Age int } var john Person Type interface : type Shape interface { Area() float64 } Alias de type : type Celsius float64 var temperature Celsius = 25.</description>
+      <description>Language Instructions de contrôle if if - Conditionnel de base L&amp;rsquo;instruction if en Go est utilisée pour exécuter un bloc de code si une condition est vraie. Elle peut être accompagnée d&amp;rsquo;un else ou de plusieurs else if pour gérer des cas supplémentaires.
+Syntaxe de base if condition { // bloc de code si la condition est vraie } else if autreCondition { // bloc de code si l&amp;#39;autre condition est vraie } else { // bloc de code si aucune des conditions précédentes n&amp;#39;est vraie } Exemple package main import &amp;#34;fmt&amp;#34; func main() { a := 10 b := 20 if a &amp;gt; b { fmt.</description>
     </item>
     
     <item>
-      <title>Packages</title>
+      <title>Opérateurs</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/041_operateurs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/041_operateurs/</guid>
+      <description>Les opérateurs Voici la liste des principaux opérateurs en Go, avec des explications et des exemples pour chacun :
+Opérateurs arithmétiques Addition (+) Ajoute deux valeurs. Exemple : package main import &amp;#34;fmt&amp;#34; func main() { a := 10 b := 5 result := a + b fmt.Println(&amp;#34;Addition :&amp;#34;, result) // Affiche: Addition : 15 } Soustraction (-) Soustrait une valeur d&amp;rsquo;une autre. Exemple: package main import &amp;#34;fmt&amp;#34; func main() { a := 10 b := 5 result := a - b fmt.</description>
+    </item>
+    
+    <item>
+      <title>Type Interface</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/042_interface/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/042_interface/</guid>
+      <description>Type interface En Go, une interface est un type qui spécifie un ensemble de méthodes que d&amp;rsquo;autres types doivent implémenter. Les interfaces sont utilisées pour définir le comportement attendu sans spécifier l&amp;rsquo;implémentation concrète. Un type qui implémente toutes les méthodes d&amp;rsquo;une interface est considéré comme une instance de cette interface.
+Définition d&amp;rsquo;une interface Une interface est définie en listant les méthodes qu&amp;rsquo;elle contient. Voici un exemple d&amp;rsquo;interface simple :
+type Speaker interface { Speak() string } Implémentation de l&amp;rsquo;interface Un type implémente une interface en définissant toutes les méthodes de cette interface.</description>
+    </item>
+    
+    <item>
+      <title>Type Structure</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/043_structure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/043_structure/</guid>
+      <description>Type structure En Go, une structure (ou struct) est un type de données composite qui regroupe des champs sous un même nom. Une structure permet de définir des objets avec des propriétés et des méthodes associées.
+Définition d&amp;rsquo;une structure Une structure est définie en listant ses champs et leurs types. Voici un exemple simple :
+type Person struct { Name string Age int } var john Person Instanciation via une fabrique Une fabrique (factory) est une fonction qui retourne une instance de la structure.</description>
+    </item>
+    
+    <item>
+      <title>Organisation packages standard</title>
       <link>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/</guid>
       <description>Packages Exemple de structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── service/ │ │ └── service.go │ └── repository/ │ └── repository.go ├── pkg/ │ └── myproject/ │ ├── models/ │ │ └── models.go │ └── utils/ │ └── utils.go └── go.mod Description des packages cmd :
 Ce répertoire contient les programmes exécutables de votre projet. Chaque sous-répertoire dans cmd contient un point d&amp;rsquo;entrée principal (main.</description>
+    </item>
+    
+    <item>
+      <title>Organisation packages web</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/</guid>
+      <description>Exemple d&amp;rsquo;organisation pour un projet web Voici une structure et un exemple de code pour un projet Go utilisant le framework web Gin. Cette organisation inclut des packages pour les API, les services, les dépôts de données, et les connecteurs de données.
+Structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── api/ │ │ ├── handlers/ │ │ │ └── user_handler.</description>
     </item>
     
   </channel>

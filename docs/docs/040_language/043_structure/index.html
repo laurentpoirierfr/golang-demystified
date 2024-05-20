@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Type Structure - Golang Demystified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" href="https://laurentpoirierfr.github.io/golang-demystified/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/golang-demystified/css/style.min.56f0491693eed9599d8ab7a88824ee081534092eefa574facfc1ba62bd99f9b6.css">
+  
+
+  
+
+</head>
+
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified"><img  width="70" height="70" alt="Logo" src="https://laurentpoirierfr.github.io/golang-demystified//images/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/golang-demystified/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-docs">
+      <a href="/golang-demystified/docs/">
+        <span>Docs</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  <h4>Docs</h4>
+  <ul>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/000_intro/000_introduction/">Introduction</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/010_install/010_installation/">Installation</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/020_explore/020_exploration/">Exploration</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/030_commandes/030_commandes/">Commandes</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/040_language/">Language</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/041_operateurs/">Opérateurs</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/042_interface/">Type Interface</a>
+    </li>
+    
+    <li class="active ">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/043_structure/">Type Structure</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Organisation packages standard</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/">Organisation packages web</a>
+    </li>
+    
+  </ul>
+</div>
+
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Type Structure</h1>
+<div class="content ">
+  <h3 id="type-structure">Type structure</h3>
+<p>En Go, une structure (ou struct) est un type de données composite qui regroupe des champs sous un même nom. Une structure permet de définir des objets avec des propriétés et des méthodes associées.</p>
+<h4 id="définition-dune-structure">Définition d&rsquo;une structure</h4>
+<p>Une structure est définie en listant ses champs et leurs types. Voici un exemple simple :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">john</span> <span class="nx">Person</span>
+</span></span></code></pre></div><h4 id="instanciation-via-une-fabrique">Instanciation via une fabrique</h4>
+<p>Une fabrique (<strong>factory</strong>) est une fonction qui retourne une instance de la structure. Cela permet d&rsquo;encapsuler la logique de création de l&rsquo;objet.</p>
+<h4 id="exemple-complet">Exemple complet</h4>
+<p>Voici un exemple complet montrant la définition d&rsquo;une structure, une fabrique pour créer des instances, l&rsquo;instanciation via un pointeur, et quelques méthodes associées à la structure :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Définition de la structure Person
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Fabrique pour créer une nouvelle instance de Person
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">NewPerson</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Age</span><span class="p">:</span> <span class="nx">age</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Méthode pour afficher les détails de la personne
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Person</span><span class="p">)</span> <span class="nf">Display</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Name: %s, Age: %d\n&#34;</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Méthode pour faire vieillir la personne d&#39;un an
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Person</span><span class="p">)</span> <span class="nf">Birthday</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Instanciation d&#39;une nouvelle personne via la fabrique
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">person</span> <span class="o">:=</span> <span class="nf">NewPerson</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Utilisation des méthodes de la structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">person</span><span class="p">.</span><span class="nf">Display</span><span class="p">()</span>  <span class="c1">// Affiche: Name: Alice, Age: 30
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">person</span><span class="p">.</span><span class="nf">Birthday</span><span class="p">()</span> <span class="c1">// Fait vieillir Alice d&#39;un an
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">person</span><span class="p">.</span><span class="nf">Display</span><span class="p">()</span>  <span class="c1">// Affiche: Name: Alice, Age: 31
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h4 id="explications">Explications</h4>
+<ul>
+<li>Définition de la structure Person :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>  <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>La structure <strong>Person</strong> a deux champs : <strong>Name</strong> de type <strong>string</strong> et <strong>Age</strong> de type <strong>int</strong>.</p>
+<ul>
+<li>Fabrique pour créer une nouvelle instance de Person :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewPerson</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">age</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">Age</span><span class="p">:</span> <span class="nx">age</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>La fonction <strong>NewPerson</strong> prend des paramètres pour le nom et l&rsquo;âge, crée une nouvelle instance de <strong>Person</strong> et retourne un pointeur vers cette instance.</p>
+<ul>
+<li>Méthode Birthday pour faire vieillir la personne d&rsquo;un an :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">Person</span><span class="p">)</span> <span class="nf">Birthday</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>La méthode Birthday incrémente l&rsquo;âge de la personne.</p>
+<ul>
+<li>Instanciation et utilisation :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">person</span> <span class="o">:=</span> <span class="nf">NewPerson</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">person</span><span class="p">.</span><span class="nf">Display</span><span class="p">()</span>  <span class="c1">// Affiche: Name: Alice, Age: 30
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nf">Birthday</span><span class="p">()</span> <span class="c1">// Fait vieillir Alice d&#39;un an
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">person</span><span class="p">.</span><span class="nf">Display</span><span class="p">()</span>  <span class="c1">// Affiche: Name: Alice, Age: 31
+</span></span></span></code></pre></div><p>Nous créons une nouvelle personne nommée Alice âgée de 30 ans en utilisant la fabrique <strong>NewPerson</strong>. Nous utilisons ensuite les méthodes <strong>Display</strong> et <strong>Birthday</strong> pour afficher et modifier les propriétés de l&rsquo;instance.</p>
+<h4 id="résumé">Résumé</h4>
+<p>Les structures en Go permettent de regrouper des données et des méthodes associées. L&rsquo;utilisation d&rsquo;une fabrique pour créer des instances de structures encapsule la logique de création, et les méthodes associées à la structure permettent de manipuler les données de manière organisée.</p>
+
+</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            
+<div class="social">
+    
+        <a href="https://github.com/laurentpoirierfr/golang-demystified" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/github.svg" title="Github" alt="Github" /></a>
+    
+        <a href="" target="blank"><img height="20" width="20" src="/golang-demystified/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+    
+</div>
+
+          
+          
+            <div class="copyright">Free Hugo theme by <a class="zerostatic" href="https://www.zerostatic.io">Zerostatic Themes</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/golang-demystified/js/scripts.min.302a6fc365d5139fb98cf60bdb8f715d96257ea189161d36c190ccfa8182e569.js"></script>
+  
+
+  
+  
+  
+    
+  
+
+
+</body>
+
+</html>

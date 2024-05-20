@@ -111,7 +111,23 @@
     </li>
     
     <li class="">
-      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Packages</a>
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/041_operateurs/">Opérateurs</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/042_interface/">Type Interface</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/040_language/043_structure/">Type Structure</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/050_packages/">Organisation packages standard</a>
+    </li>
+    
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/">Organisation packages web</a>
     </li>
     
   </ul>
@@ -124,48 +140,432 @@
 <h1 class="title">Language</h1>
 <div class="content ">
   <h1 id="language">Language</h1>
-<h3 id="les-types">Les types</h3>
+<h2 id="instructions-de-contrôle">Instructions de contrôle</h2>
+<h3 id="if">if</h3>
+<h4 id="if---conditionnel-de-base">if - Conditionnel de base</h4>
+<p>L&rsquo;instruction <strong>if</strong> en Go est utilisée pour exécuter un bloc de code si une condition est vraie. Elle peut être accompagnée d&rsquo;un <strong>else</strong> ou de plusieurs <strong>else if</strong> pour gérer des cas supplémentaires.</p>
+<h5 id="syntaxe-de-base">Syntaxe de base</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">condition</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si la condition est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">autreCondition</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si l&#39;autre condition est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si aucune des conditions précédentes n&#39;est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h5 id="exemple">Exemple</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">a</span> <span class="o">:=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span> <span class="o">:=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">a</span> <span class="p">&gt;</span> <span class="nx">b</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;a est plus grand que b&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">a</span> <span class="p">&lt;</span> <span class="nx">b</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;a est plus petit que b&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;a est égal à b&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="switch">switch</h3>
+<h4 id="switch---multiples-conditions">switch - Multiples conditions</h4>
+<p>L&rsquo;instruction <strong>switch</strong> est utilisée pour sélectionner l&rsquo;exécution d&rsquo;un des nombreux blocs de code en fonction de la valeur d&rsquo;une expression. Elle est souvent plus propre et plus lisible que l&rsquo;utilisation de multiples <strong>if-else</strong> imbriqués.</p>
+<h5 id="syntaxe-de-base-1">Syntaxe de base</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">switch</span> <span class="nx">expression</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nx">valeur1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si expression == valeur1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">case</span> <span class="nx">valeur2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si expression == valeur2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si expression ne correspond à aucune des valeurs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h5 id="exemple-1">Exemple</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">day</span> <span class="o">:=</span> <span class="s">&#34;mardi&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="nx">day</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s">&#34;lundi&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Aujourd&#39;hui c&#39;est lundi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s">&#34;mardi&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Aujourd&#39;hui c&#39;est mardi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="s">&#34;mercredi&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Aujourd&#39;hui c&#39;est mercredi&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Aujourd&#39;hui c&#39;est un autre jour de la semaine&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="utilisation-de-la-clause-switch-avec-une-expression-vide">Utilisation de la clause switch avec une expression vide</h4>
+<p>Dans Go, une expression vide dans la clause <strong>switch</strong> est équivalente à une série d&rsquo;instructions <strong>if-else</strong>. Cela permet d&rsquo;écrire un code plus concis lorsqu&rsquo;il y a plusieurs conditions à vérifier.</p>
+<h5 id="syntaxe-de-base-2">Syntaxe de base</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">switch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nx">condition1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si condition1 est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">case</span> <span class="nx">condition2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si condition2 est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bloc de code si aucune des conditions précédentes n&#39;est vraie
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h5 id="exemple-2">Exemple</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">number</span> <span class="o">:=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">number</span> <span class="p">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Le nombre est négatif&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nx">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Le nombre est zéro&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Le nombre est positif&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Dans cet exemple, la clause <strong>switch</strong> utilise une expression vide (<strong>switch { &hellip; }</strong>). Chaque case spécifie une condition à vérifier. Si aucune des conditions n&rsquo;est vraie, le bloc <strong>default</strong> est exécuté.</p>
+<p>Bien que cela puisse ressembler à un &ldquo;switch conditionnel&rdquo;, en réalité, c&rsquo;est simplement une utilisation de la syntaxe de <strong>switch</strong> sans une expression explicite à évaluer. Cependant, cela peut être pratique pour gérer plusieurs conditions de manière concise.</p>
+<h2 id="les-types">Les types</h2>
 <p>En Go, les principaux types sont les types de base (comme int, float64, string), les types composites (comme les tableaux, les tranches, les cartes, les structures et les interfaces) et les types définis par l&rsquo;utilisateur (alias de types et types structurés).</p>
 <p>Voici un exemple d&rsquo;instanciation pour quelques types :</p>
+<h3 id="type-de-base">Type de base</h3>
+<table>
+<thead>
+<tr>
+<th>Catégorie</th>
+<th>Type</th>
+<th>Description</th>
+<th>Exemple d&rsquo;instanciation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Booléens</td>
+<td><strong>bool</strong></td>
+<td>Valeur booléenne (vrai ou faux)</td>
+<td><strong>var flag bool = true</strong></td>
+</tr>
+<tr>
+<td>Numériques</td>
+<td><strong>int</strong></td>
+<td>Entier avec une taille dépendante de l&rsquo;architecture</td>
+<td><strong>var age int = 30</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>int8</strong></td>
+<td>Entier sur 8 bits (de -128 à 127)</td>
+<td><strong>var smallInt int8 = 100</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>int16</strong></td>
+<td>Entier sur 16 bits (de -32768 à 32767)</td>
+<td><strong>var mediumInt int16 = 20000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>int32</strong></td>
+<td>Entier sur 32 bits (de -2147483648 à 2147483647)</td>
+<td><strong>var largeInt int32 = 1000000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>int64</strong></td>
+<td>Entier sur 64 bits (de -9223372036854775808 à 9223372036854775807)</td>
+<td><strong>var xLargeInt int64 = 1000000000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uint</strong></td>
+<td>Entier non signé, taille dépendante de l&rsquo;architecture</td>
+<td><strong>var posInt uint = 42</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uint8</strong></td>
+<td>Entier non signé sur 8 bits (de 0 à 255)</td>
+<td><strong>var byteVal uint8 = 255</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uint16</strong></td>
+<td>Entier non signé sur 16 bits (de 0 à 65535)</td>
+<td><strong>var mediumUInt uint16 = 60000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uint32</strong></td>
+<td>Entier non signé sur 32 bits (de 0 à 4294967295)</td>
+<td><strong>var largeUInt uint32 = 4000000000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uint64</strong></td>
+<td>Entier non signé sur 64 bits (de 0 à 18446744073709551615)</td>
+<td><strong>var xLargeUInt uint64 = 10000000000</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>uintptr</strong></td>
+<td>Entier non signé pour stocker un pointeur</td>
+<td><strong>var ptr uintptr = uintptr(unsafe.Pointer(&amp;x))</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>float32</strong></td>
+<td>Nombre à virgule flottante sur 32 bits</td>
+<td><strong>var pi float32 = 3.14</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>float64</strong></td>
+<td>Nombre à virgule flottante sur 64 bits</td>
+<td><strong>var e float64 = 2.71828</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>complex64</strong></td>
+<td>Nombre complexe avec des parties réelles et imaginaires en float32</td>
+<td><strong>var z complex64 = 1 + 2i</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>complex128</strong></td>
+<td>Nombre complexe avec des parties réelles et imaginaires en float64</td>
+<td><strong>var w complex128 = 2 + 3i</strong></td>
+</tr>
+<tr>
+<td>Caractères</td>
+<td><strong>byte</strong></td>
+<td>Alias pour uint8, représente un octet</td>
+<td><strong>var b byte = &lsquo;a&rsquo;</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>rune</strong></td>
+<td>Alias pour int32, représente un caractère Unicode</td>
+<td><strong>var r rune = &lsquo;世&rsquo;</strong></td>
+</tr>
+<tr>
+<td>Chaînes</td>
+<td><strong>string</strong></td>
+<td>Séquence de caractères</td>
+<td><strong>var name string = &ldquo;Go&rdquo;</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ce tableau inclut les types de base les plus courants en Go, couvrant les booléens, les types numériques (entiers signés et non signés, nombres flottants, nombres complexes), les caractères et les chaînes.</p>
+<h3 id="type-tableau-et-slice">Type tableau et Slice</h3>
+<p>En Go, les tableaux et les tranches (slices) sont deux structures de données différentes, chacune avec ses propres caractéristiques et usages. Voici les principales différences entre les deux :</p>
+<h4 id="tableaux">Tableaux</h4>
 <ul>
-<li><strong>Type de base</strong> :</li>
+<li>
+<p>Taille fixe :</p>
+<ul>
+<li>La taille d&rsquo;un tableau est fixe et définie lors de sa création.</li>
+<li>Exemple : var arr [5]int</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">age</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">30</span>
-</span></span></code></pre></div><ul>
-<li><strong>Type tableau</strong> :</li>
+</li>
+<li>
+<p>Type :</p>
+<ul>
+<li>Le type du tableau inclut sa taille. Par exemple, [5]int et [10]int sont des types différents.</li>
+<li>Deux tableaux de tailles différentes ne sont pas compatibles, même s&rsquo;ils contiennent les mêmes types d&rsquo;éléments.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">numbers</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span>
-</span></span></code></pre></div><ul>
-<li><strong>Type slice</strong> :</li>
+</li>
+<li>
+<p>Allocation :</p>
+<ul>
+<li>Les tableaux sont alloués en mémoire statiquement. La mémoire pour un tableau est allouée au moment de la déclaration.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">fruits</span> <span class="p">[]</span><span class="kt">string</span>
-</span></span></code></pre></div><ul>
-<li><strong>Type map</strong> :</li>
+</li>
+<li>
+<p>Usage :</p>
+<ul>
+<li>Les tableaux sont rarement utilisés directement en Go en raison de leur taille fixe et de leur manque de flexibilité.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">person</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
-</span></span></code></pre></div><ul>
-<li><strong>Type structure</strong> :</li>
+</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Name</span> <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>  <span class="kt">int</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<h4 id="slices">Slices</h4>
+<ul>
+<li>
+<p>Taille dynamique :</p>
+<ul>
+<li>Les tranches sont dynamiques et peuvent changer de taille.</li>
+<li>Exemple : var slice []int</li>
+</ul>
+</li>
+<li>
+<p>Type :</p>
+<ul>
+<li>Les tranches sont des vues flexibles sur des tableaux. Le type d&rsquo;une tranche ne dépend pas de sa longueur.</li>
+<li>Par exemple, []int est un type de tranche pour une tranche de n&rsquo;importe quelle longueur d&rsquo;entiers.</li>
+</ul>
+</li>
+<li>
+<p>Allocation :</p>
+<ul>
+<li>Les tranches sont des références à des tableaux sous-jacents. Une tranche a trois composants : un pointeur vers un tableau, une longueur et une capacité.</li>
+<li>La capacité d&rsquo;une tranche est la taille du tableau sous-jacent à partir duquel la tranche est dérivée.</li>
+</ul>
+</li>
+<li>
+<p>Usage :</p>
+<ul>
+<li>Les tranches sont largement utilisées en Go en raison de leur flexibilité. Vous pouvez facilement augmenter ou réduire leur taille et elles peuvent partager des parties d&rsquo;un tableau sous-jacent.</li>
+</ul>
+</li>
+</ul>
+<h4 id="exemples">Exemples</h4>
+<h5 id="tableau">Tableau</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">john</span> <span class="nx">Person</span>
-</span></span></code></pre></div><ul>
-<li><strong>Type interface</strong> :</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Shape</span> <span class="kd">interface</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">Area</span><span class="p">()</span> <span class="kt">float64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Déclaration d&#39;un tableau de taille fixe
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">arr</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span> <span class="p">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Tableau :&#34;</span><span class="p">,</span> <span class="nx">arr</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><ul>
-<li><strong>Alias de type</strong> :</li>
+</span></span></code></pre></div><h5 id="slice">Slice</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Déclaration d&#39;une tranche
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">slice</span> <span class="p">[]</span><span class="kt">int</span> <span class="p">=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Slice :&#34;</span><span class="p">,</span> <span class="nx">slice</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Ajouter un élément à la tranche
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">slice</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Slice après append :&#34;</span><span class="p">,</span> <span class="nx">slice</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Sous-tranchage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">subSlice</span> <span class="o">:=</span> <span class="nx">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Sous-Slice :&#34;</span><span class="p">,</span> <span class="nx">subSlice</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h5 id="résumé">Résumé</h5>
+<ul>
+<li><strong>Tableaux</strong> : Taille fixe, type incluant la taille, allocation statique.</li>
+<li><strong>Slices</strong> : Taille dynamique, type indépendant de la longueur, référence à un tableau sous-jacent, très flexibles et couramment utilisées.</li>
 </ul>
+<p>En général, vous utiliserez des tranches pour la plupart des travaux avec des collections en Go en raison de leur flexibilité et de leur facilité d&rsquo;utilisation.</p>
+<h3 id="type-tableau-et-slice-1">Type tableau et Slice</h3>
+<p>Voici un exemple en Go montrant comment instancier un tableau, puis itérer sur ses éléments de manière traditionnelle et avec range :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Instanciation d&#39;un tableau de 5 entiers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">numbers</span> <span class="p">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Itération traditionnelle
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Itération traditionnelle :&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Index %d : %d\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Itération avec range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;\nItération avec range :&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">numbers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Index %d : %d\n&#34;</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="explications">Explications</h4>
+<ul>
+<li>Instanciation du tableau :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">numbers</span> <span class="p">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">}</span>
+</span></span></code></pre></div><p>Ici, nous créons un tableau numbers de 5 entiers initialisés avec les valeurs spécifiées.</p>
+<ul>
+<li>Itération traditionnelle :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">numbers</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Index %d : %d\n&#34;</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Cette boucle for utilise un index i pour accéder aux éléments du tableau en utilisant numbers[i].</p>
+<ul>
+<li>Itération avec range :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">numbers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Index %d : %d\n&#34;</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Cette boucle for utilise range pour itérer sur les éléments du tableau. La variable index représente l&rsquo;indice actuel et value représente la valeur de l&rsquo;élément à cet indice.</p>
+<h4 id="résultat-attendu-">Résultat attendu :</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Itération traditionnelle :
+</span></span><span class="line"><span class="cl">Index <span class="m">0</span> : <span class="m">10</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">1</span> : <span class="m">20</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">2</span> : <span class="m">30</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">3</span> : <span class="m">40</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">4</span> : <span class="m">50</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Itération avec range :
+</span></span><span class="line"><span class="cl">Index <span class="m">0</span> : <span class="m">10</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">1</span> : <span class="m">20</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">2</span> : <span class="m">30</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">3</span> : <span class="m">40</span>
+</span></span><span class="line"><span class="cl">Index <span class="m">4</span> : <span class="m">50</span>
+</span></span></code></pre></div><h3 id="type-map">Type map</h3>
+<p>Voici un exemple d&rsquo;instanciation d&rsquo;une map en Go, ainsi qu&rsquo;une itération sur ses éléments :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Instanciation d&#39;une carte (map) avec des clés de type string et des valeurs de type int
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">ageMap</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;Alice&#34;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;Bob&#34;</span><span class="p">:</span>   <span class="mi">25</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;Charlie&#34;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Itération traditionnelle avec range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Itération avec range :&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ageMap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Clé : %s, Valeur : %d\n&#34;</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="explications-">Explications :</h4>
+<ul>
+<li>Instanciation d&rsquo;une map :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ageMap</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Alice&#34;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Bob&#34;</span><span class="p">:</span>   <span class="mi">25</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Charlie&#34;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Ici, nous créons une map ageMap avec des clés de type <strong>string</strong> et des valeurs de type <strong>int</strong>. Nous initialisons cette carte avec quelques paires clé-valeur.</p>
+<ul>
+<li>Itération avec range :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ageMap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Clé : %s, Valeur : %d\n&#34;</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Cette boucle <strong>for</strong> utilise <strong>range</strong> pour itérer sur les éléments de la map. La variable <strong>key</strong> représente la clé actuelle et <strong>value</strong> représente la valeur associée à cette clé.</p>
+<h4 id="résultat-attendu--1">Résultat attendu :</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">It</span><span class="err">é</span><span class="nx">ration</span> <span class="nx">avec</span> <span class="k">range</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Cl</span><span class="err">é</span> <span class="p">:</span> <span class="nx">Alice</span><span class="p">,</span> <span class="nx">Valeur</span> <span class="p">:</span> <span class="mi">30</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Cl</span><span class="err">é</span> <span class="p">:</span> <span class="nx">Bob</span><span class="p">,</span> <span class="nx">Valeur</span> <span class="p">:</span> <span class="mi">25</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Cl</span><span class="err">é</span> <span class="p">:</span> <span class="nx">Charlie</span><span class="p">,</span> <span class="nx">Valeur</span> <span class="p">:</span> <span class="mi">35</span>
+</span></span></code></pre></div><p>Cet exemple montre comment créer et initialiser une map en Go, et comment parcourir toutes les paires clé-valeur de la carte en utilisant une boucle <strong>for</strong> avec <strong>range</strong>.</p>
+<h3 id="alias-de-type">Alias de type</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Celsius</span> <span class="kt">float64</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">temperature</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mf">25.5</span>
-</span></span></code></pre></div><h3 id="time">time</h3>
-<p>En Go, il n&rsquo;y a pas de type de données prédéfini pour les dates comme dans certains autres langages de programmation. Cependant, vous pouvez utiliser le type <strong>time.Time</strong> du package time pour représenter les dates et les heures. Voici un exemple d&rsquo;instanciation d&rsquo;une variable de type *<em>time.Time</em> :</p>
+</span></span></code></pre></div><h3 id="type-time-vs-date">Type time vs date</h3>
+<p>En Go, il n&rsquo;y a pas de type de données prédéfini pour les dates comme dans certains autres langages de programmation. Cependant, vous pouvez utiliser le type <strong>time.Time</strong> du package time pour représenter les dates et les heures. Voici un exemple d&rsquo;instanciation d&rsquo;une variable de type <strong>time.Time</strong> :</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;time&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>

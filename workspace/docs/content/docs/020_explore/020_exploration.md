@@ -1,7 +1,7 @@
 ---
 title: 'Exploration'
 date: 
-weight: 4
+weight: 400
 ---
 
 # Exploration

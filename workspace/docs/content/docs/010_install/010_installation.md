@@ -1,7 +1,7 @@
 ---
 title: 'Installation'
 date: 
-weight: 3
+weight: 300
 ---
 
 # Installation
