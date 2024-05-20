@@ -159,12 +159,12 @@ Voici un exemple d'instanciation pour quelques types :
 ||**complex64**	|Nombre complexe avec des parties réelles et imaginaires en float32	|**var z complex64 = 1 + 2i** |
 ||**complex128**	|Nombre complexe avec des parties réelles et imaginaires en float64	|**var w complex128 = 2 + 3i**|
 |Caractères	|**byte**	|Alias pour uint8, représente un octet	|**var b byte = 'a'** |
-||**rune**	|Alias pour int32, représente un caractère Unicode	|**var r rune = '世'** |
+||**rune**	|Alias pour int32, représente un caractère Unicode	|**var r rune = 'e'** |
 |Chaînes	|**string**	|Séquence de caractères	|**var name string = "Go"**|
 
 Ce tableau inclut les types de base les plus courants en Go, couvrant les booléens, les types numériques (entiers signés et non signés, nombres flottants, nombres complexes), les caractères et les chaînes.
 
-### Type tableau et Slice
+### Type tableau et slice
 
 En Go, les tableaux et les tranches (slices) sont deux structures de données différentes, chacune avec ses propres caractéristiques et usages. Voici les principales différences entre les deux :
 

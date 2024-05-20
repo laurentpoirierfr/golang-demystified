@@ -15,6 +15,18 @@
         "page": "../workspace/docs/content/docs/030_commandes/030_commandes.md"
     },
     {
+        "page": "../workspace/docs/content/docs/040_language/040_language.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/040_language/041_operateurs.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/040_language/042_interface.md"
+    },
+    {
+        "page": "../workspace/docs/content/docs/040_language/043_structure.md"
+    },
+    {
         "page" : "../workspace/docs/content/docs/050_packages/050_packages.md"
     }
 ]
