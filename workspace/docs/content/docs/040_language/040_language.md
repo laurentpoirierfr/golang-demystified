@@ -172,7 +172,11 @@ En Go, les tableaux et les tranches (slices) sont deux structures de données di
 
 * Taille fixe :
     - La taille d'un tableau est fixe et définie lors de sa création.
-    - Exemple : var arr [5]int
+    - Exemple : 
+    
+```go
+var arr [5]int
+```
 
 * Type :
     - Le type du tableau inclut sa taille. Par exemple, [5]int et [10]int sont des types différents.
@@ -189,7 +193,11 @@ En Go, les tableaux et les tranches (slices) sont deux structures de données di
 
 * Taille dynamique :
     - Les tranches sont dynamiques et peuvent changer de taille.
-    - Exemple : var slice []int
+    - Exemple : 
+
+```go
+    var slice []int
+```
 
 * Type :
     - Les tranches sont des vues flexibles sur des tableaux. Le type d'une tranche ne dépend pas de sa longueur.
