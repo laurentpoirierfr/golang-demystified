@@ -130,6 +130,10 @@
       <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/">Organisation packages web</a>
     </li>
     
+    <li class="">
+      <a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/052_packages_clean_archi/">Organisation packages clean architectures</a>
+    </li>
+    
   </ul>
 </div>
 
@@ -224,6 +228,13 @@ Ce répertoire contient les programmes exécutables de votre projet. Chaque sous
   <h2 class="title-summary"><a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/051_packages_web/">Organisation packages web</a></h2>
   <p>Exemple d&rsquo;organisation pour un projet web Voici une structure et un exemple de code pour un projet Go utilisant le framework web Gin. Cette organisation inclut des packages pour les API, les services, les dépôts de données, et les connecteurs de données.
 Structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── api/ │ │ ├── handlers/ │ │ │ └── user_handler.</p>
+</div>
+
+
+<div class="summary mb-2">
+  
+  <h2 class="title-summary"><a href="https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/052_packages_clean_archi/">Organisation packages clean architectures</a></h2>
+  <p>Exemple de structure de package /app /cmd /webapi main.go /consumer main.go /internal /domain /entity post.go user.go /repository post_repository.go user_repository.go /usecase /post create_post.go get_post.go ... /user create_user.go get_user.go ... /delivery /http post_handler.go user_handler.go /kafka kafka_producer.go kafka_consumer.go /repository /postgres post_repository.go user_repository.go /mongo post_repository.go user_repository.go /framework /config config.go /middleware middleware.go /pkg /domain /entity /repository /usecase /delivery /http /kafka /repository /postgres /mongo /framework /config /middleware Cette structure conserve la distinction entre le code interne et le code destiné à être utilisé par d&rsquo;autres applications, tout en maintenant la flexibilité offerte par les répertoires cmd, internal et pkg.</p>
 </div>
 
 

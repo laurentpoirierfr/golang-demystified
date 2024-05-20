@@ -107,5 +107,14 @@ Ce répertoire contient les programmes exécutables de votre projet. Chaque sous
 Structure du projet myproject/ ├── cmd/ │ └── myproject/ │ └── main.go ├── internal/ │ └── myproject/ │ ├── api/ │ │ ├── handlers/ │ │ │ └── user_handler.</description>
     </item>
     
+    <item>
+      <title>Organisation packages clean architectures</title>
+      <link>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/052_packages_clean_archi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://laurentpoirierfr.github.io/golang-demystified/docs/050_packages/052_packages_clean_archi/</guid>
+      <description>Exemple de structure de package /app /cmd /webapi main.go /consumer main.go /internal /domain /entity post.go user.go /repository post_repository.go user_repository.go /usecase /post create_post.go get_post.go ... /user create_user.go get_user.go ... /delivery /http post_handler.go user_handler.go /kafka kafka_producer.go kafka_consumer.go /repository /postgres post_repository.go user_repository.go /mongo post_repository.go user_repository.go /framework /config config.go /middleware middleware.go /pkg /domain /entity /repository /usecase /delivery /http /kafka /repository /postgres /mongo /framework /config /middleware Cette structure conserve la distinction entre le code interne et le code destiné à être utilisé par d&amp;rsquo;autres applications, tout en maintenant la flexibilité offerte par les répertoires cmd, internal et pkg.</description>
+    </item>
+    
   </channel>
 </rss>
