@@ -107,7 +107,7 @@ Ce package contient les handlers HTTP et les brokers Kafka pour gérer les requ�
 * **http** : Contient les handlers HTTP pour votre API web.
 * **kafka** : Contient les producers et consumers Kafka.
 
-####  Package repository
+#### Package repository
 
 Ce package contient les implémentations concrètes des repositories définies dans le package **domain/repository**.
 
