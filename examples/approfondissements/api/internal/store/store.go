@@ -14,7 +14,11 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib" // pilote PostgreSQL, enregistré sous le nom « pgx »
-	_ "modernc.org/sqlite"             // pilote SQLite en Go pur, enregistré sous le nom « sqlite »
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
+	"go.opentelemetry.io/otel/trace/noop"
+	_ "modernc.org/sqlite" // pilote SQLite en Go pur, enregistré sous le nom « sqlite »
 
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/tache"
 )
@@ -25,13 +29,14 @@ var migrations embed.FS
 // dialecte décrit ce qui diffère d'une base à l'autre.
 type dialecte struct {
 	pilote     string // nom du pilote database/sql
+	systeme    string // nom du système, pour les traces (db.system.name)
 	migrations string // répertoire des migrations
 	dollars    bool   // paramètres $1, $2… au lieu de ?
 }
 
 var (
-	sqlite   = dialecte{pilote: "sqlite", migrations: "migrations/sqlite"}
-	postgres = dialecte{pilote: "pgx", migrations: "migrations/postgres", dollars: true}
+	sqlite   = dialecte{pilote: "sqlite", systeme: "sqlite", migrations: "migrations/sqlite"}
+	postgres = dialecte{pilote: "pgx", systeme: "postgresql", migrations: "migrations/postgres", dollars: true}
 )
 
 // Store implémente le stockage des tâches.
@@ -39,6 +44,33 @@ type Store struct {
 	db         *sql.DB
 	d          dialecte
 	maintenant func() time.Time // remplaçable dans les tests
+	traceur    trace.Tracer     // sans effet tant que Instrumente n'est pas appelée
+}
+
+// Instrumente active les traces : chaque opération crée un span, enfant du
+// span de la requête HTTP en cours.
+func (s *Store) Instrumente(tp trace.TracerProvider) {
+	s.traceur = tp.Tracer("github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/store")
+}
+
+// debut démarre le span d'une opération de stockage.
+func (s *Store) debut(ctx context.Context, operation string) (context.Context, trace.Span) {
+	return s.traceur.Start(ctx, "store."+operation,
+		trace.WithSpanKind(trace.SpanKindClient),
+		trace.WithAttributes(
+			attribute.String("db.system.name", s.d.systeme),
+			attribute.String("db.operation.name", operation),
+		))
+}
+
+// fin termine le span, en y enregistrant l'erreur éventuelle. Une tâche
+// introuvable est un résultat normal, pas une erreur technique.
+func fin(span trace.Span, err error) {
+	if err != nil && !errors.Is(err, tache.ErrIntrouvable) {
+		span.RecordError(err)
+		span.SetStatus(codes.Error, err.Error())
+	}
+	span.End()
 }
 
 // Ouvre ouvre la base, vérifie la connexion et applique les migrations.
@@ -63,7 +95,7 @@ func Ouvre(ctx context.Context, dsn string) (*Store, error) {
 		db.Close()
 		return nil, fmt.Errorf("connexion à la base %s : %w", d.pilote, err)
 	}
-	s := &Store{db: db, d: d, maintenant: time.Now}
+	s := &Store{db: db, d: d, maintenant: time.Now, traceur: noop.NewTracerProvider().Tracer("")}
 	if err := s.migre(ctx); err != nil {
 		db.Close()
 		return nil, fmt.Errorf("migrations : %w", err)
@@ -146,7 +178,10 @@ func (s *Store) transaction(ctx context.Context, f func(*sql.Tx) error) error {
 }
 
 // Liste renvoie toutes les tâches, par ordre de création.
-func (s *Store) Liste(ctx context.Context) ([]tache.Tache, error) {
+func (s *Store) Liste(ctx context.Context) (_ []tache.Tache, err error) {
+	ctx, span := s.debut(ctx, "Liste")
+	defer func() { fin(span, err) }()
+
 	lignes, err := s.db.QueryContext(ctx,
 		`SELECT id, titre, faite, creation FROM taches ORDER BY id`)
 	if err != nil {
@@ -166,7 +201,10 @@ func (s *Store) Liste(ctx context.Context) ([]tache.Tache, error) {
 }
 
 // Trouve renvoie une tâche, ou tache.ErrIntrouvable.
-func (s *Store) Trouve(ctx context.Context, id int64) (tache.Tache, error) {
+func (s *Store) Trouve(ctx context.Context, id int64) (_ tache.Tache, err error) {
+	ctx, span := s.debut(ctx, "Trouve")
+	defer func() { fin(span, err) }()
+
 	ligne := s.db.QueryRowContext(ctx,
 		s.q(`SELECT id, titre, faite, creation FROM taches WHERE id = ?`), id)
 	t, err := scanne(ligne)
@@ -177,16 +215,22 @@ func (s *Store) Trouve(ctx context.Context, id int64) (tache.Tache, error) {
 }
 
 // Cree enregistre une nouvelle tâche.
-func (s *Store) Cree(ctx context.Context, titre string) (tache.Tache, error) {
+func (s *Store) Cree(ctx context.Context, titre string) (_ tache.Tache, err error) {
+	ctx, span := s.debut(ctx, "Cree")
+	defer func() { fin(span, err) }()
+
 	t := tache.Tache{Titre: titre, Creation: s.maintenant().UTC().Truncate(time.Millisecond)}
-	err := s.db.QueryRowContext(ctx,
+	err = s.db.QueryRowContext(ctx,
 		s.q(`INSERT INTO taches (titre, creation) VALUES (?, ?) RETURNING id`),
 		t.Titre, t.Creation.UnixMilli()).Scan(&t.ID)
 	return t, err
 }
 
 // MarqueFaite change l'état d'une tâche et renvoie la tâche à jour.
-func (s *Store) MarqueFaite(ctx context.Context, id int64, faite bool) (tache.Tache, error) {
+func (s *Store) MarqueFaite(ctx context.Context, id int64, faite bool) (_ tache.Tache, err error) {
+	ctx, span := s.debut(ctx, "MarqueFaite")
+	defer func() { fin(span, err) }()
+
 	res, err := s.db.ExecContext(ctx, s.q(`UPDATE taches SET faite = ? WHERE id = ?`), faite, id)
 	if err := verifieUneLigne(res, err); err != nil {
 		return tache.Tache{}, err
@@ -195,7 +239,10 @@ func (s *Store) MarqueFaite(ctx context.Context, id int64, faite bool) (tache.Ta
 }
 
 // Supprime supprime une tâche.
-func (s *Store) Supprime(ctx context.Context, id int64) error {
+func (s *Store) Supprime(ctx context.Context, id int64) (err error) {
+	ctx, span := s.debut(ctx, "Supprime")
+	defer func() { fin(span, err) }()
+
 	res, err := s.db.ExecContext(ctx, s.q(`DELETE FROM taches WHERE id = ?`), id)
 	return verifieUneLigne(res, err)
 }

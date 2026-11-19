@@ -18,7 +18,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## 2. Nouveaux chapitres d'approfondissement
 
-- [ ] **Observabilité** : OpenTelemetry (traces et métriques), Prometheus,
+- [x] **Observabilité** : OpenTelemetry (traces et métriques), Prometheus,
   corrélation des journaux `slog` avec les traces, appliqués à l'API des tâches
 - [ ] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
   entre services
