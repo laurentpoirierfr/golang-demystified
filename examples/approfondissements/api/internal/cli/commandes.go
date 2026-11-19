@@ -22,7 +22,7 @@ func (a *app) commandeListe() *cobra.Command {
 		Short:   "Liste les tâches",
 		Args:    cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, _ []string) error {
-			c, err := a.client()
+			c, err := a.client() // le client, configuré par viper
 			if err != nil {
 				return err
 			}
@@ -40,7 +40,7 @@ func (a *app) commandeListe() *cobra.Command {
 				}
 				taches = append(taches, t)
 			}
-			return a.affiche(taches)
+			return a.affiche(taches) // tableau ou JSON, selon viper
 		},
 	}
 	cmd.Flags().BoolVar(&faites, "faites", false, "seulement les tâches faites")
