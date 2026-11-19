@@ -1,0 +1,8 @@
+{{define "contenu"}}
+    <h1>Articles</h1>
+    {{- range $i, $a := .Articles}}
+    <p>{{add $i 1}}. <a href="/articles/{{$a.Slug}}">{{$a.Titre}}</a></p>
+    {{- else}}
+    <p>Aucun article.</p>
+    {{- end}}
+{{end}}

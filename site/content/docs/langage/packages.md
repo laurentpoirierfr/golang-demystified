@@ -150,9 +150,13 @@ Il n'existe pas de structure imposée. Quelques conventions sont largement
 partagées :
 
 - un petit projet tient dans un seul package, à la racine du module ;
-- les exécutables se placent dans `cmd/<nom>/main.go` lorsqu'il y en a
-  plusieurs ;
-- le code non destiné à être importé par d'autres modules va dans `internal/` ;
+- les exécutables se placent dans `cmd/<nom>/main.go`, avec un `main`
+  minimal qui se contente d'assembler le programme ;
+- le code propre au projet va dans `internal/` : le compilateur interdit aux
+  autres modules de l'importer ;
+- le code générique, réutilisable par d'autres projets, peut aller dans
+  `pkg/`. C'est une convention de la communauté, et non de l'outil `go` :
+  n'y placez que du code réellement indépendant du métier ;
 - on découpe en packages selon les **responsabilités** métier (`commande`,
   `facturation`), plutôt que selon les couches techniques (`models`,
   `controllers`).
@@ -162,4 +166,4 @@ l'autre, c'est le signe qu'une responsabilité est mal découpée. Une interface
 définie côté utilisateur permet souvent de casser le cycle.
 
 La partie Approfondissements présente des exemples complets d'organisation :
-un service web et une architecture hexagonale (*Clean Architecture*).
+un service web complet et une architecture hexagonale.

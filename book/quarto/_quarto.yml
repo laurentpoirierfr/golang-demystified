@@ -11,7 +11,7 @@ book:
   subtitle: "Le langage Go, ses outils et son évolution"
   author: "The Gang of Three"
   date: "2026-11-19"
-  cover-image: assets/cover.png
+  cover-image: assets/couverture.png
   # chapters: généré par mkbook
 
 number-sections: true

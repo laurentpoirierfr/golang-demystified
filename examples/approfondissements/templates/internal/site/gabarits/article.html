@@ -1,0 +1,16 @@
+{{define "titre"}}{{.Article.Titre}} – Golang Demystified{{end}}
+
+{{define "contenu"}}
+    <article>
+      <h1>{{.Article.Titre}}</h1>
+      <p class="auteur">par {{.Article.Auteur}}</p>
+      {{- with .Article.Tags}}
+      <ul>
+        {{- range .}}
+        <li><a href="/tags/{{.}}">{{.}}</a></li>
+        {{- end}}
+      </ul>
+      {{- end}}
+      <div>{{.Article.Resume}}</div>
+    </article>
+{{end}}
