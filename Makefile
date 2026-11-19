@@ -7,7 +7,7 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site publication serve book pdf check vuln lint test-integration sqlc generate clean
+.PHONY: all site publication serve book pdf check vuln lint test-integration sqlc buf generate clean
 
 all: check book publication
 
@@ -69,8 +69,16 @@ sqlc:
 	docker run --rm --volume "$(CURDIR)/examples/approfondissements/catalogue:/src" --workdir /src \
 		$(CONTAINER_USER) $(SQLC_IMAGE) generate
 
-## generate : régénère tout le code généré (oapi-codegen, sqlc)
-generate: sqlc
+## buf : vérifie le contrat Protobuf et régénère le code gRPC/Connect
+BUF_IMAGE := docker.io/bufbuild/buf:1.75.0
+BUF := docker run --rm --volume "$(CURDIR)/examples/approfondissements/grpc:/workspace" --workdir /workspace --env BUF_CACHE_DIR=/tmp/buf \
+	$(CONTAINER_USER) $(BUF_IMAGE)
+buf:
+	$(BUF) lint
+	$(BUF) generate
+
+## generate : régénère tout le code généré (oapi-codegen, sqlc, buf)
+generate: sqlc buf
 	go generate ./...
 
 clean:

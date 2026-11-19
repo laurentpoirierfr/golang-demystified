@@ -1,0 +1,11 @@
+# Configuration de buf : où sont les fichiers .proto, et quelles règles
+# appliquer (buf lint) et quels changements refuser (buf breaking).
+version: v2
+modules:
+  - path: proto
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

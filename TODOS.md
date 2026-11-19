@@ -20,7 +20,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 - [x] **Observabilité** : OpenTelemetry (traces et métriques), Prometheus,
   corrélation des journaux `slog` avec les traces, appliqués à l'API des tâches
-- [ ] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
+- [x] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
   entre services
 - [ ] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
   validation des entrées, bonnes pratiques avec `crypto`

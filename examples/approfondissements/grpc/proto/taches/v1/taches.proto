@@ -1,0 +1,66 @@
+// Contrat du service des tâches. Ce fichier est la source de vérité : le code
+// Go du serveur et du client en est généré (make generate).
+syntax = "proto3";
+
+package taches.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/grpc/pkg/rpc/taches/v1;tachesv1";
+
+// TacheService gère une liste de tâches.
+service TacheService {
+  // Cree enregistre une tâche (appel unaire : une requête, une réponse).
+  rpc Cree(CreeRequest) returns (CreeResponse) {}
+
+  // Trouve renvoie une tâche, ou l'erreur NOT_FOUND. Sans effet de bord :
+  // l'appel peut être fait en GET avec le protocole Connect.
+  rpc Trouve(TrouveRequest) returns (TrouveResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+
+  // Suit envoie les tâches existantes, puis chaque nouvelle tâche au fil de
+  // l'eau (flux serveur : une requête, une suite de réponses).
+  rpc Suit(SuitRequest) returns (stream SuitResponse) {}
+
+  // Importe reçoit une suite de titres et crée les tâches correspondantes
+  // (flux client : une suite de requêtes, une réponse).
+  rpc Importe(stream ImporteRequest) returns (ImporteResponse) {}
+}
+
+message Tache {
+  int64 id = 1;
+  string titre = 2;
+  bool faite = 3;
+  google.protobuf.Timestamp creation = 4;
+}
+
+message CreeRequest {
+  string titre = 1;
+}
+
+message CreeResponse {
+  Tache tache = 1;
+}
+
+message TrouveRequest {
+  int64 id = 1;
+}
+
+message TrouveResponse {
+  Tache tache = 1;
+}
+
+message SuitRequest {}
+
+message SuitResponse {
+  Tache tache = 1;
+}
+
+message ImporteRequest {
+  string titre = 1;
+}
+
+message ImporteResponse {
+  int64 nombre = 1; // nombre de tâches créées
+}
