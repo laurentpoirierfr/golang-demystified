@@ -2781,11 +2781,90 @@ une base par test, une transaction annulée à la fin de chaque test, ou les
 fonctions &lt;code&gt;Snapshot&lt;/code&gt; et &lt;code&gt;Restore&lt;/code&gt; du module PostgreSQL, qui sauvegardent et
 restaurent l&amp;rsquo;état de la base.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;h3 data-hextra-search-id="avec-podman"&gt;Avec Podman&lt;span class="hx:absolute hx:-mt-20" id="avec-podman"&gt;&lt;/span&gt;
-&lt;a href="#avec-podman" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Testcontainers dialogue avec l&amp;rsquo;API Docker. Podman en propose une version
-compatible, qu&amp;rsquo;il suffit d&amp;rsquo;activer. Le conteneur « Ryuk », chargé de nettoyer
-les conteneurs orphelins, ne fonctionne pas en mode &lt;em&gt;rootless&lt;/em&gt; : on le
-désactive, et c&amp;rsquo;est &lt;code&gt;CleanupContainer&lt;/code&gt; qui fait le ménage.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="le-moteur-de-conteneurs--docker-ou-podman"&gt;Le moteur de conteneurs : Docker ou Podman&lt;span class="hx:absolute hx:-mt-20" id="le-moteur-de-conteneurs--docker-ou-podman"&gt;&lt;/span&gt;
+&lt;a href="#le-moteur-de-conteneurs--docker-ou-podman" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Testcontainers dialogue avec le moteur de conteneurs à travers l&amp;rsquo;&lt;strong&gt;API
+Docker&lt;/strong&gt;. Il fonctionne donc avec Docker, mais aussi avec Podman, qui propose
+une API compatible. Il utilise aussi un petit conteneur, « Ryuk », chargé de
+supprimer les conteneurs orphelins si un test est interrompu brutalement.&lt;/p&gt;
+&lt;h4 data-hextra-search-id="avec-docker"&gt;Avec Docker&lt;span class="hx:absolute hx:-mt-20" id="avec-docker"&gt;&lt;/span&gt;
+&lt;a href="#avec-docker" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Avec &lt;strong&gt;Docker Desktop&lt;/strong&gt; (macOS, Windows) ou &lt;strong&gt;Docker Engine&lt;/strong&gt; (Linux), il n&amp;rsquo;y a
+rien à configurer : Testcontainers trouve le moteur tout seul.&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker info &lt;span class="c1"&gt;# vérifie que le moteur répond&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go &lt;span class="nb"&gt;test&lt;/span&gt; -run TestPostgres ./...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Quelques cas particuliers :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;sur Linux, l&amp;rsquo;utilisateur doit pouvoir accéder au moteur sans &lt;code&gt;sudo&lt;/code&gt;, en
+appartenant au groupe &lt;code&gt;docker&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usermod -aG docker &lt;span class="nv"&gt;$USER&lt;/span&gt; &lt;span class="c1"&gt;# puis se reconnecter&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avec Docker en mode &lt;em&gt;rootless&lt;/em&gt;, indiquez l&amp;rsquo;emplacement de son socket :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix://&lt;span class="nv"&gt;$XDG_RUNTIME_DIR&lt;/span&gt;/docker.sock&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;avec &lt;strong&gt;Colima&lt;/strong&gt; (macOS), indiquez le socket de la machine virtuelle, et
+celui que Ryuk doit monter :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix://&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.colima/default/docker.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/run/docker.sock&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dans &lt;strong&gt;GitHub Actions&lt;/strong&gt;, les machines &lt;code&gt;ubuntu-latest&lt;/code&gt; disposent de Docker :
+les tests d&amp;rsquo;intégration fonctionnent sans configuration.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 data-hextra-search-id="avec-podman"&gt;Avec Podman&lt;span class="hx:absolute hx:-mt-20" id="avec-podman"&gt;&lt;/span&gt;
+&lt;a href="#avec-podman" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Podman n&amp;rsquo;a pas de démon : son API compatible Docker est fournie par un service
+à activer. En mode &lt;em&gt;rootless&lt;/em&gt;, Ryuk ne fonctionne pas : on le désactive, et
+c&amp;rsquo;est &lt;code&gt;CleanupContainer&lt;/code&gt; qui fait le ménage.&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl --user &lt;span class="nb"&gt;enable&lt;/span&gt; --now podman.socket
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix://&lt;span class="nv"&gt;$XDG_RUNTIME_DIR&lt;/span&gt;/podman/podman.sock
@@ -2802,7 +2881,33 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Dans le dépôt du livre, &lt;code&gt;make test-integration&lt;/code&gt; détecte Podman et définit ces
+&lt;p&gt;Sur macOS, avec &lt;code&gt;podman machine&lt;/code&gt;, la commande
+&lt;code&gt;podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}'&lt;/code&gt;
+donne le chemin du socket à placer dans &lt;code&gt;DOCKER_HOST&lt;/code&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DOCKER_HOST&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;adresse de l&amp;rsquo;API du moteur, si elle n&amp;rsquo;est pas celle par défaut&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TESTCONTAINERS_RYUK_DISABLED&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;désactive Ryuk (Podman &lt;em&gt;rootless&lt;/em&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;socket à monter dans Ryuk (Colima)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Dans le dépôt du livre, &lt;code&gt;make test-integration&lt;/code&gt; fonctionne avec les deux
+moteurs : avec Docker, il n&amp;rsquo;y a rien à faire ; avec Podman, il définit ces
 variables automatiquement.&lt;/p&gt;
 &lt;p&gt;Testcontainers propose des modules prêts à l&amp;rsquo;emploi pour la plupart des
 logiciels courants : MySQL, MongoDB, Redis, Kafka, RabbitMQ, Elasticsearch,
