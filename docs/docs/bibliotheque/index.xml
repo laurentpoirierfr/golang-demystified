@@ -1,4 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang Demystified – La bibliothèque standard</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/</link><description>Recent content in La bibliothèque standard on Golang Demystified</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><atom:link href="https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/index.xml" rel="self" type="application/rss+xml"/><item><title>Texte : fmt, strings, strconv</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/texte/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/texte/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/texte" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/texte&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="fmt--formater-et-afficher"&gt;fmt : formater et afficher&lt;span class="hx:absolute hx:-mt-20" id="fmt--formater-et-afficher"&gt;&lt;/span&gt;
 &lt;a href="#fmt--formater-et-afficher" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le package &lt;code&gt;fmt&lt;/code&gt; formate des valeurs selon des &lt;strong&gt;verbes&lt;/strong&gt; inspirés du &lt;code&gt;printf&lt;/code&gt;
 du C. Ses fonctions se déclinent en trois familles :&lt;/p&gt;
@@ -326,6 +334,14 @@ data-copied-label="Copié !"
 &lt;p&gt;Pour des besoins plus avancés, &lt;code&gt;regexp&lt;/code&gt; gère les expressions régulières
 (syntaxe RE2, en temps linéaire garanti), et &lt;code&gt;text/template&lt;/code&gt; génère du texte à
 partir de gabarits (voir le chapitre consacré aux templates).&lt;/p&gt;</description></item><item><title>Collections : slices, maps, iter, cmp</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/collections/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/collections/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/collections" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/collections&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Les packages &lt;code&gt;slices&lt;/code&gt; et &lt;code&gt;maps&lt;/code&gt; (&lt;strong&gt;Go 1.21&lt;/strong&gt;), &lt;code&gt;cmp&lt;/code&gt; (&lt;strong&gt;Go 1.21&lt;/strong&gt;) et &lt;code&gt;iter&lt;/code&gt;
 (&lt;strong&gt;Go 1.23&lt;/strong&gt;) forment la boîte à outils générique des collections. Le chapitre
 « Tableaux, slices et maps » a présenté les bases ; celui-ci va plus loin.&lt;/p&gt;
@@ -579,6 +595,14 @@ et accélère les comparaisons ;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;weak&lt;/code&gt; (&lt;strong&gt;Go 1.24&lt;/strong&gt;) : pointeurs faibles, qui n&amp;rsquo;empêchent pas le
 ramasse-miettes de libérer un objet. Ils servent à construire des caches.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Fichiers et flux : io, os, bufio</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/fichiers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/fichiers/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/fichiers" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/fichiers&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="ioreader-et-iowriter"&gt;io.Reader et io.Writer&lt;span class="hx:absolute hx:-mt-20" id="ioreader-et-iowriter"&gt;&lt;/span&gt;
 &lt;a href="#ioreader-et-iowriter" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Toutes les entrées-sorties de Go reposent sur deux interfaces d&amp;rsquo;une seule
 méthode :&lt;/p&gt;
@@ -942,6 +966,14 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Le temps : time</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/temps/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/temps/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/temps" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/temps&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Le package &lt;code&gt;time&lt;/code&gt; manipule des &lt;strong&gt;instants&lt;/strong&gt; (&lt;code&gt;time.Time&lt;/code&gt;), des &lt;strong&gt;durées&lt;/strong&gt;
 (&lt;code&gt;time.Duration&lt;/code&gt;) et des &lt;strong&gt;fuseaux horaires&lt;/strong&gt; (&lt;code&gt;time.Location&lt;/code&gt;).&lt;/p&gt;
 &lt;h2 data-hextra-search-id="les-instants"&gt;Les instants&lt;span class="hx:absolute hx:-mt-20" id="les-instants"&gt;&lt;/span&gt;
@@ -1212,6 +1244,14 @@ sont devenus non bufferisés, ce qui évite de recevoir une valeur périmée
 après un &lt;code&gt;Reset&lt;/code&gt; ou un &lt;code&gt;Stop&lt;/code&gt;. Depuis &lt;strong&gt;Go 1.27&lt;/strong&gt;, l&amp;rsquo;ancien comportement
 (&lt;code&gt;asynctimerchan&lt;/code&gt;) n&amp;rsquo;est plus disponible.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>JSON : encoding/json</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/json/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/json/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/json" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/json&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="encoder-et-décoder"&gt;Encoder et décoder&lt;span class="hx:absolute hx:-mt-20" id="encoder-et-décoder"&gt;&lt;/span&gt;
 &lt;a href="#encoder-et-d%c3%a9coder" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;json.Marshal&lt;/code&gt; transforme une valeur Go en JSON, &lt;code&gt;json.Unmarshal&lt;/code&gt; fait
 l&amp;rsquo;inverse. Seuls les champs &lt;strong&gt;exportés&lt;/strong&gt; sont pris en compte, et les
@@ -1537,6 +1577,14 @@ texte de certains messages d&amp;rsquo;erreur peut différer. &lt;code&gt;GOEXPE
 permet temporairement de revenir à l&amp;rsquo;ancienne implémentation.&lt;/p&gt;
 &lt;p&gt;Pour un nouveau projet, &lt;code&gt;encoding/json/v2&lt;/code&gt; est le choix recommandé. Pour un
 projet existant, &lt;code&gt;encoding/json&lt;/code&gt; reste parfaitement supporté.&lt;/p&gt;</description></item><item><title>HTTP : net/http</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/http/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/http/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/http" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/http&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Le package &lt;code&gt;net/http&lt;/code&gt; fournit un client et un serveur HTTP complets, prêts pour
 la production : HTTP/1.1, HTTP/2, TLS, keep-alive, compression… De nombreux
 services Go n&amp;rsquo;utilisent aucun framework web.&lt;/p&gt;
@@ -1890,6 +1938,14 @@ data-alert="note" class="hextra-alert"
 compatible avec &lt;code&gt;testing/synctest&lt;/code&gt; pour tester les délais et les timeouts
 sans attendre réellement.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Journalisation : log/slog</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/slog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/slog/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/slog" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/slog&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="log--le-journal-minimal"&gt;log : le journal minimal&lt;span class="hx:absolute hx:-mt-20" id="log--le-journal-minimal"&gt;&lt;/span&gt;
 &lt;a href="#log--le-journal-minimal" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le package &lt;code&gt;log&lt;/code&gt;, présent depuis Go 1.0, écrit des messages horodatés sur la
 sortie d&amp;rsquo;erreur :&lt;/p&gt;
@@ -2111,6 +2167,14 @@ le journal global : c&amp;rsquo;est plus facile à tester.&lt;/li&gt;
 &lt;li&gt;En production, journalisez en JSON sur la sortie standard, et laissez la
 plateforme (&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://systemd.io" target="_blank" rel="noopener"&gt;systemd&lt;/a&gt;) collecter les messages.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Annulation et délais : context</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/contexte" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/contexte&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="le-problème"&gt;Le problème&lt;span class="hx:absolute hx:-mt-20" id="le-problème"&gt;&lt;/span&gt;
 &lt;a href="#le-probl%c3%a8me" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un serveur reçoit une requête, qui interroge une base de données, puis appelle
 un autre service. Si le client abandonne, ou si la requête dépasse son délai,
@@ -2330,6 +2394,14 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Dans un test, &lt;code&gt;t.Context()&lt;/code&gt; (&lt;strong&gt;Go 1.24&lt;/strong&gt;) fournit un contexte annulé
 automatiquement à la fin du test.&lt;/p&gt;</description></item><item><title>Tests : testing</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/testing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/testing/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/tests" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/tests&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Les tests font partie de l&amp;rsquo;outillage standard : pas de framework à choisir ni à
 installer. Un fichier &lt;code&gt;xxx_test.go&lt;/code&gt; contient des fonctions de test, et
 &lt;code&gt;go test&lt;/code&gt; les compile et les exécute.&lt;/p&gt;
@@ -2928,6 +3000,14 @@ base de données…), avant d&amp;rsquo;appeler &lt;code&gt;m.Run()&lt;/code&gt;
 double de test (&lt;em&gt;fake&lt;/em&gt;) écrit à la main : c&amp;rsquo;est souvent plus simple qu&amp;rsquo;une
 bibliothèque de &lt;em&gt;mocks&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Tour d'horizon</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/divers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/divers/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/divers" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/stdlib/divers&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;La bibliothèque standard de Go est vaste. Ce chapitre présente des packages
 utiles au quotidien, qui n&amp;rsquo;ont pas eu de chapitre dédié.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="uuid"&gt;uuid&lt;span class="hx:absolute hx:-mt-20" id="uuid"&gt;&lt;/span&gt;
