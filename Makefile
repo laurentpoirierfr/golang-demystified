@@ -14,7 +14,7 @@ site:
 
 ## serve : prévisualise le site sur http://localhost:1313/golang-demystified/
 serve:
-	cd site && hugo server --buildDrafts
+	cd site && hugo server --buildDrafts --renderToMemory
 
 ## book-md : assemble les pages en un seul Markdown, dans l'ordre du site
 book-md:
