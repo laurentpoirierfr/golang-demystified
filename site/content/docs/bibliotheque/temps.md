@@ -131,7 +131,7 @@ fmt.Println(reunion.UTC())      // 2026-07-01 08:00:00 +0000 UTC
 ```
 
 `LoadLocation` lit la base de fuseaux horaires du système. Dans une image
-Docker minimale qui n'en contient pas, importez `time/tzdata` (ou compilez avec
+[Docker](https://www.docker.com) minimale qui n'en contient pas, importez `time/tzdata` (ou compilez avec
 `-tags timetzdata`) pour l'embarquer dans l'exécutable, au prix d'environ
 450 Ko.
 

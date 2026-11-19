@@ -15,10 +15,10 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 | Répertoire          | Rôle                                                         |
 |---------------------|--------------------------------------------------------------|
-| `site/`             | Site Hugo (thème [Hextra](https://imfing.github.io/hextra/)) |
+| `site/`             | Site [Hugo](https://gohugo.io) (thème [Hextra](https://imfing.github.io/hextra/)) |
 | `site/content/docs` | Contenu du livre, source unique du site, du PDF et de l'EPUB |
 | `docs/`             | Site généré, publié par GitHub Pages                         |
-| `book/quarto/`      | Configuration Quarto, modèle Typst et polices du livre       |
+| `book/quarto/`      | Configuration Quarto, modèle [Typst](https://typst.app) et polices du livre       |
 | `book/`             | Couverture, PDF et EPUB générés                              |
 | `examples/`         | Code des exemples du livre, compilé et testé                 |
 | `tools/mkbook`      | Transforme le contenu du site en projet de livre Quarto      |
@@ -27,7 +27,7 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 - Go ≥ 1.27
 - Hugo extended ≥ 0.150
-- Docker ou Podman, pour générer le livre avec [Quarto](https://quarto.org)
+- [Docker](https://www.docker.com) ou [Podman](https://podman.io), pour générer le livre avec [Quarto](https://quarto.org)
   et pour les tests d'intégration ([Testcontainers](https://golang.testcontainers.org)) :
   - **Docker** (Docker Desktop ou Docker Engine) : rien à configurer, il suffit
     que `docker info` réponde ;

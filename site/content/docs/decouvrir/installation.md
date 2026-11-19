@@ -33,7 +33,7 @@ Pour fish, la commande équivalente est
 ### macOS
 
 Téléchargez et lancez l'installeur `.pkg` depuis
-[go.dev/dl](https://go.dev/dl/), ou utilisez Homebrew :
+[go.dev/dl](https://go.dev/dl/), ou utilisez [Homebrew](https://brew.sh) :
 
 ```bash
 brew install go
@@ -44,7 +44,7 @@ brew install go
 
 ### Windows
 
-Lancez l'installeur `.msi`, ou utilisez winget :
+Lancez l'installeur `.msi`, ou utilisez [winget](https://learn.microsoft.com/windows/package-manager/winget/) :
 
 ```powershell
 winget install GoLang.Go
@@ -100,14 +100,14 @@ GOTOOLCHAIN=go1.26.3 go test ./...
 
 ## Configurer un éditeur
 
-Go fournit un serveur de langage officiel, **gopls**, utilisé par la plupart
+Go fournit un serveur de langage officiel, **[gopls](https://pkg.go.dev/golang.org/x/tools/gopls)**, utilisé par la plupart
 des éditeurs : complétion, navigation dans le code, renommage, diagnostics et
 corrections automatiques.
 
-- **Visual Studio Code** : installez l'extension **Go** (éditée par l'équipe
+- **[Visual Studio Code](https://code.visualstudio.com)** : installez l'extension **Go** (éditée par l'équipe
   Go). À l'ouverture du premier fichier `.go`, elle propose d'installer gopls et
   les outils nécessaires.
-- **GoLand** (JetBrains) : un IDE dédié à Go, prêt à l'emploi.
+- **[GoLand](https://www.jetbrains.com/go/)** (JetBrains) : un IDE dédié à Go, prêt à l'emploi.
 - **Neovim, Helix, Zed, Emacs…** : configurez le client LSP pour utiliser
   `gopls`, que vous pouvez installer avec :
 

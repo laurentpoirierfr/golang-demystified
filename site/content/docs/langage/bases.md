@@ -217,7 +217,7 @@ fmt.Println(Ko, Mo, Go)
 ```
 
 Pour afficher le nom d'une valeur plutôt que son numéro, ajoutez une méthode
-`String()`, que l'outil `stringer` peut générer :
+`String()`, que l'outil [`stringer`](https://pkg.go.dev/golang.org/x/tools/cmd/stringer) peut générer :
 
 ```bash
 go get -tool golang.org/x/tools/cmd/stringer

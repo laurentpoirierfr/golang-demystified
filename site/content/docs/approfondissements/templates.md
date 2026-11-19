@@ -306,11 +306,11 @@ Trois bonnes pratiques :
   échoue si le code produit n'est pas du Go valide ;
 - commencer le fichier par le commentaire `// Code generated … DO NOT EDIT.`,
   **en anglais et exactement sous cette forme** : c'est une convention
-  reconnue par les outils (gopls, linters, revue de code), qui évitent de
+  reconnue par les outils ([gopls](https://pkg.go.dev/golang.org/x/tools/gopls), linters, revue de code), qui évitent de
   modifier ou d'analyser ces fichiers ;
 - **versionner** les fichiers générés : un utilisateur du module n'a pas à
   lancer `go generate` pour compiler.
 
 Pour des générateurs plus élaborés, le package `go/ast` analyse le code
 existant, par exemple pour trouver automatiquement les constantes d'un type,
-comme le fait l'outil `stringer`.
+comme le fait l'outil [`stringer`](https://pkg.go.dev/golang.org/x/tools/cmd/stringer).

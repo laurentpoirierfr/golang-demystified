@@ -44,7 +44,7 @@ func TestSlug(t *testing.T) {
 
 Le style Go privilégie des messages explicites (`got … attendu …`) plutôt que
 des bibliothèques d'assertions. La comparaison de structures complexes se fait
-avec `reflect.DeepEqual`, ou avec `github.com/google/go-cmp`, qui affiche les
+avec `reflect.DeepEqual`, ou avec [`github.com/google/go-cmp`](https://github.com/google/go-cmp), qui affiche les
 différences.
 
 ## Les tests de table
@@ -126,7 +126,7 @@ BenchmarkSlug-16    	  651722	      2105 ns/op	     680 B/op	       7 allocs/op
 
 `-benchmem` affiche les allocations, souvent la première piste
 d'optimisation. Pour comparer deux versions de manière statistiquement fiable,
-utilisez `benchstat` (`golang.org/x/perf/cmd/benchstat`).
+utilisez [`benchstat`](https://pkg.go.dev/golang.org/x/perf/cmd/benchstat) (`golang.org/x/perf/cmd/benchstat`).
 
 ## Le fuzzing
 
@@ -208,15 +208,15 @@ pour mesurer la couverture de tests d'intégration ou de bout en bout.
 
 ## Tests d'intégration avec Testcontainers
 
-Un double de test ou une base SQLite en mémoire ne disent pas tout : le code
-qui parle à PostgreSQL, Redis ou Kafka doit aussi être testé contre le **vrai**
+Un double de test ou une base [SQLite](https://sqlite.org) en mémoire ne disent pas tout : le code
+qui parle à [PostgreSQL](https://www.postgresql.org), [Redis](https://redis.io) ou [Kafka](https://kafka.apache.org) doit aussi être testé contre le **vrai**
 logiciel, dans la **vraie** version utilisée en production. Une différence de
 syntaxe SQL, une contrainte, un type de colonne : autant de bugs qu'aucun
 double ne révèle.
 
 [Testcontainers](https://golang.testcontainers.org) répond à ce besoin. Le
 module `github.com/testcontainers/testcontainers-go` démarre, depuis le test
-lui-même, un conteneur jetable (Docker ou Podman), attend qu'il soit prêt,
+lui-même, un conteneur jetable ([Docker](https://www.docker.com) ou [Podman](https://podman.io)), attend qu'il soit prêt,
 fournit son adresse, puis le supprime à la fin du test. Il n'y a ni base
 partagée à maintenir, ni fichier `docker-compose` à lancer avant les tests.
 
@@ -342,7 +342,7 @@ Quelques cas particuliers :
   export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
   ```
 
-- avec **Colima** (macOS), indiquez le socket de la machine virtuelle, et
+- avec **[Colima](https://github.com/abiosoft/colima)** (macOS), indiquez le socket de la machine virtuelle, et
   celui que Ryuk doit monter :
 
   ```bash
@@ -350,7 +350,7 @@ Quelques cas particuliers :
   export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
   ```
 
-- dans **GitHub Actions**, les machines `ubuntu-latest` disposent de Docker :
+- dans **[GitHub Actions](https://docs.github.com/actions)**, les machines `ubuntu-latest` disposent de Docker :
   les tests d'intégration fonctionnent sans configuration.
 
 #### Avec Podman
@@ -381,8 +381,8 @@ moteurs : avec Docker, il n'y a rien à faire ; avec Podman, il définit ces
 variables automatiquement.
 
 Testcontainers propose des modules prêts à l'emploi pour la plupart des
-logiciels courants : MySQL, MongoDB, Redis, Kafka, RabbitMQ, Elasticsearch,
-LocalStack (services AWS)… et `testcontainers.GenericContainer` pour n'importe
+logiciels courants : [MySQL](https://www.mysql.com), [MongoDB](https://www.mongodb.com), Redis, Kafka, [RabbitMQ](https://www.rabbitmq.com), [Elasticsearch](https://www.elastic.co/elasticsearch),
+[LocalStack](https://www.localstack.cloud) (services AWS)… et `testcontainers.GenericContainer` pour n'importe
 quelle image.
 
 ## Organiser les tests

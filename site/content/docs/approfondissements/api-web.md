@@ -5,7 +5,7 @@ weight: 30
 
 Ce chapitre construit un service web complet, prêt pour la production, avec la
 seule bibliothèque standard et un pilote de base de données : une API JSON de
-gestion de tâches, stockées dans SQLite. Il rassemble ce que les chapitres
+gestion de tâches, stockées dans [SQLite](https://sqlite.org). Il rassemble ce que les chapitres
 précédents ont présenté séparément : routage HTTP, JSON, `database/sql`,
 `log/slog`, `context`, `embed` et les tests.
 
@@ -127,10 +127,10 @@ func ValideTitre(titre string) (string, error) {
 chaque base. Le pilote s'enregistre par un import « à blanc ». Le service
 accepte deux bases, choisies par la chaîne de connexion :
 
-- **SQLite**, avec `modernc.org/sqlite`, écrit entièrement en Go : il ne
+- **SQLite**, avec [`modernc.org/sqlite`](https://pkg.go.dev/modernc.org/sqlite), écrit entièrement en Go : il ne
   demande pas de compilateur C, et l'exécutable reste autonome. Idéal pour le
   développement, les tests et les petits déploiements ;
-- **PostgreSQL**, avec `github.com/jackc/pgx/v5/stdlib`, pour la production.
+- **[PostgreSQL](https://www.postgresql.org)**, avec `github.com/jackc/pgx/v5/stdlib`, pour la production.
 
 Ce qui diffère d'une base à l'autre tient dans une petite structure :
 
@@ -183,7 +183,7 @@ l'ouvre une fois au démarrage, et on le partage.
 
 Le même stockage est testé sur les **deux** bases : SQLite en mémoire à chaque
 `go test`, et un vrai PostgreSQL démarré dans un conteneur par
-**Testcontainers**. Le chapitre sur le package `testing` détaille cette
+**[Testcontainers](https://golang.testcontainers.org)**. Le chapitre sur le package `testing` détaille cette
 technique.
 
 ### Les migrations
@@ -226,7 +226,7 @@ func (s *Store) migre(ctx context.Context) error {
 }
 ```
 
-Pour un projet plus important, des outils comme `goose` ou `golang-migrate`
+Pour un projet plus important, des outils comme [`goose`](https://github.com/pressly/goose) ou [`golang-migrate`](https://github.com/golang-migrate/migrate)
 gèrent aussi les retours en arrière.
 
 ### Les requêtes
@@ -301,9 +301,9 @@ Il existe deux façons d'obtenir ce contrat en Go :
 
 | Approche             | Outil          | Principe                                         | Format         |
 |----------------------|----------------|--------------------------------------------------|----------------|
-| Code d'abord         | **swag**       | commentaires `// @Router …` au-dessus des handlers | Swagger 2.0 (v1) |
+| Code d'abord         | **[swag](https://github.com/swaggo/swag)**       | commentaires `// @Router …` au-dessus des handlers | Swagger 2.0 (v1) |
 | Code d'abord         | **Huma**       | contrat déduit des types Go des entrées et sorties | OpenAPI 3.1    |
-| **Contrat d'abord**  | **oapi-codegen** | code Go généré depuis le contrat               | OpenAPI 3.0    |
+| **Contrat d'abord**  | **[oapi-codegen](https://github.com/oapi-codegen/oapi-codegen)** | code Go généré depuis le contrat               | OpenAPI 3.0    |
 
 `swag` est l'outil historique : le contrat est produit à partir de
 commentaires placés au-dessus des handlers. Il a deux défauts : sa version
@@ -444,7 +444,7 @@ Il contient aussi `HandlerWithOptions`, qui enregistre chaque opération sur un
 
 Le contrat dit bien plus que les types : un titre fait au plus 200 caractères,
 un identifiant vaut au moins 1, un champ inconnu est interdit, le corps doit
-être du JSON. Le middleware `nethttp-middleware` vérifie chaque requête
+être du JSON. Le middleware [`nethttp-middleware`](https://github.com/oapi-codegen/nethttp-middleware) vérifie chaque requête
 **par rapport au contrat**, avant qu'elle n'atteigne le handler :
 
 ```go
@@ -477,7 +477,7 @@ refusé par le domaine avec un statut 422.
 ### Servir le contrat et sa documentation
 
 Le service publie son propre contrat, et une page de documentation
-interactive basée sur **Swagger UI**, chargée depuis un CDN : aucune
+interactive basée sur **[Swagger UI](https://swagger.io/tools/swagger-ui/)**, chargée depuis un CDN : aucune
 dépendance Go n'est nécessaire.
 
 ```go
@@ -893,7 +893,7 @@ func main() {
 
 ### L'arrêt propre
 
-À la réception de `SIGTERM` (envoyé par Kubernetes ou systemd avant
+À la réception de `SIGTERM` (envoyé par [Kubernetes](https://kubernetes.io) ou [systemd](https://systemd.io) avant
 d'arrêter un service), le serveur cesse d'accepter des connexions, termine les
 requêtes en cours, puis ferme la base de données :
 
@@ -967,7 +967,7 @@ pour simuler un `SIGTERM` et vérifier l'arrêt propre.
 ## Déployer
 
 Le pilote SQLite étant écrit en Go, l'exécutable est **statique** : une image
-Docker minimale suffit.
+[Docker](https://www.docker.com) minimale suffit.
 
 ```dockerfile
 FROM golang:1.27 AS build
@@ -984,7 +984,7 @@ USER nonroot
 ENTRYPOINT ["/taches"]
 ```
 
-L'image se construit et s'exécute avec Docker ou avec Podman, dont les
+L'image se construit et s'exécute avec Docker ou avec [Podman](https://podman.io), dont les
 commandes sont identiques :
 
 ```bash
@@ -1021,7 +1021,7 @@ croissance. Les évolutions classiques sont :
 - l'**authentification**, par un middleware qui valide un jeton et place
   l'utilisateur dans le contexte ;
 - la **pagination** de la liste (`?apres=42&limite=50`) ;
-- les **métriques** (Prometheus, OpenTelemetry) et le **traçage** distribué,
+- les **métriques** ([Prometheus](https://prometheus.io), [OpenTelemetry](https://opentelemetry.io)) et le **traçage** distribué,
   par d'autres middlewares ;
 - une **documentation OpenAPI**, écrite à la main ou générée.
 

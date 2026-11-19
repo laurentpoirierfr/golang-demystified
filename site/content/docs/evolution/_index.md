@@ -34,7 +34,7 @@ importantes sont détaillées dans les chapitres des parties précédentes.
 | 1.21    | août 2023     | **`slog`, `slices`, `maps`**, `min`/`max`/`clear`, toolchains |
 | 1.22    | février 2024  | **Variable de boucle par itération**, `range` sur entier, routage HTTP |
 | 1.23    | août 2024     | **Itérateurs**, `unique`, nouveaux timers                    |
-| 1.24    | février 2025  | Alias génériques, directive `tool`, maps Swiss Tables, `os.Root` |
+| 1.24    | février 2025  | Alias génériques, directive `tool`, maps [Swiss Tables](https://abseil.io/about/design/swisstables), `os.Root` |
 | 1.25    | août 2025     | `GOMAXPROCS` adapté aux conteneurs, `synctest`, `WaitGroup.Go` |
 | 1.26    | février 2026  | `new(expr)`, GC Green Tea, `go fix` modernisé, `errors.AsType` |
 | 1.27    | août 2026     | **Méthodes génériques**, `encoding/json/v2`, `uuid`          |

@@ -17,8 +17,8 @@ quelques secondes, produit un binaire autonome et rend la concurrence naturelle.
 
 Go a été rendu public en novembre 2009. La version **Go 1.0**, publiée en mars
 2012, a marqué le début de la stabilité. Depuis, Go est devenu le langage de
-l'infrastructure moderne : Docker, Kubernetes, Terraform, Prometheus, etcd ou
-Caddy sont écrits en Go.
+l'infrastructure moderne : [Docker](https://www.docker.com), [Kubernetes](https://kubernetes.io), [Terraform](https://www.terraform.io), [Prometheus](https://prometheus.io), [etcd](https://etcd.io) ou
+[Caddy](https://caddyserver.com) sont écrits en Go.
 
 ## Une philosophie de la simplicité
 

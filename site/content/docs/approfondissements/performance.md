@@ -94,7 +94,7 @@ l'allocation, puis au ramasse-miettes.
 > [!TIP]
 > Un benchmark varie d'une exécution à l'autre. Pour comparer deux versions de
 > manière fiable, exécutez chacune une dizaine de fois et comparez avec
-> `benchstat` :
+> [`benchstat`](https://pkg.go.dev/golang.org/x/perf/cmd/benchstat) :
 >
 > ```bash
 > go test -bench . -count 10 > avant.txt

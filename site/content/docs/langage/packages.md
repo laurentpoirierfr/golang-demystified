@@ -36,7 +36,7 @@ func main() {
 }
 ```
 
-`goimports`, intégré à gopls, ajoute et range les imports automatiquement : la
+[`goimports`](https://pkg.go.dev/golang.org/x/tools/cmd/goimports), intégré à [gopls](https://pkg.go.dev/golang.org/x/tools/gopls), ajoute et range les imports automatiquement : la
 bibliothèque standard d'abord, puis les autres modules.
 
 Un import peut être renommé (`import str "strings"`) pour éviter un conflit de

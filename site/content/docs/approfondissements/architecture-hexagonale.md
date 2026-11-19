@@ -326,7 +326,7 @@ Grâce au typage implicite des interfaces, `horloge.Systeme` satisfait le port
 `application.Horloge` sans que le package `horloge` le connaisse : c'est ce qui
 lui permet de rester générique.
 
-Un adaptateur PostgreSQL, construit comme le stockage du chapitre précédent,
+Un adaptateur [PostgreSQL](https://www.postgresql.org), construit comme le stockage du chapitre précédent,
 remplacerait le dépôt en mémoire **sans toucher** au domaine ni à
 l'application.
 
