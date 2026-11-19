@@ -1,0 +1,7 @@
+book/build/
+site/public/
+site/resources/
+site/.hugo_build.lock
+.claude/settings.local.json
+
+claude.sh

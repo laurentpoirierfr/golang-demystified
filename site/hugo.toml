@@ -1,0 +1,63 @@
+baseURL = "https://laurentpoirierfr.github.io/golang-demystified/"
+locale = "fr-FR"
+defaultContentLanguage = "fr"
+title = "Golang Demystified"
+publishDir = "../docs"
+enableGitInfo = true
+
+[module]
+  [[module.imports]]
+    path = "github.com/imfing/hextra"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+[menu]
+  [[menu.main]]
+    name = "Livre"
+    pageRef = "/docs"
+    weight = 1
+  [[menu.main]]
+    name = "PDF"
+    url = "https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf"
+    weight = 2
+  [[menu.main]]
+    name = "Rechercher"
+    weight = 3
+    [menu.main.params]
+      type = "search"
+  [[menu.main]]
+    name = "GitHub"
+    weight = 4
+    url = "https://github.com/laurentpoirierfr/golang-demystified"
+    [menu.main.params]
+      icon = "github"
+
+[params]
+  description = "Go dans son ensemble : le langage, ses outils et son évolution au fil des versions."
+
+  [params.navbar]
+    displayTitle = true
+    displayLogo = true
+    [params.navbar.logo]
+      path = "images/gopher.png"
+      width = 32
+      height = 32
+
+  [params.page]
+    width = "wide"
+
+  [params.footer]
+    displayCopyright = false
+    displayPoweredBy = false
+
+  [params.editURL]
+    enable = true
+    base = "https://github.com/laurentpoirierfr/golang-demystified/edit/main/site/content"
+
+  [params.search]
+    enable = true
+    type = "flexsearch"

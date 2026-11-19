@@ -1,0 +1,221 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang Demystified – Découvrir Go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/</link><description>Recent content in Découvrir Go on Golang Demystified</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><atom:link href="https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/introduction/</guid><description>
+&lt;h2 data-hextra-search-id="démystifier-go--exploration-de-lécosystème-dun-langage-de-programmation-révolutionnaire"&gt;Démystifier Go : Exploration de l&amp;rsquo;Écosystème d&amp;rsquo;un Langage de Programmation Révolutionnaire&lt;span class="hx:absolute hx:-mt-20" id="démystifier-go--exploration-de-lécosystème-dun-langage-de-programmation-révolutionnaire"&gt;&lt;/span&gt;
+&lt;a href="#d%c3%a9mystifier-go--exploration-de-l%c3%a9cosyst%c3%a8me-dun-langage-de-programmation-r%c3%a9volutionnaire" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dans le paysage des langages de programmation, émergent parfois des solutions qui résonnent avec la communauté des développeurs d&amp;rsquo;une manière unique. Go, souvent désigné sous le nom de Golang, est l&amp;rsquo;un de ces langages. Conçu par Google, Go a rapidement gagné en popularité pour sa simplicité, ses performances élevées et sa robustesse. Cependant, au-delà de ces caractéristiques techniques, Go possède un écosystème dynamique et en constante évolution qui mérite d&amp;rsquo;être exploré et compris.&lt;/p&gt;
+&lt;p&gt;Une des particularités les plus remarquables de Go est sa courbe d&amp;rsquo;apprentissage rapide. Grâce à sa syntaxe épurée et à une conception axée sur la simplicité et la lisibilité, les nouveaux développeurs peuvent se sentir rapidement à l&amp;rsquo;aise avec le langage. Cette facilité d&amp;rsquo;adoption ne compromet en rien la puissance de Go, bien au contraire : elle permet aux développeurs de se concentrer sur la résolution des problèmes plutôt que sur des subtilités syntaxiques.&lt;/p&gt;
+&lt;p&gt;Dans ce document, nous nous aventurerons dans l&amp;rsquo;univers de Go, explorant non seulement les fondements du langage lui-même, mais également l&amp;rsquo;écosystème qui l&amp;rsquo;entoure. Nous plongerons dans les bibliothèques standard, les outils de développement, les frameworks et les projets open source qui font de Go bien plus qu&amp;rsquo;un simple langage de programmation, mais plutôt une communauté vibrante et innovante.&lt;/p&gt;
+&lt;p&gt;Que vous soyez un développeur curieux cherchant à en apprendre davantage sur Go, un décideur évaluant les technologies pour votre prochain projet, ou simplement quelqu&amp;rsquo;un intéressé par les dernières avancées technologiques, ce document servira de guide pour naviguer à travers les méandres de Go et son écosystème florissant.&lt;/p&gt;
+&lt;p&gt;Préparez-vous à être éclairé, inspiré et peut-être même surpris par la richesse et la diversité de ce que Go et sa communauté ont à offrir.&lt;/p&gt;</description></item><item><title>Installation</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</guid><description>
+&lt;h2 data-hextra-search-id="téléchargement-de-go-"&gt;Téléchargement de Go :&lt;span class="hx:absolute hx:-mt-20" id="téléchargement-de-go-"&gt;&lt;/span&gt;
+&lt;a href="#t%c3%a9l%c3%a9chargement-de-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Rendez-vous sur le site officiel de Go à l&amp;rsquo;adresse &lt;a href="https://golang.org/dl/" target="_blank" rel="noopener"&gt;https://golang.org/dl/&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Téléchargez la version appropriée pour votre système d&amp;rsquo;exploitation (Linux, macOS, Windows, etc.).&lt;/li&gt;
+&lt;li&gt;Une fois le téléchargement terminé, extrayez l&amp;rsquo;archive dans le répertoire &lt;strong&gt;$HOME/Community/go&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="configuration-des-variables-denvironnement-"&gt;Configuration des variables d&amp;rsquo;environnement :&lt;span class="hx:absolute hx:-mt-20" id="configuration-des-variables-denvironnement-"&gt;&lt;/span&gt;
+&lt;a href="#configuration-des-variables-denvironnement-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Ouvrez ou créez le fichier de profil de votre shell (&lt;strong&gt;~/.bash_profile&lt;/strong&gt;, &lt;strong&gt;~/.bashrc&lt;/strong&gt;, &lt;strong&gt;~/.zshrc&lt;/strong&gt;, etc.).&lt;/li&gt;
+&lt;li&gt;Ajoutez les lignes suivantes pour définir les variables d&amp;rsquo;environnement &lt;strong&gt;GOROOT&lt;/strong&gt;, &lt;strong&gt;GOPATH&lt;/strong&gt;, et mettre les binaires de &lt;strong&gt;GOPATH/bin&lt;/strong&gt; dans le &lt;strong&gt;PATH&lt;/strong&gt; :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/Community/go
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/Community/gopath
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$GOROOT&lt;/span&gt;/bin:&lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/bin&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="vérification-de-linstallation-"&gt;Vérification de l&amp;rsquo;installation :&lt;span class="hx:absolute hx:-mt-20" id="vérification-de-linstallation-"&gt;&lt;/span&gt;
+&lt;a href="#v%c3%a9rification-de-linstallation-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Ouvrez un nouveau terminal.&lt;/li&gt;
+&lt;li&gt;Tapez &lt;strong&gt;go version&lt;/strong&gt; pour vérifier que Go est correctement installé et configuré.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;elfeo@elfeo:~/Project,golang-demystified$ go version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go version go1.22.2 linux/amd64&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Avec ces configurations, vous pourrez utiliser Go et ses outils associés de manière fluide, en ayant accès aux binaires des packages installés dans &lt;strong&gt;$HOME/Community/gopath/bin&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="téléchargement-de-visual-studio-code-"&gt;Téléchargement de Visual Studio Code :&lt;span class="hx:absolute hx:-mt-20" id="téléchargement-de-visual-studio-code-"&gt;&lt;/span&gt;
+&lt;a href="#t%c3%a9l%c3%a9chargement-de-visual-studio-code-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Rendez-vous sur le site officiel de Visual Studio Code à l&amp;rsquo;adresse &lt;a href="https://code.visualstudio.com/" target="_blank" rel="noopener"&gt;https://code.visualstudio.com/&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Téléchargez la version appropriée pour votre système d&amp;rsquo;exploitation (Linux, macOS, Windows, etc.).&lt;/li&gt;
+&lt;li&gt;Suivez les instructions pour installer Visual Studio Code sur votre système.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="installation-dextensions-pour-go-"&gt;Installation d&amp;rsquo;extensions pour Go :&lt;span class="hx:absolute hx:-mt-20" id="installation-dextensions-pour-go-"&gt;&lt;/span&gt;
+&lt;a href="#installation-dextensions-pour-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;img src="https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/go-help.png" alt="Help" loading="lazy" /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Recherchez &amp;ldquo;Go&amp;rdquo; dans la barre de recherche des extensions.&lt;/li&gt;
+&lt;li&gt;Installez l&amp;rsquo;extension &lt;strong&gt;&amp;ldquo;Go&amp;rdquo;&lt;/strong&gt; proposée par Microsoft, en cliquant sur le bouton &lt;strong&gt;&amp;ldquo;Installer&amp;rdquo;&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="configuration-de-lenvironnement-go-"&gt;Configuration de l&amp;rsquo;environnement Go :&lt;span class="hx:absolute hx:-mt-20" id="configuration-de-lenvironnement-go-"&gt;&lt;/span&gt;
+&lt;a href="#configuration-de-lenvironnement-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Ouvrez les paramètres de Visual Studio Code en appuyant sur Ctrl+, ou en sélectionnant &lt;strong&gt;&amp;ldquo;Fichier&amp;rdquo; &amp;gt; &amp;ldquo;Préférences&amp;rdquo; &amp;gt; &amp;ldquo;Paramètres&amp;rdquo;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Recherchez &amp;ldquo;go.gopath&amp;rdquo; dans la barre de recherche des paramètres.&lt;/li&gt;
+&lt;li&gt;Spécifiez le chemin du répertoire gopath que vous avez configuré précédemment, par exemple &lt;strong&gt;&amp;quot;$HOME/Community/gopath&amp;quot;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Enregistrez les modifications.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="vérification-de-linstallation--1"&gt;Vérification de l&amp;rsquo;installation :&lt;span class="hx:absolute hx:-mt-20" id="vérification-de-linstallation--1"&gt;&lt;/span&gt;
+&lt;a href="#v%c3%a9rification-de-linstallation--1" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Redémarrez Visual Studio Code pour appliquer les paramètres.&lt;/li&gt;
+&lt;li&gt;Créez un nouveau fichier Go ou ouvrez un projet existant.&lt;/li&gt;
+&lt;li&gt;Visual Studio Code devrait automatiquement détecter que c&amp;rsquo;est un projet Go et proposer des suggestions d&amp;rsquo;installation d&amp;rsquo;outils supplémentaires si nécessaire.&lt;/li&gt;
+&lt;li&gt;Vous êtes maintenant prêt à coder en Go avec Visual Studio Code !&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Avec Visual Studio Code et l&amp;rsquo;extension Go, vous bénéficierez d&amp;rsquo;un environnement de développement puissant et convivial pour vos projets en Go.&lt;/p&gt;</description></item><item><title>Exploration de l'environnement</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/exploration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/exploration/</guid><description>
+&lt;h2 data-hextra-search-id="goroot"&gt;$GOROOT&lt;span class="hx:absolute hx:-mt-20" id="goroot"&gt;&lt;/span&gt;
+&lt;a href="#goroot" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Voici une explication rapide des répertoires principaux présents dans &lt;strong&gt;$GOROOT&lt;/strong&gt;, qui est le répertoire où est installé Go :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; : Ce répertoire contient les exécutables binaires de Go, y compris le binaire de l&amp;rsquo;interpréteur Go (go) et d&amp;rsquo;autres outils comme le formateur de code (gofmt), l&amp;rsquo;outil de gestion de modules (go mod), etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;pkg/&lt;/strong&gt; : Ce répertoire contient les packages précompilés, c&amp;rsquo;est-à-dire les fichiers objets résultant de la compilation des fichiers source Go. Ces fichiers sont utilisés lors de la construction de programmes Go pour accélérer les temps de compilation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;src/&lt;/strong&gt; : Bien que souvent vide dans le répertoire &lt;strong&gt;$GOROOT&lt;/strong&gt; standard, ce répertoire est destiné à contenir les fichiers source des packages standard de Go. Ces fichiers source sont généralement inclus dans le code source de Go lors de l&amp;rsquo;installation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;include/&lt;/strong&gt; : Ce répertoire contient les fichiers d&amp;rsquo;en-tête nécessaires pour la construction de programmes Go qui utilisent des paquets C, C++ ou autres langages compatibles avec Go. Ces fichiers d&amp;rsquo;en-tête sont utilisés par le compilateur Go lors de la liaison avec des bibliothèques externes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;misc/&lt;/strong&gt; : Ce répertoire contient diverses ressources et outils supplémentaires liés à Go, tels que des exemples de code, des scripts de test, etc. Ces ressources peuvent être utiles pour explorer et apprendre Go plus en profondeur.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ces répertoires constituent l&amp;rsquo;infrastructure de base de l&amp;rsquo;installation de Go dans le répertoire &lt;strong&gt;$GOROOT&lt;/strong&gt;, et chacun joue un rôle spécifique dans le fonctionnement et le développement avec Go.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="gopath"&gt;$GOPATH&lt;span class="hx:absolute hx:-mt-20" id="gopath"&gt;&lt;/span&gt;
+&lt;a href="#gopath" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Voici une explication rapide des répertoires principaux présents dans &lt;strong&gt;$GOPATH&lt;/strong&gt;, qui est le répertoire où sont stockés les projets et les dépendances pour les applications Go :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; : Ce répertoire contient les exécutables binaires des programmes Go que vous avez installés localement à l&amp;rsquo;aide de la commande &lt;strong&gt;go install&lt;/strong&gt;. Les binaires installés ici sont généralement des outils Go tiers que vous utilisez dans votre workflow de développement.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;pkg/&lt;/strong&gt; : Similaire au répertoire &lt;strong&gt;pkg/&lt;/strong&gt; dans &lt;strong&gt;$GOROOT&lt;/strong&gt;, ce répertoire contient les packages précompilés des projets Go que vous avez construits. Ces packages sont compilés à partir du code source des projets situés dans le répertoire &lt;strong&gt;src/&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;src/&lt;/strong&gt; : C&amp;rsquo;est le répertoire principal où vous stockez le code source de vos projets Go. Chaque sous-répertoire de src/ correspond généralement à un chemin d&amp;rsquo;importation pour les packages Go. Par exemple, si votre projet est &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt;, vous créerez un répertoire &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt; dans &lt;strong&gt;src/&lt;/strong&gt; et placerez votre code source là-dedans.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;pkg/mod/&lt;/strong&gt; : À partir de Go 1.11, ce répertoire est utilisé pour stocker les modules Go téléchargés. Lorsque vous utilisez les modules Go pour gérer les dépendances de vos projets, les fichiers source et les dépendances téléchargées sont stockés ici pour une gestion efficace des dépendances.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; (à l&amp;rsquo;intérieur de &lt;strong&gt;$GOPATH/pkg/mod/&lt;/strong&gt;) : Ce sous-répertoire contient également des binaires, mais spécifiquement pour les modules Go téléchargés. Ces binaires sont souvent des outils associés à des modules particuliers que vous avez téléchargés et qui sont nécessaires pour la construction ou la gestion de projets Go.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ces répertoires forment la structure de base de &lt;strong&gt;$GOPATH&lt;/strong&gt; et sont utilisés pour stocker les projets, les dépendances et les binaires associés à votre environnement de développement Go.&lt;/p&gt;</description></item><item><title>Les commandes go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/commandes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/commandes/</guid><description>
+&lt;p&gt;Voici une explication rapide des commandes les plus couramment utilisées avec Go :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;go mod init&lt;/strong&gt; : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé &lt;strong&gt;&amp;ldquo;monprojet&amp;rdquo;&lt;/strong&gt;. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Créez un nouveau répertoire pour votre projet et accédez-y dans votre terminal :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir monprojet
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; monprojet&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Initialisez un nouveau module Go en utilisant go mod init avec le nom de votre module. Par exemple, si vous avez l&amp;rsquo;intention de publier votre code sous &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt;, vous pouvez utiliser :&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod init github.com/utilisateur/monprojet&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Après avoir exécuté cette commande, un fichier &lt;strong&gt;go.mod&lt;/strong&gt; sera créé dans le répertoire de votre projet. Ce fichier contient des informations sur votre module, y compris son chemin d&amp;rsquo;importation et les dépendances (initialisées à ce stade comme étant les dépendances standard de Go).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;utilisateur&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;monprojet&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.22&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v1&lt;/span&gt;&lt;span class="mf"&gt;.2.3&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.4.0&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;replace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;utilisateur&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.4.1&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;module github.com/utilisateur/monprojet&lt;/strong&gt; : Cette ligne spécifie le chemin d&amp;rsquo;importation de votre module Go. Cela permet à d&amp;rsquo;autres programmes Go de référencer votre module en important ce chemin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go 1.22&lt;/strong&gt; : Cette ligne spécifie la version minimale de Go requise pour construire votre projet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;require&lt;/strong&gt; : Cette section liste les dépendances de votre projet, avec leurs noms de module et leurs versions. Par exemple, &lt;strong&gt;github.com/pkg1 v1.2.3&lt;/strong&gt; signifie que votre projet dépend de la version 1.2.3 du module github.com/pkg1.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;replace&lt;/strong&gt; : Cette section permet de remplacer les dépendances par d&amp;rsquo;autres. Cela peut être utile pour utiliser des versions modifiées ou locales de dépendances. Par exemple, &lt;strong&gt;github.com/pkg2 =&amp;gt; github.com/utilisateur/pkg2 v0.4.1&lt;/strong&gt; remplace la dépendance github.com/pkg2 par github.com/utilisateur/pkg2 à la version v0.4.1.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Vous pouvez maintenant commencer à développer votre projet en Go ! Vous pouvez ajouter des dépendances à l&amp;rsquo;aide de la commande &lt;strong&gt;go get&lt;/strong&gt; et utiliser des packages externes sans crainte de perturber votre environnement de développement grâce à la gestion des modules.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cet exemple illustre comment utiliser &lt;strong&gt;go mod init&lt;/strong&gt; pour initialiser un nouveau module Go dans un projet et démarrer le développement avec la gestion des modules.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go mod tidy&lt;/strong&gt; : Analyse les dépendances de votre projet et met à jour le fichier go.mod et, le cas échéant, le fichier go.sum pour refléter les dépendances réellement utilisées par votre code. Il supprime également les dépendances qui ne sont plus nécessaires.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go mod vendor&lt;/strong&gt; : Copie les dépendances de votre projet dans le répertoire &lt;strong&gt;vendor/&lt;/strong&gt; de votre projet. Cela permet de garantir que toutes les dépendances nécessaires sont présentes localement et que le code peut être construit et exécuté de manière isolée.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go run&lt;/strong&gt; : Compile et exécute immédiatement le fichier Go spécifié. Cela permet d&amp;rsquo;exécuter rapidement un programme Go sans avoir à le construire séparément.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go install&lt;/strong&gt; : Compile et installe le package ou le programme Go spécifié. Si le package ou le programme est un exécutable, il sera installé dans le répertoire &lt;strong&gt;bin/&lt;/strong&gt; de votre &lt;strong&gt;$GOPATH&lt;/strong&gt; ou de votre module.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;go test&lt;/strong&gt; : Exécute les tests unitaires pour le package Go spécifié. Il recherche les fichiers &lt;strong&gt;_test.go&lt;/strong&gt; dans le package et exécute les fonctions de test qu&amp;rsquo;ils contiennent.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ces commandes constituent un ensemble de base pour gérer les dépendances, construire, exécuter et tester des programmes Go. Elles sont largement utilisées dans le développement quotidien avec Go.&lt;/p&gt;</description></item></channel></rss>
