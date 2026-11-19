@@ -5,6 +5,7 @@ package httpkit
 
 import (
 	"context"
+	"errors"
 	"log/slog"
 	"net/http"
 	"time"
@@ -87,7 +88,8 @@ func Recuperation(log *slog.Logger) Middleware {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			defer func() {
 				if v := recover(); v != nil {
-					if v == http.ErrAbortHandler { // abandon volontaire : on le propage
+					if err, ok := v.(error); ok && errors.Is(err, http.ErrAbortHandler) {
+						// Abandon volontaire de la requête : on le propage.
 						panic(v)
 					}
 					log.ErrorContext(r.Context(), "panique", "valeur", v,
