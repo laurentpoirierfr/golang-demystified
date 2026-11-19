@@ -192,7 +192,7 @@ chez tous ses utilisateurs.
 
 ### govulncheck
 
-`govulncheck` compare les dépendances à la base de vulnérabilités de Go. Il ne
+[`govulncheck`](https://go.dev/doc/security/vuln/) compare les dépendances à la base de vulnérabilités de Go. Il ne
 signale que les vulnérabilités dont le code est réellement appelé par le
 programme :
 

@@ -267,7 +267,7 @@ des tâches. Pour conserver l&amp;rsquo;ordre, écrivez chaque résultat à l&am
 tâche dans une slice préallouée.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="errgroup--un-groupe-de-tâches-qui-peuvent-échouer"&gt;errgroup : un groupe de tâches qui peuvent échouer&lt;span class="hx:absolute hx:-mt-20" id="errgroup--un-groupe-de-tâches-qui-peuvent-échouer"&gt;&lt;/span&gt;
 &lt;a href="#errgroup--un-groupe-de-t%c3%a2ches-qui-peuvent-%c3%a9chouer" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Lorsque l&amp;rsquo;échec d&amp;rsquo;une tâche doit &lt;strong&gt;annuler toutes les autres&lt;/strong&gt;, le package
-&lt;code&gt;golang.org/x/sync/errgroup&lt;/code&gt; est l&amp;rsquo;outil idéal. Maintenu par l&amp;rsquo;équipe Go, il
+&lt;a href="https://pkg.go.dev/golang.org/x/sync/errgroup" target="_blank" rel="noopener"&gt;&lt;code&gt;golang.org/x/sync/errgroup&lt;/code&gt;&lt;/a&gt; est l&amp;rsquo;outil idéal. Maintenu par l&amp;rsquo;équipe Go, il
 remplace avantageusement un &lt;code&gt;WaitGroup&lt;/code&gt; accompagné d&amp;rsquo;une gestion d&amp;rsquo;erreurs
 manuelle :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
@@ -334,12 +334,12 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Le package &lt;code&gt;golang.org/x/sync/semaphore&lt;/code&gt; propose un sémaphore pondéré, dont
+&lt;p&gt;Le package &lt;a href="https://pkg.go.dev/golang.org/x/sync/semaphore" target="_blank" rel="noopener"&gt;&lt;code&gt;golang.org/x/sync/semaphore&lt;/code&gt;&lt;/a&gt; propose un sémaphore pondéré, dont
 l&amp;rsquo;acquisition respecte un contexte.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="limiter-le-débit"&gt;Limiter le débit&lt;span class="hx:absolute hx:-mt-20" id="limiter-le-débit"&gt;&lt;/span&gt;
 &lt;a href="#limiter-le-d%c3%a9bit" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Limiter le &lt;strong&gt;débit&lt;/strong&gt;, c&amp;rsquo;est limiter le nombre d&amp;rsquo;opérations par unité de temps :
 appeler une API qui accepte 10 requêtes par seconde, par exemple. Le package
-&lt;code&gt;golang.org/x/time/rate&lt;/code&gt; implémente un &lt;em&gt;token bucket&lt;/em&gt; :&lt;/p&gt;
+&lt;a href="https://pkg.go.dev/golang.org/x/time/rate" target="_blank" rel="noopener"&gt;&lt;code&gt;golang.org/x/time/rate&lt;/code&gt;&lt;/a&gt; implémente un &lt;em&gt;token bucket&lt;/em&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;golang.org/x/time/rate&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
@@ -568,8 +568,8 @@ data-copied-label="Copié !"
 &lt;a href="#les-biblioth%c3%a8ques-de-traitement-de-flux" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les motifs de ce chapitre suffisent à la plupart des besoins. Pour le
 traitement de flux d&amp;rsquo;événements (journaux, mesures, messages), des
 bibliothèques proposent des briques prêtes à l&amp;rsquo;emploi : fenêtres
-temporelles, regroupements, limitation de débit, connecteurs vers Kafka ou
-NATS. Avant d&amp;rsquo;en adopter une, il faut savoir ce qu&amp;rsquo;elle apporte et ce qu&amp;rsquo;elle
+temporelles, regroupements, limitation de débit, connecteurs vers &lt;a href="https://kafka.apache.org" target="_blank" rel="noopener"&gt;Kafka&lt;/a&gt; ou
+&lt;a href="https://nats.io" target="_blank" rel="noopener"&gt;NATS&lt;/a&gt;. Avant d&amp;rsquo;en adopter une, il faut savoir ce qu&amp;rsquo;elle apporte et ce qu&amp;rsquo;elle
 coûte.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="go-streams"&gt;go-streams&lt;span class="hx:absolute hx:-mt-20" id="go-streams"&gt;&lt;/span&gt;
 &lt;a href="#go-streams" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;a href="https://github.com/reugn/go-streams" target="_blank" rel="noopener"&gt;go-streams&lt;/a&gt; décrit un pipeline comme
@@ -689,7 +689,7 @@ chapitre, avec &lt;code&gt;context&lt;/code&gt; et &lt;code&gt;errgroup&lt;/code
 &lt;td&gt;go-streams&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;Services pilotés par des messages (Kafka, NATS, RabbitMQ, SQL)&lt;/td&gt;
+&lt;td&gt;Services pilotés par des messages (Kafka, NATS, &lt;a href="https://www.rabbitmq.com" target="_blank" rel="noopener"&gt;RabbitMQ&lt;/a&gt;, SQL)&lt;/td&gt;
 &lt;td&gt;&lt;a href="https://watermill.io" target="_blank" rel="noopener"&gt;Watermill&lt;/a&gt; : routeur, reprises, middlewares&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -718,8 +718,8 @@ tout ce qui ralentit une équipe : un langage petit, lisible, qui compile en
 quelques secondes, produit un binaire autonome et rend la concurrence naturelle.&lt;/p&gt;
 &lt;p&gt;Go a été rendu public en novembre 2009. La version &lt;strong&gt;Go 1.0&lt;/strong&gt;, publiée en mars
 2012, a marqué le début de la stabilité. Depuis, Go est devenu le langage de
-l&amp;rsquo;infrastructure moderne : Docker, Kubernetes, Terraform, Prometheus, etcd ou
-Caddy sont écrits en Go.&lt;/p&gt;
+l&amp;rsquo;infrastructure moderne : &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://www.terraform.io" target="_blank" rel="noopener"&gt;Terraform&lt;/a&gt;, &lt;a href="https://prometheus.io" target="_blank" rel="noopener"&gt;Prometheus&lt;/a&gt;, &lt;a href="https://etcd.io" target="_blank" rel="noopener"&gt;etcd&lt;/a&gt; ou
+&lt;a href="https://caddyserver.com" target="_blank" rel="noopener"&gt;Caddy&lt;/a&gt; sont écrits en Go.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="une-philosophie-de-la-simplicité"&gt;Une philosophie de la simplicité&lt;span class="hx:absolute hx:-mt-20" id="une-philosophie-de-la-simplicité"&gt;&lt;/span&gt;
 &lt;a href="#une-philosophie-de-la-simplicit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Quelques principes guident la conception de Go et reviennent tout au long de ce
 livre :&lt;/p&gt;
@@ -1520,7 +1520,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Pour afficher le nom d&amp;rsquo;une valeur plutôt que son numéro, ajoutez une méthode
-&lt;code&gt;String()&lt;/code&gt;, que l&amp;rsquo;outil &lt;code&gt;stringer&lt;/code&gt; peut générer :&lt;/p&gt;
+&lt;code&gt;String()&lt;/code&gt;, que l&amp;rsquo;outil &lt;a href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer" target="_blank" rel="noopener"&gt;&lt;code&gt;stringer&lt;/code&gt;&lt;/a&gt; peut générer :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get -tool golang.org/x/tools/cmd/stringer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go tool stringer -type&lt;span class="o"&gt;=&lt;/span&gt;JourSemaine&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
@@ -1896,7 +1896,7 @@ data-copied-label="Copié !"
 &lt;code&gt;fish_add_path /usr/local/go/bin $HOME/go/bin&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="macos"&gt;macOS&lt;span class="hx:absolute hx:-mt-20" id="macos"&gt;&lt;/span&gt;
 &lt;a href="#macos" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Téléchargez et lancez l&amp;rsquo;installeur &lt;code&gt;.pkg&lt;/code&gt; depuis
-&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;, ou utilisez Homebrew :&lt;/p&gt;
+&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;, ou utilisez &lt;a href="https://brew.sh" target="_blank" rel="noopener"&gt;Homebrew&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install go&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
@@ -1918,7 +1918,7 @@ data-alert="note" class="hextra-alert"
 &lt;div class="hextra-alert-content"&gt;&lt;p&gt;&lt;strong&gt;Go 1.27&lt;/strong&gt; nécessite macOS 13 Ventura ou une version plus récente.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 data-hextra-search-id="windows"&gt;Windows&lt;span class="hx:absolute hx:-mt-20" id="windows"&gt;&lt;/span&gt;
-&lt;a href="#windows" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Lancez l&amp;rsquo;installeur &lt;code&gt;.msi&lt;/code&gt;, ou utilisez winget :&lt;/p&gt;
+&lt;a href="#windows" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Lancez l&amp;rsquo;installeur &lt;code&gt;.msi&lt;/code&gt;, ou utilisez &lt;a href="https://learn.microsoft.com/windows/package-manager/winget/" target="_blank" rel="noopener"&gt;winget&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;winget&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;GoLang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Go&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
@@ -2024,14 +2024,14 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="configurer-un-éditeur"&gt;Configurer un éditeur&lt;span class="hx:absolute hx:-mt-20" id="configurer-un-éditeur"&gt;&lt;/span&gt;
-&lt;a href="#configurer-un-%c3%a9diteur" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go fournit un serveur de langage officiel, &lt;strong&gt;gopls&lt;/strong&gt;, utilisé par la plupart
+&lt;a href="#configurer-un-%c3%a9diteur" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go fournit un serveur de langage officiel, &lt;strong&gt;&lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt;&lt;/strong&gt;, utilisé par la plupart
 des éditeurs : complétion, navigation dans le code, renommage, diagnostics et
 corrections automatiques.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Visual Studio Code&lt;/strong&gt; : installez l&amp;rsquo;extension &lt;strong&gt;Go&lt;/strong&gt; (éditée par l&amp;rsquo;équipe
+&lt;li&gt;&lt;strong&gt;&lt;a href="https://code.visualstudio.com" target="_blank" rel="noopener"&gt;Visual Studio Code&lt;/a&gt;&lt;/strong&gt; : installez l&amp;rsquo;extension &lt;strong&gt;Go&lt;/strong&gt; (éditée par l&amp;rsquo;équipe
 Go). À l&amp;rsquo;ouverture du premier fichier &lt;code&gt;.go&lt;/code&gt;, elle propose d&amp;rsquo;installer gopls et
 les outils nécessaires.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GoLand&lt;/strong&gt; (JetBrains) : un IDE dédié à Go, prêt à l&amp;rsquo;emploi.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener"&gt;GoLand&lt;/a&gt;&lt;/strong&gt; (JetBrains) : un IDE dédié à Go, prêt à l&amp;rsquo;emploi.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Neovim, Helix, Zed, Emacs…&lt;/strong&gt; : configurez le client LSP pour utiliser
 &lt;code&gt;gopls&lt;/code&gt;, que vous pouvez installer avec :&lt;/li&gt;
 &lt;/ul&gt;
@@ -2791,14 +2791,14 @@ data-copied-label="Copié !"
 échoue si le code produit n&amp;rsquo;est pas du Go valide ;&lt;/li&gt;
 &lt;li&gt;commencer le fichier par le commentaire &lt;code&gt;// Code generated … DO NOT EDIT.&lt;/code&gt;,
 &lt;strong&gt;en anglais et exactement sous cette forme&lt;/strong&gt; : c&amp;rsquo;est une convention
-reconnue par les outils (gopls, linters, revue de code), qui évitent de
+reconnue par les outils (&lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt;, linters, revue de code), qui évitent de
 modifier ou d&amp;rsquo;analyser ces fichiers ;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;versionner&lt;/strong&gt; les fichiers générés : un utilisateur du module n&amp;rsquo;a pas à
 lancer &lt;code&gt;go generate&lt;/code&gt; pour compiler.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Pour des générateurs plus élaborés, le package &lt;code&gt;go/ast&lt;/code&gt; analyse le code
 existant, par exemple pour trouver automatiquement les constantes d&amp;rsquo;un type,
-comme le fait l&amp;rsquo;outil &lt;code&gt;stringer&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Contrôle de flux</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</guid><description>
+comme le fait l&amp;rsquo;outil &lt;a href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer" target="_blank" rel="noopener"&gt;&lt;code&gt;stringer&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Contrôle de flux</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</guid><description>
 &lt;p&gt;Go a peu d&amp;rsquo;instructions de contrôle : &lt;code&gt;if&lt;/code&gt;, &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;switch&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt; (vu avec
 la concurrence), &lt;code&gt;defer&lt;/code&gt; et &lt;code&gt;goto&lt;/code&gt;. Il n&amp;rsquo;y a pas de parenthèses autour des
 conditions, et les accolades sont &lt;strong&gt;obligatoires&lt;/strong&gt;.&lt;/p&gt;
@@ -3773,7 +3773,7 @@ livre.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Une API web complète</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/api-web/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/api-web/</guid><description>
 &lt;p&gt;Ce chapitre construit un service web complet, prêt pour la production, avec la
 seule bibliothèque standard et un pilote de base de données : une API JSON de
-gestion de tâches, stockées dans SQLite. Il rassemble ce que les chapitres
+gestion de tâches, stockées dans &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt;. Il rassemble ce que les chapitres
 précédents ont présenté séparément : routage HTTP, JSON, &lt;code&gt;database/sql&lt;/code&gt;,
 &lt;code&gt;log/slog&lt;/code&gt;, &lt;code&gt;context&lt;/code&gt;, &lt;code&gt;embed&lt;/code&gt; et les tests.&lt;/p&gt;
 &lt;p&gt;Le code complet est dans &lt;code&gt;examples/approfondissements/api&lt;/code&gt;, et chaque
@@ -3844,14 +3844,17 @@ le code du routage et des types est généré.&lt;/p&gt;
 │ └── oapi-codegen.yaml la configuration du générateur
 ├── cmd/
 │ ├── taches/ le serveur : assemblage, démarrage, arrêt propre
+│ ├── taches-huma/ la même API, écrite avec Huma
 │ └── taches-cli/ le client en ligne de commande (chapitre suivant)
 ├── internal/
+│ ├── cli/ les commandes de taches-cli (cobra, viper)
 │ ├── config/ lecture de la configuration
 │ ├── tache/ le domaine : type, validation, erreurs
 │ ├── store/ stockage SQLite ou PostgreSQL (database/sql)
 │ │ └── migrations/ schéma SQL par base, embarqué dans l&amp;#39;exécutable
-│ └── web/ handlers HTTP de l&amp;#39;API
-│ └── openapi.gen.go types et routage générés depuis le contrat
+│ ├── web/ handlers HTTP de l&amp;#39;API
+│ │ └── openapi.gen.go types et routage générés depuis le contrat
+│ └── webhuma/ la variante « code d&amp;#39;abord » avec Huma
 └── pkg/
 ├── client/ client Go de l&amp;#39;API, généré depuis le contrat
 └── httpkit/ middlewares, JSON, documentation : réutilisables&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
@@ -3957,10 +3960,10 @@ data-copied-label="Copié !"
 chaque base. Le pilote s&amp;rsquo;enregistre par un import « à blanc ». Le service
 accepte deux bases, choisies par la chaîne de connexion :&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;SQLite&lt;/strong&gt;, avec &lt;code&gt;modernc.org/sqlite&lt;/code&gt;, écrit entièrement en Go : il ne
+&lt;li&gt;&lt;strong&gt;SQLite&lt;/strong&gt;, avec &lt;a href="https://pkg.go.dev/modernc.org/sqlite" target="_blank" rel="noopener"&gt;&lt;code&gt;modernc.org/sqlite&lt;/code&gt;&lt;/a&gt;, écrit entièrement en Go : il ne
 demande pas de compilateur C, et l&amp;rsquo;exécutable reste autonome. Idéal pour le
 développement, les tests et les petits déploiements ;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt;, avec &lt;code&gt;github.com/jackc/pgx/v5/stdlib&lt;/code&gt;, pour la production.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;&lt;/strong&gt;, avec &lt;code&gt;github.com/jackc/pgx/v5/stdlib&lt;/code&gt;, pour la production.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Ce qui diffère d&amp;rsquo;une base à l&amp;rsquo;autre tient dans une petite structure :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
@@ -4028,7 +4031,7 @@ data-copied-label="Copié !"
 l&amp;rsquo;ouvre une fois au démarrage, et on le partage.&lt;/p&gt;
 &lt;p&gt;Le même stockage est testé sur les &lt;strong&gt;deux&lt;/strong&gt; bases : SQLite en mémoire à chaque
 &lt;code&gt;go test&lt;/code&gt;, et un vrai PostgreSQL démarré dans un conteneur par
-&lt;strong&gt;Testcontainers&lt;/strong&gt;. Le chapitre sur le package &lt;code&gt;testing&lt;/code&gt; détaille cette
+&lt;strong&gt;&lt;a href="https://golang.testcontainers.org" target="_blank" rel="noopener"&gt;Testcontainers&lt;/a&gt;&lt;/strong&gt;. Le chapitre sur le package &lt;code&gt;testing&lt;/code&gt; détaille cette
 technique.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="les-migrations"&gt;Les migrations&lt;span class="hx:absolute hx:-mt-20" id="les-migrations"&gt;&lt;/span&gt;
 &lt;a href="#les-migrations" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le schéma est décrit par des fichiers SQL numérotés, embarqués dans
@@ -4077,7 +4080,7 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Pour un projet plus important, des outils comme &lt;code&gt;goose&lt;/code&gt; ou &lt;code&gt;golang-migrate&lt;/code&gt;
+&lt;p&gt;Pour un projet plus important, des outils comme &lt;a href="https://github.com/pressly/goose" target="_blank" rel="noopener"&gt;&lt;code&gt;goose&lt;/code&gt;&lt;/a&gt; ou &lt;a href="https://github.com/golang-migrate/migrate" target="_blank" rel="noopener"&gt;&lt;code&gt;golang-migrate&lt;/code&gt;&lt;/a&gt;
 gèrent aussi les retours en arrière.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="les-requêtes"&gt;Les requêtes&lt;span class="hx:absolute hx:-mt-20" id="les-requêtes"&gt;&lt;/span&gt;
 &lt;a href="#les-requ%c3%aates" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Les trois méthodes de requête de &lt;code&gt;*sql.DB&lt;/code&gt; couvrent tous les cas :&lt;/p&gt;
@@ -4188,7 +4191,7 @@ clients dans tous les langages, tests de conformité, passerelles d&amp;rsquo;AP
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Code d&amp;rsquo;abord&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;swag&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;&lt;a href="https://github.com/swaggo/swag" target="_blank" rel="noopener"&gt;swag&lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;commentaires &lt;code&gt;// @Router …&lt;/code&gt; au-dessus des handlers&lt;/td&gt;
 &lt;td&gt;Swagger 2.0 (v1)&lt;/td&gt;
 &lt;/tr&gt;
@@ -4200,7 +4203,7 @@ clients dans tous les langages, tests de conformité, passerelles d&amp;rsquo;AP
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;strong&gt;Contrat d&amp;rsquo;abord&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;oapi-codegen&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;&lt;a href="https://github.com/oapi-codegen/oapi-codegen" target="_blank" rel="noopener"&gt;oapi-codegen&lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
 &lt;td&gt;code Go généré depuis le contrat&lt;/td&gt;
 &lt;td&gt;OpenAPI 3.0&lt;/td&gt;
 &lt;/tr&gt;
@@ -4382,7 +4385,7 @@ data-copied-label="Copié !"
 &lt;h3 data-hextra-search-id="valider-les-requêtes-par-le-contrat"&gt;Valider les requêtes par le contrat&lt;span class="hx:absolute hx:-mt-20" id="valider-les-requêtes-par-le-contrat"&gt;&lt;/span&gt;
 &lt;a href="#valider-les-requ%c3%aates-par-le-contrat" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le contrat dit bien plus que les types : un titre fait au plus 200 caractères,
 un identifiant vaut au moins 1, un champ inconnu est interdit, le corps doit
-être du JSON. Le middleware &lt;code&gt;nethttp-middleware&lt;/code&gt; vérifie chaque requête
+être du JSON. Le middleware &lt;a href="https://github.com/oapi-codegen/nethttp-middleware" target="_blank" rel="noopener"&gt;&lt;code&gt;nethttp-middleware&lt;/code&gt;&lt;/a&gt; vérifie chaque requête
 &lt;strong&gt;par rapport au contrat&lt;/strong&gt;, avant qu&amp;rsquo;elle n&amp;rsquo;atteigne le handler :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;contrat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;GetSpec&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// le contrat embarqué par oapi-codegen&lt;/span&gt;&lt;span class="w"&gt;
@@ -4429,7 +4432,7 @@ pas exprimer : un titre composé uniquement d&amp;rsquo;espaces, par exemple, re
 refusé par le domaine avec un statut 422.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="servir-le-contrat-et-sa-documentation"&gt;Servir le contrat et sa documentation&lt;span class="hx:absolute hx:-mt-20" id="servir-le-contrat-et-sa-documentation"&gt;&lt;/span&gt;
 &lt;a href="#servir-le-contrat-et-sa-documentation" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le service publie son propre contrat, et une page de documentation
-interactive basée sur &lt;strong&gt;Swagger UI&lt;/strong&gt;, chargée depuis un CDN : aucune
+interactive basée sur &lt;strong&gt;&lt;a href="https://swagger.io/tools/swagger-ui/" target="_blank" rel="noopener"&gt;Swagger UI&lt;/a&gt;&lt;/strong&gt;, chargée depuis un CDN : aucune
 dépendance Go n&amp;rsquo;est nécessaire.&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Handle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;GET /openapi.yaml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;httpkit&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Fichier&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;application/yaml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Contrat&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
@@ -4449,6 +4452,241 @@ data-copied-label="Copié !"
 directement depuis le navigateur. Le même contrat permet de générer des
 clients, par exemple en TypeScript pour une application web, ou en Go avec
 l&amp;rsquo;option &lt;code&gt;client: true&lt;/code&gt; d&amp;rsquo;oapi-codegen.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="la-variante--code-dabord--avec-huma"&gt;La variante « code d&amp;rsquo;abord » avec Huma&lt;span class="hx:absolute hx:-mt-20" id="la-variante--code-dabord--avec-huma"&gt;&lt;/span&gt;
+&lt;a href="#la-variante--code-dabord--avec-huma" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Pour comparer les deux approches, le projet contient une seconde version de
+la même API, écrite avec &lt;a href="https://huma.rocks" target="_blank" rel="noopener"&gt;Huma&lt;/a&gt; : le package
+&lt;code&gt;internal/webhuma&lt;/code&gt; et l&amp;rsquo;exécutable &lt;code&gt;cmd/taches-huma&lt;/code&gt;. Elle réutilise le même
+domaine (&lt;code&gt;internal/tache&lt;/code&gt;) et le même stockage (&lt;code&gt;internal/store&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Avec Huma, il n&amp;rsquo;y a pas de fichier de contrat à écrire. Chaque opération
+déclare ses &lt;strong&gt;entrées&lt;/strong&gt; et ses &lt;strong&gt;sorties&lt;/strong&gt; sous forme de structures Go, dont
+les balises indiquent l&amp;rsquo;origine de chaque champ (chemin, en-tête, corps) et
+ses règles de validation :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;CreeEntree&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;struct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;struct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Titre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;`json:&amp;#34;titre&amp;#34; minLength:&amp;#34;1&amp;#34; maxLength:&amp;#34;200&amp;#34; doc:&amp;#34;Titre de la tâche&amp;#34; example:&amp;#34;Relire le livre&amp;#34;`&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;TacheSortie&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;struct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Location&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;`header:&amp;#34;Location&amp;#34; doc:&amp;#34;Adresse de la tâche&amp;#34;`&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Tache&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ModifieEntree&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;struct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ID&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;int64&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;`path:&amp;#34;id&amp;#34; minimum:&amp;#34;1&amp;#34; doc:&amp;#34;Identifiant de la tâche&amp;#34;`&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;struct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Faite&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;`json:&amp;#34;faite&amp;#34; doc:&amp;#34;Nouvel état de la tâche&amp;#34;`&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// obligatoire : pas d&amp;#39;omitempty&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Un handler est une fonction &lt;strong&gt;typée&lt;/strong&gt;, qui reçoit son entrée déjà décodée et
+validée, et renvoie sa sortie ou une erreur. Il n&amp;rsquo;écrit jamais lui-même dans
+le &lt;code&gt;http.ResponseWriter&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;huma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;huma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Operation&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;OperationID&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;cree-tache&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Method&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MethodPost&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Path&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/taches&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Summary&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Crée une tâche&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Tags&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;taches&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;DefaultStatus&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;StatusCreated&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ctx&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;context&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;CreeEntree&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;TacheSortie&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;titre&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;tache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ValideTitre&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Titre&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// règle métier : pas de titre blanc&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;erreur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Cree&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ctx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;titre&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;erreur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nx"&gt;TacheSortie&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;Location&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Sprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/taches/%d&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ID&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;depuis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)},&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Les erreurs du domaine sont traduites par les fonctions de Huma, qui
+produisent des réponses au format standard &lt;strong&gt;« problem+json »&lt;/strong&gt; (RFC 9457) :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;erreur&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;error&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;switch&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;case&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;case&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Is&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;tache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ErrIntrouvable&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;huma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Error404NotFound&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Error&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ok&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;errors&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;AsType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;tache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ErrValidation&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ok&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;huma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Error422UnprocessableEntity&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;v&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Error&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// erreur 500&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Le serveur s&amp;rsquo;appuie sur le routeur standard, grâce à l&amp;rsquo;adaptateur &lt;code&gt;humago&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;NewServeMux&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;humago&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;New&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;mux&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;huma&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;DefaultConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;API des tâches (Huma)&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;Enregistre&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Huma &lt;strong&gt;déduit&lt;/strong&gt; le contrat OpenAPI 3.1 de ces types, et le sert avec la
+documentation, sans configuration : &lt;code&gt;/openapi.yaml&lt;/code&gt;, &lt;code&gt;/openapi.json&lt;/code&gt; et
+&lt;code&gt;/docs&lt;/code&gt;. Extrait du contrat produit :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;CreeEntreeBody&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;additionalProperties&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;properties&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;titre&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;description&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;Titre de la tâche&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;examples&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;- &lt;span class="l"&gt;Relire le livre&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;maxLength&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;200&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;minLength&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l"&gt;string&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Les requêtes invalides sont rejetées avant d&amp;rsquo;atteindre le handler, avec la
+liste de &lt;strong&gt;toutes&lt;/strong&gt; les erreurs :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;POST /taches {&amp;#34;titre&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;priorite&amp;#34;: 1}
+422 application/problem&amp;#43;json
+{&amp;#34;title&amp;#34;:&amp;#34;Unprocessable Entity&amp;#34;,&amp;#34;status&amp;#34;:422,&amp;#34;detail&amp;#34;:&amp;#34;validation failed&amp;#34;,
+&amp;#34;errors&amp;#34;:[{&amp;#34;message&amp;#34;:&amp;#34;expected length &amp;gt;= 1&amp;#34;,&amp;#34;location&amp;#34;:&amp;#34;body.titre&amp;#34;,&amp;#34;value&amp;#34;:&amp;#34;&amp;#34;},
+{&amp;#34;message&amp;#34;:&amp;#34;unexpected property&amp;#34;,&amp;#34;location&amp;#34;:&amp;#34;body.priorite&amp;#34;,…}]}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Le package &lt;code&gt;humatest&lt;/code&gt; teste les opérations sans réseau, et donne accès au
+contrat déduit :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;TestScenario&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;humatest&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;New&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;Enregistre&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;nouveauStore&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/taches&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;titre&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34; Relire &amp;#34;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// r.Code == 201, r.Body contient &amp;#34;titre&amp;#34;:&amp;#34;Relire&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;api&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Patch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/taches/1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="kt"&gt;any&lt;/span&gt;&lt;span class="p"&gt;{})&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// « faite » manquant&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// r.Code == 422 : expected required property faite&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 data-hextra-search-id="quelle-approche-choisir-"&gt;Quelle approche choisir ?&lt;span class="hx:absolute hx:-mt-20" id="quelle-approche-choisir-"&gt;&lt;/span&gt;
+&lt;a href="#quelle-approche-choisir-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Critère&lt;/th&gt;
+&lt;th&gt;oapi-codegen (contrat d&amp;rsquo;abord)&lt;/th&gt;
+&lt;th&gt;Huma (code d&amp;rsquo;abord)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Source de vérité&lt;/td&gt;
+&lt;td&gt;le fichier &lt;code&gt;openapi.yaml&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;les types Go&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Format&lt;/td&gt;
+&lt;td&gt;OpenAPI 3.0&lt;/td&gt;
+&lt;td&gt;OpenAPI 3.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Contrat discuté avant le code&lt;/td&gt;
+&lt;td&gt;oui, c&amp;rsquo;est son principe&lt;/td&gt;
+&lt;td&gt;non, il découle du code&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Écart entre code et contrat&lt;/td&gt;
+&lt;td&gt;impossible : le code ne compile plus&lt;/td&gt;
+&lt;td&gt;impossible : le contrat est déduit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Handlers&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;http.Handler&lt;/code&gt; classiques&lt;/td&gt;
+&lt;td&gt;fonctions typées &lt;code&gt;entrée → sortie&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Erreurs&lt;/td&gt;
+&lt;td&gt;format libre&lt;/td&gt;
+&lt;td&gt;« problem+json » (RFC 9457)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Client généré&lt;/td&gt;
+&lt;td&gt;oui (Go)&lt;/td&gt;
+&lt;td&gt;via le contrat, avec un autre outil&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dépendances&lt;/td&gt;
+&lt;td&gt;générateur + validateur&lt;/td&gt;
+&lt;td&gt;une bibliothèque&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Les deux approches éliminent le problème de fond de swag : un contrat qui ne
+dit pas la vérité. Choisissez &lt;strong&gt;oapi-codegen&lt;/strong&gt; lorsque le contrat est négocié
+avec d&amp;rsquo;autres équipes, ou partagé par plusieurs langages ; choisissez
+&lt;strong&gt;Huma&lt;/strong&gt; lorsque l&amp;rsquo;API naît dans le code Go et que vous voulez écrire le moins
+de code possible.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="la-couche-http"&gt;La couche HTTP&lt;span class="hx:absolute hx:-mt-20" id="la-couche-http"&gt;&lt;/span&gt;
 &lt;a href="#la-couche-http" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 data-hextra-search-id="linterface-du-stockage"&gt;L&amp;rsquo;interface du stockage&lt;span class="hx:absolute hx:-mt-20" id="linterface-du-stockage"&gt;&lt;/span&gt;
 &lt;a href="#linterface-du-stockage" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Le package &lt;code&gt;web&lt;/code&gt; déclare l&amp;rsquo;interface &lt;strong&gt;dont il a besoin&lt;/strong&gt;. Il ne dépend pas du
@@ -4787,7 +5025,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 data-hextra-search-id="larrêt-propre"&gt;L&amp;rsquo;arrêt propre&lt;span class="hx:absolute hx:-mt-20" id="larrêt-propre"&gt;&lt;/span&gt;
-&lt;a href="#larr%c3%aat-propre" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;À la réception de &lt;code&gt;SIGTERM&lt;/code&gt; (envoyé par Kubernetes ou systemd avant
+&lt;a href="#larr%c3%aat-propre" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;À la réception de &lt;code&gt;SIGTERM&lt;/code&gt; (envoyé par &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt; ou &lt;a href="https://systemd.io" target="_blank" rel="noopener"&gt;systemd&lt;/a&gt; avant
 d&amp;rsquo;arrêter un service), le serveur cesse d&amp;rsquo;accepter des connexions, termine les
 requêtes en cours, puis ferme la base de données :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
@@ -4873,7 +5111,7 @@ Un dernier test démarre le &lt;strong&gt;vrai programme&lt;/strong&gt; sur un p
 pour simuler un &lt;code&gt;SIGTERM&lt;/code&gt; et vérifier l&amp;rsquo;arrêt propre.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="déployer"&gt;Déployer&lt;span class="hx:absolute hx:-mt-20" id="déployer"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9ployer" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le pilote SQLite étant écrit en Go, l&amp;rsquo;exécutable est &lt;strong&gt;statique&lt;/strong&gt; : une image
-Docker minimale suffit.&lt;/p&gt;
+&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; minimale suffit.&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-dockerfile" data-lang="dockerfile"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;FROM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;golang:1.27&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;AS&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;build&lt;/span&gt;&lt;span class="err"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;/src&lt;/span&gt;&lt;span class="err"&gt;
@@ -4898,7 +5136,7 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;L&amp;rsquo;image se construit et s&amp;rsquo;exécute avec Docker ou avec Podman, dont les
+&lt;p&gt;L&amp;rsquo;image se construit et s&amp;rsquo;exécute avec Docker ou avec &lt;a href="https://podman.io" target="_blank" rel="noopener"&gt;Podman&lt;/a&gt;, dont les
 commandes sont identiques :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Avec Docker&lt;/span&gt;
@@ -4954,7 +5192,7 @@ croissance. Les évolutions classiques sont :&lt;/p&gt;
 &lt;li&gt;l&amp;rsquo;&lt;strong&gt;authentification&lt;/strong&gt;, par un middleware qui valide un jeton et place
 l&amp;rsquo;utilisateur dans le contexte ;&lt;/li&gt;
 &lt;li&gt;la &lt;strong&gt;pagination&lt;/strong&gt; de la liste (&lt;code&gt;?apres=42&amp;amp;limite=50&lt;/code&gt;) ;&lt;/li&gt;
-&lt;li&gt;les &lt;strong&gt;métriques&lt;/strong&gt; (Prometheus, OpenTelemetry) et le &lt;strong&gt;traçage&lt;/strong&gt; distribué,
+&lt;li&gt;les &lt;strong&gt;métriques&lt;/strong&gt; (&lt;a href="https://prometheus.io" target="_blank" rel="noopener"&gt;Prometheus&lt;/a&gt;, &lt;a href="https://opentelemetry.io" target="_blank" rel="noopener"&gt;OpenTelemetry&lt;/a&gt;) et le &lt;strong&gt;traçage&lt;/strong&gt; distribué,
 par d&amp;rsquo;autres middlewares ;&lt;/li&gt;
 &lt;li&gt;une &lt;strong&gt;documentation OpenAPI&lt;/strong&gt;, écrite à la main ou générée.&lt;/li&gt;
 &lt;/ul&gt;
@@ -4962,8 +5200,8 @@ par d&amp;rsquo;autres middlewares ;&lt;/li&gt;
 nettement de l&amp;rsquo;infrastructure : c&amp;rsquo;est l&amp;rsquo;objet du chapitre suivant,
 l&amp;rsquo;architecture hexagonale.&lt;/p&gt;</description></item><item><title>Ligne de commande : cobra et viper</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/cli-cobra-viper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/cli-cobra-viper/</guid><description>
 &lt;p&gt;Go excelle pour les outils en ligne de commande : un exécutable unique,
-statique, rapide à démarrer, compilable pour toutes les plateformes. Docker,
-Kubernetes (&lt;code&gt;kubectl&lt;/code&gt;), Hugo, GitHub (&lt;code&gt;gh&lt;/code&gt;) ou Terraform sont écrits en Go,
+statique, rapide à démarrer, compilable pour toutes les plateformes. &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;,
+&lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt; (&lt;code&gt;kubectl&lt;/code&gt;), &lt;a href="https://gohugo.io" target="_blank" rel="noopener"&gt;Hugo&lt;/a&gt;, GitHub (&lt;code&gt;gh&lt;/code&gt;) ou &lt;a href="https://www.terraform.io" target="_blank" rel="noopener"&gt;Terraform&lt;/a&gt; sont écrits en Go,
 et la plupart utilisent deux bibliothèques de Steve Francia :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href="https://cobra.dev" target="_blank" rel="noopener"&gt;cobra&lt;/a&gt;&lt;/strong&gt; structure une application en &lt;strong&gt;commandes et
@@ -4977,7 +5215,7 @@ de commande et valeurs par défaut, avec un ordre de priorité clair.&lt;/li&gt;
 chapitre « Une API web complète ». Le code est dans
 &lt;code&gt;examples/approfondissements/api&lt;/code&gt; : un second exécutable dans &lt;code&gt;cmd/&lt;/code&gt;, la
 logique dans &lt;code&gt;internal/cli&lt;/code&gt;, et le client HTTP &lt;strong&gt;généré depuis le contrat
-OpenAPI&lt;/strong&gt; dans &lt;code&gt;pkg/client&lt;/code&gt;.&lt;/p&gt;
+&lt;a href="https://www.openapis.org" target="_blank" rel="noopener"&gt;OpenAPI&lt;/a&gt;&lt;/strong&gt; dans &lt;code&gt;pkg/client&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;pre&gt;&lt;code&gt;$ taches-cli ajoute Relire le chapitre
 Tâche 1 créée : Relire le chapitre
@@ -5007,7 +5245,7 @@ bibliothèque standard suffit (voir le chapitre « Tour d&amp;rsquo;horizon »).
 justifie dès qu&amp;rsquo;il y a plusieurs sous-commandes.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="le-client-http-généré-depuis-le-contrat"&gt;Le client HTTP, généré depuis le contrat&lt;span class="hx:absolute hx:-mt-20" id="le-client-http-généré-depuis-le-contrat"&gt;&lt;/span&gt;
-&lt;a href="#le-client-http-g%c3%a9n%c3%a9r%c3%a9-depuis-le-contrat" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le contrat OpenAPI de l&amp;rsquo;API décrit déjà toutes les opérations : oapi-codegen
+&lt;a href="#le-client-http-g%c3%a9n%c3%a9r%c3%a9-depuis-le-contrat" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le contrat OpenAPI de l&amp;rsquo;API décrit déjà toutes les opérations : &lt;a href="https://github.com/oapi-codegen/oapi-codegen" target="_blank" rel="noopener"&gt;oapi-codegen&lt;/a&gt;
 génère aussi le &lt;strong&gt;client&lt;/strong&gt;. Une seconde configuration le place dans
 &lt;code&gt;pkg/client&lt;/code&gt;, car c&amp;rsquo;est précisément du code destiné à être importé par
 d&amp;rsquo;autres projets :&lt;/p&gt;
@@ -5399,7 +5637,7 @@ attendent un fichier de configuration et des options.&lt;/p&gt;&lt;/div&gt;
 &lt;h2 data-hextra-search-id="tester-la-ligne-de-commande"&gt;Tester la ligne de commande&lt;span class="hx:absolute hx:-mt-20" id="tester-la-ligne-de-commande"&gt;&lt;/span&gt;
 &lt;a href="#tester-la-ligne-de-commande" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Comme la racine est construite par une fonction et écrit dans un &lt;code&gt;io.Writer&lt;/code&gt;,
 une commande se teste comme une fonction ordinaire. Les tests démarrent la
-&lt;strong&gt;vraie API&lt;/strong&gt;, avec une base SQLite en mémoire : ils couvrent ensemble la ligne
+&lt;strong&gt;vraie API&lt;/strong&gt;, avec une base &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt; en mémoire : ils couvrent ensemble la ligne
 de commande, le client généré et le serveur.&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;lance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;args&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
@@ -5496,7 +5734,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Pour un projet publié, &lt;a href="https://goreleaser.com" target="_blank" rel="noopener"&gt;GoReleaser&lt;/a&gt; automatise ces
-compilations, les archives, les sommes de contrôle, les paquets (Homebrew,
+compilations, les archives, les sommes de contrôle, les paquets (&lt;a href="https://brew.sh" target="_blank" rel="noopener"&gt;Homebrew&lt;/a&gt;,
 deb, rpm) et la publication sur GitHub à chaque tag. Les utilisateurs qui ont
 Go peuvent aussi installer l&amp;rsquo;outil directement :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
@@ -5527,9 +5765,9 @@ compilation ;&lt;/li&gt;
 commande ou depuis le programme lui-même.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Ce chapitre les combine dans un exemple complet : un catalogue de livres sur
-PostgreSQL. Le code est dans &lt;code&gt;examples/approfondissements/catalogue&lt;/code&gt;.&lt;/p&gt;
+&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;. Le code est dans &lt;code&gt;examples/approfondissements/catalogue&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="sqlc--le-sql-dabord"&gt;sqlc : le SQL d&amp;rsquo;abord&lt;span class="hx:absolute hx:-mt-20" id="sqlc--le-sql-dabord"&gt;&lt;/span&gt;
-&lt;a href="#sqlc--le-sql-dabord" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La plupart des ORM (GORM, ent…) génèrent le SQL à partir du code Go. sqlc fait
+&lt;a href="#sqlc--le-sql-dabord" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La plupart des ORM (&lt;a href="https://gorm.io" target="_blank" rel="noopener"&gt;GORM&lt;/a&gt;, ent…) génèrent le SQL à partir du code Go. sqlc fait
 l&amp;rsquo;inverse : on écrit du &lt;strong&gt;vrai SQL&lt;/strong&gt;, et sqlc génère le code Go qui l&amp;rsquo;appelle.
 On garde toute la puissance de PostgreSQL (jointures, &lt;code&gt;RETURNING&lt;/code&gt;,
 &lt;code&gt;ON CONFLICT&lt;/code&gt;, fonctions, CTE), sans réflexion à l&amp;rsquo;exécution ni requête
@@ -5726,9 +5964,9 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;sql_package: &amp;quot;pgx/v5&amp;quot;&lt;/code&gt;&lt;/strong&gt; génère du code pour le pilote natif &lt;code&gt;pgx&lt;/code&gt;, plus
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;sql_package: &amp;quot;pgx/v5&amp;quot;&lt;/code&gt;&lt;/strong&gt; génère du code pour le pilote natif &lt;a href="https://github.com/jackc/pgx" target="_blank" rel="noopener"&gt;&lt;code&gt;pgx&lt;/code&gt;&lt;/a&gt;, plus
 rapide et plus complet que &lt;code&gt;database/sql&lt;/code&gt; avec PostgreSQL. sqlc sait aussi
-générer pour &lt;code&gt;database/sql&lt;/code&gt;, MySQL et SQLite ;&lt;/li&gt;
+générer pour &lt;code&gt;database/sql&lt;/code&gt;, &lt;a href="https://www.mysql.com" target="_blank" rel="noopener"&gt;MySQL&lt;/a&gt; et &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt; ;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;emit_pointers_for_null_types&lt;/code&gt;&lt;/strong&gt; représente une colonne qui peut être
 &lt;code&gt;NULL&lt;/code&gt; par un pointeur (&lt;code&gt;*int32&lt;/code&gt;), plus idiomatique que les types
 &lt;code&gt;pgtype.Int4&lt;/code&gt; ;&lt;/li&gt;
@@ -5751,8 +5989,8 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;L&amp;rsquo;analyseur PostgreSQL de sqlc est une bibliothèque C : &lt;code&gt;go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest&lt;/code&gt; demande donc un compilateur C. Sans
-compilateur, l&amp;rsquo;image officielle fait le même travail, avec Docker comme avec
-Podman :&lt;/p&gt;
+compilateur, l&amp;rsquo;image officielle fait le même travail, avec &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; comme avec
+&lt;a href="https://podman.io" target="_blank" rel="noopener"&gt;Podman&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;docker run --rm -v &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$PWD&lt;/span&gt;&lt;span class="s2"&gt;:/src&amp;#34;&lt;/span&gt; -w /src sqlc/sqlc:1.31.1 generate&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
@@ -6071,7 +6309,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="tester-avec-testcontainers"&gt;Tester avec Testcontainers&lt;span class="hx:absolute hx:-mt-20" id="tester-avec-testcontainers"&gt;&lt;/span&gt;
 &lt;a href="#tester-avec-testcontainers" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le code généré par sqlc est du SQL PostgreSQL : on le teste contre un &lt;strong&gt;vrai&lt;/strong&gt;
-PostgreSQL, démarré par Testcontainers (voir le chapitre sur le package
+PostgreSQL, démarré par &lt;a href="https://golang.testcontainers.org" target="_blank" rel="noopener"&gt;Testcontainers&lt;/a&gt; (voir le chapitre sur le package
 &lt;code&gt;testing&lt;/code&gt;). Les migrations sont appliquées exactement comme en production :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;TestPostgresCatalogue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
@@ -6162,7 +6400,7 @@ fichier de migration a un nom conforme et sa migration inverse.&lt;/p&gt;
 &lt;p&gt;sqlc convient à la grande majorité des services : les requêtes y sont connues
 à l&amp;rsquo;avance. Pour les rares requêtes réellement dynamiques (un moteur de
 recherche aux filtres multiples, par exemple), un constructeur de requêtes
-comme &lt;code&gt;squirrel&lt;/code&gt;, ou du SQL écrit à la main, complète sqlc sans difficulté :
+comme &lt;a href="https://github.com/Masterminds/squirrel" target="_blank" rel="noopener"&gt;&lt;code&gt;squirrel&lt;/code&gt;&lt;/a&gt;, ou du SQL écrit à la main, complète sqlc sans difficulté :
 les deux utilisent le même pool de connexions.&lt;/p&gt;</description></item><item><title>Architecture hexagonale</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/architecture-hexagonale/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/architecture-hexagonale/</guid><description>
 &lt;p&gt;Le chapitre précédent a construit un service web en couches simples : HTTP,
 stockage, domaine. C&amp;rsquo;est suffisant tant que la logique métier reste mince.
@@ -6545,7 +6783,7 @@ data-copied-label="Copié !"
 &lt;p&gt;Grâce au typage implicite des interfaces, &lt;code&gt;horloge.Systeme&lt;/code&gt; satisfait le port
 &lt;code&gt;application.Horloge&lt;/code&gt; sans que le package &lt;code&gt;horloge&lt;/code&gt; le connaisse : c&amp;rsquo;est ce qui
 lui permet de rester générique.&lt;/p&gt;
-&lt;p&gt;Un adaptateur PostgreSQL, construit comme le stockage du chapitre précédent,
+&lt;p&gt;Un adaptateur &lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;, construit comme le stockage du chapitre précédent,
 remplacerait le dépôt en mémoire &lt;strong&gt;sans toucher&lt;/strong&gt; au domaine ni à
 l&amp;rsquo;application.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="lassemblage"&gt;L&amp;rsquo;assemblage&lt;span class="hx:absolute hx:-mt-20" id="lassemblage"&gt;&lt;/span&gt;
@@ -7043,7 +7281,7 @@ data-copied-label="Copié !"
 &lt;code&gt;//go:fix inline&lt;/code&gt; : &lt;code&gt;go fix&lt;/code&gt; remplace alors ses appels par son nouveau code
 chez tous ses utilisateurs.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="govulncheck"&gt;govulncheck&lt;span class="hx:absolute hx:-mt-20" id="govulncheck"&gt;&lt;/span&gt;
-&lt;a href="#govulncheck" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;govulncheck&lt;/code&gt; compare les dépendances à la base de vulnérabilités de Go. Il ne
+&lt;a href="#govulncheck" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;a href="https://go.dev/doc/security/vuln/" target="_blank" rel="noopener"&gt;&lt;code&gt;govulncheck&lt;/code&gt;&lt;/a&gt; compare les dépendances à la base de vulnérabilités de Go. Il ne
 signale que les vulnérabilités dont le code est réellement appelé par le
 programme :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
@@ -7308,7 +7546,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;LoadLocation&lt;/code&gt; lit la base de fuseaux horaires du système. Dans une image
-Docker minimale qui n&amp;rsquo;en contient pas, importez &lt;code&gt;time/tzdata&lt;/code&gt; (ou compilez avec
+&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; minimale qui n&amp;rsquo;en contient pas, importez &lt;code&gt;time/tzdata&lt;/code&gt; (ou compilez avec
 &lt;code&gt;-tags timetzdata&lt;/code&gt;) pour l&amp;rsquo;embarquer dans l&amp;rsquo;exécutable, au prix d&amp;rsquo;environ
 450 Ko.&lt;/p&gt;
 &lt;p&gt;Une bonne pratique : stockez et échangez les instants en &lt;strong&gt;UTC&lt;/strong&gt;, et ne
@@ -8470,7 +8708,7 @@ data-alert="tip" class="hextra-alert"
 &lt;/p&gt;
 &lt;div class="hextra-alert-content"&gt;&lt;p&gt;Un benchmark varie d&amp;rsquo;une exécution à l&amp;rsquo;autre. Pour comparer deux versions de
 manière fiable, exécutez chacune une dizaine de fois et comparez avec
-&lt;code&gt;benchstat&lt;/code&gt; :&lt;/p&gt;
+&lt;a href="https://pkg.go.dev/golang.org/x/perf/cmd/benchstat" target="_blank" rel="noopener"&gt;&lt;code&gt;benchstat&lt;/code&gt;&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go &lt;span class="nb"&gt;test&lt;/span&gt; -bench . -count &lt;span class="m"&gt;10&lt;/span&gt; &amp;gt; avant.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# … modification …&lt;/span&gt;
@@ -10058,7 +10296,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Les méthodes &lt;code&gt;InfoContext&lt;/code&gt;, &lt;code&gt;ErrorContext&lt;/code&gt;… reçoivent un &lt;code&gt;context.Context&lt;/code&gt;. Un
 handler personnalisé peut y lire des informations, comme l&amp;rsquo;identifiant de
-trace OpenTelemetry de la requête en cours.&lt;/p&gt;
+trace &lt;a href="https://opentelemetry.io" target="_blank" rel="noopener"&gt;OpenTelemetry&lt;/a&gt; de la requête en cours.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="masquer-les-données-sensibles"&gt;Masquer les données sensibles&lt;span class="hx:absolute hx:-mt-20" id="masquer-les-données-sensibles"&gt;&lt;/span&gt;
 &lt;a href="#masquer-les-donn%c3%a9es-sensibles" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un type qui implémente &lt;code&gt;slog.LogValuer&lt;/code&gt; contrôle sa propre représentation dans
 les journaux. C&amp;rsquo;est le moyen le plus sûr de ne jamais journaliser un mot de
@@ -10109,7 +10347,7 @@ vont dans les attributs. On peut ainsi compter les occurrences d&amp;rsquo;un me
 &lt;li&gt;Passez le &lt;code&gt;*slog.Logger&lt;/code&gt; comme une dépendance plutôt que d&amp;rsquo;utiliser partout
 le journal global : c&amp;rsquo;est plus facile à tester.&lt;/li&gt;
 &lt;li&gt;En production, journalisez en JSON sur la sortie standard, et laissez la
-plateforme (Docker, Kubernetes, systemd) collecter les messages.&lt;/li&gt;
+plateforme (&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://systemd.io" target="_blank" rel="noopener"&gt;systemd&lt;/a&gt;) collecter les messages.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Annulation et délais : context</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</guid><description>
 &lt;h2 data-hextra-search-id="le-problème"&gt;Le problème&lt;span class="hx:absolute hx:-mt-20" id="le-problème"&gt;&lt;/span&gt;
 &lt;a href="#le-probl%c3%a8me" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un serveur reçoit une requête, qui interroge une base de données, puis appelle
@@ -11008,7 +11246,7 @@ data-copied-label="Copié !"
 &lt;/table&gt;
 &lt;p&gt;Le style Go privilégie des messages explicites (&lt;code&gt;got … attendu …&lt;/code&gt;) plutôt que
 des bibliothèques d&amp;rsquo;assertions. La comparaison de structures complexes se fait
-avec &lt;code&gt;reflect.DeepEqual&lt;/code&gt;, ou avec &lt;code&gt;github.com/google/go-cmp&lt;/code&gt;, qui affiche les
+avec &lt;code&gt;reflect.DeepEqual&lt;/code&gt;, ou avec &lt;a href="https://github.com/google/go-cmp" target="_blank" rel="noopener"&gt;&lt;code&gt;github.com/google/go-cmp&lt;/code&gt;&lt;/a&gt;, qui affiche les
 différences.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="les-tests-de-table"&gt;Les tests de table&lt;span class="hx:absolute hx:-mt-20" id="les-tests-de-table"&gt;&lt;/span&gt;
 &lt;a href="#les-tests-de-table" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La forme idiomatique d&amp;rsquo;un test Go est la &lt;strong&gt;table&lt;/strong&gt; : une slice de cas, et une
@@ -11119,7 +11357,7 @@ boucle.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;-benchmem&lt;/code&gt; affiche les allocations, souvent la première piste
 d&amp;rsquo;optimisation. Pour comparer deux versions de manière statistiquement fiable,
-utilisez &lt;code&gt;benchstat&lt;/code&gt; (&lt;code&gt;golang.org/x/perf/cmd/benchstat&lt;/code&gt;).&lt;/p&gt;
+utilisez &lt;a href="https://pkg.go.dev/golang.org/x/perf/cmd/benchstat" target="_blank" rel="noopener"&gt;&lt;code&gt;benchstat&lt;/code&gt;&lt;/a&gt; (&lt;code&gt;golang.org/x/perf/cmd/benchstat&lt;/code&gt;).&lt;/p&gt;
 &lt;h2 data-hextra-search-id="le-fuzzing"&gt;Le fuzzing&lt;span class="hx:absolute hx:-mt-20" id="le-fuzzing"&gt;&lt;/span&gt;
 &lt;a href="#le-fuzzing" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div
 data-alert="note" class="hextra-alert"
@@ -11235,14 +11473,14 @@ data-copied-label="Copié !"
 &lt;p&gt;Depuis &lt;strong&gt;Go 1.20&lt;/strong&gt;, &lt;code&gt;go build -cover&lt;/code&gt; produit aussi un exécutable instrumenté,
 pour mesurer la couverture de tests d&amp;rsquo;intégration ou de bout en bout.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="tests-dintégration-avec-testcontainers"&gt;Tests d&amp;rsquo;intégration avec Testcontainers&lt;span class="hx:absolute hx:-mt-20" id="tests-dintégration-avec-testcontainers"&gt;&lt;/span&gt;
-&lt;a href="#tests-dint%c3%a9gration-avec-testcontainers" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un double de test ou une base SQLite en mémoire ne disent pas tout : le code
-qui parle à PostgreSQL, Redis ou Kafka doit aussi être testé contre le &lt;strong&gt;vrai&lt;/strong&gt;
+&lt;a href="#tests-dint%c3%a9gration-avec-testcontainers" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un double de test ou une base &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt; en mémoire ne disent pas tout : le code
+qui parle à &lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="https://redis.io" target="_blank" rel="noopener"&gt;Redis&lt;/a&gt; ou &lt;a href="https://kafka.apache.org" target="_blank" rel="noopener"&gt;Kafka&lt;/a&gt; doit aussi être testé contre le &lt;strong&gt;vrai&lt;/strong&gt;
 logiciel, dans la &lt;strong&gt;vraie&lt;/strong&gt; version utilisée en production. Une différence de
 syntaxe SQL, une contrainte, un type de colonne : autant de bugs qu&amp;rsquo;aucun
 double ne révèle.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://golang.testcontainers.org" target="_blank" rel="noopener"&gt;Testcontainers&lt;/a&gt; répond à ce besoin. Le
 module &lt;code&gt;github.com/testcontainers/testcontainers-go&lt;/code&gt; démarre, depuis le test
-lui-même, un conteneur jetable (Docker ou Podman), attend qu&amp;rsquo;il soit prêt,
+lui-même, un conteneur jetable (&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; ou &lt;a href="https://podman.io" target="_blank" rel="noopener"&gt;Podman&lt;/a&gt;), attend qu&amp;rsquo;il soit prêt,
 fournit son adresse, puis le supprime à la fin du test. Il n&amp;rsquo;y a ni base
 partagée à maintenir, ni fichier &lt;code&gt;docker-compose&lt;/code&gt; à lancer avant les tests.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="un-exemple--le-stockage-de-lapi"&gt;Un exemple : le stockage de l&amp;rsquo;API&lt;span class="hx:absolute hx:-mt-20" id="un-exemple--le-stockage-de-lapi"&gt;&lt;/span&gt;
@@ -11421,7 +11659,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;avec &lt;strong&gt;Colima&lt;/strong&gt; (macOS), indiquez le socket de la machine virtuelle, et
+&lt;p&gt;avec &lt;strong&gt;&lt;a href="https://github.com/abiosoft/colima" target="_blank" rel="noopener"&gt;Colima&lt;/a&gt;&lt;/strong&gt; (macOS), indiquez le socket de la machine virtuelle, et
 celui que Ryuk doit monter :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix://&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.colima/default/docker.sock
@@ -11439,7 +11677,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;dans &lt;strong&gt;GitHub Actions&lt;/strong&gt;, les machines &lt;code&gt;ubuntu-latest&lt;/code&gt; disposent de Docker :
+&lt;p&gt;dans &lt;strong&gt;&lt;a href="https://docs.github.com/actions" target="_blank" rel="noopener"&gt;GitHub Actions&lt;/a&gt;&lt;/strong&gt;, les machines &lt;code&gt;ubuntu-latest&lt;/code&gt; disposent de Docker :
 les tests d&amp;rsquo;intégration fonctionnent sans configuration.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -11492,8 +11730,8 @@ donne le chemin du socket à placer dans &lt;code&gt;DOCKER_HOST&lt;/code&gt;.&l
 moteurs : avec Docker, il n&amp;rsquo;y a rien à faire ; avec Podman, il définit ces
 variables automatiquement.&lt;/p&gt;
 &lt;p&gt;Testcontainers propose des modules prêts à l&amp;rsquo;emploi pour la plupart des
-logiciels courants : MySQL, MongoDB, Redis, Kafka, RabbitMQ, Elasticsearch,
-LocalStack (services AWS)… et &lt;code&gt;testcontainers.GenericContainer&lt;/code&gt; pour n&amp;rsquo;importe
+logiciels courants : &lt;a href="https://www.mysql.com" target="_blank" rel="noopener"&gt;MySQL&lt;/a&gt;, &lt;a href="https://www.mongodb.com" target="_blank" rel="noopener"&gt;MongoDB&lt;/a&gt;, Redis, Kafka, &lt;a href="https://www.rabbitmq.com" target="_blank" rel="noopener"&gt;RabbitMQ&lt;/a&gt;, &lt;a href="https://www.elastic.co/elasticsearch" target="_blank" rel="noopener"&gt;Elasticsearch&lt;/a&gt;,
+&lt;a href="https://www.localstack.cloud" target="_blank" rel="noopener"&gt;LocalStack&lt;/a&gt; (services AWS)… et &lt;code&gt;testcontainers.GenericContainer&lt;/code&gt; pour n&amp;rsquo;importe
 quelle image.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="organiser-les-tests"&gt;Organiser les tests&lt;span class="hx:absolute hx:-mt-20" id="organiser-les-tests"&gt;&lt;/span&gt;
 &lt;a href="#organiser-les-tests" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
@@ -11950,7 +12188,7 @@ certificats X.509. Ils sont maintenus par l&amp;rsquo;équipe Go et font l&amp;r
 de sécurité réguliers. Depuis Go 1.24, ils peuvent fonctionner dans un mode
 conforme FIPS 140-3.&lt;/p&gt;
 &lt;p&gt;Pour stocker des mots de passe, utilisez une fonction lente dédiée, comme
-&lt;code&gt;golang.org/x/crypto/bcrypt&lt;/code&gt; ou &lt;code&gt;argon2&lt;/code&gt;, et non une simple empreinte SHA-256.&lt;/p&gt;
+&lt;a href="https://pkg.go.dev/golang.org/x/crypto/bcrypt" target="_blank" rel="noopener"&gt;&lt;code&gt;golang.org/x/crypto/bcrypt&lt;/code&gt;&lt;/a&gt; ou &lt;a href="https://pkg.go.dev/golang.org/x/crypto/argon2" target="_blank" rel="noopener"&gt;&lt;code&gt;argon2&lt;/code&gt;&lt;/a&gt;, et non une simple empreinte SHA-256.&lt;/p&gt;
 &lt;p&gt;Les encodages sont regroupés dans &lt;code&gt;encoding/...&lt;/code&gt; : &lt;code&gt;hex&lt;/code&gt;, &lt;code&gt;base64&lt;/code&gt;, &lt;code&gt;csv&lt;/code&gt;,
 &lt;code&gt;xml&lt;/code&gt;, &lt;code&gt;binary&lt;/code&gt;, &lt;code&gt;pem&lt;/code&gt;…&lt;/p&gt;
 &lt;h2 data-hextra-search-id="csv"&gt;CSV&lt;span class="hx:absolute hx:-mt-20" id="csv"&gt;&lt;/span&gt;
@@ -12049,7 +12287,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="bases-de-données--databasesql"&gt;Bases de données : database/sql&lt;span class="hx:absolute hx:-mt-20" id="bases-de-données--databasesql"&gt;&lt;/span&gt;
 &lt;a href="#bases-de-donn%c3%a9es--databasesql" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;database/sql&lt;/code&gt; définit une interface commune à toutes les bases SQL. Le pilote
-(PostgreSQL, MySQL, SQLite…) est fourni par un module externe :&lt;/p&gt;
+(&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="https://www.mysql.com" target="_blank" rel="noopener"&gt;MySQL&lt;/a&gt;, &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt;…) est fourni par un module externe :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;pgx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;postgres://localhost/boutique&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
@@ -12478,7 +12716,7 @@ outils et la sécurité.&lt;/p&gt;
 &lt;a href="#outils" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;go vet&lt;/code&gt; est réécrit&lt;/strong&gt; sur le framework &lt;code&gt;golang.org/x/tools/go/analysis&lt;/code&gt;.
 Les analyseurs deviennent des composants réutilisables par d&amp;rsquo;autres outils,
-comme gopls ou staticcheck. L&amp;rsquo;ancienne commande &lt;code&gt;go tool vet&lt;/code&gt; disparaît.&lt;/li&gt;
+comme &lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt; ou &lt;a href="https://staticcheck.dev" target="_blank" rel="noopener"&gt;staticcheck&lt;/a&gt;. L&amp;rsquo;ancienne commande &lt;code&gt;go tool vet&lt;/code&gt; disparaît.&lt;/li&gt;
 &lt;li&gt;Les commandes &lt;code&gt;go&lt;/code&gt; fonctionnent en mode module même hors d&amp;rsquo;un module, par
 exemple pour &lt;code&gt;go get&lt;/code&gt; d&amp;rsquo;un outil.&lt;/li&gt;
 &lt;li&gt;La directive &lt;code&gt;go&lt;/code&gt; de &lt;code&gt;go.mod&lt;/code&gt; indique la version du langage utilisée par le
@@ -12636,7 +12874,7 @@ beaucoup de cœurs.&lt;/li&gt;
 &lt;h2 data-hextra-search-id="bibliothèque-standard"&gt;Bibliothèque standard&lt;span class="hx:absolute hx:-mt-20" id="bibliothèque-standard"&gt;&lt;/span&gt;
 &lt;a href="#biblioth%c3%a8que-standard" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;time/tzdata&lt;/code&gt;&lt;/strong&gt; embarque la base des fuseaux horaires dans l&amp;rsquo;exécutable.
-C&amp;rsquo;est indispensable dans une image Docker minimale qui n&amp;rsquo;en contient pas.&lt;/li&gt;
+C&amp;rsquo;est indispensable dans une image &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; minimale qui n&amp;rsquo;en contient pas.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;crypto/x509&lt;/code&gt; ne prend plus en compte le champ obsolète &lt;code&gt;CommonName&lt;/code&gt; des
 certificats lorsque les noms alternatifs (SAN) sont absents.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;testing.T.TempDir&lt;/code&gt; crée un répertoire temporaire supprimé automatiquement.&lt;/li&gt;
@@ -12963,7 +13201,7 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;code&gt;goimports&lt;/code&gt;, intégré à gopls, ajoute et range les imports automatiquement : la
+&lt;p&gt;&lt;a href="https://pkg.go.dev/golang.org/x/tools/cmd/goimports" target="_blank" rel="noopener"&gt;&lt;code&gt;goimports&lt;/code&gt;&lt;/a&gt;, intégré à &lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt;, ajoute et range les imports automatiquement : la
 bibliothèque standard d&amp;rsquo;abord, puis les autres modules.&lt;/p&gt;
 &lt;p&gt;Un import peut être renommé (&lt;code&gt;import str &amp;quot;strings&amp;quot;&lt;/code&gt;) pour éviter un conflit de
 noms. L&amp;rsquo;import &lt;code&gt;_&lt;/code&gt; (&lt;code&gt;import _ &amp;quot;image/png&amp;quot;&lt;/code&gt;) exécute seulement les fonctions
@@ -13373,7 +13611,7 @@ fuzz tests et exemples.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="runtime"&gt;Runtime&lt;span class="hx:absolute hx:-mt-20" id="runtime"&gt;&lt;/span&gt;
 &lt;a href="#runtime" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Les &lt;strong&gt;maps&lt;/strong&gt; sont réimplémentées sur le modèle des &lt;strong&gt;Swiss Tables&lt;/strong&gt;, une
+&lt;li&gt;Les &lt;strong&gt;maps&lt;/strong&gt; sont réimplémentées sur le modèle des &lt;strong&gt;&lt;a href="https://abseil.io/about/design/swisstables" target="_blank" rel="noopener"&gt;Swiss Tables&lt;/a&gt;&lt;/strong&gt;, une
 structure plus rapide, notamment pour les grandes maps.&lt;/li&gt;
 &lt;li&gt;L&amp;rsquo;allocation des petits objets est plus rapide.&lt;/li&gt;
 &lt;li&gt;Au total, le coût CPU baisse de 2 à 3 % en moyenne.&lt;/li&gt;
@@ -13487,7 +13725,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Testez toujours l&amp;rsquo;erreur &lt;strong&gt;avant&lt;/strong&gt; d&amp;rsquo;utiliser les autres valeurs renvoyées.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="à-retenir"&gt;À retenir&lt;span class="hx:absolute hx:-mt-20" id="à-retenir"&gt;&lt;/span&gt;
-&lt;a href="#%c3%a0-retenir" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pour un service déployé dans Kubernetes, passer à Go 1.25 règle d&amp;rsquo;office
+&lt;a href="#%c3%a0-retenir" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pour un service déployé dans &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, passer à Go 1.25 règle d&amp;rsquo;office
 &lt;code&gt;GOMAXPROCS&lt;/code&gt; correctement. Voir le chapitre
 &lt;a href="../../langage/concurrence/"&gt;Goroutines et channels&lt;/a&gt; pour &lt;code&gt;WaitGroup.Go&lt;/code&gt;, et
 &lt;a href="../../bibliotheque/testing/"&gt;Tests&lt;/a&gt; pour &lt;code&gt;synctest&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Go 1.26</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/evolution/go1-26/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/evolution/go1-26/</guid><description>

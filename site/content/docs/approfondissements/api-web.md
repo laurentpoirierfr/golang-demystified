@@ -5,7 +5,7 @@ weight: 30
 
 Ce chapitre construit un service web complet, prêt pour la production, avec la
 seule bibliothèque standard et un pilote de base de données : une API JSON de
-gestion de tâches, stockées dans SQLite. Il rassemble ce que les chapitres
+gestion de tâches, stockées dans [SQLite](https://sqlite.org). Il rassemble ce que les chapitres
 précédents ont présenté séparément : routage HTTP, JSON, `database/sql`,
 `log/slog`, `context`, `embed` et les tests.
 
@@ -42,14 +42,17 @@ api/
 │   └── oapi-codegen.yaml    la configuration du générateur
 ├── cmd/
 │   ├── taches/              le serveur : assemblage, démarrage, arrêt propre
+│   ├── taches-huma/         la même API, écrite avec Huma
 │   └── taches-cli/          le client en ligne de commande (chapitre suivant)
 ├── internal/
+│   ├── cli/                 les commandes de taches-cli (cobra, viper)
 │   ├── config/              lecture de la configuration
 │   ├── tache/               le domaine : type, validation, erreurs
 │   ├── store/               stockage SQLite ou PostgreSQL (database/sql)
 │   │   └── migrations/      schéma SQL par base, embarqué dans l'exécutable
-│   └── web/                 handlers HTTP de l'API
-│       └── openapi.gen.go   types et routage générés depuis le contrat
+│   ├── web/                 handlers HTTP de l'API
+│   │   └── openapi.gen.go   types et routage générés depuis le contrat
+│   └── webhuma/             la variante « code d'abord » avec Huma
 └── pkg/
     ├── client/              client Go de l'API, généré depuis le contrat
     └── httpkit/             middlewares, JSON, documentation : réutilisables
@@ -124,10 +127,10 @@ func ValideTitre(titre string) (string, error) {
 chaque base. Le pilote s'enregistre par un import « à blanc ». Le service
 accepte deux bases, choisies par la chaîne de connexion :
 
-- **SQLite**, avec `modernc.org/sqlite`, écrit entièrement en Go : il ne
+- **SQLite**, avec [`modernc.org/sqlite`](https://pkg.go.dev/modernc.org/sqlite), écrit entièrement en Go : il ne
   demande pas de compilateur C, et l'exécutable reste autonome. Idéal pour le
   développement, les tests et les petits déploiements ;
-- **PostgreSQL**, avec `github.com/jackc/pgx/v5/stdlib`, pour la production.
+- **[PostgreSQL](https://www.postgresql.org)**, avec `github.com/jackc/pgx/v5/stdlib`, pour la production.
 
 Ce qui diffère d'une base à l'autre tient dans une petite structure :
 
@@ -180,7 +183,7 @@ l'ouvre une fois au démarrage, et on le partage.
 
 Le même stockage est testé sur les **deux** bases : SQLite en mémoire à chaque
 `go test`, et un vrai PostgreSQL démarré dans un conteneur par
-**Testcontainers**. Le chapitre sur le package `testing` détaille cette
+**[Testcontainers](https://golang.testcontainers.org)**. Le chapitre sur le package `testing` détaille cette
 technique.
 
 ### Les migrations
@@ -223,7 +226,7 @@ func (s *Store) migre(ctx context.Context) error {
 }
 ```
 
-Pour un projet plus important, des outils comme `goose` ou `golang-migrate`
+Pour un projet plus important, des outils comme [`goose`](https://github.com/pressly/goose) ou [`golang-migrate`](https://github.com/golang-migrate/migrate)
 gèrent aussi les retours en arrière.
 
 ### Les requêtes
@@ -298,9 +301,9 @@ Il existe deux façons d'obtenir ce contrat en Go :
 
 | Approche             | Outil          | Principe                                         | Format         |
 |----------------------|----------------|--------------------------------------------------|----------------|
-| Code d'abord         | **swag**       | commentaires `// @Router …` au-dessus des handlers | Swagger 2.0 (v1) |
+| Code d'abord         | **[swag](https://github.com/swaggo/swag)**       | commentaires `// @Router …` au-dessus des handlers | Swagger 2.0 (v1) |
 | Code d'abord         | **Huma**       | contrat déduit des types Go des entrées et sorties | OpenAPI 3.1    |
-| **Contrat d'abord**  | **oapi-codegen** | code Go généré depuis le contrat               | OpenAPI 3.0    |
+| **Contrat d'abord**  | **[oapi-codegen](https://github.com/oapi-codegen/oapi-codegen)** | code Go généré depuis le contrat               | OpenAPI 3.0    |
 
 `swag` est l'outil historique : le contrat est produit à partir de
 commentaires placés au-dessus des handlers. Il a deux défauts : sa version
@@ -441,7 +444,7 @@ Il contient aussi `HandlerWithOptions`, qui enregistre chaque opération sur un
 
 Le contrat dit bien plus que les types : un titre fait au plus 200 caractères,
 un identifiant vaut au moins 1, un champ inconnu est interdit, le corps doit
-être du JSON. Le middleware `nethttp-middleware` vérifie chaque requête
+être du JSON. Le middleware [`nethttp-middleware`](https://github.com/oapi-codegen/nethttp-middleware) vérifie chaque requête
 **par rapport au contrat**, avant qu'elle n'atteigne le handler :
 
 ```go
@@ -474,7 +477,7 @@ refusé par le domaine avec un statut 422.
 ### Servir le contrat et sa documentation
 
 Le service publie son propre contrat, et une page de documentation
-interactive basée sur **Swagger UI**, chargée depuis un CDN : aucune
+interactive basée sur **[Swagger UI](https://swagger.io/tools/swagger-ui/)**, chargée depuis un CDN : aucune
 dépendance Go n'est nécessaire.
 
 ```go
@@ -486,6 +489,150 @@ En ouvrant `http://localhost:8080/docs`, on parcourt l'API et on l'essaie
 directement depuis le navigateur. Le même contrat permet de générer des
 clients, par exemple en TypeScript pour une application web, ou en Go avec
 l'option `client: true` d'oapi-codegen.
+
+### La variante « code d'abord » avec Huma
+
+Pour comparer les deux approches, le projet contient une seconde version de
+la même API, écrite avec [Huma](https://huma.rocks) : le package
+`internal/webhuma` et l'exécutable `cmd/taches-huma`. Elle réutilise le même
+domaine (`internal/tache`) et le même stockage (`internal/store`).
+
+Avec Huma, il n'y a pas de fichier de contrat à écrire. Chaque opération
+déclare ses **entrées** et ses **sorties** sous forme de structures Go, dont
+les balises indiquent l'origine de chaque champ (chemin, en-tête, corps) et
+ses règles de validation :
+
+```go
+type CreeEntree struct {
+	Body struct {
+		Titre string `json:"titre" minLength:"1" maxLength:"200" doc:"Titre de la tâche" example:"Relire le livre"`
+	}
+}
+
+type TacheSortie struct {
+	Location string `header:"Location" doc:"Adresse de la tâche"`
+	Body     Tache
+}
+
+type ModifieEntree struct {
+	ID   int64 `path:"id" minimum:"1" doc:"Identifiant de la tâche"`
+	Body struct {
+		Faite bool `json:"faite" doc:"Nouvel état de la tâche"` // obligatoire : pas d'omitempty
+	}
+}
+```
+
+Un handler est une fonction **typée**, qui reçoit son entrée déjà décodée et
+validée, et renvoie sa sortie ou une erreur. Il n'écrit jamais lui-même dans
+le `http.ResponseWriter` :
+
+```go
+huma.Register(api, huma.Operation{
+	OperationID: "cree-tache", Method: http.MethodPost, Path: "/taches",
+	Summary: "Crée une tâche", Tags: []string{"taches"},
+	DefaultStatus: http.StatusCreated,
+}, func(ctx context.Context, e *CreeEntree) (*TacheSortie, error) {
+	titre, err := tache.ValideTitre(e.Body.Titre) // règle métier : pas de titre blanc
+	if err != nil {
+		return nil, erreur(err)
+	}
+	t, err := s.Cree(ctx, titre)
+	if err != nil {
+		return nil, erreur(err)
+	}
+	return &TacheSortie{Location: fmt.Sprintf("/taches/%d", t.ID), Body: depuis(t)}, nil
+})
+```
+
+Les erreurs du domaine sont traduites par les fonctions de Huma, qui
+produisent des réponses au format standard **« problem+json »** (RFC 9457) :
+
+```go
+func erreur(err error) error {
+	switch {
+	case err == nil:
+		return nil
+	case errors.Is(err, tache.ErrIntrouvable):
+		return huma.Error404NotFound(err.Error())
+	}
+	if v, ok := errors.AsType[*tache.ErrValidation](err); ok {
+		return huma.Error422UnprocessableEntity(v.Error())
+	}
+	return err // erreur 500
+}
+```
+
+Le serveur s'appuie sur le routeur standard, grâce à l'adaptateur `humago` :
+
+```go
+mux := http.NewServeMux()
+api := humago.New(mux, huma.DefaultConfig("API des tâches (Huma)", "1.0.0"))
+Enregistre(api, s)
+```
+
+Huma **déduit** le contrat OpenAPI 3.1 de ces types, et le sert avec la
+documentation, sans configuration : `/openapi.yaml`, `/openapi.json` et
+`/docs`. Extrait du contrat produit :
+
+```yaml
+CreeEntreeBody:
+  additionalProperties: false
+  properties:
+    titre:
+      description: Titre de la tâche
+      examples:
+        - Relire le livre
+      maxLength: 200
+      minLength: 1
+      type: string
+```
+
+Les requêtes invalides sont rejetées avant d'atteindre le handler, avec la
+liste de **toutes** les erreurs :
+
+```
+POST /taches {"titre": "", "priorite": 1}
+
+422 application/problem+json
+{"title":"Unprocessable Entity","status":422,"detail":"validation failed",
+ "errors":[{"message":"expected length >= 1","location":"body.titre","value":""},
+           {"message":"unexpected property","location":"body.priorite",…}]}
+```
+
+Le package `humatest` teste les opérations sans réseau, et donne accès au
+contrat déduit :
+
+```go
+func TestScenario(t *testing.T) {
+	_, api := humatest.New(t)
+	Enregistre(api, nouveauStore(t))
+
+	r := api.Post("/taches", map[string]any{"titre": "  Relire  "})
+	// r.Code == 201, r.Body contient "titre":"Relire"
+
+	r = api.Patch("/taches/1", map[string]any{}) // « faite » manquant
+	// r.Code == 422 : expected required property faite
+}
+```
+
+### Quelle approche choisir ?
+
+| Critère                         | oapi-codegen (contrat d'abord)            | Huma (code d'abord)                       |
+|---------------------------------|-------------------------------------------|-------------------------------------------|
+| Source de vérité                | le fichier `openapi.yaml`                 | les types Go                              |
+| Format                          | OpenAPI 3.0                               | OpenAPI 3.1                               |
+| Contrat discuté avant le code   | oui, c'est son principe                   | non, il découle du code                   |
+| Écart entre code et contrat     | impossible : le code ne compile plus      | impossible : le contrat est déduit        |
+| Handlers                        | `http.Handler` classiques                 | fonctions typées `entrée → sortie`        |
+| Erreurs                         | format libre                              | « problem+json » (RFC 9457)               |
+| Client généré                   | oui (Go)                                  | via le contrat, avec un autre outil       |
+| Dépendances                     | générateur + validateur                   | une bibliothèque                          |
+
+Les deux approches éliminent le problème de fond de swag : un contrat qui ne
+dit pas la vérité. Choisissez **oapi-codegen** lorsque le contrat est négocié
+avec d'autres équipes, ou partagé par plusieurs langages ; choisissez
+**Huma** lorsque l'API naît dans le code Go et que vous voulez écrire le moins
+de code possible.
 
 ## La couche HTTP
 
@@ -746,7 +893,7 @@ func main() {
 
 ### L'arrêt propre
 
-À la réception de `SIGTERM` (envoyé par Kubernetes ou systemd avant
+À la réception de `SIGTERM` (envoyé par [Kubernetes](https://kubernetes.io) ou [systemd](https://systemd.io) avant
 d'arrêter un service), le serveur cesse d'accepter des connexions, termine les
 requêtes en cours, puis ferme la base de données :
 
@@ -820,7 +967,7 @@ pour simuler un `SIGTERM` et vérifier l'arrêt propre.
 ## Déployer
 
 Le pilote SQLite étant écrit en Go, l'exécutable est **statique** : une image
-Docker minimale suffit.
+[Docker](https://www.docker.com) minimale suffit.
 
 ```dockerfile
 FROM golang:1.27 AS build
@@ -837,7 +984,7 @@ USER nonroot
 ENTRYPOINT ["/taches"]
 ```
 
-L'image se construit et s'exécute avec Docker ou avec Podman, dont les
+L'image se construit et s'exécute avec Docker ou avec [Podman](https://podman.io), dont les
 commandes sont identiques :
 
 ```bash
@@ -874,7 +1021,7 @@ croissance. Les évolutions classiques sont :
 - l'**authentification**, par un middleware qui valide un jeton et place
   l'utilisateur dans le contexte ;
 - la **pagination** de la liste (`?apres=42&limite=50`) ;
-- les **métriques** (Prometheus, OpenTelemetry) et le **traçage** distribué,
+- les **métriques** ([Prometheus](https://prometheus.io), [OpenTelemetry](https://opentelemetry.io)) et le **traçage** distribué,
   par d'autres middlewares ;
 - une **documentation OpenAPI**, écrite à la main ou générée.
 

@@ -66,7 +66,7 @@ de sécurité réguliers. Depuis Go 1.24, ils peuvent fonctionner dans un mode
 conforme FIPS 140-3.
 
 Pour stocker des mots de passe, utilisez une fonction lente dédiée, comme
-`golang.org/x/crypto/bcrypt` ou `argon2`, et non une simple empreinte SHA-256.
+[`golang.org/x/crypto/bcrypt`](https://pkg.go.dev/golang.org/x/crypto/bcrypt) ou [`argon2`](https://pkg.go.dev/golang.org/x/crypto/argon2), et non une simple empreinte SHA-256.
 
 Les encodages sont regroupés dans `encoding/...` : `hex`, `base64`, `csv`,
 `xml`, `binary`, `pem`…
@@ -141,7 +141,7 @@ env := config()["env"]
 ## Bases de données : database/sql
 
 `database/sql` définit une interface commune à toutes les bases SQL. Le pilote
-(PostgreSQL, MySQL, SQLite…) est fourni par un module externe :
+([PostgreSQL](https://www.postgresql.org), [MySQL](https://www.mysql.com), [SQLite](https://sqlite.org)…) est fourni par un module externe :
 
 ```go
 db, err := sql.Open("pgx", "postgres://localhost/boutique")

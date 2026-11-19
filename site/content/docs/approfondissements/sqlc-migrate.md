@@ -19,11 +19,11 @@ Deux outils complémentaires industrialisent l'accès aux données :
   commande ou depuis le programme lui-même.
 
 Ce chapitre les combine dans un exemple complet : un catalogue de livres sur
-PostgreSQL. Le code est dans `examples/approfondissements/catalogue`.
+[PostgreSQL](https://www.postgresql.org). Le code est dans `examples/approfondissements/catalogue`.
 
 ## sqlc : le SQL d'abord
 
-La plupart des ORM (GORM, ent…) génèrent le SQL à partir du code Go. sqlc fait
+La plupart des ORM ([GORM](https://gorm.io), ent…) génèrent le SQL à partir du code Go. sqlc fait
 l'inverse : on écrit du **vrai SQL**, et sqlc génère le code Go qui l'appelle.
 On garde toute la puissance de PostgreSQL (jointures, `RETURNING`,
 `ON CONFLICT`, fonctions, CTE), sans réflexion à l'exécution ni requête
@@ -161,9 +161,9 @@ sql:
         output_files_suffix: ".gen"
 ```
 
-- **`sql_package: "pgx/v5"`** génère du code pour le pilote natif `pgx`, plus
+- **`sql_package: "pgx/v5"`** génère du code pour le pilote natif [`pgx`](https://github.com/jackc/pgx), plus
   rapide et plus complet que `database/sql` avec PostgreSQL. sqlc sait aussi
-  générer pour `database/sql`, MySQL et SQLite ;
+  générer pour `database/sql`, [MySQL](https://www.mysql.com) et [SQLite](https://sqlite.org) ;
 - **`emit_pointers_for_null_types`** représente une colonne qui peut être
   `NULL` par un pointeur (`*int32`), plus idiomatique que les types
   `pgtype.Int4` ;
@@ -179,8 +179,8 @@ sqlc vet          # vérifie les requêtes
 
 L'analyseur PostgreSQL de sqlc est une bibliothèque C : `go install
 github.com/sqlc-dev/sqlc/cmd/sqlc@latest` demande donc un compilateur C. Sans
-compilateur, l'image officielle fait le même travail, avec Docker comme avec
-Podman :
+compilateur, l'image officielle fait le même travail, avec [Docker](https://www.docker.com) comme avec
+[Podman](https://podman.io) :
 
 ```bash
 docker run --rm -v "$PWD:/src" -w /src sqlc/sqlc:1.31.1 generate
@@ -430,7 +430,7 @@ tous, err := c.Recherche(ctx, "go", nil)                   // sans filtre d'ann�
 ## Tester avec Testcontainers
 
 Le code généré par sqlc est du SQL PostgreSQL : on le teste contre un **vrai**
-PostgreSQL, démarré par Testcontainers (voir le chapitre sur le package
+PostgreSQL, démarré par [Testcontainers](https://golang.testcontainers.org) (voir le chapitre sur le package
 `testing`). Les migrations sont appliquées exactement comme en production :
 
 ```go
@@ -487,5 +487,5 @@ fichier de migration a un nom conforme et sa migration inverse.
 sqlc convient à la grande majorité des services : les requêtes y sont connues
 à l'avance. Pour les rares requêtes réellement dynamiques (un moteur de
 recherche aux filtres multiples, par exemple), un constructeur de requêtes
-comme `squirrel`, ou du SQL écrit à la main, complète sqlc sans difficulté :
+comme [`squirrel`](https://github.com/Masterminds/squirrel), ou du SQL écrit à la main, complète sqlc sans difficulté :
 les deux utilisent le même pool de connexions.

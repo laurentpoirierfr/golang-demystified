@@ -4,8 +4,8 @@ weight: 33
 ---
 
 Go excelle pour les outils en ligne de commande : un exécutable unique,
-statique, rapide à démarrer, compilable pour toutes les plateformes. Docker,
-Kubernetes (`kubectl`), Hugo, GitHub (`gh`) ou Terraform sont écrits en Go,
+statique, rapide à démarrer, compilable pour toutes les plateformes. [Docker](https://www.docker.com),
+[Kubernetes](https://kubernetes.io) (`kubectl`), [Hugo](https://gohugo.io), GitHub (`gh`) ou [Terraform](https://www.terraform.io) sont écrits en Go,
 et la plupart utilisent deux bibliothèques de Steve Francia :
 
 - **[cobra](https://cobra.dev)** structure une application en **commandes et
@@ -19,7 +19,7 @@ Ce chapitre construit `taches-cli`, le client en ligne de commande de l'API du
 chapitre « Une API web complète ». Le code est dans
 `examples/approfondissements/api` : un second exécutable dans `cmd/`, la
 logique dans `internal/cli`, et le client HTTP **généré depuis le contrat
-OpenAPI** dans `pkg/client`.
+[OpenAPI](https://www.openapis.org)** dans `pkg/client`.
 
 ```
 $ taches-cli ajoute Relire le chapitre
@@ -38,7 +38,7 @@ ID  FAITE  TITRE
 
 ## Le client HTTP, généré depuis le contrat
 
-Le contrat OpenAPI de l'API décrit déjà toutes les opérations : oapi-codegen
+Le contrat OpenAPI de l'API décrit déjà toutes les opérations : [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen)
 génère aussi le **client**. Une seconde configuration le place dans
 `pkg/client`, car c'est précisément du code destiné à être importé par
 d'autres projets :
@@ -314,7 +314,7 @@ sienne, et les tests ne se perturbent pas les uns les autres.
 
 Comme la racine est construite par une fonction et écrit dans un `io.Writer`,
 une commande se teste comme une fonction ordinaire. Les tests démarrent la
-**vraie API**, avec une base SQLite en mémoire : ils couvrent ensemble la ligne
+**vraie API**, avec une base [SQLite](https://sqlite.org) en mémoire : ils couvrent ensemble la ligne
 de commande, le client généré et le serveur.
 
 ```go
@@ -380,7 +380,7 @@ GOOS=windows GOARCH=amd64 go build -o dist/taches-cli.exe ./cmd/taches-cli
 ```
 
 Pour un projet publié, [GoReleaser](https://goreleaser.com) automatise ces
-compilations, les archives, les sommes de contrôle, les paquets (Homebrew,
+compilations, les archives, les sommes de contrôle, les paquets ([Homebrew](https://brew.sh),
 deb, rpm) et la publication sur GitHub à chaque tag. Les utilisateurs qui ont
 Go peuvent aussi installer l'outil directement :
 

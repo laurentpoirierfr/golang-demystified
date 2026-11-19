@@ -96,7 +96,7 @@ reqLog.Info("commande créée", slog.Group("commande", "id", 1001, "montant", 59
 
 Les méthodes `InfoContext`, `ErrorContext`… reçoivent un `context.Context`. Un
 handler personnalisé peut y lire des informations, comme l'identifiant de
-trace OpenTelemetry de la requête en cours.
+trace [OpenTelemetry](https://opentelemetry.io) de la requête en cours.
 
 ## Masquer les données sensibles
 
@@ -134,4 +134,4 @@ niveau.Set(slog.LevelDebug)
 - Passez le `*slog.Logger` comme une dépendance plutôt que d'utiliser partout
   le journal global : c'est plus facile à tester.
 - En production, journalisez en JSON sur la sortie standard, et laissez la
-  plateforme (Docker, Kubernetes, systemd) collecter les messages.
+  plateforme ([Docker](https://www.docker.com), [Kubernetes](https://kubernetes.io), [systemd](https://systemd.io)) collecter les messages.

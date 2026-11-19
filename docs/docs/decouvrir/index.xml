@@ -10,8 +10,8 @@ tout ce qui ralentit une équipe : un langage petit, lisible, qui compile en
 quelques secondes, produit un binaire autonome et rend la concurrence naturelle.&lt;/p&gt;
 &lt;p&gt;Go a été rendu public en novembre 2009. La version &lt;strong&gt;Go 1.0&lt;/strong&gt;, publiée en mars
 2012, a marqué le début de la stabilité. Depuis, Go est devenu le langage de
-l&amp;rsquo;infrastructure moderne : Docker, Kubernetes, Terraform, Prometheus, etcd ou
-Caddy sont écrits en Go.&lt;/p&gt;
+l&amp;rsquo;infrastructure moderne : &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://www.terraform.io" target="_blank" rel="noopener"&gt;Terraform&lt;/a&gt;, &lt;a href="https://prometheus.io" target="_blank" rel="noopener"&gt;Prometheus&lt;/a&gt;, &lt;a href="https://etcd.io" target="_blank" rel="noopener"&gt;etcd&lt;/a&gt; ou
+&lt;a href="https://caddyserver.com" target="_blank" rel="noopener"&gt;Caddy&lt;/a&gt; sont écrits en Go.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="une-philosophie-de-la-simplicité"&gt;Une philosophie de la simplicité&lt;span class="hx:absolute hx:-mt-20" id="une-philosophie-de-la-simplicité"&gt;&lt;/span&gt;
 &lt;a href="#une-philosophie-de-la-simplicit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Quelques principes guident la conception de Go et reviennent tout au long de ce
 livre :&lt;/p&gt;
@@ -170,7 +170,7 @@ data-copied-label="Copié !"
 &lt;code&gt;fish_add_path /usr/local/go/bin $HOME/go/bin&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="macos"&gt;macOS&lt;span class="hx:absolute hx:-mt-20" id="macos"&gt;&lt;/span&gt;
 &lt;a href="#macos" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Téléchargez et lancez l&amp;rsquo;installeur &lt;code&gt;.pkg&lt;/code&gt; depuis
-&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;, ou utilisez Homebrew :&lt;/p&gt;
+&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;, ou utilisez &lt;a href="https://brew.sh" target="_blank" rel="noopener"&gt;Homebrew&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install go&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
@@ -192,7 +192,7 @@ data-alert="note" class="hextra-alert"
 &lt;div class="hextra-alert-content"&gt;&lt;p&gt;&lt;strong&gt;Go 1.27&lt;/strong&gt; nécessite macOS 13 Ventura ou une version plus récente.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 data-hextra-search-id="windows"&gt;Windows&lt;span class="hx:absolute hx:-mt-20" id="windows"&gt;&lt;/span&gt;
-&lt;a href="#windows" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Lancez l&amp;rsquo;installeur &lt;code&gt;.msi&lt;/code&gt;, ou utilisez winget :&lt;/p&gt;
+&lt;a href="#windows" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Lancez l&amp;rsquo;installeur &lt;code&gt;.msi&lt;/code&gt;, ou utilisez &lt;a href="https://learn.microsoft.com/windows/package-manager/winget/" target="_blank" rel="noopener"&gt;winget&lt;/a&gt; :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;winget&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;GoLang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Go&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
@@ -298,14 +298,14 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="configurer-un-éditeur"&gt;Configurer un éditeur&lt;span class="hx:absolute hx:-mt-20" id="configurer-un-éditeur"&gt;&lt;/span&gt;
-&lt;a href="#configurer-un-%c3%a9diteur" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go fournit un serveur de langage officiel, &lt;strong&gt;gopls&lt;/strong&gt;, utilisé par la plupart
+&lt;a href="#configurer-un-%c3%a9diteur" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go fournit un serveur de langage officiel, &lt;strong&gt;&lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt;&lt;/strong&gt;, utilisé par la plupart
 des éditeurs : complétion, navigation dans le code, renommage, diagnostics et
 corrections automatiques.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Visual Studio Code&lt;/strong&gt; : installez l&amp;rsquo;extension &lt;strong&gt;Go&lt;/strong&gt; (éditée par l&amp;rsquo;équipe
+&lt;li&gt;&lt;strong&gt;&lt;a href="https://code.visualstudio.com" target="_blank" rel="noopener"&gt;Visual Studio Code&lt;/a&gt;&lt;/strong&gt; : installez l&amp;rsquo;extension &lt;strong&gt;Go&lt;/strong&gt; (éditée par l&amp;rsquo;équipe
 Go). À l&amp;rsquo;ouverture du premier fichier &lt;code&gt;.go&lt;/code&gt;, elle propose d&amp;rsquo;installer gopls et
 les outils nécessaires.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GoLand&lt;/strong&gt; (JetBrains) : un IDE dédié à Go, prêt à l&amp;rsquo;emploi.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href="https://www.jetbrains.com/go/" target="_blank" rel="noopener"&gt;GoLand&lt;/a&gt;&lt;/strong&gt; (JetBrains) : un IDE dédié à Go, prêt à l&amp;rsquo;emploi.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Neovim, Helix, Zed, Emacs…&lt;/strong&gt; : configurez le client LSP pour utiliser
 &lt;code&gt;gopls&lt;/code&gt;, que vous pouvez installer avec :&lt;/li&gt;
 &lt;/ul&gt;
@@ -862,7 +862,7 @@ data-copied-label="Copié !"
 &lt;code&gt;//go:fix inline&lt;/code&gt; : &lt;code&gt;go fix&lt;/code&gt; remplace alors ses appels par son nouveau code
 chez tous ses utilisateurs.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="govulncheck"&gt;govulncheck&lt;span class="hx:absolute hx:-mt-20" id="govulncheck"&gt;&lt;/span&gt;
-&lt;a href="#govulncheck" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;govulncheck&lt;/code&gt; compare les dépendances à la base de vulnérabilités de Go. Il ne
+&lt;a href="#govulncheck" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;a href="https://go.dev/doc/security/vuln/" target="_blank" rel="noopener"&gt;&lt;code&gt;govulncheck&lt;/code&gt;&lt;/a&gt; compare les dépendances à la base de vulnérabilités de Go. Il ne
 signale que les vulnérabilités dont le code est réellement appelé par le
 programme :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;

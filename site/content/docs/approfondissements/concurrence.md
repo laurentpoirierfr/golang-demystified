@@ -220,7 +220,7 @@ tâche dans une slice préallouée.
 ## errgroup : un groupe de tâches qui peuvent échouer
 
 Lorsque l'échec d'une tâche doit **annuler toutes les autres**, le package
-`golang.org/x/sync/errgroup` est l'outil idéal. Maintenu par l'équipe Go, il
+[`golang.org/x/sync/errgroup`](https://pkg.go.dev/golang.org/x/sync/errgroup) est l'outil idéal. Maintenu par l'équipe Go, il
 remplace avantageusement un `WaitGroup` accompagné d'une gestion d'erreurs
 manuelle :
 
@@ -272,14 +272,14 @@ for _, f := range fichiers {
 wg.Wait()
 ```
 
-Le package `golang.org/x/sync/semaphore` propose un sémaphore pondéré, dont
+Le package [`golang.org/x/sync/semaphore`](https://pkg.go.dev/golang.org/x/sync/semaphore) propose un sémaphore pondéré, dont
 l'acquisition respecte un contexte.
 
 ## Limiter le débit
 
 Limiter le **débit**, c'est limiter le nombre d'opérations par unité de temps :
 appeler une API qui accepte 10 requêtes par seconde, par exemple. Le package
-`golang.org/x/time/rate` implémente un *token bucket* :
+[`golang.org/x/time/rate`](https://pkg.go.dev/golang.org/x/time/rate) implémente un *token bucket* :
 
 ```go
 import "golang.org/x/time/rate"
@@ -423,8 +423,8 @@ Et dans tous les cas : `go test -race` dans l'intégration continue, et
 Les motifs de ce chapitre suffisent à la plupart des besoins. Pour le
 traitement de flux d'événements (journaux, mesures, messages), des
 bibliothèques proposent des briques prêtes à l'emploi : fenêtres
-temporelles, regroupements, limitation de débit, connecteurs vers Kafka ou
-NATS. Avant d'en adopter une, il faut savoir ce qu'elle apporte et ce qu'elle
+temporelles, regroupements, limitation de débit, connecteurs vers [Kafka](https://kafka.apache.org) ou
+[NATS](https://nats.io). Avant d'en adopter une, il faut savoir ce qu'elle apporte et ce qu'elle
 coûte.
 
 ### go-streams
@@ -516,7 +516,7 @@ chapitre, avec `context` et `errgroup`, restent préférables.
 | Traitement en mémoire d'une séquence                | itérateurs (`iter.Seq`, Go 1.23)        |
 | Pipelines concurrents dans un service               | channels, `context`, `errgroup` (ce chapitre) |
 | Opérateurs de flux prêts à l'emploi (fenêtres…)     | go-streams                              |
-| Services pilotés par des messages (Kafka, NATS, RabbitMQ, SQL) | [Watermill](https://watermill.io) : routeur, reprises, middlewares |
+| Services pilotés par des messages (Kafka, NATS, [RabbitMQ](https://www.rabbitmq.com), SQL) | [Watermill](https://watermill.io) : routeur, reprises, middlewares |
 | Traitement de flux décrit par configuration         | [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/) (anciennement Benthos) |
 | Traitement de flux Kafka avec état                  | [goka](https://github.com/lovoo/goka)   |
 
