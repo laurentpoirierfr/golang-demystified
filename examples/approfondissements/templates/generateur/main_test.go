@@ -27,3 +27,15 @@ func TestGenere(t *testing.T) {
 		}
 	}
 }
+
+func TestEnTeteGenere(t *testing.T) {
+	code, err := Genere(Enum{Package: "p", Type: "T", Valeurs: []string{"A"}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Convention reconnue par les outils : https://go.dev/s/generatedcode
+	premiere, _, _ := strings.Cut(string(code), "\n")
+	if !strings.HasPrefix(premiere, "// Code generated ") || !strings.HasSuffix(premiere, " DO NOT EDIT.") {
+		t.Errorf("en-tête non conforme : %q", premiere)
+	}
+}
