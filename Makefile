@@ -7,7 +7,7 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site serve book pdf check test-integration sqlc generate clean
+.PHONY: all site serve book pdf check vuln test-integration sqlc generate clean
 
 all: check site book
 
@@ -39,6 +39,10 @@ check:
 	test -z "$$(gofmt -l tools examples)"
 	go vet ./...
 	go test -short ./...
+
+## vuln : recherche les vulnérabilités connues dans le code et ses dépendances
+vuln:
+	go tool govulncheck ./...
 
 # Avec Podman, Testcontainers passe par l'API compatible Docker de Podman
 # (systemctl --user start podman.socket), sans le conteneur « Ryuk ».
