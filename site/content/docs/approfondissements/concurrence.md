@@ -417,3 +417,111 @@ func TestPipelineSansFuite(t *testing.T) {
 
 Et dans tous les cas : `go test -race` dans l'intégration continue, et
 `synctest` pour tester le code qui dépend du temps.
+
+## Les bibliothèques de traitement de flux
+
+Les motifs de ce chapitre suffisent à la plupart des besoins. Pour le
+traitement de flux d'événements (journaux, mesures, messages), des
+bibliothèques proposent des briques prêtes à l'emploi : fenêtres
+temporelles, regroupements, limitation de débit, connecteurs vers Kafka ou
+NATS. Avant d'en adopter une, il faut savoir ce qu'elle apporte et ce qu'elle
+coûte.
+
+### go-streams
+
+[go-streams](https://github.com/reugn/go-streams) décrit un pipeline comme
+une **source**, des **étapes** (*flows*) et une **destination** (*sink*),
+reliées par `Via` et `To` :
+
+```go
+import (
+	"github.com/reugn/go-streams/extension"
+	"github.com/reugn/go-streams/flow"
+)
+
+entree := make(chan any)
+sortie := make(chan any)
+
+source := extension.NewChanSource(entree)
+analyseur := flow.NewMap(analyse, 1) // parallélisme 1 : l'ordre est conservé
+erreurs := flow.NewFilter(func(r Requete) bool { return r.Statut >= 500 }, 1)
+lots := flow.NewBatch[Requete](2, time.Hour) // lots de 2, ou toutes les heures
+
+go source.Via(analyseur).Via(erreurs).Via(lots).To(extension.NewChanSink(sortie))
+
+for lot := range sortie {
+	for _, r := range lot.([]Requete) { // la sortie est un chan any : assertion de type
+		…
+	}
+}
+```
+
+Son point fort est un catalogue d'opérateurs délicats à bien écrire soi-même :
+fenêtres glissantes, fixes ou de session, lots par taille ou par durée,
+limitation de débit adaptée à la charge CPU et mémoire, regroupement par clé.
+Compter les requêtes par seconde tient en une ligne, et se teste
+instantanément avec `synctest`, car la bibliothèque utilise les timers de la
+bibliothèque standard :
+
+```go
+func TestFenetreTemporelle(t *testing.T) {
+	synctest.Test(t, func(t *testing.T) {
+		entree := make(chan any)
+		sortie := make(chan any)
+		fenetre := flow.NewTumblingWindow[Requete](time.Second)
+		go extension.NewChanSource(entree).Via(fenetre).To(extension.NewChanSink(sortie))
+
+		go func() {
+			defer close(entree)
+			for _, pause := range []time.Duration{0, 100, 200, 900, 50, 1000} {
+				time.Sleep(pause * time.Millisecond)
+				entree <- Requete{Chemin: "/", Statut: 200}
+			}
+		}()
+
+		var comptes []int
+		for f := range sortie {
+			comptes = append(comptes, len(f.([]Requete)))
+		}
+		// Instants d'arrivée : 0, 100, 300, 1200, 1250, 2250 ms.
+		if got := fmt.Sprint(comptes); got != "[3 2 1]" {
+			t.Errorf("requêtes par seconde = %s, attendu [3 2 1]", got)
+		}
+	})
+}
+```
+
+Ses limites sont toutefois importantes pour un usage en production :
+
+- **le typage s'arrête aux constructeurs.** `NewMap[T, R]` est générique, mais
+  les étapes communiquent par des `chan any`, et la bibliothèque convertit
+  chaque élément avec `element.(T)` sans vérification. Deux étapes mal
+  assorties compilent, puis **paniquent** à l'exécution ;
+- **pas de gestion des erreurs** : une transformation a la signature
+  `func(T) R`. Une étape qui peut échouer, comme un appel HTTP, n'a pas de
+  moyen propre de le signaler ;
+- **pas de `context.Context`** dans les opérateurs, donc pas d'annulation ni
+  d'échéance intégrées ;
+- **une maintenance reposant sur une seule personne**, dont le rythme a
+  ralenti (dernière version publiée en mai 2025).
+
+go-streams convient donc bien à un outil interne, un prototype ou un
+traitement de journaux. Pour un service critique, les pipelines typés de ce
+chapitre, avec `context` et `errgroup`, restent préférables.
+
+### Les alternatives
+
+| Besoin                                              | Outil                                   |
+|-----------------------------------------------------|-----------------------------------------|
+| Traitement en mémoire d'une séquence                | itérateurs (`iter.Seq`, Go 1.23)        |
+| Pipelines concurrents dans un service               | channels, `context`, `errgroup` (ce chapitre) |
+| Opérateurs de flux prêts à l'emploi (fenêtres…)     | go-streams                              |
+| Services pilotés par des messages (Kafka, NATS, RabbitMQ, SQL) | [Watermill](https://watermill.io) : routeur, reprises, middlewares |
+| Traitement de flux décrit par configuration         | [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/) (anciennement Benthos) |
+| Traitement de flux Kafka avec état                  | [goka](https://github.com/lovoo/goka)   |
+
+Watermill mérite une mention particulière pour les architectures
+événementielles : il apporte aux messages ce que `net/http` apporte aux
+requêtes (un routeur, des handlers, des middlewares de reprise, de
+journalisation ou de dédoublonnage), indépendamment du système de messages
+utilisé.

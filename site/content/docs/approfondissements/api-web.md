@@ -41,9 +41,8 @@ api/
 │   ├── openapi.yaml         le contrat OpenAPI 3, source de vérité
 │   └── oapi-codegen.yaml    la configuration du générateur
 ├── cmd/
-│   └── taches/
-│       ├── main.go          assemblage, démarrage, arrêt propre
-│       └── main_test.go
+│   ├── taches/              le serveur : assemblage, démarrage, arrêt propre
+│   └── taches-cli/          le client en ligne de commande (chapitre suivant)
 ├── internal/
 │   ├── config/              lecture de la configuration
 │   ├── tache/               le domaine : type, validation, erreurs
@@ -52,6 +51,7 @@ api/
 │   └── web/                 handlers HTTP de l'API
 │       └── openapi.gen.go   types et routage générés depuis le contrat
 └── pkg/
+    ├── client/              client Go de l'API, généré depuis le contrat
     └── httpkit/             middlewares, JSON, documentation : réutilisables
 ```
 
