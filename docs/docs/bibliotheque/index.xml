@@ -1169,7 +1169,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;LoadLocation&lt;/code&gt; lit la base de fuseaux horaires du système. Dans une image
-Docker minimale qui n&amp;rsquo;en contient pas, importez &lt;code&gt;time/tzdata&lt;/code&gt; (ou compilez avec
+&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; minimale qui n&amp;rsquo;en contient pas, importez &lt;code&gt;time/tzdata&lt;/code&gt; (ou compilez avec
 &lt;code&gt;-tags timetzdata&lt;/code&gt;) pour l&amp;rsquo;embarquer dans l&amp;rsquo;exécutable, au prix d&amp;rsquo;environ
 450 Ko.&lt;/p&gt;
 &lt;p&gt;Une bonne pratique : stockez et échangez les instants en &lt;strong&gt;UTC&lt;/strong&gt;, et ne
@@ -2058,7 +2058,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Les méthodes &lt;code&gt;InfoContext&lt;/code&gt;, &lt;code&gt;ErrorContext&lt;/code&gt;… reçoivent un &lt;code&gt;context.Context&lt;/code&gt;. Un
 handler personnalisé peut y lire des informations, comme l&amp;rsquo;identifiant de
-trace OpenTelemetry de la requête en cours.&lt;/p&gt;
+trace &lt;a href="https://opentelemetry.io" target="_blank" rel="noopener"&gt;OpenTelemetry&lt;/a&gt; de la requête en cours.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="masquer-les-données-sensibles"&gt;Masquer les données sensibles&lt;span class="hx:absolute hx:-mt-20" id="masquer-les-données-sensibles"&gt;&lt;/span&gt;
 &lt;a href="#masquer-les-donn%c3%a9es-sensibles" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un type qui implémente &lt;code&gt;slog.LogValuer&lt;/code&gt; contrôle sa propre représentation dans
 les journaux. C&amp;rsquo;est le moyen le plus sûr de ne jamais journaliser un mot de
@@ -2109,7 +2109,7 @@ vont dans les attributs. On peut ainsi compter les occurrences d&amp;rsquo;un me
 &lt;li&gt;Passez le &lt;code&gt;*slog.Logger&lt;/code&gt; comme une dépendance plutôt que d&amp;rsquo;utiliser partout
 le journal global : c&amp;rsquo;est plus facile à tester.&lt;/li&gt;
 &lt;li&gt;En production, journalisez en JSON sur la sortie standard, et laissez la
-plateforme (Docker, Kubernetes, systemd) collecter les messages.&lt;/li&gt;
+plateforme (&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://systemd.io" target="_blank" rel="noopener"&gt;systemd&lt;/a&gt;) collecter les messages.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Annulation et délais : context</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/bibliotheque/context/</guid><description>
 &lt;h2 data-hextra-search-id="le-problème"&gt;Le problème&lt;span class="hx:absolute hx:-mt-20" id="le-problème"&gt;&lt;/span&gt;
 &lt;a href="#le-probl%c3%a8me" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un serveur reçoit une requête, qui interroge une base de données, puis appelle
@@ -2426,7 +2426,7 @@ data-copied-label="Copié !"
 &lt;/table&gt;
 &lt;p&gt;Le style Go privilégie des messages explicites (&lt;code&gt;got … attendu …&lt;/code&gt;) plutôt que
 des bibliothèques d&amp;rsquo;assertions. La comparaison de structures complexes se fait
-avec &lt;code&gt;reflect.DeepEqual&lt;/code&gt;, ou avec &lt;code&gt;github.com/google/go-cmp&lt;/code&gt;, qui affiche les
+avec &lt;code&gt;reflect.DeepEqual&lt;/code&gt;, ou avec &lt;a href="https://github.com/google/go-cmp" target="_blank" rel="noopener"&gt;&lt;code&gt;github.com/google/go-cmp&lt;/code&gt;&lt;/a&gt;, qui affiche les
 différences.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="les-tests-de-table"&gt;Les tests de table&lt;span class="hx:absolute hx:-mt-20" id="les-tests-de-table"&gt;&lt;/span&gt;
 &lt;a href="#les-tests-de-table" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La forme idiomatique d&amp;rsquo;un test Go est la &lt;strong&gt;table&lt;/strong&gt; : une slice de cas, et une
@@ -2537,7 +2537,7 @@ boucle.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;code&gt;-benchmem&lt;/code&gt; affiche les allocations, souvent la première piste
 d&amp;rsquo;optimisation. Pour comparer deux versions de manière statistiquement fiable,
-utilisez &lt;code&gt;benchstat&lt;/code&gt; (&lt;code&gt;golang.org/x/perf/cmd/benchstat&lt;/code&gt;).&lt;/p&gt;
+utilisez &lt;a href="https://pkg.go.dev/golang.org/x/perf/cmd/benchstat" target="_blank" rel="noopener"&gt;&lt;code&gt;benchstat&lt;/code&gt;&lt;/a&gt; (&lt;code&gt;golang.org/x/perf/cmd/benchstat&lt;/code&gt;).&lt;/p&gt;
 &lt;h2 data-hextra-search-id="le-fuzzing"&gt;Le fuzzing&lt;span class="hx:absolute hx:-mt-20" id="le-fuzzing"&gt;&lt;/span&gt;
 &lt;a href="#le-fuzzing" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div
 data-alert="note" class="hextra-alert"
@@ -2653,14 +2653,14 @@ data-copied-label="Copié !"
 &lt;p&gt;Depuis &lt;strong&gt;Go 1.20&lt;/strong&gt;, &lt;code&gt;go build -cover&lt;/code&gt; produit aussi un exécutable instrumenté,
 pour mesurer la couverture de tests d&amp;rsquo;intégration ou de bout en bout.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="tests-dintégration-avec-testcontainers"&gt;Tests d&amp;rsquo;intégration avec Testcontainers&lt;span class="hx:absolute hx:-mt-20" id="tests-dintégration-avec-testcontainers"&gt;&lt;/span&gt;
-&lt;a href="#tests-dint%c3%a9gration-avec-testcontainers" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un double de test ou une base SQLite en mémoire ne disent pas tout : le code
-qui parle à PostgreSQL, Redis ou Kafka doit aussi être testé contre le &lt;strong&gt;vrai&lt;/strong&gt;
+&lt;a href="#tests-dint%c3%a9gration-avec-testcontainers" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un double de test ou une base &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt; en mémoire ne disent pas tout : le code
+qui parle à &lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="https://redis.io" target="_blank" rel="noopener"&gt;Redis&lt;/a&gt; ou &lt;a href="https://kafka.apache.org" target="_blank" rel="noopener"&gt;Kafka&lt;/a&gt; doit aussi être testé contre le &lt;strong&gt;vrai&lt;/strong&gt;
 logiciel, dans la &lt;strong&gt;vraie&lt;/strong&gt; version utilisée en production. Une différence de
 syntaxe SQL, une contrainte, un type de colonne : autant de bugs qu&amp;rsquo;aucun
 double ne révèle.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://golang.testcontainers.org" target="_blank" rel="noopener"&gt;Testcontainers&lt;/a&gt; répond à ce besoin. Le
 module &lt;code&gt;github.com/testcontainers/testcontainers-go&lt;/code&gt; démarre, depuis le test
-lui-même, un conteneur jetable (Docker ou Podman), attend qu&amp;rsquo;il soit prêt,
+lui-même, un conteneur jetable (&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; ou &lt;a href="https://podman.io" target="_blank" rel="noopener"&gt;Podman&lt;/a&gt;), attend qu&amp;rsquo;il soit prêt,
 fournit son adresse, puis le supprime à la fin du test. Il n&amp;rsquo;y a ni base
 partagée à maintenir, ni fichier &lt;code&gt;docker-compose&lt;/code&gt; à lancer avant les tests.&lt;/p&gt;
 &lt;h3 data-hextra-search-id="un-exemple--le-stockage-de-lapi"&gt;Un exemple : le stockage de l&amp;rsquo;API&lt;span class="hx:absolute hx:-mt-20" id="un-exemple--le-stockage-de-lapi"&gt;&lt;/span&gt;
@@ -2839,7 +2839,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;avec &lt;strong&gt;Colima&lt;/strong&gt; (macOS), indiquez le socket de la machine virtuelle, et
+&lt;p&gt;avec &lt;strong&gt;&lt;a href="https://github.com/abiosoft/colima" target="_blank" rel="noopener"&gt;Colima&lt;/a&gt;&lt;/strong&gt; (macOS), indiquez le socket de la machine virtuelle, et
 celui que Ryuk doit monter :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_HOST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;unix://&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.colima/default/docker.sock
@@ -2857,7 +2857,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;dans &lt;strong&gt;GitHub Actions&lt;/strong&gt;, les machines &lt;code&gt;ubuntu-latest&lt;/code&gt; disposent de Docker :
+&lt;p&gt;dans &lt;strong&gt;&lt;a href="https://docs.github.com/actions" target="_blank" rel="noopener"&gt;GitHub Actions&lt;/a&gt;&lt;/strong&gt;, les machines &lt;code&gt;ubuntu-latest&lt;/code&gt; disposent de Docker :
 les tests d&amp;rsquo;intégration fonctionnent sans configuration.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2910,8 +2910,8 @@ donne le chemin du socket à placer dans &lt;code&gt;DOCKER_HOST&lt;/code&gt;.&l
 moteurs : avec Docker, il n&amp;rsquo;y a rien à faire ; avec Podman, il définit ces
 variables automatiquement.&lt;/p&gt;
 &lt;p&gt;Testcontainers propose des modules prêts à l&amp;rsquo;emploi pour la plupart des
-logiciels courants : MySQL, MongoDB, Redis, Kafka, RabbitMQ, Elasticsearch,
-LocalStack (services AWS)… et &lt;code&gt;testcontainers.GenericContainer&lt;/code&gt; pour n&amp;rsquo;importe
+logiciels courants : &lt;a href="https://www.mysql.com" target="_blank" rel="noopener"&gt;MySQL&lt;/a&gt;, &lt;a href="https://www.mongodb.com" target="_blank" rel="noopener"&gt;MongoDB&lt;/a&gt;, Redis, Kafka, &lt;a href="https://www.rabbitmq.com" target="_blank" rel="noopener"&gt;RabbitMQ&lt;/a&gt;, &lt;a href="https://www.elastic.co/elasticsearch" target="_blank" rel="noopener"&gt;Elasticsearch&lt;/a&gt;,
+&lt;a href="https://www.localstack.cloud" target="_blank" rel="noopener"&gt;LocalStack&lt;/a&gt; (services AWS)… et &lt;code&gt;testcontainers.GenericContainer&lt;/code&gt; pour n&amp;rsquo;importe
 quelle image.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="organiser-les-tests"&gt;Organiser les tests&lt;span class="hx:absolute hx:-mt-20" id="organiser-les-tests"&gt;&lt;/span&gt;
 &lt;a href="#organiser-les-tests" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
@@ -3032,7 +3032,7 @@ certificats X.509. Ils sont maintenus par l&amp;rsquo;équipe Go et font l&amp;r
 de sécurité réguliers. Depuis Go 1.24, ils peuvent fonctionner dans un mode
 conforme FIPS 140-3.&lt;/p&gt;
 &lt;p&gt;Pour stocker des mots de passe, utilisez une fonction lente dédiée, comme
-&lt;code&gt;golang.org/x/crypto/bcrypt&lt;/code&gt; ou &lt;code&gt;argon2&lt;/code&gt;, et non une simple empreinte SHA-256.&lt;/p&gt;
+&lt;a href="https://pkg.go.dev/golang.org/x/crypto/bcrypt" target="_blank" rel="noopener"&gt;&lt;code&gt;golang.org/x/crypto/bcrypt&lt;/code&gt;&lt;/a&gt; ou &lt;a href="https://pkg.go.dev/golang.org/x/crypto/argon2" target="_blank" rel="noopener"&gt;&lt;code&gt;argon2&lt;/code&gt;&lt;/a&gt;, et non une simple empreinte SHA-256.&lt;/p&gt;
 &lt;p&gt;Les encodages sont regroupés dans &lt;code&gt;encoding/...&lt;/code&gt; : &lt;code&gt;hex&lt;/code&gt;, &lt;code&gt;base64&lt;/code&gt;, &lt;code&gt;csv&lt;/code&gt;,
 &lt;code&gt;xml&lt;/code&gt;, &lt;code&gt;binary&lt;/code&gt;, &lt;code&gt;pem&lt;/code&gt;…&lt;/p&gt;
 &lt;h2 data-hextra-search-id="csv"&gt;CSV&lt;span class="hx:absolute hx:-mt-20" id="csv"&gt;&lt;/span&gt;
@@ -3131,7 +3131,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;h2 data-hextra-search-id="bases-de-données--databasesql"&gt;Bases de données : database/sql&lt;span class="hx:absolute hx:-mt-20" id="bases-de-données--databasesql"&gt;&lt;/span&gt;
 &lt;a href="#bases-de-donn%c3%a9es--databasesql" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;database/sql&lt;/code&gt; définit une interface commune à toutes les bases SQL. Le pilote
-(PostgreSQL, MySQL, SQLite…) est fourni par un module externe :&lt;/p&gt;
+(&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="https://www.mysql.com" target="_blank" rel="noopener"&gt;MySQL&lt;/a&gt;, &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt;…) est fourni par un module externe :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;db&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;pgx&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;postgres://localhost/boutique&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
