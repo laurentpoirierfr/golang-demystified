@@ -5,6 +5,7 @@ package api
 import _ "embed"
 
 //go:generate go tool oapi-codegen -config oapi-codegen.yaml openapi.yaml
+//go:generate go tool oapi-codegen -config oapi-codegen-client.yaml openapi.yaml
 
 // Contrat est le contrat OpenAPI, tel qu'il est servi aux clients.
 //

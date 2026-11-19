@@ -1,0 +1,9 @@
+# Client Go de l'API, généré depuis le même contrat que le serveur.
+package: client
+output: ../pkg/client/client.gen.go
+generate:
+  models: true
+  client: true
+output-options:
+  # ClientWithResponses décode automatiquement les réponses JSON typées.
+  client-type-name: Client
