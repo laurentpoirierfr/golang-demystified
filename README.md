@@ -27,9 +27,13 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 - Go ≥ 1.27
 - Hugo extended ≥ 0.150
-- Docker (ou Podman) pour générer le livre avec [Quarto](https://quarto.org)
-  et pour les tests d'intégration ([Testcontainers](https://golang.testcontainers.org)) ;
-  avec Podman, activer l'API : `systemctl --user enable --now podman.socket`
+- Docker ou Podman, pour générer le livre avec [Quarto](https://quarto.org)
+  et pour les tests d'intégration ([Testcontainers](https://golang.testcontainers.org)) :
+  - **Docker** (Docker Desktop ou Docker Engine) : rien à configurer, il suffit
+    que `docker info` réponde ;
+  - **Podman** : activer son API compatible Docker avec
+    `systemctl --user enable --now podman.socket`. Le `Makefile` détecte Podman
+    et adapte les options (`--userns=keep-id`, `DOCKER_HOST`, Ryuk désactivé).
 
 ## Commandes
 

@@ -593,6 +593,33 @@ USER nonroot
 ENTRYPOINT ["/taches"]
 ```
 
+L'image se construit et s'exécute avec Docker ou avec Podman, dont les
+commandes sont identiques :
+
+```bash
+# Avec Docker
+docker build -t taches .
+docker run --rm -p 8080:8080 -v taches-data:/data taches
+
+# Avec Podman (sans démon, sans droits root)
+podman build -t taches .
+podman run --rm -p 8080:8080 -v taches-data:/data taches
+```
+
+Pour la production, la même image se connecte à PostgreSQL en changeant une
+seule variable :
+
+```bash
+docker run --rm -p 8080:8080 \
+  -e TACHES_BASE=postgres://gopher:secret@db.example.com:5432/taches \
+  taches
+```
+
+> [!TIP]
+> Avec Podman, `alias docker=podman` permet de suivre sans modification la
+> plupart des documentations écrites pour Docker. Le paquet `podman-docker`
+> de nombreuses distributions installe cet alias pour tout le système.
+
 ## Pour aller plus loin
 
 Ce service est volontairement simple, mais sa structure supporte la
