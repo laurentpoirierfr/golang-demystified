@@ -1,0 +1,9 @@
+apiVersion: taches.example.com/v1alpha1
+kind: ApiTaches
+metadata:
+  name: taches
+  namespace: demo
+spec:
+  image: ghcr.io/exemple/taches:1.0
+  replicas: 2
+  base: postgres://gopher:secret@postgres:5432/taches
