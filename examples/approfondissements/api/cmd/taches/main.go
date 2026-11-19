@@ -46,8 +46,13 @@ func run(ctx context.Context, getenv func(string) string, sortie io.Writer, pret
 	}
 	defer s.Close()
 
+	handler, err := web.Nouveau(s, log).Routes()
+	if err != nil {
+		return err
+	}
+
 	srv := &http.Server{
-		Handler:           web.Nouveau(s, log).Routes(),
+		Handler:           handler,
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       10 * time.Second,
 		WriteTimeout:      30 * time.Second,

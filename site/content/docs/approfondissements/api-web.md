@@ -22,15 +22,24 @@ fonctionnalité est couverte par un test.
 | `PATCH /taches/{id}`     | Modifie `{"faite"}`           | 200 ou 404         |
 | `DELETE /taches/{id}`    | Supprime une tâche            | 204 ou 404         |
 | `GET /sante`             | Contrôle de santé             | 200 ou 503         |
+| `GET /openapi.yaml`      | Le contrat OpenAPI de l'API   | 200                |
+| `GET /docs`              | La documentation interactive  | 200                |
 
 Les erreurs sont toujours du JSON, `{"erreur": "…"}`, avec le statut adapté :
-400 pour une requête mal formée, 404 pour une tâche absente, 422 pour une
-donnée invalide, 500 pour une erreur interne.
+400 pour une requête mal formée ou non conforme au contrat, 404 pour une tâche
+absente, 422 pour une donnée refusée par les règles métier, 500 pour une
+erreur interne.
+
+L'interface de l'API est décrite par un **contrat OpenAPI**, à partir duquel
+le code du routage et des types est généré.
 
 ## L'organisation du projet
 
 ```
 api/
+├── api/
+│   ├── openapi.yaml         le contrat OpenAPI 3, source de vérité
+│   └── oapi-codegen.yaml    la configuration du générateur
 ├── cmd/
 │   └── taches/
 │       ├── main.go          assemblage, démarrage, arrêt propre
@@ -41,9 +50,13 @@ api/
 │   ├── store/               stockage SQLite ou PostgreSQL (database/sql)
 │   │   └── migrations/      schéma SQL par base, embarqué dans l'exécutable
 │   └── web/                 handlers HTTP de l'API
+│       └── openapi.gen.go   types et routage générés depuis le contrat
 └── pkg/
-    └── httpkit/             middlewares et JSON, réutilisables
+    └── httpkit/             middlewares, JSON, documentation : réutilisables
 ```
+
+Le répertoire `api/` à la racine, pour les contrats d'interface (OpenAPI,
+Protocol Buffers, schémas JSON), est une autre convention courante.
 
 Le projet suit la disposition la plus répandue dans l'écosystème Go :
 
@@ -272,6 +285,208 @@ func (s *Store) Supprime(ctx context.Context, id int64) error {
 }
 ```
 
+## Le contrat OpenAPI
+
+Une API est un **contrat** entre un service et ses clients. Le décrire au
+format [OpenAPI](https://www.openapis.org) apporte une documentation lisible
+par les humains et par les outils : documentation interactive, génération de
+clients dans tous les langages, tests de conformité, passerelles d'API.
+
+### Code d'abord ou contrat d'abord ?
+
+Il existe deux façons d'obtenir ce contrat en Go :
+
+| Approche             | Outil          | Principe                                         | Format         |
+|----------------------|----------------|--------------------------------------------------|----------------|
+| Code d'abord         | **swag**       | commentaires `// @Router …` au-dessus des handlers | Swagger 2.0 (v1) |
+| Code d'abord         | **Huma**       | contrat déduit des types Go des entrées et sorties | OpenAPI 3.1    |
+| **Contrat d'abord**  | **oapi-codegen** | code Go généré depuis le contrat               | OpenAPI 3.0    |
+
+`swag` est l'outil historique : le contrat est produit à partir de
+commentaires placés au-dessus des handlers. Il a deux défauts : sa version
+stable ne produit que l'ancien format **Swagger 2.0** (la version 2, qui
+vise OpenAPI 3, est en préversion depuis plusieurs années), et rien ne
+garantit que les commentaires disent la vérité sur le code.
+
+Ce chapitre utilise **oapi-codegen**, avec l'approche *contrat d'abord* : on
+écrit le contrat, et le générateur produit les types et une **interface Go**
+que le serveur doit implémenter. Si le code s'écarte du contrat, il **ne
+compile plus**. Le contrat peut aussi être discuté et validé avec les équipes
+clientes avant la première ligne de code.
+
+> [!TIP]
+> Si vous préférez écrire le code d'abord, **Huma** est l'alternative moderne
+> à swag : il déduit un contrat OpenAPI 3.1 des types Go de chaque opération,
+> valide les entrées, et fonctionne avec le routeur standard de Go.
+
+### Le contrat
+
+Le contrat décrit les chemins, les opérations, les paramètres, les corps et
+les réponses. Chaque opération porte un `operationId`, qui deviendra le nom de
+la méthode Go :
+
+```yaml
+openapi: 3.0.3
+info:
+  title: API des tâches
+  version: 1.0.0
+paths:
+  /taches:
+    post:
+      operationId: creeTache
+      summary: Crée une tâche
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NouvelleTache" }
+      responses:
+        "201":
+          description: La tâche créée
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Tache" }
+        "400": { $ref: "#/components/responses/RequeteInvalide" }
+        "422": { $ref: "#/components/responses/DonneeInvalide" }
+  /taches/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: integer, format: int64, minimum: 1 }
+    …
+components:
+  schemas:
+    NouvelleTache:
+      type: object
+      additionalProperties: false
+      required: [titre]
+      properties:
+        titre: { type: string, minLength: 1, maxLength: 200 }
+    ModificationTache:
+      type: object
+      additionalProperties: false
+      required: [faite]
+      properties:
+        faite: { type: boolean }
+    …
+```
+
+### Générer le code
+
+oapi-codegen est déclaré comme **outil** du module, grâce à la directive
+`tool` de Go 1.24 : sa version est figée dans `go.mod`, et `go tool` le lance
+sans installation.
+
+```bash
+go get -tool github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@v2.8.2
+```
+
+La configuration demande les types, le serveur pour le routeur standard de Go
+et le contrat embarqué :
+
+```yaml
+# api/oapi-codegen.yaml
+package: web
+output: ../internal/web/openapi.gen.go
+generate:
+  models: true          # les types des schémas
+  std-http-server: true # l'interface du serveur et le routage net/http (Go 1.22)
+  embedded-spec: true   # le contrat embarqué, pour valider les requêtes
+```
+
+Une directive `go:generate` relie le tout, et `go generate ./...` régénère le
+code après chaque modification du contrat :
+
+```go
+//go:generate go tool oapi-codegen -config oapi-codegen.yaml openapi.yaml
+```
+
+### Le code généré
+
+Le fichier `openapi.gen.go` contient un type par schéma, et une interface avec
+une méthode par opération. Les paramètres de chemin sont déjà convertis :
+
+```go
+type NouvelleTache struct {
+	Titre string `json:"titre"`
+}
+
+type ServerInterface interface {
+	// Contrôle de santé
+	// (GET /sante)
+	Sante(w http.ResponseWriter, r *http.Request)
+	// Liste les tâches
+	// (GET /taches)
+	ListeTaches(w http.ResponseWriter, r *http.Request)
+	// Crée une tâche
+	// (POST /taches)
+	CreeTache(w http.ResponseWriter, r *http.Request)
+	// Supprime une tâche
+	// (DELETE /taches/{id})
+	SupprimeTache(w http.ResponseWriter, r *http.Request, id int64)
+	// Détail d'une tâche
+	// (GET /taches/{id})
+	DetailTache(w http.ResponseWriter, r *http.Request, id int64)
+	// Marque une tâche comme faite, ou non
+	// (PATCH /taches/{id})
+	ModifieTache(w http.ResponseWriter, r *http.Request, id int64)
+}
+```
+
+Il contient aussi `HandlerWithOptions`, qui enregistre chaque opération sur un
+`http.ServeMux` avec les motifs de Go 1.22 (`GET /taches/{id}`…).
+
+### Valider les requêtes par le contrat
+
+Le contrat dit bien plus que les types : un titre fait au plus 200 caractères,
+un identifiant vaut au moins 1, un champ inconnu est interdit, le corps doit
+être du JSON. Le middleware `nethttp-middleware` vérifie chaque requête
+**par rapport au contrat**, avant qu'elle n'atteigne le handler :
+
+```go
+contrat, err := GetSpec() // le contrat embarqué par oapi-codegen
+if err != nil {
+	return nil, fmt.Errorf("contrat OpenAPI : %w", err)
+}
+valide := middleware.OapiRequestValidatorWithOptions(contrat, &middleware.Options{
+	DoNotValidateServers: true, // le service peut être joint par n'importe quelle adresse
+	ErrorHandler: func(w http.ResponseWriter, message string, statut int) {
+		httpkit.EcritJSON(w, statut, Erreur{Erreur: message})
+	},
+})
+```
+
+Les réponses désignent précisément l'écart au contrat :
+
+```
+POST /taches {"titre": "xxx…"}         → 400 Error at "/titre": maximum string length is 200
+POST /taches {"titre": "a", "priorite": 1} → 400 property "priorite" is unsupported
+PATCH /taches/1 {}                      → 400 Error at "/faite": property "faite" is missing
+GET /taches/0                           → 400 number must be at least 1
+POST /taches (sans Content-Type)        → 400 header Content-Type has unexpected value ""
+```
+
+Le handler ne s'occupe plus que des **règles métier**, que le contrat ne peut
+pas exprimer : un titre composé uniquement d'espaces, par exemple, reste
+refusé par le domaine avec un statut 422.
+
+### Servir le contrat et sa documentation
+
+Le service publie son propre contrat, et une page de documentation
+interactive basée sur **Swagger UI**, chargée depuis un CDN : aucune
+dépendance Go n'est nécessaire.
+
+```go
+mux.Handle("GET /openapi.yaml", httpkit.Fichier("application/yaml", api.Contrat))
+mux.Handle("GET /docs", httpkit.SwaggerUI("API des tâches", "/openapi.yaml"))
+```
+
+En ouvrant `http://localhost:8080/docs`, on parcourt l'API et on l'essaie
+directement depuis le navigateur. Le même contrat permet de générer des
+clients, par exemple en TypeScript pour une application web, ou en Go avec
+l'option `client: true` d'oapi-codegen.
+
 ## La couche HTTP
 
 ### L'interface du stockage
@@ -295,21 +510,45 @@ type Serveur struct {
 	log   *slog.Logger
 }
 
-func (s *Serveur) Routes() http.Handler {
+// Le compilateur vérifie que Serveur implémente toutes les opérations du
+// contrat : une opération ajoutée au contrat sans être codée ne compile pas.
+var _ ServerInterface = (*Serveur)(nil)
+
+func (s *Serveur) Routes() (http.Handler, error) {
+	… // préparation du middleware de validation (voir plus haut)
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /taches", s.liste)
-	mux.HandleFunc("POST /taches", s.cree)
-	mux.HandleFunc("GET /taches/{id}", s.detail)
-	mux.HandleFunc("PATCH /taches/{id}", s.modifie)
-	mux.HandleFunc("DELETE /taches/{id}", s.supprime)
-	mux.HandleFunc("GET /sante", s.sante)
+	HandlerWithOptions(s, StdHTTPServerOptions{
+		BaseRouter:  mux,
+		Middlewares: []MiddlewareFunc{valide}, // chaque requête est validée par le contrat
+		ErrorHandlerFunc: func(w http.ResponseWriter, r *http.Request, err error) {
+			s.erreur(w, r, &httpkit.ErrRequete{Raison: "paramètre invalide : " + err.Error()})
+		},
+	})
+	mux.Handle("GET /openapi.yaml", httpkit.Fichier("application/yaml", api.Contrat))
+	mux.Handle("GET /docs", httpkit.SwaggerUI("API des tâches", "/openapi.yaml"))
 
 	// Le premier middleware de la liste est le plus extérieur.
 	return httpkit.Chaine(mux,
 		httpkit.Identifiant(),
 		httpkit.Journal(s.log),
 		httpkit.Recuperation(s.log),
-	)
+	), nil
+}
+```
+
+Les handlers sont les méthodes de l'interface générée. Les identifiants
+arrivent déjà convertis en `int64`, et validés :
+
+```go
+// DetailTache implémente GET /taches/{id}.
+func (s *Serveur) DetailTache(w http.ResponseWriter, r *http.Request, id int64) {
+	t, err := s.store.Trouve(r.Context(), id)
+	if err != nil {
+		s.erreur(w, r, err)
+		return
+	}
+	httpkit.EcritJSON(w, http.StatusOK, t)
 }
 ```
 
@@ -339,14 +578,20 @@ func LitJSON(w http.ResponseWriter, r *http.Request, dest any) error {
 }
 ```
 
-Pour une modification partielle, un pointeur distingue un champ **absent**
-d'un champ à sa valeur zéro :
+Le corps est décodé dans le type généré depuis le contrat. Comme le contrat
+déclare `faite` obligatoire et que le middleware l'a vérifié, un simple
+`bool` suffit :
 
 ```go
-var entree struct {
-	Faite *bool `json:"faite"` // nil si absent, sinon true ou false
+var entree ModificationTache // « faite » est obligatoire : vérifié par le contrat
+if err := httpkit.LitJSON(w, r, &entree); err != nil {
+	s.erreur(w, r, err)
+	return
 }
 ```
+
+Sans contrat, il aurait fallu un pointeur (`*bool`) pour distinguer un champ
+**absent** d'un champ à `false`.
 
 ### Traduire les erreurs
 
@@ -367,17 +612,15 @@ func (s *Serveur) erreur(w http.ResponseWriter, r *http.Request, err error) {
 	} else {
 		s.log.ErrorContext(r.Context(), "erreur interne", "erreur", err)
 	}
-	httpkit.EcritJSON(w, statut, map[string]string{"erreur": message})
+	httpkit.EcritJSON(w, statut, Erreur{Erreur: message}) // type généré depuis le contrat
 }
 ```
 
 Un handler devient alors une suite d'étapes lisible :
 
 ```go
-func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
-	var entree struct {
-		Titre string `json:"titre"`
-	}
+func (s *Serveur) CreeTache(w http.ResponseWriter, r *http.Request) {
+	var entree NouvelleTache // type généré depuis le contrat
 	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
@@ -558,7 +801,8 @@ func TestScenario(t *testing.T) {
 		{"création", "POST", "/taches", `{"titre": "  Relire le livre  "}`, 201, `"titre":"Relire le livre"`},
 		{"modification", "PATCH", "/taches/1", `{"faite": true}`, 200, `"faite":true`},
 		{"titre vide", "POST", "/taches", `{"titre": " "}`, 422, "titre : obligatoire"},
-		{"champ inconnu", "POST", "/taches", `{"titre": "a", "priorite": 1}`, 400, "unknown field"},
+		{"champ inconnu (contrat)", "POST", "/taches", `{"titre": "a", "priorite": 1}`, 400, `property \"priorite\" is unsupported`},
+		{"identifiant nul (contrat)", "GET", "/taches/0", "", 400, "number must be at least 1"},
 		{"introuvable", "GET", "/taches/99", "", 404, "tâche introuvable"},
 		{"méthode interdite", "PUT", "/taches/1", "", 405, ""},
 		…

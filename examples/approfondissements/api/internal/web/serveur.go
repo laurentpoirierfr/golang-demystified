@@ -1,4 +1,6 @@
-// Package web expose les tâches à travers une API HTTP JSON.
+// Package web expose les tâches à travers une API HTTP JSON. Son interface est
+// définie par le contrat OpenAPI api/openapi.yaml : le routage, les types et
+// l'interface ServerInterface sont générés par oapi-codegen (openapi.gen.go).
 package web
 
 import (
@@ -7,8 +9,10 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
-	"strconv"
 
+	middleware "github.com/oapi-codegen/nethttp-middleware"
+
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/api"
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/tache"
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/pkg/httpkit"
 )
@@ -31,30 +35,50 @@ type Serveur struct {
 	log   *slog.Logger
 }
 
+// Le compilateur vérifie que Serveur implémente toutes les opérations du
+// contrat : une opération ajoutée au contrat sans être codée ne compile pas.
+var _ ServerInterface = (*Serveur)(nil)
+
 // Nouveau crée le serveur.
 func Nouveau(store Store, log *slog.Logger) *Serveur {
 	return &Serveur{store: store, log: log}
 }
 
-// Routes renvoie le handler complet, middlewares compris.
-func (s *Serveur) Routes() http.Handler {
+// Routes renvoie le handler complet : les opérations du contrat, validées
+// par rapport à lui, le contrat lui-même et sa documentation interactive.
+func (s *Serveur) Routes() (http.Handler, error) {
+	contrat, err := GetSpec() // le contrat embarqué par oapi-codegen
+	if err != nil {
+		return nil, fmt.Errorf("contrat OpenAPI : %w", err)
+	}
+	valide := middleware.OapiRequestValidatorWithOptions(contrat, &middleware.Options{
+		DoNotValidateServers: true, // le service peut être joint par n'importe quelle adresse
+		ErrorHandler: func(w http.ResponseWriter, message string, statut int) {
+			httpkit.EcritJSON(w, statut, Erreur{Erreur: message})
+		},
+	})
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /taches", s.liste)
-	mux.HandleFunc("POST /taches", s.cree)
-	mux.HandleFunc("GET /taches/{id}", s.detail)
-	mux.HandleFunc("PATCH /taches/{id}", s.modifie)
-	mux.HandleFunc("DELETE /taches/{id}", s.supprime)
-	mux.HandleFunc("GET /sante", s.sante)
+	HandlerWithOptions(s, StdHTTPServerOptions{
+		BaseRouter:  mux,
+		Middlewares: []MiddlewareFunc{valide}, // chaque requête est validée par le contrat
+		ErrorHandlerFunc: func(w http.ResponseWriter, r *http.Request, err error) {
+			s.erreur(w, r, &httpkit.ErrRequete{Raison: "paramètre invalide : " + err.Error()})
+		},
+	})
+	mux.Handle("GET /openapi.yaml", httpkit.Fichier("application/yaml", api.Contrat))
+	mux.Handle("GET /docs", httpkit.SwaggerUI("API des tâches", "/openapi.yaml"))
 
 	// Le premier middleware de la liste est le plus extérieur.
 	return httpkit.Chaine(mux,
 		httpkit.Identifiant(),
 		httpkit.Journal(s.log),
 		httpkit.Recuperation(s.log),
-	)
+	), nil
 }
 
-func (s *Serveur) liste(w http.ResponseWriter, r *http.Request) {
+// ListeTaches implémente GET /taches.
+func (s *Serveur) ListeTaches(w http.ResponseWriter, r *http.Request) {
 	taches, err := s.store.Liste(r.Context())
 	if err != nil {
 		s.erreur(w, r, err)
@@ -63,15 +87,14 @@ func (s *Serveur) liste(w http.ResponseWriter, r *http.Request) {
 	httpkit.EcritJSON(w, http.StatusOK, taches)
 }
 
-func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
-	var entree struct {
-		Titre string `json:"titre"`
-	}
+// CreeTache implémente POST /taches.
+func (s *Serveur) CreeTache(w http.ResponseWriter, r *http.Request) {
+	var entree NouvelleTache // type généré depuis le contrat
 	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
 	}
-	titre, err := tache.ValideTitre(entree.Titre)
+	titre, err := tache.ValideTitre(entree.Titre) // règle métier : pas de titre blanc
 	if err != nil {
 		s.erreur(w, r, err)
 		return
@@ -85,12 +108,9 @@ func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
 	httpkit.EcritJSON(w, http.StatusCreated, t)
 }
 
-func (s *Serveur) detail(w http.ResponseWriter, r *http.Request) {
-	id, err := identifiant(r)
-	if err != nil {
-		s.erreur(w, r, err)
-		return
-	}
+// DetailTache implémente GET /taches/{id}. L'identifiant est déjà converti
+// et validé (entier ≥ 1) par le code généré et le middleware de validation.
+func (s *Serveur) DetailTache(w http.ResponseWriter, r *http.Request, id int64) {
 	t, err := s.store.Trouve(r.Context(), id)
 	if err != nil {
 		s.erreur(w, r, err)
@@ -99,24 +119,14 @@ func (s *Serveur) detail(w http.ResponseWriter, r *http.Request) {
 	httpkit.EcritJSON(w, http.StatusOK, t)
 }
 
-func (s *Serveur) modifie(w http.ResponseWriter, r *http.Request) {
-	id, err := identifiant(r)
-	if err != nil {
-		s.erreur(w, r, err)
-		return
-	}
-	var entree struct {
-		Faite *bool `json:"faite"` // pointeur : distingue « absent » de false
-	}
+// ModifieTache implémente PATCH /taches/{id}.
+func (s *Serveur) ModifieTache(w http.ResponseWriter, r *http.Request, id int64) {
+	var entree ModificationTache // « faite » est obligatoire : vérifié par le contrat
 	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
 	}
-	if entree.Faite == nil {
-		s.erreur(w, r, &tache.ErrValidation{Champ: "faite", Raison: "obligatoire"})
-		return
-	}
-	t, err := s.store.MarqueFaite(r.Context(), id, *entree.Faite)
+	t, err := s.store.MarqueFaite(r.Context(), id, entree.Faite)
 	if err != nil {
 		s.erreur(w, r, err)
 		return
@@ -124,12 +134,8 @@ func (s *Serveur) modifie(w http.ResponseWriter, r *http.Request) {
 	httpkit.EcritJSON(w, http.StatusOK, t)
 }
 
-func (s *Serveur) supprime(w http.ResponseWriter, r *http.Request) {
-	id, err := identifiant(r)
-	if err != nil {
-		s.erreur(w, r, err)
-		return
-	}
+// SupprimeTache implémente DELETE /taches/{id}.
+func (s *Serveur) SupprimeTache(w http.ResponseWriter, r *http.Request, id int64) {
 	if err := s.store.Supprime(r.Context(), id); err != nil {
 		s.erreur(w, r, err)
 		return
@@ -137,21 +143,14 @@ func (s *Serveur) supprime(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-func (s *Serveur) sante(w http.ResponseWriter, r *http.Request) {
+// Sante implémente GET /sante.
+func (s *Serveur) Sante(w http.ResponseWriter, r *http.Request) {
 	if err := s.store.Ping(r.Context()); err != nil {
 		s.log.ErrorContext(r.Context(), "base indisponible", "erreur", err)
-		httpkit.EcritJSON(w, http.StatusServiceUnavailable, map[string]string{"statut": "indisponible"})
+		httpkit.EcritJSON(w, http.StatusServiceUnavailable, Sante{Statut: Indisponible})
 		return
 	}
-	httpkit.EcritJSON(w, http.StatusOK, map[string]string{"statut": "ok"})
-}
-
-func identifiant(r *http.Request) (int64, error) {
-	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
-	if err != nil || id <= 0 {
-		return 0, &httpkit.ErrRequete{Raison: "identifiant invalide"}
-	}
-	return id, nil
+	httpkit.EcritJSON(w, http.StatusOK, Sante{Statut: Ok})
 }
 
 // erreur traduit une erreur en réponse HTTP. Les erreurs inattendues sont
@@ -167,5 +166,5 @@ func (s *Serveur) erreur(w http.ResponseWriter, r *http.Request, err error) {
 	} else {
 		s.log.ErrorContext(r.Context(), "erreur interne", "erreur", err)
 	}
-	httpkit.EcritJSON(w, statut, map[string]string{"erreur": message})
+	httpkit.EcritJSON(w, statut, Erreur{Erreur: message})
 }

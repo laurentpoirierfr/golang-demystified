@@ -23,12 +23,19 @@ func nouveauServeur(t *testing.T) (http.Handler, *bytes.Buffer) {
 	}
 	t.Cleanup(func() { s.Close() })
 	var journal bytes.Buffer
-	return Nouveau(s, slog.New(slog.NewJSONHandler(&journal, nil))).Routes(), &journal
+	h, err := Nouveau(s, slog.New(slog.NewJSONHandler(&journal, nil))).Routes()
+	if err != nil {
+		t.Fatal(err)
+	}
+	return h, &journal
 }
 
 func appel(t *testing.T, h http.Handler, methode, chemin, corps string) *httptest.ResponseRecorder {
 	t.Helper()
 	req := httptest.NewRequest(methode, chemin, strings.NewReader(corps))
+	if corps != "" {
+		req.Header.Set("Content-Type", "application/json")
+	}
 	rec := httptest.NewRecorder()
 	h.ServeHTTP(rec, req)
 	return rec
@@ -48,16 +55,19 @@ func TestScenario(t *testing.T) {
 		{"modification", "PATCH", "/taches/1", `{"faite": true}`, 200, `"faite":true`},
 		{"liste", "GET", "/taches", "", 200, `"id":1`},
 		{"titre vide", "POST", "/taches", `{"titre": " "}`, 422, "titre : obligatoire"},
-		{"titre trop long", "POST", "/taches", `{"titre": "` + strings.Repeat("x", 201) + `"}`, 422, "200 caractères au plus"},
-		{"champ inconnu", "POST", "/taches", `{"titre": "a", "priorite": 1}`, 400, "unknown field"},
+		{"titre trop long (contrat)", "POST", "/taches", `{"titre": "` + strings.Repeat("x", 201) + `"}`, 400, "maximum string length is 200"},
+		{"champ inconnu (contrat)", "POST", "/taches", `{"titre": "a", "priorite": 1}`, 400, `property \"priorite\" is unsupported`},
 		{"deux objets", "POST", "/taches", `{"titre": "a"}{"titre": "b"}`, 400, "un seul objet"},
-		{"faite absent", "PATCH", "/taches/1", `{}`, 422, "faite : obligatoire"},
-		{"identifiant invalide", "GET", "/taches/abc", "", 400, "identifiant invalide"},
+		{"faite absent (contrat)", "PATCH", "/taches/1", `{}`, 400, `property \"faite\" is missing`},
+		{"identifiant invalide", "GET", "/taches/abc", "", 400, "paramètre invalide"},
+		{"identifiant nul (contrat)", "GET", "/taches/0", "", 400, "number must be at least 1"},
 		{"introuvable", "GET", "/taches/99", "", 404, "tâche introuvable"},
 		{"suppression", "DELETE", "/taches/1", "", 204, ""},
 		{"déjà supprimée", "DELETE", "/taches/1", "", 404, "tâche introuvable"},
 		{"méthode interdite", "PUT", "/taches/1", "", 405, ""},
 		{"santé", "GET", "/sante", "", 200, `"statut":"ok"`},
+		{"contrat", "GET", "/openapi.yaml", "", 200, "operationId: creeTache"},
+		{"documentation", "GET", "/docs", "", 200, "swagger-ui-bundle.js"},
 	}
 	for _, e := range etapes {
 		rec := appel(t, h, e.methode, e.chemin, e.corps)
@@ -67,6 +77,17 @@ func TestScenario(t *testing.T) {
 		if !strings.Contains(rec.Body.String(), e.contient) {
 			t.Errorf("%s : %q absent de %s", e.nom, e.contient, rec.Body)
 		}
+	}
+}
+
+// TestContentType vérifie que le contrat impose le type du corps.
+func TestContentType(t *testing.T) {
+	h, _ := nouveauServeur(t)
+	req := httptest.NewRequest("POST", "/taches", strings.NewReader(`{"titre": "a"}`))
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req) // sans Content-Type
+	if rec.Code != 400 || !strings.Contains(rec.Body.String(), "Content-Type") {
+		t.Errorf("%d %s", rec.Code, rec.Body)
 	}
 }
 
