@@ -127,7 +127,7 @@ data-alert="note" class="hextra-alert"
 &lt;/p&gt;
 &lt;div class="hextra-alert-content"&gt;&lt;p&gt;&lt;strong&gt;Go 1.22&lt;/strong&gt; — &lt;code&gt;for i := range 10&lt;/code&gt; parcourt les entiers de 0 à 9.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Le code des exemples se trouve dans le dossier &lt;code&gt;examples/&lt;/code&gt; du
+&lt;p&gt;Le code des exemples se trouve dans le dossier &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/&lt;/code&gt;&lt;/a&gt; du
 &lt;a href="https://github.com/laurentpoirierfr/golang-demystified" target="_blank" rel="noopener"&gt;dépôt du livre&lt;/a&gt;. Il est
 compilé et testé à chaque modification.&lt;/p&gt;</description></item><item><title>Les grands projets écrits en Go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/projets-go/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/projets-go/</guid><description>
 &lt;p&gt;Go s&amp;rsquo;est imposé comme &lt;strong&gt;le langage de l&amp;rsquo;infrastructure&lt;/strong&gt; : une grande partie
@@ -589,6 +589,14 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Pensez à activer le formatage automatique à l&amp;rsquo;enregistrement : avec Go, le
 formatage n&amp;rsquo;est pas une question de goût, c&amp;rsquo;est celui de &lt;code&gt;gofmt&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Premier programme</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/premier-programme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/premier-programme/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/hello" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/hello&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="créer-un-module"&gt;Créer un module&lt;span class="hx:absolute hx:-mt-20" id="créer-un-module"&gt;&lt;/span&gt;
 &lt;a href="#cr%c3%a9er-un-module" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Tout projet Go est un &lt;strong&gt;module&lt;/strong&gt; : un ensemble de packages versionnés ensemble,
 décrit par un fichier &lt;code&gt;go.mod&lt;/code&gt;. Créez un répertoire, puis initialisez le module

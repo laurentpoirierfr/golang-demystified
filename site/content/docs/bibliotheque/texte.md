@@ -3,6 +3,10 @@ title: "Texte : fmt, strings, strconv"
 weight: 10
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/texte`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/texte).
+
 ## fmt : formater et afficher
 
 Le package `fmt` formate des valeurs selon des **verbes** inspirés du `printf`

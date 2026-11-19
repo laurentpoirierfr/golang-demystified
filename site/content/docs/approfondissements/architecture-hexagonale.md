@@ -16,7 +16,7 @@ principe.
 
 Ce chapitre l'applique à un domaine plus riche que la liste de tâches : les
 **emprunts d'une bibliothèque**. Le code est dans
-`examples/approfondissements/hexagonale`.
+[`examples/approfondissements/hexagonale`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/hexagonale).
 
 ## Le principe
 

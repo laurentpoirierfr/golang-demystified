@@ -4,7 +4,7 @@ chapitre les assemble en &lt;strong&gt;motifs&lt;/strong&gt; éprouvés, que l&a
 des programmes concurrents : pipelines, pools de workers, groupes d&amp;rsquo;erreurs,
 limitation de débit. Il montre aussi comment tester ce code et détecter les
 fuites de goroutines.&lt;/p&gt;
-&lt;p&gt;Tout le code de ce chapitre est dans &lt;code&gt;examples/approfondissements/concurrence&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Tout le code de ce chapitre est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/concurrence" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/concurrence&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="trois-règles-dor"&gt;Trois règles d&amp;rsquo;or&lt;span class="hx:absolute hx:-mt-20" id="trois-règles-dor"&gt;&lt;/span&gt;
 &lt;a href="#trois-r%c3%a8gles-dor" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Avant les motifs, trois règles qui évitent l&amp;rsquo;essentiel des bugs :&lt;/p&gt;
 &lt;ol&gt;
@@ -716,7 +716,7 @@ données selon leur contexte, ce qui protège contre les injections (XSS).&lt;/l
 &lt;/ul&gt;
 &lt;p&gt;Ce chapitre présente la syntaxe, puis construit un petit site avec un gabarit
 de mise en page commun, et termine par la génération de code. Le code est dans
-&lt;code&gt;examples/approfondissements/templates&lt;/code&gt;.&lt;/p&gt;
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/templates" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/templates&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="la-syntaxe"&gt;La syntaxe&lt;span class="hx:absolute hx:-mt-20" id="la-syntaxe"&gt;&lt;/span&gt;
 &lt;a href="#la-syntaxe" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un gabarit est un texte qui contient des &lt;strong&gt;actions&lt;/strong&gt; entre &lt;code&gt;{{&lt;/code&gt; et &lt;code&gt;}}&lt;/code&gt;. Le
 point, &lt;code&gt;.&lt;/code&gt;, désigne la donnée courante, passée à &lt;code&gt;Execute&lt;/code&gt; :&lt;/p&gt;
@@ -1183,7 +1183,7 @@ seule bibliothèque standard et un pilote de base de données : une API JSON de
 gestion de tâches, stockées dans &lt;a href="https://sqlite.org" target="_blank" rel="noopener"&gt;SQLite&lt;/a&gt;. Il rassemble ce que les chapitres
 précédents ont présenté séparément : routage HTTP, JSON, &lt;code&gt;database/sql&lt;/code&gt;,
 &lt;code&gt;log/slog&lt;/code&gt;, &lt;code&gt;context&lt;/code&gt;, &lt;code&gt;embed&lt;/code&gt; et les tests.&lt;/p&gt;
-&lt;p&gt;Le code complet est dans &lt;code&gt;examples/approfondissements/api&lt;/code&gt;, et chaque
+&lt;p&gt;Le code complet est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/api" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/api&lt;/code&gt;&lt;/a&gt;, et chaque
 fonctionnalité est couverte par un test.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="lapi"&gt;L&amp;rsquo;API&lt;span class="hx:absolute hx:-mt-20" id="lapi"&gt;&lt;/span&gt;
 &lt;a href="#lapi" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
@@ -2632,7 +2632,7 @@ statique, qui démarre instantanément et se compile pour toutes les
 plateformes. &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;
 (&lt;code&gt;kubectl&lt;/code&gt;), &lt;a href="https://gohugo.io" target="_blank" rel="noopener"&gt;Hugo&lt;/a&gt; ou &lt;a href="https://cli.github.com" target="_blank" rel="noopener"&gt;GitHub CLI&lt;/a&gt;
 (&lt;code&gt;gh&lt;/code&gt;) sont des outils en ligne de commande écrits en Go.&lt;/p&gt;
-&lt;p&gt;Le code est dans &lt;code&gt;examples/approfondissements/api&lt;/code&gt; : l&amp;rsquo;exécutable dans
+&lt;p&gt;Le code est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/api" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/api&lt;/code&gt;&lt;/a&gt; : l&amp;rsquo;exécutable dans
 &lt;code&gt;cmd/taches-cli&lt;/code&gt;, et les commandes dans &lt;code&gt;internal/cli&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="trois-questions-trois-briques"&gt;Trois questions, trois briques&lt;span class="hx:absolute hx:-mt-20" id="trois-questions-trois-briques"&gt;&lt;/span&gt;
 &lt;a href="#trois-questions-trois-briques" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Toute commande tapée par l&amp;rsquo;utilisateur, par exemple &lt;code&gt;taches-cli fait 1&lt;/code&gt;,
@@ -3358,7 +3358,7 @@ compilation ;&lt;/li&gt;
 commande ou depuis le programme lui-même.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Ce chapitre les combine dans un exemple complet : un catalogue de livres sur
-&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;. Le code est dans &lt;code&gt;examples/approfondissements/catalogue&lt;/code&gt;.&lt;/p&gt;
+&lt;a href="https://www.postgresql.org" target="_blank" rel="noopener"&gt;PostgreSQL&lt;/a&gt;. Le code est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/catalogue" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/catalogue&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="sqlc--le-sql-dabord"&gt;sqlc : le SQL d&amp;rsquo;abord&lt;span class="hx:absolute hx:-mt-20" id="sqlc--le-sql-dabord"&gt;&lt;/span&gt;
 &lt;a href="#sqlc--le-sql-dabord" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;La plupart des ORM (&lt;a href="https://gorm.io" target="_blank" rel="noopener"&gt;GORM&lt;/a&gt;, ent…) génèrent le SQL à partir du code Go. sqlc fait
 l&amp;rsquo;inverse : on écrit du &lt;strong&gt;vrai SQL&lt;/strong&gt;, et sqlc génère le code Go qui l&amp;rsquo;appelle.
@@ -4006,7 +4006,7 @@ l&amp;rsquo;architecture en oignon en sont des variantes, qui reposent sur le m�
 principe.&lt;/p&gt;
 &lt;p&gt;Ce chapitre l&amp;rsquo;applique à un domaine plus riche que la liste de tâches : les
 &lt;strong&gt;emprunts d&amp;rsquo;une bibliothèque&lt;/strong&gt;. Le code est dans
-&lt;code&gt;examples/approfondissements/hexagonale&lt;/code&gt;.&lt;/p&gt;
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/hexagonale" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/hexagonale&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="le-principe"&gt;Le principe&lt;span class="hx:absolute hx:-mt-20" id="le-principe"&gt;&lt;/span&gt;
 &lt;a href="#le-principe" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;L&amp;rsquo;application est organisée en cercles concentriques. &lt;strong&gt;Les dépendances
 pointent toujours vers le centre&lt;/strong&gt; :&lt;/p&gt;
@@ -4555,7 +4555,7 @@ refactorisation légère.&lt;/p&gt;
 l&amp;rsquo;étend. Ce chapitre présente les outils de l&amp;rsquo;écosystème, puis construit un
 &lt;strong&gt;opérateur&lt;/strong&gt; : un programme qui apprend à Kubernetes à gérer une application,
 ici l&amp;rsquo;API des tâches du chapitre « Une API web complète ».&lt;/p&gt;
-&lt;p&gt;Le code est dans &lt;code&gt;examples/approfondissements/operateur&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Le code est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/operateur" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/operateur&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="le-principe--la-boucle-de-réconciliation"&gt;Le principe : la boucle de réconciliation&lt;span class="hx:absolute hx:-mt-20" id="le-principe--la-boucle-de-réconciliation"&gt;&lt;/span&gt;
 &lt;a href="#le-principe--la-boucle-de-r%c3%a9conciliation" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Kubernetes fonctionne de manière &lt;strong&gt;déclarative&lt;/strong&gt;. On ne lui dit pas « démarre
 deux conteneurs », mais « je veux deux conteneurs ». Des &lt;strong&gt;contrôleurs&lt;/strong&gt;
@@ -5185,7 +5185,7 @@ une raison précise, souvent inattendue. Ce chapitre présente la démarche et l
 outils pour la trouver : benchmarks, profils, analyse d&amp;rsquo;échappement, traces et
 optimisation guidée par profil. Il les applique à un exemple réel, dont tous
 les chiffres ont été mesurés.&lt;/p&gt;
-&lt;p&gt;Le code est dans &lt;code&gt;examples/approfondissements/performance&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Le code est dans &lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/performance" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/approfondissements/performance&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="la-démarche"&gt;La démarche&lt;span class="hx:absolute hx:-mt-20" id="la-démarche"&gt;&lt;/span&gt;
 &lt;a href="#la-d%c3%a9marche" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;« Premature optimization is the root of all evil. » — Donald Knuth&lt;/p&gt;

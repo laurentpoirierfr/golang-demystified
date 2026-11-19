@@ -3,6 +3,10 @@ title: "Structures et méthodes"
 weight: 60
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/structures`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/structures).
+
 ## Définir une structure
 
 Une structure (`struct`) regroupe des champs nommés. C'est la brique de base

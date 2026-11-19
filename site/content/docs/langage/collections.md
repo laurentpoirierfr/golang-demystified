@@ -3,6 +3,10 @@ title: "Tableaux, slices et maps"
 weight: 40
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/collections`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/collections).
+
 ## Les tableaux
 
 Un tableau a une **taille fixe**, qui fait partie de son type : `[3]int` et

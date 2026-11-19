@@ -3,6 +3,10 @@ title: "Annulation et délais : context"
 weight: 80
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/contexte`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/contexte).
+
 ## Le problème
 
 Un serveur reçoit une requête, qui interroge une base de données, puis appelle

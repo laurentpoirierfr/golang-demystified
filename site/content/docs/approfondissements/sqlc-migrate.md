@@ -19,7 +19,7 @@ Deux outils complémentaires industrialisent l'accès aux données :
   commande ou depuis le programme lui-même.
 
 Ce chapitre les combine dans un exemple complet : un catalogue de livres sur
-[PostgreSQL](https://www.postgresql.org). Le code est dans `examples/approfondissements/catalogue`.
+[PostgreSQL](https://www.postgresql.org). Le code est dans [`examples/approfondissements/catalogue`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/catalogue).
 
 ## sqlc : le SQL d'abord
 

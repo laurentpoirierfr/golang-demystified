@@ -3,6 +3,10 @@ title: "Pointeurs et mémoire"
 weight: 100
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/pointeurs`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/pointeurs).
+
 ## Les pointeurs
 
 Un pointeur contient l'**adresse** d'une variable. Le type `*T` désigne un

@@ -1,4 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Golang Demystified – Le langage</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/</link><description>Recent content in Le langage on Golang Demystified</description><generator>Hugo -- gohugo.io</generator><language>fr-FR</language><atom:link href="https://laurentpoirierfr.github.io/golang-demystified/docs/langage/index.xml" rel="self" type="application/rss+xml"/><item><title>Variables, constantes et types</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/bases/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/bases/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/bases" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/bases&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="déclarer-des-variables"&gt;Déclarer des variables&lt;span class="hx:absolute hx:-mt-20" id="déclarer-des-variables"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9clarer-des-variables" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go est un langage &lt;strong&gt;statiquement typé&lt;/strong&gt; : chaque variable a un type fixé à la
 compilation. Le compilateur sait cependant souvent le déduire.&lt;/p&gt;
@@ -715,6 +723,14 @@ fort au plus faible :&lt;/p&gt;
 &lt;code&gt;&amp;amp;&lt;/code&gt; est plus prioritaire que &lt;code&gt;==&lt;/code&gt; : &lt;code&gt;x&amp;amp;masque != 0&lt;/code&gt; se lit
 &lt;code&gt;(x&amp;amp;masque) != 0&lt;/code&gt;. Dans le doute, ajoutez des parenthèses ; &lt;code&gt;gofmt&lt;/code&gt; ajuste les
 espaces pour refléter la priorité.&lt;/p&gt;</description></item><item><title>Contrôle de flux</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/controle/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/controle" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/controle&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Go a peu d&amp;rsquo;instructions de contrôle : &lt;code&gt;if&lt;/code&gt;, &lt;code&gt;for&lt;/code&gt;, &lt;code&gt;switch&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt; (vu avec
 la concurrence), &lt;code&gt;defer&lt;/code&gt; et &lt;code&gt;goto&lt;/code&gt;. Il n&amp;rsquo;y a pas de parenthèses autour des
 conditions, et les accolades sont &lt;strong&gt;obligatoires&lt;/strong&gt;.&lt;/p&gt;
@@ -1109,6 +1125,14 @@ ouvre de nombreux fichiers, placez le traitement de chaque fichier dans une
 fonction séparée, sinon tous les fichiers restent ouverts jusqu&amp;rsquo;à la fin de
 la boucle.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Tableaux, slices et maps</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/collections/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/collections/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/collections" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/collections&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="les-tableaux"&gt;Les tableaux&lt;span class="hx:absolute hx:-mt-20" id="les-tableaux"&gt;&lt;/span&gt;
 &lt;a href="#les-tableaux" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un tableau a une &lt;strong&gt;taille fixe&lt;/strong&gt;, qui fait partie de son type : &lt;code&gt;[3]int&lt;/code&gt; et
 &lt;code&gt;[4]int&lt;/code&gt; sont deux types différents. Un tableau est une &lt;strong&gt;valeur&lt;/strong&gt; : l&amp;rsquo;affecter
@@ -1455,6 +1479,14 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Fonctions</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/fonctions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/fonctions/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/fonctions" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/fonctions&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="déclarer-une-fonction"&gt;Déclarer une fonction&lt;span class="hx:absolute hx:-mt-20" id="déclarer-une-fonction"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9clarer-une-fonction" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;nom&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;paramètre&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;…&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;typeDeRetour&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
@@ -1761,6 +1793,14 @@ paramètre ni retour. Elles sont exécutées automatiquement une seule fois, apr
 l&amp;rsquo;initialisation des variables du package et avant &lt;code&gt;main&lt;/code&gt;. Elles sont utiles
 pour enregistrer un pilote ou vérifier une configuration, mais à utiliser avec
 modération : leur effet est implicite et difficile à tester.&lt;/p&gt;</description></item><item><title>Structures et méthodes</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/structures" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/structures&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="définir-une-structure"&gt;Définir une structure&lt;span class="hx:absolute hx:-mt-20" id="définir-une-structure"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9finir-une-structure" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Une structure (&lt;code&gt;struct&lt;/code&gt;) regroupe des champs nommés. C&amp;rsquo;est la brique de base
 pour modéliser des données en Go, qui n&amp;rsquo;a pas de classes.&lt;/p&gt;
@@ -1998,6 +2038,14 @@ d&amp;rsquo;accès aux bases de données ou de validation. &lt;code&gt;go vet&lt
 &lt;a href="#la-structure-vide" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;struct{}&lt;/code&gt; n&amp;rsquo;a aucun champ et occupe &lt;strong&gt;zéro octet&lt;/strong&gt;. On l&amp;rsquo;utilise comme valeur
 d&amp;rsquo;un ensemble (&lt;code&gt;map[string]struct{}&lt;/code&gt;) ou comme signal dans un channel
 (&lt;code&gt;chan struct{}&lt;/code&gt;), lorsque seule l&amp;rsquo;existence de l&amp;rsquo;événement compte.&lt;/p&gt;</description></item><item><title>Interfaces</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/interfaces" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/interfaces&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="un-contrat-de-comportement"&gt;Un contrat de comportement&lt;span class="hx:absolute hx:-mt-20" id="un-contrat-de-comportement"&gt;&lt;/span&gt;
 &lt;a href="#un-contrat-de-comportement" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Une interface décrit un &lt;strong&gt;ensemble de méthodes&lt;/strong&gt;. Tout type qui possède ces
 méthodes satisfait l&amp;rsquo;interface, &lt;strong&gt;implicitement&lt;/strong&gt; : il n&amp;rsquo;y a pas de mot-clé
@@ -2330,6 +2378,14 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Gestion des erreurs</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/erreurs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/erreurs/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/erreurs" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/erreurs&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="les-erreurs-sont-des-valeurs"&gt;Les erreurs sont des valeurs&lt;span class="hx:absolute hx:-mt-20" id="les-erreurs-sont-des-valeurs"&gt;&lt;/span&gt;
 &lt;a href="#les-erreurs-sont-des-valeurs" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go n&amp;rsquo;a pas d&amp;rsquo;exceptions. Une fonction qui peut échouer renvoie une valeur de
 type &lt;code&gt;error&lt;/code&gt; en dernière position, et l&amp;rsquo;appelant la teste :&lt;/p&gt;
@@ -2635,6 +2691,14 @@ data-copied-label="Copié !"
 &lt;p&gt;Un serveur HTTP utilise ce mécanisme pour qu&amp;rsquo;une requête qui panique
 n&amp;rsquo;arrête pas tout le serveur. &lt;code&gt;recover&lt;/code&gt; ne fonctionne que dans la goroutine
 qui a paniqué : une panique dans une autre goroutine arrête le programme.&lt;/p&gt;</description></item><item><title>Génériques</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/generiques/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/generiques/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/generiques" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/generiques&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Les génériques, ou &lt;strong&gt;paramètres de type&lt;/strong&gt;, sont arrivés avec &lt;strong&gt;Go 1.18&lt;/strong&gt;, après
 plus de dix ans de débats. Ils permettent d&amp;rsquo;écrire une fonction ou un type une
 seule fois pour plusieurs types, en gardant la vérification à la compilation.&lt;/p&gt;
@@ -2912,6 +2976,14 @@ génériques de Go&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Une bonne règle : commencez par écrire le code pour un type concret. Lorsque
 vous le dupliquez pour un second type, il est temps de le rendre générique.&lt;/p&gt;</description></item><item><title>Pointeurs et mémoire</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/pointeurs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/pointeurs/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/pointeurs" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/pointeurs&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 data-hextra-search-id="les-pointeurs"&gt;Les pointeurs&lt;span class="hx:absolute hx:-mt-20" id="les-pointeurs"&gt;&lt;/span&gt;
 &lt;a href="#les-pointeurs" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Un pointeur contient l&amp;rsquo;&lt;strong&gt;adresse&lt;/strong&gt; d&amp;rsquo;une variable. Le type &lt;code&gt;*T&lt;/code&gt; désigne un
 pointeur vers une valeur de type &lt;code&gt;T&lt;/code&gt;. L&amp;rsquo;opérateur &lt;code&gt;&amp;amp;&lt;/code&gt; prend l&amp;rsquo;adresse d&amp;rsquo;une
@@ -3149,6 +3221,14 @@ data-alert="note" class="hextra-alert"
 30 % moins coûteuses grâce à des fonctions d&amp;rsquo;allocation spécialisées par
 taille.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description></item><item><title>Goroutines et channels</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/concurrence/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/concurrence/</guid><description>
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Les exemples de ce chapitre sont compilés et testés à chaque modification :
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/concurrence" target="_blank" rel="noopener"&gt;&lt;code&gt;examples/langage/concurrence&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;La concurrence est au cœur de Go. Ce chapitre en présente les briques de
 base. Le chapitre « Concurrence en pratique » de la partie Approfondissements
 les met en œuvre dans des motifs complets : pipelines, pools de workers,

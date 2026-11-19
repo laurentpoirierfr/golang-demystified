@@ -22,7 +22,7 @@ plateformes. [Docker](https://www.docker.com), [Kubernetes](https://kubernetes.i
 (`kubectl`), [Hugo](https://gohugo.io) ou [GitHub CLI](https://cli.github.com)
 (`gh`) sont des outils en ligne de commande écrits en Go.
 
-Le code est dans `examples/approfondissements/api` : l'exécutable dans
+Le code est dans [`examples/approfondissements/api`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/api) : l'exécutable dans
 `cmd/taches-cli`, et les commandes dans `internal/cli`.
 
 ## Trois questions, trois briques

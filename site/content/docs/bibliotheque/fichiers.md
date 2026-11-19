@@ -3,6 +3,10 @@ title: "Fichiers et flux : io, os, bufio"
 weight: 30
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/fichiers`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/fichiers).
+
 ## io.Reader et io.Writer
 
 Toutes les entrées-sorties de Go reposent sur deux interfaces d'une seule

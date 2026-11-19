@@ -3,6 +3,10 @@ title: "Interfaces"
 weight: 70
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/interfaces`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/interfaces).
+
 ## Un contrat de comportement
 
 Une interface décrit un **ensemble de méthodes**. Tout type qui possède ces

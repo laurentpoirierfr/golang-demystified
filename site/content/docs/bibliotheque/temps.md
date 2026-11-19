@@ -3,6 +3,10 @@ title: "Le temps : time"
 weight: 40
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/temps`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/temps).
+
 Le package `time` manipule des **instants** (`time.Time`), des **durées**
 (`time.Duration`) et des **fuseaux horaires** (`time.Location`).
 

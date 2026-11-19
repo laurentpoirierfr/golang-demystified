@@ -3,6 +3,10 @@ title: "HTTP : net/http"
 weight: 60
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/http`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/http).
+
 Le package `net/http` fournit un client et un serveur HTTP complets, prêts pour
 la production : HTTP/1.1, HTTP/2, TLS, keep-alive, compression… De nombreux
 services Go n'utilisent aucun framework web.

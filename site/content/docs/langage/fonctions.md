@@ -3,6 +3,10 @@ title: "Fonctions"
 weight: 50
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/fonctions`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/fonctions).
+
 ## Déclarer une fonction
 
 ```go
