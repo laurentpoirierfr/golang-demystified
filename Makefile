@@ -7,7 +7,7 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site publication serve book pdf check vuln test-integration sqlc generate clean
+.PHONY: all site publication serve book pdf check vuln lint test-integration sqlc generate clean
 
 all: check book publication
 
@@ -43,6 +43,12 @@ check:
 	test -z "$$(gofmt -l tools examples)"
 	go vet ./...
 	go test -short ./...
+
+## lint : golangci-lint, par son image Docker (configuration : .golangci.yml)
+GOLANGCI_IMAGE := docker.io/golangci/golangci-lint:v2.15.0
+lint:
+	docker run --rm --volume "$(CURDIR):/app" --workdir /app $(CONTAINER_USER) -e HOME=/tmp \
+		$(GOLANGCI_IMAGE) golangci-lint run ./...
 
 ## vuln : recherche les vulnérabilités connues dans le code et ses dépendances
 vuln:

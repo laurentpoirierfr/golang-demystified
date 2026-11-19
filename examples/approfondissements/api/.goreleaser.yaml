@@ -1,0 +1,30 @@
+# GoReleaser : compile taches-cli pour toutes les plateformes, et prépare les
+# archives et les sommes de contrôle d'une release. https://goreleaser.com
+version: 2
+project_name: taches-cli
+
+builds:
+  - id: taches-cli
+    main: ./cmd/taches-cli
+    binary: taches-cli
+    env:
+      - CGO_ENABLED=0 # exécutables statiques
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    flags:
+      - -trimpath # chemins de compilation retirés : builds reproductibles
+    ldflags:
+      - -s -w
+      - -X github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/cli.Version={{ .Version }}
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc

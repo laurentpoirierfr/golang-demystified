@@ -31,5 +31,7 @@ func LitJSON(w http.ResponseWriter, r *http.Request, dest any) error {
 func EcritJSON(w http.ResponseWriter, statut int, v any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statut)
-	json.NewEncoder(w).Encode(v)
+	// Les en-têtes sont déjà envoyés : une erreur d'encodage ne peut plus être
+	// signalée au client.
+	_ = json.NewEncoder(w).Encode(v)
 }

@@ -43,6 +43,18 @@ jobs:
       - name: Vulnérabilités (govulncheck)
         run: go tool govulncheck ./...
 
+  lint:
+    name: Linters (golangci-lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - uses: golangci/golangci-lint-action@v9
+        with:
+          version: v2.15.0
+
   integration:
     name: Tests d'intégration (Testcontainers)
     runs-on: ubuntu-latest
@@ -56,6 +68,24 @@ jobs:
       # démarre PostgreSQL sans configuration.
       - name: Tests avec PostgreSQL
         run: go test -count=1 -run Postgres -v ./examples/...
+
+  goreleaser:
+    name: Livraison de taches-cli (GoReleaser, à blanc)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # GoReleaser lit les tags pour nommer la version
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      # Compile pour toutes les plateformes et prépare les archives, sans rien
+      # publier : la configuration reste valide à chaque modification.
+      - uses: goreleaser/goreleaser-action@v7
+        with:
+          version: v2.20.1
+          args: release --snapshot --clean --skip=publish
+          workdir: examples/approfondissements/api
 
   code-genere:
     name: Code généré à jour

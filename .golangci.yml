@@ -1,0 +1,28 @@
+# Configuration de golangci-lint : https://golangci-lint.run
+version: "2"
+
+linters:
+  # errcheck, govet, ineffassign, staticcheck, unused.
+  default: standard
+  enable:
+    - bodyclose  # corps de réponse HTTP non fermé
+    - errorlint  # comparaison d'erreurs sans errors.Is / errors.As
+  exclusions:
+    presets:
+      # Erreurs habituellement ignorées : Close, Flush, fmt.Fprint…
+      - std-error-handling
+      - common-false-positives
+    rules:
+      # Dans les tests, une erreur inattendue fait échouer le test par ailleurs.
+      - path: _test\.go
+        linters: [errcheck]
+      # Les exemples de la partie « Le langage » contiennent volontairement du
+      # code à ne pas imiter (méthode qui modifie une copie, types explicites…)
+      # pour l'expliquer.
+      - path: examples/langage/
+        linters: [errorlint, ineffassign, staticcheck]
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

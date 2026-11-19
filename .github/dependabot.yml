@@ -1,0 +1,18 @@
+# Dependabot propose des pull requests pour mettre à jour les dépendances.
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # Une seule pull request pour les modules Kubernetes, qui évoluent ensemble.
+      kubernetes:
+        patterns: ["k8s.io/*", "sigs.k8s.io/*"]
+      golang-x:
+        patterns: ["golang.org/x/*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
