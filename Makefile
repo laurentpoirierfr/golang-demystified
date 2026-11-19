@@ -1,12 +1,13 @@
-PANDOC_IMAGE := docker.io/pandoc/extra:3.14
-BOOK_MD      := book/build/book.md
+QUARTO_IMAGE := ghcr.io/quarto-dev/quarto:1.11.9
+QUARTO_DIR   := book/build/quarto
 BOOK_PDF     := book/golang-demystified.pdf
+BOOK_EPUB    := book/golang-demystified.epub
 # Podman rootless : keep-id conserve l'UID de l'utilisateur dans le conteneur.
 CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--userns=keep-id,--user $(shell id -u):$(shell id -g))
 
-.PHONY: all site serve pdf book-md check clean
+.PHONY: all site serve book pdf check clean
 
-all: check site pdf
+all: check site book
 
 ## site : génère le site statique dans docs/ (GitHub Pages)
 site:
@@ -16,16 +17,18 @@ site:
 serve:
 	cd site && hugo server --buildDrafts --renderToMemory
 
-## book-md : assemble les pages en un seul Markdown, dans l'ordre du site
-book-md:
-	go run ./tools/mkbook -content site/content/docs -static site/static -out $(BOOK_MD)
+## book : génère le livre en PDF (Quarto + Typst) et en EPUB
+book:
+	go run ./tools/mkbook -content site/content/docs -static site/static \
+		-config book/quarto/_quarto.yml -out $(QUARTO_DIR)
+	cp -r book/assets book/quarto/fonts book/quarto/typst-show.typ $(QUARTO_DIR)/
+	docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) $(CONTAINER_USER) \
+		-e HOME=/tmp $(QUARTO_IMAGE) quarto render
+	cp $(QUARTO_DIR)/_book/Golang-Demystified.pdf $(BOOK_PDF)
+	cp $(QUARTO_DIR)/_book/Golang-Demystified.epub $(BOOK_EPUB)
 
-## pdf : génère le livre PDF avec pandoc + eisvogel (via Docker)
-pdf: book-md
-	docker run --rm --volume "$(CURDIR):/data" --workdir /data $(CONTAINER_USER) \
-		$(PANDOC_IMAGE) $(BOOK_MD) --from gfm --metadata-file book/metadata.yaml --lua-filter book/callouts.lua \
-		--template eisvogel --syntax-highlighting=idiomatic --pdf-engine=xelatex --top-level-division=part \
-		--output $(BOOK_PDF)
+## pdf : alias de book
+pdf: book
 
 ## check : vérifie et teste les outils et les exemples du livre
 check:
