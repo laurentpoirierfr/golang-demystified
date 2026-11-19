@@ -37,6 +37,7 @@ func Example_pipeline() {
 
 func Example_annulation() {
 	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	somme := 0
 	for n := range Genere(ctx, 1_000_000) {
 		somme += n
