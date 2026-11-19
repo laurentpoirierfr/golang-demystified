@@ -18,7 +18,8 @@ layout: hextra-home
 
 <div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-button text="Lire le livre" link="docs" >}}
-{{< hextra/hero-button text="Télécharger le PDF" link="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
+{{< hextra/hero-button text="PDF" link="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
+{{< hextra/hero-button text="EPUB" link="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.epub" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
 </div>
 
 {{< hextra/feature-grid >}}
