@@ -5,3 +5,6 @@ site/.hugo_build.lock
 .claude/settings.local.json
 
 claude.sh
+docs/
+book/golang-demystified.pdf
+book/golang-demystified.epub

@@ -11,7 +11,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   - vérifications à chaque push : `gofmt`, `go vet`, `go test -race`, `govulncheck`
   - tests d'intégration avec Testcontainers (Docker est disponible sur les machines GitHub)
   - vérification que le code généré est à jour (sqlc, oapi-codegen, controller-gen)
-- [ ] **Publication par l'intégration continue** : site, PDF et EPUB construits
+- [x] **Publication par l'intégration continue** : site, PDF et EPUB construits
   à chaque tag, au lieu d'être versionnés dans `docs/` et `book/`
 - [ ] **Chapitre « CI/CD d'un projet Go »** : GitHub Actions, golangci-lint,
   govulncheck, GoReleaser, images multi-architectures, SBOM

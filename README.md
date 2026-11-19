@@ -1,15 +1,15 @@
 # Golang Demystified
 
 <p align="center">
-  <a href="./book/golang-demystified.pdf"><img src="site/static/images/couverture.png" alt="Couverture du livre" width="280"></a>
+  <a href="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf"><img src="site/static/images/couverture.png" alt="Couverture du livre" width="280"></a>
 </p>
 
 Un livre en français qui présente Go dans son ensemble : le langage, ses outils,
 sa bibliothèque standard et son évolution au fil des versions.
 
 - 🌐 [Lire en ligne](https://laurentpoirierfr.github.io/golang-demystified/)
-- 📄 [Télécharger le PDF](./book/golang-demystified.pdf)
-- 📱 [Télécharger l'EPUB](./book/golang-demystified.epub) (liseuses)
+- 📄 [Télécharger le PDF](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf)
+- 📱 [Télécharger l'EPUB](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub) (liseuses)
 
 ## Organisation du dépôt
 
@@ -17,9 +17,9 @@ sa bibliothèque standard et son évolution au fil des versions.
 |---------------------|--------------------------------------------------------------|
 | `site/`             | Site [Hugo](https://gohugo.io) (thème [Hextra](https://imfing.github.io/hextra/)) |
 | `site/content/docs` | Contenu du livre, source unique du site, du PDF et de l'EPUB |
-| `docs/`             | Site généré, publié par GitHub Pages                         |
 | `book/quarto/`      | Configuration Quarto, modèle [Typst](https://typst.app) et polices du livre       |
-| `book/`             | Couverture, PDF et EPUB générés                              |
+| `book/`             | Couverture et ressources du livre                            |
+| `.github/workflows` | Intégration continue et publication (GitHub Actions)         |
 | `examples/`         | Code des exemples du livre, compilé et testé                 |
 | `tools/mkbook`      | Transforme le contenu du site en projet de livre Quarto      |
 
@@ -39,10 +39,11 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 ```sh
 make serve   # prévisualisation sur http://localhost:1313/golang-demystified/
-make site    # génère le site dans docs/
+make site    # génère le site dans site/public
 make book    # génère book/golang-demystified.pdf et .epub (Quarto + Typst)
 make check   # gofmt, go vet et go test (rapide, sans conteneur)
-make generate          # régénère le code (oapi-codegen, sqlc)
+make generate          # régénère le code (oapi-codegen, sqlc, controller-gen)
+make vuln              # vulnérabilités connues (govulncheck)
 make test-integration  # tests avec Testcontainers (Docker ou Podman)
 make all     # tout à la fois
 ```
@@ -63,9 +64,14 @@ Le même Markdown alimente le site, le PDF et l'EPUB :
 ## Gestion des versions
 
 Le dépôt suit [git flow](https://nvie.com/posts/a-successful-git-branching-model/) :
-le travail se fait sur des branches `feature/*` issues de `develop`, et chaque
-release (`release/x.y.z`) régénère le site et le livre avant d'être fusionnée
-dans `main`, qui est publiée par GitHub Pages.
+le travail se fait sur des branches `feature/*` issues de `develop`, puis chaque
+release (`release/x.y.z`) est fusionnée dans `main` avec un tag `vx.y.z`.
+
+L'intégration continue (GitHub Actions) vérifie chaque push : format, analyse,
+tests avec le détecteur de courses, vulnérabilités, tests d'intégration avec
+Testcontainers, et code généré à jour. Chaque push sur `main` construit le livre
+et le site, publie le site sur GitHub Pages et, pour un tag, crée la release
+GitHub avec le PDF et l'EPUB. Ces fichiers générés ne sont pas versionnés.
 
 ## Licences des polices
 

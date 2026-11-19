@@ -2,7 +2,6 @@ baseURL = "https://laurentpoirierfr.github.io/golang-demystified/"
 locale = "fr-FR"
 defaultContentLanguage = "fr"
 title = "Golang Demystified"
-publishDir = "../docs"
 enableGitInfo = true
 
 [module]
@@ -22,11 +21,11 @@ enableGitInfo = true
     weight = 1
   [[menu.main]]
     name = "PDF"
-    url = "https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf"
+    url = "https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf"
     weight = 2
   [[menu.main]]
     name = "EPUB"
-    url = "https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.epub"
+    url = "https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub"
     weight = 2
   [[menu.main]]
     name = "Rechercher"

@@ -23,13 +23,13 @@ layout: hextra-home
 
 <div style="margin-top: 1.5rem;">
 {{< hextra/hero-button text="Lire le livre" link="docs" >}}
-{{< hextra/hero-button text="PDF" link="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
-{{< hextra/hero-button text="EPUB" link="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.epub" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
+{{< hextra/hero-button text="PDF" link="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
+{{< hextra/hero-button text="EPUB" link="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
 </div>
 
 </div>
 <div style="flex: 0 1 18rem; margin: 0 auto;">
-<a href="https://github.com/laurentpoirierfr/golang-demystified/raw/main/book/golang-demystified.pdf" title="Télécharger le livre en PDF">
+<a href="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf" title="Télécharger le livre en PDF">
 <img src="images/couverture.png" alt="Couverture du livre Golang Demystified, édition Go 1.27" width="288" height="407" style="width: 100%; height: auto; border-radius: 6px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);">
 </a>
 </div>
