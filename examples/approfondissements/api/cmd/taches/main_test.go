@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"io"
 	"net/http"
 	"strings"
 	"sync"
@@ -57,6 +58,17 @@ func TestDemarrageEtArret(t *testing.T) {
 	resp.Body.Close()
 	if resp.StatusCode != http.StatusCreated {
 		t.Fatalf("statut %d", resp.StatusCode)
+	}
+
+	// Les métriques comptent la tâche créée.
+	metriques, err := client.Get("http://" + adresse + "/metrics")
+	if err != nil {
+		t.Fatal(err)
+	}
+	corps, _ := io.ReadAll(metriques.Body)
+	metriques.Body.Close()
+	if !strings.Contains(string(corps), "taches_creees_total{") {
+		t.Errorf("métrique taches_creees_total absente de /metrics")
 	}
 
 	arrete()

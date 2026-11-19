@@ -11,10 +11,13 @@ import (
 	"net/http"
 
 	middleware "github.com/oapi-codegen/nethttp-middleware"
+	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/noop"
 
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/api"
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/tache"
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/pkg/httpkit"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/pkg/telemetrie"
 )
 
 // Store est ce dont l'API a besoin pour stocker les tâches. L'interface est
@@ -33,6 +36,23 @@ type Store interface {
 type Serveur struct {
 	store Store
 	log   *slog.Logger
+
+	// creees compte les tâches créées : une métrique métier, sans effet tant
+	// que Instrumente n'est pas appelée.
+	creees metric.Int64Counter
+}
+
+// Instrumente active les métriques métier du serveur.
+func (s *Serveur) Instrumente(mp metric.MeterProvider) error {
+	mesures := mp.Meter("github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/web")
+	creees, err := mesures.Int64Counter("taches.creees",
+		metric.WithDescription("Nombre de tâches créées"),
+		metric.WithUnit("{tache}"))
+	if err != nil {
+		return err
+	}
+	s.creees = creees
+	return nil
 }
 
 // Le compilateur vérifie que Serveur implémente toutes les opérations du
@@ -41,7 +61,8 @@ var _ ServerInterface = (*Serveur)(nil)
 
 // Nouveau crée le serveur.
 func Nouveau(store Store, log *slog.Logger) *Serveur {
-	return &Serveur{store: store, log: log}
+	creees, _ := noop.NewMeterProvider().Meter("").Int64Counter("") // ne peut pas échouer
+	return &Serveur{store: store, log: log, creees: creees}
 }
 
 // Routes renvoie le handler complet : les opérations du contrat, validées
@@ -60,8 +81,10 @@ func (s *Serveur) Routes() (http.Handler, error) {
 
 	mux := http.NewServeMux()
 	HandlerWithOptions(s, StdHTTPServerOptions{
-		BaseRouter:  mux,
-		Middlewares: []MiddlewareFunc{valide}, // chaque requête est validée par le contrat
+		BaseRouter: mux,
+		// Après le routage : la route est enregistrée pour les traces et les
+		// métriques, puis la requête est validée par le contrat.
+		Middlewares: []MiddlewareFunc{valide, telemetrie.Route},
 		ErrorHandlerFunc: func(w http.ResponseWriter, r *http.Request, err error) {
 			s.erreur(w, r, &httpkit.ErrRequete{Raison: "paramètre invalide : " + err.Error()})
 		},
@@ -104,6 +127,7 @@ func (s *Serveur) CreeTache(w http.ResponseWriter, r *http.Request) {
 		s.erreur(w, r, err)
 		return
 	}
+	s.creees.Add(r.Context(), 1)
 	w.Header().Set("Location", fmt.Sprintf("/taches/%d", t.ID))
 	httpkit.EcritJSON(w, http.StatusCreated, t)
 }
