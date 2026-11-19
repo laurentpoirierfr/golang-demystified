@@ -5,9 +5,7 @@ import (
 	htmltemplate "html/template"
 	"os"
 	"strings"
-	"testing"
 	"text/template"
-	"time"
 )
 
 func Example_texte() {
@@ -63,51 +61,4 @@ func Example_echappement() {
 		`<p title="{{.}}">{{.}}</p><a href="/recherche?q={{.}}">lien</a><script>var q = {{.}};</script>` + "\n"))
 	t.Execute(os.Stdout, `<script>alert("x")</script>`)
 	// Output: <p title="&lt;script&gt;alert(&#34;x&#34;)&lt;/script&gt;">&lt;script&gt;alert(&#34;x&#34;)&lt;/script&gt;</p><a href="/recherche?q=%3cscript%3ealert%28%22x%22%29%3c%2fscript%3e">lien</a><script>var q = "\u003cscript\u003ealert(\"x\")\u003c/script\u003e";</script>
-}
-
-func TestSite(t *testing.T) {
-	site, err := NouveauSite()
-	if err != nil {
-		t.Fatal(err)
-	}
-	var b strings.Builder
-	err = site.Affiche(&b, "article", map[string]any{
-		"Date": time.Date(2026, 8, 12, 0, 0, 0, 0, time.UTC),
-		"Article": Article{
-			Titre:  "Go 1.27 <enfin>",
-			Auteur: "Alice",
-			Tags:   []string{"génériques", "json"},
-			Resume: "<em>Méthodes génériques</em>",
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	html := b.String()
-	for _, attendu := range []string{
-		"<title>Go 1.27 &lt;enfin&gt; – Golang Demystified</title>",
-		"<h1>Go 1.27 &lt;enfin&gt;</h1>",
-		`<a href="/tags/g%c3%a9n%c3%a9riques">génériques</a>`,
-		"<div><em>Méthodes génériques</em></div>",
-		"Généré le 12/08/2026",
-	} {
-		if !strings.Contains(html, attendu) {
-			t.Errorf("%q absent de :\n%s", attendu, html)
-		}
-	}
-}
-
-func TestSiteAccueilVide(t *testing.T) {
-	site, err := NouveauSite()
-	if err != nil {
-		t.Fatal(err)
-	}
-	var b strings.Builder
-	if err := site.Affiche(&b, "accueil", map[string]any{"Date": time.Now()}); err != nil {
-		t.Fatal(err)
-	}
-	if !strings.Contains(b.String(), "<title>Golang Demystified</title>") ||
-		!strings.Contains(b.String(), "Aucun article.") {
-		t.Errorf("page d'accueil inattendue :\n%s", b.String())
-	}
 }

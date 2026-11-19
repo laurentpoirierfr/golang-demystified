@@ -35,18 +35,36 @@ api/
 │   └── taches/
 │       ├── main.go          assemblage, démarrage, arrêt propre
 │       └── main_test.go
-└── internal/
-    ├── config/              lecture de la configuration
-    ├── tache/               le domaine : type, validation, erreurs
-    ├── store/               stockage SQLite (database/sql)
-    │   └── migrations/      schéma SQL, embarqué dans l'exécutable
-    └── web/                 handlers HTTP et middlewares
+├── internal/
+│   ├── config/              lecture de la configuration
+│   ├── tache/               le domaine : type, validation, erreurs
+│   ├── store/               stockage SQLite (database/sql)
+│   │   └── migrations/      schéma SQL, embarqué dans l'exécutable
+│   └── web/                 handlers HTTP de l'API
+└── pkg/
+    └── httpkit/             middlewares et JSON, réutilisables
 ```
 
+Le projet suit la disposition la plus répandue dans l'écosystème Go :
+
+| Répertoire  | Contenu                                                            |
+|-------------|--------------------------------------------------------------------|
+| `cmd/`      | un sous-répertoire par exécutable, avec un `main.go` minimal       |
+| `internal/` | le code propre au service ; le compilateur interdit aux autres modules de l'importer |
+| `pkg/`      | le code générique, sans lien avec le métier, que d'autres projets peuvent importer |
+
 Chaque package a une responsabilité unique, et les dépendances vont dans un
-seul sens : `cmd` assemble tout, `web` et `store` dépendent de `tache`, et
-`tache` ne dépend de rien. Le répertoire `internal` empêche les autres modules
-d'importer ces packages : seule l'API HTTP est publique.
+seul sens : `cmd` assemble tout, `web` et `store` dépendent de `tache`,
+`tache` ne dépend de rien, et `pkg/httpkit` ignore tout du reste du projet.
+
+> [!NOTE]
+> `cmd/` et `internal/` sont des conventions reconnues par l'outil `go`
+> (`internal/` est même imposé par le compilateur). `pkg/` est une convention
+> de la communauté, popularisée par le dépôt *golang-standards/project-layout*
+> ; l'équipe Go ne l'impose pas. Elle a le mérite de signaler clairement ce
+> qui est réutilisable. N'y placez que du code réellement générique : en cas
+> de doute, `internal/` est le bon choix, car il est toujours possible d'en
+> sortir un package plus tard.
 
 ## Le domaine
 
@@ -257,7 +275,11 @@ func (s *Serveur) Routes() http.Handler {
 	mux.HandleFunc("GET /sante", s.sante)
 
 	// Le premier middleware de la liste est le plus extérieur.
-	return chaine(mux, s.identifie, s.journalise, s.recupere)
+	return httpkit.Chaine(mux,
+		httpkit.Identifiant(),
+		httpkit.Journal(s.log),
+		httpkit.Recuperation(s.log),
+	)
 }
 ```
 
@@ -265,17 +287,23 @@ func (s *Serveur) Routes() http.Handler {
 
 La lecture du corps d'une requête est l'endroit où un service est le plus
 exposé. Le décodeur limite la taille, refuse les champs inconnus et exige un
-unique objet :
+unique objet. Ce code ne dépend pas du métier : il est dans `pkg/httpkit`.
 
 ```go
-func litJSON(w http.ResponseWriter, r *http.Request, dest any) error {
-	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20))
+// ErrRequete signale une requête mal formée, à traduire en statut 400.
+type ErrRequete struct{ Raison string }
+
+func (e *ErrRequete) Error() string { return e.Raison }
+
+// LitJSON décode un unique objet JSON, de 1 Mo au plus, sans champ inconnu.
+func LitJSON(w http.ResponseWriter, r *http.Request, dest any) error {
+	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, TailleMax))
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(dest); err != nil {
-		return &errRequete{"JSON invalide : " + err.Error()}
+		return &ErrRequete{"JSON invalide : " + err.Error()}
 	}
 	if dec.Decode(&struct{}{}) != io.EOF {
-		return &errRequete{"un seul objet JSON est attendu"}
+		return &ErrRequete{"un seul objet JSON est attendu"}
 	}
 	return nil
 }
@@ -302,14 +330,14 @@ func (s *Serveur) erreur(w http.ResponseWriter, r *http.Request, err error) {
 	statut, message := http.StatusInternalServerError, "erreur interne"
 	if v, ok := errors.AsType[*tache.ErrValidation](err); ok {
 		statut, message = http.StatusUnprocessableEntity, v.Error()
-	} else if e, ok := errors.AsType[*errRequete](err); ok {
+	} else if e, ok := errors.AsType[*httpkit.ErrRequete](err); ok {
 		statut, message = http.StatusBadRequest, e.Error()
 	} else if errors.Is(err, tache.ErrIntrouvable) {
 		statut, message = http.StatusNotFound, err.Error()
 	} else {
 		s.log.ErrorContext(r.Context(), "erreur interne", "erreur", err)
 	}
-	ecritJSON(w, statut, map[string]string{"erreur": message})
+	httpkit.EcritJSON(w, statut, map[string]string{"erreur": message})
 }
 ```
 
@@ -320,7 +348,7 @@ func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
 	var entree struct {
 		Titre string `json:"titre"`
 	}
-	if err := litJSON(w, r, &entree); err != nil {
+	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
 	}
@@ -335,20 +363,34 @@ func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Location", fmt.Sprintf("/taches/%d", t.ID))
-	ecritJSON(w, http.StatusCreated, t)
+	httpkit.EcritJSON(w, http.StatusCreated, t)
 }
 ```
 
 ### Les middlewares
 
-Trois middlewares s'appliquent à toutes les requêtes :
+Trois middlewares de `pkg/httpkit` s'appliquent à toutes les requêtes :
 
-- **`identifie`** attribue à chaque requête un identifiant unique (un UUID v7,
-  avec le package `uuid` de Go 1.27), placé dans le contexte et renvoyé dans
-  l'en-tête `X-Request-ID`. Il permet de retrouver tous les messages liés à une
-  requête ;
-- **`journalise`** écrit une ligne de journal structurée par requête ;
-- **`recupere`** transforme une panique en réponse 500.
+- **`Identifiant`** attribue à chaque requête un identifiant unique (un UUID
+  v7, avec le package `uuid` de Go 1.27), placé dans le contexte et renvoyé
+  dans l'en-tête `X-Request-ID`. Il permet de retrouver tous les messages liés
+  à une requête ;
+- **`Journal`** écrit une ligne de journal structurée par requête ;
+- **`Recuperation`** transforme une panique en réponse 500.
+
+Un middleware qui a besoin d'une dépendance, comme le journal, est une
+fonction qui la reçoit et renvoie le middleware :
+
+```go
+type Middleware func(http.Handler) http.Handler
+
+func Chaine(h http.Handler, mws ...Middleware) http.Handler {
+	for i := len(mws) - 1; i >= 0; i-- {
+		h = mws[i](h)
+	}
+	return h
+}
+```
 
 Pour journaliser le statut de la réponse, le middleware enveloppe le
 `ResponseWriter` :
@@ -367,19 +409,21 @@ func (e *enregistreur) WriteHeader(statut int) {
 // Unwrap permet à http.ResponseController d'atteindre le ResponseWriter d'origine.
 func (e *enregistreur) Unwrap() http.ResponseWriter { return e.ResponseWriter }
 
-func (s *Serveur) journalise(suivant http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		debut := time.Now()
-		rec := &enregistreur{ResponseWriter: w, statut: http.StatusOK}
-		suivant.ServeHTTP(rec, r)
-		s.log.InfoContext(r.Context(), "requête",
-			slog.String("requete_id", RequeteID(r.Context())),
-			slog.String("methode", r.Method),
-			slog.String("chemin", r.URL.Path),
-			slog.Int("statut", rec.statut),
-			slog.Duration("duree", time.Since(debut)),
-		)
-	})
+func Journal(log *slog.Logger) Middleware {
+	return func(suivant http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			debut := time.Now()
+			rec := &enregistreur{ResponseWriter: w, statut: http.StatusOK}
+			suivant.ServeHTTP(rec, r)
+			log.InfoContext(r.Context(), "requête",
+				slog.String("requete_id", RequeteID(r.Context())),
+				slog.String("methode", r.Method),
+				slog.String("chemin", r.URL.Path),
+				slog.Int("statut", rec.statut),
+				slog.Duration("duree", time.Since(debut)),
+			)
+		})
+	}
 }
 ```
 
@@ -493,8 +537,9 @@ func TestScenario(t *testing.T) {
 }
 ```
 
-Un double de test qui panique vérifie le middleware de récupération, et un
-dernier test démarre le **vrai programme** sur un port libre
+Les briques de `pkg/httpkit` ont leurs propres tests, indépendants du
+service : ordre des middlewares, récupération d'une panique, lecture du JSON.
+Un dernier test démarre le **vrai programme** sur un port libre
 (`TACHES_ADRESSE=127.0.0.1:0`), envoie une requête, puis annule son contexte
 pour simuler un `SIGTERM` et vérifier l'arrêt propre.
 

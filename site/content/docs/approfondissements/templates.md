@@ -133,7 +133,8 @@ Les pages d'un site partagent une mise en page : en-tête, pied de page,
 feuilles de style. Avec `block`, le gabarit de base définit des
 emplacements, que chaque page redéfinit.
 
-Le gabarit de base, `gabarits/base.html` :
+Le site est un package interne, `internal/site`, qui embarque ses gabarits.
+Le gabarit de base, `internal/site/gabarits/base.html` :
 
 ```html
 {{define "base"}}<!doctype html>
@@ -257,14 +258,15 @@ directive `//go:generate` déclare la commande à exécuter, et `go generate`
 la lance :
 
 ```go
-//go:generate go run ./generateur -type Statut -package commande Brouillon Valide Expediee
+//go:generate go run ./cmd/generateur -type Statut -package commande Brouillon Valide Expediee
 ```
 
 ```bash
 go generate ./...
 ```
 
-Le générateur produit une méthode `String` et une fonction d'analyse pour un
+Le générateur est un exécutable du projet, placé dans `cmd/generateur`. Il
+produit une méthode `String` et une fonction d'analyse pour un
 type énuméré :
 
 ```go

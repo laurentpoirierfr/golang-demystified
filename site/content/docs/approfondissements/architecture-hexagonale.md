@@ -52,19 +52,33 @@ implicitement, et l'usage veut qu'elles soient définies **par celui qui les
 utilise**. Les ports sont donc simplement des interfaces déclarées dans le
 package `application`.
 
+Les cercles de l'hexagone s'inscrivent dans la disposition habituelle d'un
+projet Go, `cmd/`, `internal/` et `pkg/` :
+
 ```
 hexagonale/
-├── domaine/                  règles d'emprunt, sans dépendance
-├── application/
-│   ├── ports.go              les interfaces vers l'extérieur
-│   └── service.go            les cas d'usage
-├── adaptateurs/
-│   ├── web/                  primaire : HTTP
-│   ├── memoire/              secondaire : stockage en mémoire
-│   └── notification/         secondaire : notifications, horloge, UUID
-├── cmd/bibliotheque/         assemblage
+├── cmd/
+│   └── bibliotheque/         assemblage des adaptateurs et des ports
+├── internal/
+│   ├── domaine/              règles d'emprunt, sans dépendance
+│   ├── application/
+│   │   ├── ports.go          les interfaces vers l'extérieur
+│   │   └── service.go        les cas d'usage
+│   └── adaptateurs/
+│       ├── web/              primaire : HTTP
+│       ├── memoire/          secondaire : stockage en mémoire
+│       └── notification/     secondaire : notifications
+├── pkg/
+│   ├── horloge/              horloge système et horloge manuelle
+│   └── identifiant/          UUID et séquence prévisible
 └── architecture_test.go      vérification des dépendances
 ```
+
+Tout l'hexagone est dans `internal/` : le métier de la bibliothèque n'a pas
+vocation à être importé par d'autres modules. `pkg/` ne contient que des
+briques **techniques et génériques** (une horloge, un générateur
+d'identifiants), qui ignorent tout du domaine et pourraient servir à n'importe
+quel projet.
 
 ## Le domaine
 
@@ -278,17 +292,39 @@ func (d *Depot) Atomique(ctx context.Context, f func(context.Context) error) err
 }
 ```
 
-Les ports techniques ont des implémentations de quelques lignes :
+Les ports techniques (`Horloge`, `Identifiants`) sont implémentés par les
+packages génériques de `pkg/`. Chacun propose une version de production et une
+version prévisible pour les tests :
 
 ```go
-type HorlogeSysteme struct{}
+// pkg/horloge
+type Systeme struct{}
 
-func (HorlogeSysteme) Maintenant() time.Time { return time.Now() }
+func (Systeme) Maintenant() time.Time { return time.Now() }
 
+// Manuelle est une horloge que l'on fait avancer à la main.
+type Manuelle struct {
+	mu sync.Mutex
+	t  time.Time
+}
+
+func (m *Manuelle) Avance(d time.Duration) { … }
+
+// pkg/identifiant
 type UUID struct{}
 
 func (UUID) Nouveau() string { return uuid.NewV7().String() }
+
+// Sequence produit des identifiants prévisibles : e1, e2…
+type Sequence struct {
+	Prefixe string
+	n       atomic.Int64
+}
 ```
+
+Grâce au typage implicite des interfaces, `horloge.Systeme` satisfait le port
+`application.Horloge` sans que le package `horloge` le connaisse : c'est ce qui
+lui permet de rester générique.
 
 Un adaptateur PostgreSQL, construit comme le stockage du chapitre précédent,
 remplacerait le dépôt en mémoire **sans toucher** au domaine ni à
@@ -305,8 +341,8 @@ app := application.NouveauService(application.Dependances{
 	Emprunts:     depot,
 	Transactions: depot,
 	Notifieur:    notification.Journal{Log: journal},
-	Horloge:      notification.HorlogeSysteme{},
-	Identifiants: notification.UUID{},
+	Horloge:      horloge.Systeme{},
+	Identifiants: identifiant.UUID{},
 	Journal:      journal,
 })
 
@@ -328,14 +364,18 @@ L'architecture hexagonale facilite surtout les **tests** :
 | adaptateurs   | la traduction technique       | un faux cas d'usage, ou une vraie base  |
 | architecture  | la direction des dépendances  | l'analyse des imports                   |
 
-Les cas d'usage se testent avec une **horloge que le test fait avancer** et un
-**espion** qui enregistre les notifications au lieu de les envoyer :
+Les cas d'usage se testent avec l'**horloge manuelle** de `pkg/horloge`, une
+**séquence** d'identifiants prévisibles, et un **espion** qui enregistre les
+notifications au lieu de les envoyer :
 
 ```go
-type horlogeFixe struct{ t time.Time }
-
-func (h *horlogeFixe) Maintenant() time.Time   { return h.t }
-func (h *horlogeFixe) Avance(d time.Duration) { h.t = h.t.Add(d) }
+b.service = application.NouveauService(application.Dependances{
+	Catalogue: depot, Emprunts: depot, Transactions: depot,
+	Notifieur:    b.notifieur, // espion
+	Horloge:      horloge.NouvelleManuelle(time.Date(2026, 9, 1, 10, 0, 0, 0, time.UTC)),
+	Identifiants: &identifiant.Sequence{Prefixe: "e"},
+	…
+})
 
 func TestRetardPenaliteEtSuspension(t *testing.T) {
 	b := nouveauBanc()
@@ -368,8 +408,10 @@ func TestDirectionDesDependances(t *testing.T) {
 		paquet    string
 		autorises []string // packages du projet autorisés
 	}{
-		{"domaine", nil},
-		{"application", []string{"domaine"}},
+		{"internal/domaine", nil},
+		{"internal/application", []string{"internal/domaine"}},
+		{"pkg/horloge", nil}, // pkg/ ne dépend jamais du reste du projet
+		{"pkg/identifiant", nil},
 	}
 	for _, r := range regles {
 		for _, imp := range imports(t, r.paquet) {
@@ -384,8 +426,12 @@ func TestDirectionDesDependances(t *testing.T) {
 
 ```
 --- FAIL: TestDirectionDesDependances (0.00s)
-    architecture_test.go:69: domaine ne doit pas importer adaptateurs/memoire
+    architecture_test.go:75: internal/domaine ne doit pas importer internal/adaptateurs/memoire
 ```
+
+Le test échoue aussi si un répertoire de la liste ne contient aucun fichier
+Go : sans cette précaution, un déplacement de package rendrait la règle
+silencieusement inopérante.
 
 Go interdit déjà les cycles d'imports ; ce test va plus loin et protège
 l'intention de l'architecture, même face à un nouveau venu dans l'équipe.

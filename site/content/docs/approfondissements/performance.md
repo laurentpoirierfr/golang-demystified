@@ -32,15 +32,18 @@ première version est simple et correcte :
 ```go
 var separateurs = regexp.MustCompile(`[^\p{L}\p{N}]+`)
 
-func MotsFrequentsNaif(r io.Reader, n int) []Frequence {
-	data, _ := io.ReadAll(r)
+func MotsFrequentsNaif(r io.Reader, n int) ([]Frequence, error) {
+	data, err := io.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
 	compte := map[string]int{}
 	for _, mot := range separateurs.Split(string(data), -1) {
 		if mot != "" {
 			compte[strings.ToLower(mot)]++
 		}
 	}
-	return lesPlusFrequents(compte, n)
+	return lesPlusFrequents(compte, n), nil
 }
 ```
 
@@ -49,8 +52,11 @@ produira **exactement** les mêmes résultats :
 
 ```go
 func TestVersionsIdentiques(t *testing.T) {
-	naif := MotsFrequentsNaif(strings.NewReader(texte), 5)
-	optimise := MotsFrequents(strings.NewReader(texte), 5)
+	naif, err1 := MotsFrequentsNaif(strings.NewReader(texte), 5)
+	optimise, err2 := MotsFrequents(strings.NewReader(texte), 5)
+	if err1 != nil || err2 != nil {
+		t.Fatal(err1, err2)
+	}
 	if !slices.Equal(naif, optimise) {
 		t.Errorf("résultats différents :\n%v\n%v", naif, optimise)
 	}
@@ -168,7 +174,7 @@ compilateur : une **lecture** de map avec `m[string(octets)]` n'alloue pas de
 chaîne.
 
 ```go
-func MotsFrequents(r io.Reader, n int) []Frequence {
+func MotsFrequents(r io.Reader, n int) ([]Frequence, error) {
 	sc := bufio.NewScanner(r)
 	sc.Split(bufio.ScanWords)
 	compte := make(map[string]*int, 1024) // capacité initiale : moins de réallocations
@@ -187,6 +193,9 @@ func MotsFrequents(r io.Reader, n int) []Frequence {
 			un := 1
 			compte[string(minuscules)] = &un // nouveau mot : une seule allocation
 		}
+	}
+	if err := sc.Err(); err != nil { // erreur de lecture, ou mot trop long
+		return nil, err
 	}
 	…
 }
@@ -219,9 +228,9 @@ la lecture de map n'alloue pas, contrairement à l'insertion d'un nouveau mot :
 
 ```bash
 $ go build -gcflags=-m . 2>&1 | grep mots.go
-./mots.go:53:30: string(minuscules) does not escape
-./mots.go:58:18: string(minuscules) escapes to heap
-./mots.go:57:4: moved to heap: un
+./mots.go:56:30: string(minuscules) does not escape
+./mots.go:61:18: string(minuscules) escapes to heap
+./mots.go:60:4: moved to heap: un
 ```
 
 ### Verrouiller le gain

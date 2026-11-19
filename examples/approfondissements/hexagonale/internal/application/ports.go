@@ -7,7 +7,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
 )
 
 // Catalogue donne accès aux livres et aux membres.

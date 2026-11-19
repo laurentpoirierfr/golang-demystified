@@ -3,27 +3,17 @@ package application_test
 import (
 	"context"
 	"errors"
-	"fmt"
 	"io"
 	"log/slog"
 	"testing"
 	"time"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/adaptateurs/memoire"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/application"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/adaptateurs/memoire"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/application"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/pkg/horloge"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/pkg/identifiant"
 )
-
-// horlogeFixe est une horloge que le test fait avancer à la main.
-type horlogeFixe struct{ t time.Time }
-
-func (h *horlogeFixe) Maintenant() time.Time  { return h.t }
-func (h *horlogeFixe) Avance(d time.Duration) { h.t = h.t.Add(d) }
-
-// compteur produit des identifiants prévisibles : e1, e2…
-type compteur struct{ n int }
-
-func (c *compteur) Nouveau() string { c.n++; return fmt.Sprintf("e%d", c.n) }
 
 // notifieurEspion enregistre les notifications au lieu de les envoyer.
 type notifieurEspion struct {
@@ -41,7 +31,7 @@ func (n *notifieurEspion) Notifie(_ context.Context, m domaine.Membre, msg strin
 
 type banc struct {
 	service   *application.Service
-	horloge   *horlogeFixe
+	horloge   *horloge.Manuelle
 	notifieur *notifieurEspion
 	depot     *memoire.Depot
 }
@@ -57,13 +47,13 @@ func nouveauBanc() banc {
 		[]domaine.Membre{{ID: "alice", Nom: "Alice"}, {ID: "bob", Nom: "Bob"}},
 	)
 	b := banc{
-		horloge:   &horlogeFixe{time.Date(2026, 9, 1, 10, 0, 0, 0, time.UTC)},
+		horloge:   horloge.NouvelleManuelle(time.Date(2026, 9, 1, 10, 0, 0, 0, time.UTC)),
 		notifieur: &notifieurEspion{},
 		depot:     depot,
 	}
 	b.service = application.NouveauService(application.Dependances{
 		Catalogue: depot, Emprunts: depot, Transactions: depot,
-		Notifieur: b.notifieur, Horloge: b.horloge, Identifiants: &compteur{},
+		Notifieur: b.notifieur, Horloge: b.horloge, Identifiants: &identifiant.Sequence{Prefixe: "e"},
 		Journal: slog.New(slog.NewTextHandler(io.Discard, nil)),
 	})
 	return b
@@ -77,7 +67,7 @@ func TestEmprunteEtRend(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if want := b.horloge.t.Add(21 * 24 * time.Hour); !e.Echeance.Equal(want) {
+	if want := b.horloge.Maintenant().Add(21 * 24 * time.Hour); !e.Echeance.Equal(want) {
 		t.Errorf("échéance = %v, attendu %v", e.Echeance, want)
 	}
 

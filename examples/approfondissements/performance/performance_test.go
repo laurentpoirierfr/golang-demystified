@@ -15,15 +15,19 @@ import (
 var texte = strings.Repeat("Le gopher creuse un terrier. Le terrier du Gopher est profond ! ", 2000)
 
 func TestVersionsIdentiques(t *testing.T) {
-	naif := MotsFrequentsNaif(strings.NewReader(texte), 5)
-	optimise := MotsFrequents(strings.NewReader(texte), 5)
+	naif, err1 := MotsFrequentsNaif(strings.NewReader(texte), 5)
+	optimise, err2 := MotsFrequents(strings.NewReader(texte), 5)
+	if err1 != nil || err2 != nil {
+		t.Fatal(err1, err2)
+	}
 	if !slices.Equal(naif, optimise) {
 		t.Errorf("résultats différents :\n%v\n%v", naif, optimise)
 	}
 }
 
 func ExampleMotsFrequents() {
-	for _, f := range MotsFrequents(strings.NewReader(texte), 3) {
+	freqs, _ := MotsFrequents(strings.NewReader(texte), 3)
+	for _, f := range freqs {
 		fmt.Println(f.Mot, f.Compte)
 	}
 	// Output:

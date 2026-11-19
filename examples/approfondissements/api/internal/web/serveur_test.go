@@ -2,9 +2,7 @@ package web
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
-	"io"
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
@@ -107,24 +105,5 @@ func TestIdentifiantEtJournal(t *testing.T) {
 	// Sans en-tête, un identifiant est généré.
 	if id := appel(t, h, "GET", "/taches", "").Header().Get("X-Request-ID"); len(id) != 36 {
 		t.Errorf("identifiant généré inattendu : %q", id)
-	}
-}
-
-// storePanique est un double de test dont toutes les méthodes paniquent.
-type storePanique struct{ Store }
-
-func (storePanique) Liste(context.Context) ([]tache.Tache, error) { panic("boum") }
-
-func TestRecuperation(t *testing.T) {
-	var journal bytes.Buffer
-	h := Nouveau(storePanique{}, slog.New(slog.NewJSONHandler(&journal, nil))).Routes()
-
-	rec := appel(t, h, "GET", "/taches", "")
-	corps, _ := io.ReadAll(rec.Body)
-	if rec.Code != 500 || !strings.Contains(string(corps), "erreur interne") {
-		t.Errorf("réponse = %d %s", rec.Code, corps)
-	}
-	if !strings.Contains(journal.String(), `"valeur":"boum"`) {
-		t.Errorf("panique non journalisée : %s", journal.String())
 	}
 }

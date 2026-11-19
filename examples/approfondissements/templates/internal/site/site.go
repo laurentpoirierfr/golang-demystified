@@ -1,5 +1,6 @@
-// Package templates illustre le chapitre « Templates ».
-package templates
+// Package site affiche les pages HTML d'un petit site, à partir de gabarits
+// embarqués dans l'exécutable.
+package site
 
 import (
 	"embed"

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
 )
 
 // Service regroupe les cas d'usage. Il ne dépend que du domaine et des ports.

@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
 )
 
 // faux remplace l'application : l'adaptateur se teste seul, sans métier.

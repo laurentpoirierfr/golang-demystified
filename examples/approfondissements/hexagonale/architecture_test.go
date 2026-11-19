@@ -20,6 +20,9 @@ func imports(t *testing.T, dir string) []string {
 	if err != nil {
 		t.Fatal(err)
 	}
+	if len(fichiers) == 0 {
+		t.Fatalf("aucun fichier Go dans %s : la règle ne vérifierait rien", dir)
+	}
 	var res []string
 	for _, f := range fichiers {
 		if strings.HasSuffix(f, "_test.go") {
@@ -43,14 +46,17 @@ func imports(t *testing.T, dir string) []string {
 
 // TestDirectionDesDependances garantit que les dépendances pointent vers le
 // centre : le domaine ne dépend de rien, l'application ne dépend que du
-// domaine, et aucun des deux ne connaît les adaptateurs.
+// domaine, et aucun des deux ne connaît les adaptateurs. Les packages de pkg/,
+// réutilisables, ne dépendent pas du reste du projet.
 func TestDirectionDesDependances(t *testing.T) {
 	regles := []struct {
 		paquet    string
 		autorises []string // packages du projet autorisés
 	}{
-		{"domaine", nil},
-		{"application", []string{"domaine"}},
+		{"internal/domaine", nil},
+		{"internal/application", []string{"internal/domaine"}},
+		{"pkg/horloge", nil},
+		{"pkg/identifiant", nil},
 	}
 	for _, r := range regles {
 		for _, imp := range imports(t, r.paquet) {

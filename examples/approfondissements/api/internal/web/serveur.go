@@ -3,15 +3,14 @@ package web
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"log/slog"
 	"net/http"
 	"strconv"
 
 	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/internal/tache"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/api/pkg/httpkit"
 )
 
 // Store est ce dont l'API a besoin pour stocker les tâches. L'interface est
@@ -48,7 +47,11 @@ func (s *Serveur) Routes() http.Handler {
 	mux.HandleFunc("GET /sante", s.sante)
 
 	// Le premier middleware de la liste est le plus extérieur.
-	return chaine(mux, s.identifie, s.journalise, s.recupere)
+	return httpkit.Chaine(mux,
+		httpkit.Identifiant(),
+		httpkit.Journal(s.log),
+		httpkit.Recuperation(s.log),
+	)
 }
 
 func (s *Serveur) liste(w http.ResponseWriter, r *http.Request) {
@@ -57,14 +60,14 @@ func (s *Serveur) liste(w http.ResponseWriter, r *http.Request) {
 		s.erreur(w, r, err)
 		return
 	}
-	ecritJSON(w, http.StatusOK, taches)
+	httpkit.EcritJSON(w, http.StatusOK, taches)
 }
 
 func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
 	var entree struct {
 		Titre string `json:"titre"`
 	}
-	if err := litJSON(w, r, &entree); err != nil {
+	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
 	}
@@ -79,7 +82,7 @@ func (s *Serveur) cree(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Location", fmt.Sprintf("/taches/%d", t.ID))
-	ecritJSON(w, http.StatusCreated, t)
+	httpkit.EcritJSON(w, http.StatusCreated, t)
 }
 
 func (s *Serveur) detail(w http.ResponseWriter, r *http.Request) {
@@ -93,7 +96,7 @@ func (s *Serveur) detail(w http.ResponseWriter, r *http.Request) {
 		s.erreur(w, r, err)
 		return
 	}
-	ecritJSON(w, http.StatusOK, t)
+	httpkit.EcritJSON(w, http.StatusOK, t)
 }
 
 func (s *Serveur) modifie(w http.ResponseWriter, r *http.Request) {
@@ -105,7 +108,7 @@ func (s *Serveur) modifie(w http.ResponseWriter, r *http.Request) {
 	var entree struct {
 		Faite *bool `json:"faite"` // pointeur : distingue « absent » de false
 	}
-	if err := litJSON(w, r, &entree); err != nil {
+	if err := httpkit.LitJSON(w, r, &entree); err != nil {
 		s.erreur(w, r, err)
 		return
 	}
@@ -118,7 +121,7 @@ func (s *Serveur) modifie(w http.ResponseWriter, r *http.Request) {
 		s.erreur(w, r, err)
 		return
 	}
-	ecritJSON(w, http.StatusOK, t)
+	httpkit.EcritJSON(w, http.StatusOK, t)
 }
 
 func (s *Serveur) supprime(w http.ResponseWriter, r *http.Request) {
@@ -137,42 +140,18 @@ func (s *Serveur) supprime(w http.ResponseWriter, r *http.Request) {
 func (s *Serveur) sante(w http.ResponseWriter, r *http.Request) {
 	if err := s.store.Ping(r.Context()); err != nil {
 		s.log.ErrorContext(r.Context(), "base indisponible", "erreur", err)
-		ecritJSON(w, http.StatusServiceUnavailable, map[string]string{"statut": "indisponible"})
+		httpkit.EcritJSON(w, http.StatusServiceUnavailable, map[string]string{"statut": "indisponible"})
 		return
 	}
-	ecritJSON(w, http.StatusOK, map[string]string{"statut": "ok"})
+	httpkit.EcritJSON(w, http.StatusOK, map[string]string{"statut": "ok"})
 }
-
-// errRequete signale une requête mal formée (400).
-type errRequete struct{ raison string }
-
-func (e *errRequete) Error() string { return e.raison }
 
 func identifiant(r *http.Request) (int64, error) {
 	id, err := strconv.ParseInt(r.PathValue("id"), 10, 64)
 	if err != nil || id <= 0 {
-		return 0, &errRequete{"identifiant invalide"}
+		return 0, &httpkit.ErrRequete{Raison: "identifiant invalide"}
 	}
 	return id, nil
-}
-
-// litJSON décode un unique objet JSON, de 1 Mo au plus, sans champ inconnu.
-func litJSON(w http.ResponseWriter, r *http.Request, dest any) error {
-	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1<<20))
-	dec.DisallowUnknownFields()
-	if err := dec.Decode(dest); err != nil {
-		return &errRequete{"JSON invalide : " + err.Error()}
-	}
-	if dec.Decode(&struct{}{}) != io.EOF {
-		return &errRequete{"un seul objet JSON est attendu"}
-	}
-	return nil
-}
-
-func ecritJSON(w http.ResponseWriter, statut int, v any) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(statut)
-	json.NewEncoder(w).Encode(v)
 }
 
 // erreur traduit une erreur en réponse HTTP. Les erreurs inattendues sont
@@ -181,12 +160,12 @@ func (s *Serveur) erreur(w http.ResponseWriter, r *http.Request, err error) {
 	statut, message := http.StatusInternalServerError, "erreur interne"
 	if v, ok := errors.AsType[*tache.ErrValidation](err); ok {
 		statut, message = http.StatusUnprocessableEntity, v.Error()
-	} else if e, ok := errors.AsType[*errRequete](err); ok {
+	} else if e, ok := errors.AsType[*httpkit.ErrRequete](err); ok {
 		statut, message = http.StatusBadRequest, e.Error()
 	} else if errors.Is(err, tache.ErrIntrouvable) {
 		statut, message = http.StatusNotFound, err.Error()
 	} else {
 		s.log.ErrorContext(r.Context(), "erreur interne", "erreur", err)
 	}
-	ecritJSON(w, statut, map[string]string{"erreur": message})
+	httpkit.EcritJSON(w, statut, map[string]string{"erreur": message})
 }

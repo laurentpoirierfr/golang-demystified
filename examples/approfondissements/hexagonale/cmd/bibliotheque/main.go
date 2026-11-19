@@ -9,11 +9,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/adaptateurs/memoire"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/adaptateurs/notification"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/adaptateurs/web"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/application"
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/adaptateurs/memoire"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/adaptateurs/notification"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/adaptateurs/web"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/application"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/pkg/horloge"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/pkg/identifiant"
 )
 
 func main() {
@@ -31,8 +33,8 @@ func main() {
 		Emprunts:     depot,
 		Transactions: depot,
 		Notifieur:    notification.Journal{Log: journal},
-		Horloge:      notification.HorlogeSysteme{},
-		Identifiants: notification.UUID{},
+		Horloge:      horloge.Systeme{},
+		Identifiants: identifiant.UUID{},
 		Journal:      journal,
 	})
 

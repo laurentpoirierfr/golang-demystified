@@ -8,7 +8,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
 )
 
 // CasDUsage est ce que l'adaptateur attend de l'application.

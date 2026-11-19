@@ -25,20 +25,23 @@ var separateurs = regexp.MustCompile(`[^\p{L}\p{N}]+`)
 // MotsFrequentsNaif lit tout le texte en mémoire, le découpe avec une
 // expression régulière, et met chaque mot en minuscules : simple et correct,
 // mais coûteux.
-func MotsFrequentsNaif(r io.Reader, n int) []Frequence {
-	data, _ := io.ReadAll(r)
+func MotsFrequentsNaif(r io.Reader, n int) ([]Frequence, error) {
+	data, err := io.ReadAll(r)
+	if err != nil {
+		return nil, err
+	}
 	compte := map[string]int{}
 	for _, mot := range separateurs.Split(string(data), -1) {
 		if mot != "" {
 			compte[strings.ToLower(mot)]++
 		}
 	}
-	return lesPlusFrequents(compte, n)
+	return lesPlusFrequents(compte, n), nil
 }
 
 // MotsFrequents lit le texte en flux et travaille sur des octets : il n'alloue
 // qu'une chaîne par mot distinct, et non par occurrence.
-func MotsFrequents(r io.Reader, n int) []Frequence {
+func MotsFrequents(r io.Reader, n int) ([]Frequence, error) {
 	sc := bufio.NewScanner(r)
 	sc.Split(bufio.ScanWords)
 	compte := make(map[string]*int, 1024) // capacité initiale : moins de réallocations
@@ -58,11 +61,14 @@ func MotsFrequents(r io.Reader, n int) []Frequence {
 			compte[string(minuscules)] = &un // nouveau mot : une seule allocation
 		}
 	}
+	if err := sc.Err(); err != nil { // erreur de lecture, ou mot trop long
+		return nil, err
+	}
 	valeurs := make(map[string]int, len(compte))
 	for mot, c := range compte {
 		valeurs[mot] = *c
 	}
-	return lesPlusFrequents(valeurs, n)
+	return lesPlusFrequents(valeurs, n), nil
 }
 
 func separateur(r rune) bool { return !unicode.IsLetter(r) && !unicode.IsNumber(r) }

@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/domaine"
+	"github.com/laurentpoirierfr/golang-demystified/examples/approfondissements/hexagonale/internal/domaine"
 )
 
 // Depot stocke tout en mémoire, protégé par un verrou.
