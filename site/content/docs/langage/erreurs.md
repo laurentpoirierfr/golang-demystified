@@ -3,6 +3,10 @@ title: "Gestion des erreurs"
 weight: 80
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/erreurs`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/erreurs).
+
 ## Les erreurs sont des valeurs
 
 Go n'a pas d'exceptions. Une fonction qui peut échouer renvoie une valeur de

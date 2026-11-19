@@ -3,6 +3,10 @@ title: "Tests : testing"
 weight: 90
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/tests`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/tests).
+
 Les tests font partie de l'outillage standard : pas de framework à choisir ni à
 installer. Un fichier `xxx_test.go` contient des fonctions de test, et
 `go test` les compile et les exécute.

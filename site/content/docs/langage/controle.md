@@ -3,6 +3,10 @@ title: "Contrôle de flux"
 weight: 30
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/controle`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/controle).
+
 Go a peu d'instructions de contrôle : `if`, `for`, `switch`, `select` (vu avec
 la concurrence), `defer` et `goto`. Il n'y a pas de parenthèses autour des
 conditions, et les accolades sont **obligatoires**.

@@ -9,7 +9,7 @@ des programmes concurrents : pipelines, pools de workers, groupes d'erreurs,
 limitation de débit. Il montre aussi comment tester ce code et détecter les
 fuites de goroutines.
 
-Tout le code de ce chapitre est dans `examples/approfondissements/concurrence`.
+Tout le code de ce chapitre est dans [`examples/approfondissements/concurrence`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/concurrence).
 
 ## Trois règles d'or
 

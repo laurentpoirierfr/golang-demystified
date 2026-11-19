@@ -3,6 +3,10 @@ title: "Génériques"
 weight: 90
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/generiques`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/generiques).
+
 Les génériques, ou **paramètres de type**, sont arrivés avec **Go 1.18**, après
 plus de dix ans de débats. Ils permettent d'écrire une fonction ou un type une
 seule fois pour plusieurs types, en gardant la vérification à la compilation.

@@ -3,6 +3,10 @@ title: "Collections : slices, maps, iter, cmp"
 weight: 20
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/collections`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/collections).
+
 Les packages `slices` et `maps` (**Go 1.21**), `cmp` (**Go 1.21**) et `iter`
 (**Go 1.23**) forment la boîte à outils générique des collections. Le chapitre
 « Tableaux, slices et maps » a présenté les bases ; celui-ci va plus loin.

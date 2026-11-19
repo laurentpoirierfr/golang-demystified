@@ -3,6 +3,10 @@ title: "Journalisation : log/slog"
 weight: 70
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/slog`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/slog).
+
 ## log : le journal minimal
 
 Le package `log`, présent depuis Go 1.0, écrit des messages horodatés sur la

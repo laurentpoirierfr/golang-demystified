@@ -9,7 +9,7 @@ gestion de tâches, stockées dans [SQLite](https://sqlite.org). Il rassemble ce
 précédents ont présenté séparément : routage HTTP, JSON, `database/sql`,
 `log/slog`, `context`, `embed` et les tests.
 
-Le code complet est dans `examples/approfondissements/api`, et chaque
+Le code complet est dans [`examples/approfondissements/api`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/api), et chaque
 fonctionnalité est couverte par un test.
 
 ## L'API

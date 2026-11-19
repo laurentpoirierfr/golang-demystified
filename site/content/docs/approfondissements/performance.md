@@ -9,7 +9,7 @@ outils pour la trouver : benchmarks, profils, analyse d'échappement, traces et
 optimisation guidée par profil. Il les applique à un exemple réel, dont tous
 les chiffres ont été mesurés.
 
-Le code est dans `examples/approfondissements/performance`.
+Le code est dans [`examples/approfondissements/performance`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/performance).
 
 ## La démarche
 

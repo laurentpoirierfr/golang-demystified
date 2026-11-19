@@ -3,6 +3,10 @@ title: "Tour d'horizon"
 weight: 100
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/divers`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/divers).
+
 La bibliothèque standard de Go est vaste. Ce chapitre présente des packages
 utiles au quotidien, qui n'ont pas eu de chapitre dédié.
 

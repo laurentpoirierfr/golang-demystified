@@ -3,6 +3,10 @@ title: "Goroutines et channels"
 weight: 110
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/concurrence`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/concurrence).
+
 La concurrence est au cœur de Go. Ce chapitre en présente les briques de
 base. Le chapitre « Concurrence en pratique » de la partie Approfondissements
 les met en œuvre dans des motifs complets : pipelines, pools de workers,

@@ -12,7 +12,7 @@ Go fournit deux moteurs de gabarits qui partagent la même syntaxe :
 
 Ce chapitre présente la syntaxe, puis construit un petit site avec un gabarit
 de mise en page commun, et termine par la génération de code. Le code est dans
-`examples/approfondissements/templates`.
+[`examples/approfondissements/templates`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/templates).
 
 ## La syntaxe
 

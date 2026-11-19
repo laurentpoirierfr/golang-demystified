@@ -3,6 +3,10 @@ title: "JSON : encoding/json"
 weight: 50
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/stdlib/json`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/stdlib/json).
+
 ## Encoder et décoder
 
 `json.Marshal` transforme une valeur Go en JSON, `json.Unmarshal` fait

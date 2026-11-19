@@ -8,7 +8,7 @@ l'étend. Ce chapitre présente les outils de l'écosystème, puis construit un
 **opérateur** : un programme qui apprend à Kubernetes à gérer une application,
 ici l'API des tâches du chapitre « Une API web complète ».
 
-Le code est dans `examples/approfondissements/operateur`.
+Le code est dans [`examples/approfondissements/operateur`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/operateur).
 
 ## Le principe : la boucle de réconciliation
 

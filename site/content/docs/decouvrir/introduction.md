@@ -95,6 +95,6 @@ disponible dans un projet qui utilise une version plus ancienne :
 > [!NOTE]
 > **Go 1.22** — `for i := range 10` parcourt les entiers de 0 à 9.
 
-Le code des exemples se trouve dans le dossier `examples/` du
+Le code des exemples se trouve dans le dossier [`examples/`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples) du
 [dépôt du livre](https://github.com/laurentpoirierfr/golang-demystified). Il est
 compilé et testé à chaque modification.

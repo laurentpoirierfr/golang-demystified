@@ -3,6 +3,10 @@ title: "Variables, constantes et types"
 weight: 10
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/langage/bases`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/bases).
+
 ## Déclarer des variables
 
 Go est un langage **statiquement typé** : chaque variable a un type fixé à la

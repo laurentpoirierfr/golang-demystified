@@ -3,6 +3,10 @@ title: "Premier programme"
 weight: 30
 ---
 
+> [!NOTE]
+> Les exemples de ce chapitre sont compilés et testés à chaque modification :
+> [`examples/hello`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/hello).
+
 ## Créer un module
 
 Tout projet Go est un **module** : un ensemble de packages versionnés ensemble,
