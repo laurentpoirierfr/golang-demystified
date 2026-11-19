@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: API des tâches
+  description: |
+    Exemple du livre Golang Demystified, chapitre « Une API web complète ».
+    Ce contrat est la source de vérité : le code Go des types et du routage
+    en est généré par oapi-codegen.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /taches:
+    get:
+      operationId: listeTaches
+      summary: Liste les tâches
+      tags: [taches]
+      responses:
+        "200":
+          description: Les tâches, par ordre de création
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Tache" }
+    post:
+      operationId: creeTache
+      summary: Crée une tâche
+      tags: [taches]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NouvelleTache" }
+      responses:
+        "201":
+          description: La tâche créée
+          headers:
+            Location:
+              description: Adresse de la nouvelle tâche
+              schema: { type: string }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Tache" }
+        "400": { $ref: "#/components/responses/RequeteInvalide" }
+        "422": { $ref: "#/components/responses/DonneeInvalide" }
+  /taches/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: integer, format: int64, minimum: 1 }
+    get:
+      operationId: detailTache
+      summary: Détail d'une tâche
+      tags: [taches]
+      responses:
+        "200":
+          description: La tâche
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Tache" }
+        "400": { $ref: "#/components/responses/RequeteInvalide" }
+        "404": { $ref: "#/components/responses/Introuvable" }
+    patch:
+      operationId: modifieTache
+      summary: Marque une tâche comme faite, ou non
+      tags: [taches]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ModificationTache" }
+      responses:
+        "200":
+          description: La tâche à jour
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Tache" }
+        "400": { $ref: "#/components/responses/RequeteInvalide" }
+        "404": { $ref: "#/components/responses/Introuvable" }
+    delete:
+      operationId: supprimeTache
+      summary: Supprime une tâche
+      tags: [taches]
+      responses:
+        "204": { description: Tâche supprimée }
+        "400": { $ref: "#/components/responses/RequeteInvalide" }
+        "404": { $ref: "#/components/responses/Introuvable" }
+  /sante:
+    get:
+      operationId: sante
+      summary: Contrôle de santé
+      tags: [exploitation]
+      responses:
+        "200":
+          description: Le service et sa base répondent
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Sante" }
+        "503":
+          description: La base ne répond pas
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Sante" }
+components:
+  schemas:
+    Tache:
+      type: object
+      required: [id, titre, faite, creation]
+      properties:
+        id: { type: integer, format: int64, example: 1 }
+        titre: { type: string, example: Relire le livre }
+        faite: { type: boolean, example: false }
+        creation: { type: string, format: date-time }
+    NouvelleTache:
+      type: object
+      additionalProperties: false
+      required: [titre]
+      properties:
+        titre: { type: string, minLength: 1, maxLength: 200, example: Relire le livre }
+    ModificationTache:
+      type: object
+      additionalProperties: false
+      required: [faite]
+      properties:
+        faite: { type: boolean }
+    Sante:
+      type: object
+      required: [statut]
+      properties:
+        statut: { type: string, enum: [ok, indisponible] }
+    Erreur:
+      type: object
+      required: [erreur]
+      properties:
+        erreur: { type: string, example: tâche introuvable }
+  responses:
+    RequeteInvalide:
+      description: Requête mal formée ou non conforme au contrat
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Erreur" }
+    DonneeInvalide:
+      description: Donnée refusée par les règles métier
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Erreur" }
+    Introuvable:
+      description: Tâche introuvable
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Erreur" }

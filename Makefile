@@ -7,7 +7,7 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site serve book pdf check test-integration clean
+.PHONY: all site serve book pdf check test-integration sqlc generate clean
 
 all: check site book
 
@@ -48,6 +48,16 @@ TC_ENV := $(if $(shell docker --version 2>/dev/null | grep -i podman),DOCKER_HOS
 ## test-integration : tests d'intégration avec Testcontainers (Docker ou Podman)
 test-integration:
 	$(TC_ENV) go test -count=1 -run Postgres -v ./examples/...
+
+## sqlc : régénère le code d'accès aux données de l'exemple « catalogue »
+SQLC_IMAGE := docker.io/sqlc/sqlc:1.31.1
+sqlc:
+	docker run --rm --volume "$(CURDIR)/examples/approfondissements/catalogue:/src" --workdir /src \
+		$(CONTAINER_USER) $(SQLC_IMAGE) generate
+
+## generate : régénère tout le code généré (oapi-codegen, sqlc)
+generate: sqlc
+	go generate ./...
 
 clean:
 	rm -rf book/build site/public site/resources site/.hugo_build.lock

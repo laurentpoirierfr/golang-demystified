@@ -1,0 +1,7 @@
+# Configuration d'oapi-codegen : https://github.com/oapi-codegen/oapi-codegen
+package: web
+output: ../internal/web/openapi.gen.go
+generate:
+  models: true          # les types des schémas
+  std-http-server: true # l'interface du serveur et le routage net/http (Go 1.22)
+  embedded-spec: true   # le contrat embarqué, pour le servir et valider les requêtes
