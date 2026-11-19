@@ -310,12 +310,54 @@ Quelques points à retenir :
 > fonctions `Snapshot` et `Restore` du module PostgreSQL, qui sauvegardent et
 > restaurent l'état de la base.
 
-### Avec Podman
+### Le moteur de conteneurs : Docker ou Podman
 
-Testcontainers dialogue avec l'API Docker. Podman en propose une version
-compatible, qu'il suffit d'activer. Le conteneur « Ryuk », chargé de nettoyer
-les conteneurs orphelins, ne fonctionne pas en mode *rootless* : on le
-désactive, et c'est `CleanupContainer` qui fait le ménage.
+Testcontainers dialogue avec le moteur de conteneurs à travers l'**API
+Docker**. Il fonctionne donc avec Docker, mais aussi avec Podman, qui propose
+une API compatible. Il utilise aussi un petit conteneur, « Ryuk », chargé de
+supprimer les conteneurs orphelins si un test est interrompu brutalement.
+
+#### Avec Docker
+
+Avec **Docker Desktop** (macOS, Windows) ou **Docker Engine** (Linux), il n'y a
+rien à configurer : Testcontainers trouve le moteur tout seul.
+
+```bash
+docker info                     # vérifie que le moteur répond
+go test -run TestPostgres ./...
+```
+
+Quelques cas particuliers :
+
+- sur Linux, l'utilisateur doit pouvoir accéder au moteur sans `sudo`, en
+  appartenant au groupe `docker` :
+
+  ```bash
+  sudo usermod -aG docker $USER   # puis se reconnecter
+  ```
+
+- avec Docker en mode *rootless*, indiquez l'emplacement de son socket :
+
+  ```bash
+  export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+  ```
+
+- avec **Colima** (macOS), indiquez le socket de la machine virtuelle, et
+  celui que Ryuk doit monter :
+
+  ```bash
+  export DOCKER_HOST=unix://$HOME/.colima/default/docker.sock
+  export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+  ```
+
+- dans **GitHub Actions**, les machines `ubuntu-latest` disposent de Docker :
+  les tests d'intégration fonctionnent sans configuration.
+
+#### Avec Podman
+
+Podman n'a pas de démon : son API compatible Docker est fournie par un service
+à activer. En mode *rootless*, Ryuk ne fonctionne pas : on le désactive, et
+c'est `CleanupContainer` qui fait le ménage.
 
 ```bash
 systemctl --user enable --now podman.socket
@@ -324,7 +366,18 @@ export TESTCONTAINERS_RYUK_DISABLED=true
 go test -run TestPostgres ./...
 ```
 
-Dans le dépôt du livre, `make test-integration` détecte Podman et définit ces
+Sur macOS, avec `podman machine`, la commande
+`podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}'`
+donne le chemin du socket à placer dans `DOCKER_HOST`.
+
+| Variable                                  | Rôle                                            |
+|-------------------------------------------|-------------------------------------------------|
+| `DOCKER_HOST`                             | adresse de l'API du moteur, si elle n'est pas celle par défaut |
+| `TESTCONTAINERS_RYUK_DISABLED`            | désactive Ryuk (Podman *rootless*)              |
+| `TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE`   | socket à monter dans Ryuk (Colima)              |
+
+Dans le dépôt du livre, `make test-integration` fonctionne avec les deux
+moteurs : avec Docker, il n'y a rien à faire ; avec Podman, il définit ces
 variables automatiquement.
 
 Testcontainers propose des modules prêts à l'emploi pour la plupart des
