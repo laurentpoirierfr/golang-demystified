@@ -1,0 +1,15 @@
+{{define "base"}}<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>{{block "titre" .}}Golang Demystified{{end}}</title>
+</head>
+<body>
+  <header><a href="/">Accueil</a></header>
+  <main>
+{{block "contenu" .}}{{end}}
+  </main>
+  <footer>Généré le {{.Date | date}}</footer>
+</body>
+</html>
+{{end}}

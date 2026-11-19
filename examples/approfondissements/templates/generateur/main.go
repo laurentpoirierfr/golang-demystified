@@ -1,0 +1,87 @@
+// Command generateur produit, pour un type énuméré, une méthode String et une
+// fonction d'analyse. Il illustre la génération de code avec text/template.
+//
+// Usage, dans un fichier du package cible :
+//
+//	//go:generate go run ./generateur -type Statut -package commande Brouillon Valide Expediee
+package main
+
+import (
+	"bytes"
+	"flag"
+	"fmt"
+	"go/format"
+	"log"
+	"os"
+	"strings"
+	"text/template"
+)
+
+var gabarit = template.Must(template.New("enum").Funcs(template.FuncMap{
+	"lower": strings.ToLower,
+}).Parse(`// Code généré par generateur ; NE PAS MODIFIER.
+
+package {{.Package}}
+
+import "fmt"
+
+// String renvoie le nom de la valeur.
+func (v {{.Type}}) String() string {
+	switch v {
+	{{- range .Valeurs}}
+	case {{.}}:
+		return "{{lower .}}"
+	{{- end}}
+	}
+	return fmt.Sprintf("{{.Type}}(%d)", int(v))
+}
+
+// Parse{{.Type}} analyse le nom d'une valeur.
+func Parse{{.Type}}(s string) ({{.Type}}, error) {
+	switch s {
+	{{- range .Valeurs}}
+	case "{{lower .}}":
+		return {{.}}, nil
+	{{- end}}
+	}
+	return 0, fmt.Errorf("{{lower .Type}} inconnu : %q", s)
+}
+`))
+
+// Enum décrit le type à générer.
+type Enum struct {
+	Package string
+	Type    string
+	Valeurs []string
+}
+
+// Genere produit le code source formaté.
+func Genere(e Enum) ([]byte, error) {
+	var b bytes.Buffer
+	if err := gabarit.Execute(&b, e); err != nil {
+		return nil, err
+	}
+	return format.Source(b.Bytes()) // gofmt, et vérification de la syntaxe
+}
+
+func main() {
+	typ := flag.String("type", "", "nom du type énuméré")
+	pkg := flag.String("package", "main", "nom du package")
+	sortie := flag.String("o", "", "fichier de sortie (sinon <type>_string.go)")
+	flag.Parse()
+
+	if *typ == "" || flag.NArg() == 0 {
+		log.Fatal("usage : generateur -type T [-package p] Valeur1 Valeur2…")
+	}
+	code, err := Genere(Enum{Package: *pkg, Type: *typ, Valeurs: flag.Args()})
+	if err != nil {
+		log.Fatal(err)
+	}
+	if *sortie == "" {
+		*sortie = strings.ToLower(*typ) + "_string.go"
+	}
+	if err := os.WriteFile(*sortie, code, 0o644); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("écrit :", *sortie)
+}
