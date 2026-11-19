@@ -28,6 +28,8 @@ sa bibliothèque standard et son évolution au fil des versions.
 - Go ≥ 1.27
 - Hugo extended ≥ 0.150
 - Docker (ou Podman) pour générer le livre avec [Quarto](https://quarto.org)
+  et pour les tests d'intégration ([Testcontainers](https://golang.testcontainers.org)) ;
+  avec Podman, activer l'API : `systemctl --user enable --now podman.socket`
 
 ## Commandes
 
@@ -35,7 +37,8 @@ sa bibliothèque standard et son évolution au fil des versions.
 make serve   # prévisualisation sur http://localhost:1313/golang-demystified/
 make site    # génère le site dans docs/
 make book    # génère book/golang-demystified.pdf et .epub (Quarto + Typst)
-make check   # gofmt, go vet et go test sur les exemples et les outils
+make check   # gofmt, go vet et go test (rapide, sans conteneur)
+make test-integration  # tests avec Testcontainers (Docker ou Podman)
 make all     # tout à la fois
 ```
 

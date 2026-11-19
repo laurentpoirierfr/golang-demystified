@@ -7,7 +7,7 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site serve book pdf check clean
+.PHONY: all site serve book pdf check test-integration clean
 
 all: check site book
 
@@ -34,11 +34,20 @@ book:
 ## pdf : alias de book
 pdf: book
 
-## check : vérifie et teste les outils et les exemples du livre
+## check : vérifie et teste les outils et les exemples du livre (sans conteneur)
 check:
 	test -z "$$(gofmt -l tools examples)"
 	go vet ./...
-	go test ./...
+	go test -short ./...
+
+# Avec Podman, Testcontainers passe par l'API compatible Docker de Podman
+# (systemctl --user start podman.socket), sans le conteneur « Ryuk ».
+PODMAN_SOCKET := $(XDG_RUNTIME_DIR)/podman/podman.sock
+TC_ENV := $(if $(shell docker --version 2>/dev/null | grep -i podman),DOCKER_HOST=unix://$(PODMAN_SOCKET) TESTCONTAINERS_RYUK_DISABLED=true)
+
+## test-integration : tests d'intégration avec Testcontainers (Docker ou Podman)
+test-integration:
+	$(TC_ENV) go test -count=1 -run Postgres -v ./examples/...
 
 clean:
 	rm -rf book/build site/public site/resources site/.hugo_build.lock
