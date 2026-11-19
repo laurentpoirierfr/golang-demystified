@@ -814,12 +814,136 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Dans cet exemple, nous définissons une structure &lt;strong&gt;RFC3339Date&lt;/strong&gt; avec un champ Date de type &lt;strong&gt;time.Time&lt;/strong&gt;. Nous utilisons ensuite &lt;strong&gt;json.Unmarshal&lt;/strong&gt; pour décompresser le JSON dans cette structure. La date décodée sera stockée dans le champ &lt;strong&gt;Date&lt;/strong&gt; de la structure &lt;strong&gt;RFC3339Date&lt;/strong&gt;.&lt;/p&gt;</description></item><item><title>Introduction</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/introduction/</guid><description>
-&lt;h2 data-hextra-search-id="démystifier-go--exploration-de-lécosystème-dun-langage-de-programmation-révolutionnaire"&gt;Démystifier Go : Exploration de l&amp;rsquo;Écosystème d&amp;rsquo;un Langage de Programmation Révolutionnaire&lt;span class="hx:absolute hx:-mt-20" id="démystifier-go--exploration-de-lécosystème-dun-langage-de-programmation-révolutionnaire"&gt;&lt;/span&gt;
-&lt;a href="#d%c3%a9mystifier-go--exploration-de-l%c3%a9cosyst%c3%a8me-dun-langage-de-programmation-r%c3%a9volutionnaire" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dans le paysage des langages de programmation, émergent parfois des solutions qui résonnent avec la communauté des développeurs d&amp;rsquo;une manière unique. Go, souvent désigné sous le nom de Golang, est l&amp;rsquo;un de ces langages. Conçu par Google, Go a rapidement gagné en popularité pour sa simplicité, ses performances élevées et sa robustesse. Cependant, au-delà de ces caractéristiques techniques, Go possède un écosystème dynamique et en constante évolution qui mérite d&amp;rsquo;être exploré et compris.&lt;/p&gt;
-&lt;p&gt;Une des particularités les plus remarquables de Go est sa courbe d&amp;rsquo;apprentissage rapide. Grâce à sa syntaxe épurée et à une conception axée sur la simplicité et la lisibilité, les nouveaux développeurs peuvent se sentir rapidement à l&amp;rsquo;aise avec le langage. Cette facilité d&amp;rsquo;adoption ne compromet en rien la puissance de Go, bien au contraire : elle permet aux développeurs de se concentrer sur la résolution des problèmes plutôt que sur des subtilités syntaxiques.&lt;/p&gt;
-&lt;p&gt;Dans ce document, nous nous aventurerons dans l&amp;rsquo;univers de Go, explorant non seulement les fondements du langage lui-même, mais également l&amp;rsquo;écosystème qui l&amp;rsquo;entoure. Nous plongerons dans les bibliothèques standard, les outils de développement, les frameworks et les projets open source qui font de Go bien plus qu&amp;rsquo;un simple langage de programmation, mais plutôt une communauté vibrante et innovante.&lt;/p&gt;
-&lt;p&gt;Que vous soyez un développeur curieux cherchant à en apprendre davantage sur Go, un décideur évaluant les technologies pour votre prochain projet, ou simplement quelqu&amp;rsquo;un intéressé par les dernières avancées technologiques, ce document servira de guide pour naviguer à travers les méandres de Go et son écosystème florissant.&lt;/p&gt;
-&lt;p&gt;Préparez-vous à être éclairé, inspiré et peut-être même surpris par la richesse et la diversité de ce que Go et sa communauté ont à offrir.&lt;/p&gt;</description></item><item><title>Organiser un projet</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/organisation-projet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/organisation-projet/</guid><description>
+&lt;h2 data-hextra-search-id="pourquoi-go-"&gt;Pourquoi Go ?&lt;span class="hx:absolute hx:-mt-20" id="pourquoi-go-"&gt;&lt;/span&gt;
+&lt;a href="#pourquoi-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go est né chez Google en 2007, d&amp;rsquo;une frustration partagée par trois ingénieurs :
+Robert Griesemer, Rob Pike et Ken Thompson. Les programmes sur lesquels ils
+travaillaient, écrits en C++ et en Java, mettaient de longues minutes à compiler,
+leurs dépendances étaient difficiles à maîtriser, et les machines multicœurs
+étaient mal exploitées par des langages pensés pour un seul processeur.&lt;/p&gt;
+&lt;p&gt;Leur objectif n&amp;rsquo;était pas d&amp;rsquo;inventer des concepts nouveaux, mais de &lt;strong&gt;retirer&lt;/strong&gt;
+tout ce qui ralentit une équipe : un langage petit, lisible, qui compile en
+quelques secondes, produit un binaire autonome et rend la concurrence naturelle.&lt;/p&gt;
+&lt;p&gt;Go a été rendu public en novembre 2009. La version &lt;strong&gt;Go 1.0&lt;/strong&gt;, publiée en mars
+2012, a marqué le début de la stabilité. Depuis, Go est devenu le langage de
+l&amp;rsquo;infrastructure moderne : Docker, Kubernetes, Terraform, Prometheus, etcd ou
+Caddy sont écrits en Go.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="une-philosophie-de-la-simplicité"&gt;Une philosophie de la simplicité&lt;span class="hx:absolute hx:-mt-20" id="une-philosophie-de-la-simplicité"&gt;&lt;/span&gt;
+&lt;a href="#une-philosophie-de-la-simplicit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Quelques principes guident la conception de Go et reviennent tout au long de ce
+livre :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Peu de mots-clés, une seule façon de faire.&lt;/strong&gt; Go compte 25 mots-clés. Il n&amp;rsquo;y a
+qu&amp;rsquo;une boucle (&lt;code&gt;for&lt;/code&gt;), pas d&amp;rsquo;héritage, pas d&amp;rsquo;exceptions, pas de surcharge
+d&amp;rsquo;opérateurs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La lisibilité avant l&amp;rsquo;élégance.&lt;/strong&gt; Le code est plus souvent lu qu&amp;rsquo;écrit. Le
+formatage est imposé par &lt;code&gt;gofmt&lt;/code&gt; : il n&amp;rsquo;y a pas de débat sur le style.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La composition plutôt que l&amp;rsquo;héritage.&lt;/strong&gt; Les types se combinent par
+intégration, et les interfaces sont satisfaites implicitement.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Les erreurs sont des valeurs.&lt;/strong&gt; Une fonction qui peut échouer renvoie une
+erreur, que l&amp;rsquo;appelant traite explicitement.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La concurrence intégrée au langage.&lt;/strong&gt; Les goroutines et les channels font
+partie du langage, et non d&amp;rsquo;une bibliothèque.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Un outillage complet fourni d&amp;rsquo;office.&lt;/strong&gt; Compilation, tests, benchmarks,
+formatage, documentation, profilage et gestion des dépendances sont tous
+disponibles via la commande &lt;code&gt;go&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;« Clear is better than clever. » — Rob Pike, &lt;em&gt;Go Proverbs&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 data-hextra-search-id="la-promesse-de-compatibilité"&gt;La promesse de compatibilité&lt;span class="hx:absolute hx:-mt-20" id="la-promesse-de-compatibilité"&gt;&lt;/span&gt;
+&lt;a href="#la-promesse-de-compatibilit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Avec Go 1.0, l&amp;rsquo;équipe s&amp;rsquo;est engagée sur une &lt;strong&gt;promesse de compatibilité&lt;/strong&gt; : un
+programme qui compile avec Go 1.x continuera de compiler et de fonctionner avec
+toutes les versions 1.y suivantes. Cette promesse a été tenue depuis plus de
+quatorze ans, et c&amp;rsquo;est l&amp;rsquo;une des raisons du succès de Go en entreprise.&lt;/p&gt;
+&lt;p&gt;Le langage évolue pourtant : génériques, itérateurs, nouvelles fonctions de la
+bibliothèque standard, nouveau ramasse-miettes… Ces évolutions sont ajoutées
+sans casser l&amp;rsquo;existant. Lorsqu&amp;rsquo;un comportement doit changer, il dépend de la
+version déclarée dans le fichier &lt;code&gt;go.mod&lt;/code&gt; du module, ce qui permet à chaque
+projet de migrer à son rythme.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="un-cycle-de-sortie-régulier"&gt;Un cycle de sortie régulier&lt;span class="hx:absolute hx:-mt-20" id="un-cycle-de-sortie-régulier"&gt;&lt;/span&gt;
+&lt;a href="#un-cycle-de-sortie-r%c3%a9gulier" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Une nouvelle version majeure de Go sort &lt;strong&gt;tous les six mois&lt;/strong&gt;, en février et en
+août. Les deux dernières versions majeures reçoivent des correctifs de sécurité
+(les versions mineures, comme &lt;code&gt;1.27.4&lt;/code&gt;).&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Version&lt;/th&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Apport marquant&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td&gt;mars 2012&lt;/td&gt;
+&lt;td&gt;Stabilité et promesse de compatibilité&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;août 2015&lt;/td&gt;
+&lt;td&gt;Compilateur écrit en Go, ramasse-miettes concurrent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.11&lt;/td&gt;
+&lt;td&gt;août 2018&lt;/td&gt;
+&lt;td&gt;Modules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.18&lt;/td&gt;
+&lt;td&gt;mars 2022&lt;/td&gt;
+&lt;td&gt;Génériques, fuzzing, workspaces&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.21&lt;/td&gt;
+&lt;td&gt;août 2023&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;slices&lt;/code&gt;, &lt;code&gt;maps&lt;/code&gt;, &lt;code&gt;log/slog&lt;/code&gt;, &lt;code&gt;min&lt;/code&gt;, &lt;code&gt;max&lt;/code&gt;, &lt;code&gt;clear&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.22&lt;/td&gt;
+&lt;td&gt;février 2024&lt;/td&gt;
+&lt;td&gt;Variable de boucle par itération, &lt;code&gt;range&lt;/code&gt; sur entier&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.23&lt;/td&gt;
+&lt;td&gt;août 2024&lt;/td&gt;
+&lt;td&gt;Itérateurs (&lt;code&gt;range&lt;/code&gt; sur fonction)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.26&lt;/td&gt;
+&lt;td&gt;février 2026&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;new(expr)&lt;/code&gt;, ramasse-miettes Green Tea&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.27&lt;/td&gt;
+&lt;td&gt;août 2026&lt;/td&gt;
+&lt;td&gt;Méthodes génériques, &lt;code&gt;encoding/json/v2&lt;/code&gt;, &lt;code&gt;uuid&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;La partie « L&amp;rsquo;évolution de Go » détaille ce qu&amp;rsquo;a apporté chaque version.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="comment-lire-ce-livre"&gt;Comment lire ce livre&lt;span class="hx:absolute hx:-mt-20" id="comment-lire-ce-livre"&gt;&lt;/span&gt;
+&lt;a href="#comment-lire-ce-livre" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Le livre est organisé en parties :&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Découvrir Go&lt;/strong&gt; : installation, premier programme et outil &lt;code&gt;go&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le langage&lt;/strong&gt; : types, fonctions, structures, interfaces, erreurs,
+génériques.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;La bibliothèque standard&lt;/strong&gt; : les packages à connaître.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;L&amp;rsquo;évolution de Go&lt;/strong&gt; : ce que chaque version a apporté.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Approfondissements&lt;/strong&gt; : des chapitres construits autour d&amp;rsquo;exemples complets
+(concurrence, templates, organisation d&amp;rsquo;un projet…).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Le livre décrit &lt;strong&gt;Go 1.27&lt;/strong&gt;. Lorsqu&amp;rsquo;une fonctionnalité est apparue récemment,
+la version qui l&amp;rsquo;a introduite est indiquée. Cela permet de savoir si elle est
+disponible dans un projet qui utilise une version plus ancienne :&lt;/p&gt;
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;&lt;strong&gt;Go 1.22&lt;/strong&gt; — &lt;code&gt;for i := range 10&lt;/code&gt; parcourt les entiers de 0 à 9.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Le code des exemples se trouve dans le dossier &lt;code&gt;examples/&lt;/code&gt; du
+&lt;a href="https://github.com/laurentpoirierfr/golang-demystified" target="_blank" rel="noopener"&gt;dépôt du livre&lt;/a&gt;. Il est
+compilé et testé à chaque modification.&lt;/p&gt;</description></item><item><title>Organiser un projet</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/organisation-projet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/approfondissements/organisation-projet/</guid><description>
 &lt;h2 data-hextra-search-id="exemple-de-structure-du-projet"&gt;Exemple de structure du projet&lt;span class="hx:absolute hx:-mt-20" id="exemple-de-structure-du-projet"&gt;&lt;/span&gt;
 &lt;a href="#exemple-de-structure-du-projet" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;myproject/
@@ -1018,21 +1142,17 @@ data-copied-label="Copié !"
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Cette organisation permet de structurer votre projet de manière modulaire et claire, en séparant les différentes responsabilités et en facilitant la maintenance et la scalabilité du code.&lt;/p&gt;</description></item><item><title>Installation</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</guid><description>
-&lt;h2 data-hextra-search-id="téléchargement-de-go-"&gt;Téléchargement de Go :&lt;span class="hx:absolute hx:-mt-20" id="téléchargement-de-go-"&gt;&lt;/span&gt;
-&lt;a href="#t%c3%a9l%c3%a9chargement-de-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Rendez-vous sur le site officiel de Go à l&amp;rsquo;adresse &lt;a href="https://golang.org/dl/" target="_blank" rel="noopener"&gt;https://golang.org/dl/&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Téléchargez la version appropriée pour votre système d&amp;rsquo;exploitation (Linux, macOS, Windows, etc.).&lt;/li&gt;
-&lt;li&gt;Une fois le téléchargement terminé, extrayez l&amp;rsquo;archive dans le répertoire &lt;strong&gt;$HOME/Community/go&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 data-hextra-search-id="configuration-des-variables-denvironnement-"&gt;Configuration des variables d&amp;rsquo;environnement :&lt;span class="hx:absolute hx:-mt-20" id="configuration-des-variables-denvironnement-"&gt;&lt;/span&gt;
-&lt;a href="#configuration-des-variables-denvironnement-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Ouvrez ou créez le fichier de profil de votre shell (&lt;strong&gt;~/.bash_profile&lt;/strong&gt;, &lt;strong&gt;~/.bashrc&lt;/strong&gt;, &lt;strong&gt;~/.zshrc&lt;/strong&gt;, etc.).&lt;/li&gt;
-&lt;li&gt;Ajoutez les lignes suivantes pour définir les variables d&amp;rsquo;environnement &lt;strong&gt;GOROOT&lt;/strong&gt;, &lt;strong&gt;GOPATH&lt;/strong&gt;, et mettre les binaires de &lt;strong&gt;GOPATH/bin&lt;/strong&gt; dans le &lt;strong&gt;PATH&lt;/strong&gt; :&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="installer-go"&gt;Installer Go&lt;span class="hx:absolute hx:-mt-20" id="installer-go"&gt;&lt;/span&gt;
+&lt;a href="#installer-go" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les distributions officielles sont disponibles sur
+&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;. Une installation de Go est autonome : elle
+contient le compilateur, la bibliothèque standard et tous les outils.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="linux"&gt;Linux&lt;span class="hx:absolute hx:-mt-20" id="linux"&gt;&lt;/span&gt;
+&lt;a href="#linux" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Téléchargez l&amp;rsquo;archive, puis extrayez-la dans &lt;code&gt;/usr/local&lt;/code&gt; en remplaçant toute
+installation précédente :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOROOT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/Community/go
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;GOPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/Community/gopath
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:&lt;span class="nv"&gt;$GOROOT&lt;/span&gt;/bin:&lt;span class="nv"&gt;$GOPATH&lt;/span&gt;/bin&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -LO https://go.dev/dl/go1.27.4.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo rm -rf /usr/local/go
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo tar -C /usr/local -xzf go1.27.4.linux-amd64.tar.gz&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copier le code"
@@ -1044,14 +1164,10 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;h2 data-hextra-search-id="vérification-de-linstallation-"&gt;Vérification de l&amp;rsquo;installation :&lt;span class="hx:absolute hx:-mt-20" id="vérification-de-linstallation-"&gt;&lt;/span&gt;
-&lt;a href="#v%c3%a9rification-de-linstallation-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Ouvrez un nouveau terminal.&lt;/li&gt;
-&lt;li&gt;Tapez &lt;strong&gt;go version&lt;/strong&gt; pour vérifier que Go est correctement installé et configuré.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Ajoutez ensuite le répertoire des binaires de Go, ainsi que celui des outils
+que vous installerez, à votre &lt;code&gt;PATH&lt;/code&gt; (dans &lt;code&gt;~/.bashrc&lt;/code&gt;, &lt;code&gt;~/.zshrc&lt;/code&gt;…) :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;elfeo@elfeo:~/Project,golang-demystified$ go version
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go version go1.22.2 linux/amd64&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;:/usr/local/go/bin:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/go/bin&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copier le code"
@@ -1063,34 +1179,164 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;Avec ces configurations, vous pourrez utiliser Go et ses outils associés de manière fluide, en ayant accès aux binaires des packages installés dans &lt;strong&gt;$HOME/Community/gopath/bin&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2 data-hextra-search-id="téléchargement-de-visual-studio-code-"&gt;Téléchargement de Visual Studio Code :&lt;span class="hx:absolute hx:-mt-20" id="téléchargement-de-visual-studio-code-"&gt;&lt;/span&gt;
-&lt;a href="#t%c3%a9l%c3%a9chargement-de-visual-studio-code-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Rendez-vous sur le site officiel de Visual Studio Code à l&amp;rsquo;adresse &lt;a href="https://code.visualstudio.com/" target="_blank" rel="noopener"&gt;https://code.visualstudio.com/&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Téléchargez la version appropriée pour votre système d&amp;rsquo;exploitation (Linux, macOS, Windows, etc.).&lt;/li&gt;
-&lt;li&gt;Suivez les instructions pour installer Visual Studio Code sur votre système.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 data-hextra-search-id="installation-dextensions-pour-go-"&gt;Installation d&amp;rsquo;extensions pour Go :&lt;span class="hx:absolute hx:-mt-20" id="installation-dextensions-pour-go-"&gt;&lt;/span&gt;
-&lt;a href="#installation-dextensions-pour-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;img src="https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/go-help.png" alt="Help" loading="lazy" /&gt;&lt;/p&gt;
+&lt;p&gt;Pour fish, la commande équivalente est
+&lt;code&gt;fish_add_path /usr/local/go/bin $HOME/go/bin&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="macos"&gt;macOS&lt;span class="hx:absolute hx:-mt-20" id="macos"&gt;&lt;/span&gt;
+&lt;a href="#macos" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Téléchargez et lancez l&amp;rsquo;installeur &lt;code&gt;.pkg&lt;/code&gt; depuis
+&lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;, ou utilisez Homebrew :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install go&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div
+data-alert="note" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Note&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;&lt;strong&gt;Go 1.27&lt;/strong&gt; nécessite macOS 13 Ventura ou une version plus récente.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 data-hextra-search-id="windows"&gt;Windows&lt;span class="hx:absolute hx:-mt-20" id="windows"&gt;&lt;/span&gt;
+&lt;a href="#windows" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Lancez l&amp;rsquo;installeur &lt;code&gt;.msi&lt;/code&gt;, ou utilisez winget :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;winget&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;GoLang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Go&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;L&amp;rsquo;installeur configure le &lt;code&gt;PATH&lt;/code&gt; automatiquement. Ouvrez un nouveau terminal
+pour qu&amp;rsquo;il soit pris en compte.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="vérifier-linstallation"&gt;Vérifier l&amp;rsquo;installation&lt;span class="hx:absolute hx:-mt-20" id="vérifier-linstallation"&gt;&lt;/span&gt;
+&lt;a href="#v%c3%a9rifier-linstallation" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go version
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go version go1.27.4 linux/amd64&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;La commande &lt;code&gt;go env&lt;/code&gt; affiche la configuration de l&amp;rsquo;outil. Les variables les plus
+utiles sont décrites dans le chapitre sur l&amp;rsquo;outil &lt;code&gt;go&lt;/code&gt;.&lt;/p&gt;
+&lt;div
+data-alert="tip" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Tip&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Il n&amp;rsquo;est plus nécessaire de définir &lt;code&gt;GOROOT&lt;/code&gt; ni &lt;code&gt;GOPATH&lt;/code&gt;. Depuis les modules
+(Go 1.11) et leur activation par défaut (Go 1.16), un projet peut se trouver
+n&amp;rsquo;importe où sur le disque. &lt;code&gt;GOPATH&lt;/code&gt; vaut &lt;code&gt;$HOME/go&lt;/code&gt; par défaut et sert
+uniquement de cache et de répertoire d&amp;rsquo;installation des outils.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="gérer-plusieurs-versions"&gt;Gérer plusieurs versions&lt;span class="hx:absolute hx:-mt-20" id="gérer-plusieurs-versions"&gt;&lt;/span&gt;
+&lt;a href="#g%c3%a9rer-plusieurs-versions" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Depuis &lt;strong&gt;Go 1.21&lt;/strong&gt;, la commande &lt;code&gt;go&lt;/code&gt; sait télécharger et utiliser la version
+de Go dont un projet a besoin. Le fichier &lt;code&gt;go.mod&lt;/code&gt; d&amp;rsquo;un module déclare la
+version minimale requise :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;monprojet&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.27&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Si la version installée est plus ancienne que celle demandée, &lt;code&gt;go&lt;/code&gt; télécharge
+automatiquement la bonne chaîne de compilation (&lt;em&gt;toolchain&lt;/em&gt;) et l&amp;rsquo;utilise. Ce
+comportement est contrôlé par la variable &lt;code&gt;GOTOOLCHAIN&lt;/code&gt; :&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Valeur&lt;/th&gt;
+&lt;th&gt;Effet&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;auto&lt;/code&gt; (défaut)&lt;/td&gt;
+&lt;td&gt;Utilise la version locale, ou télécharge celle demandée&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;local&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Utilise toujours la version installée, sans téléchargement&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go1.26.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Force une version précise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go1.26.3+auto&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Utilise au minimum cette version, et plus récente si besoin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Pour tester un projet avec une autre version de Go :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;GOTOOLCHAIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;go1.26.3 go &lt;span class="nb"&gt;test&lt;/span&gt; ./...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="configurer-un-éditeur"&gt;Configurer un éditeur&lt;span class="hx:absolute hx:-mt-20" id="configurer-un-éditeur"&gt;&lt;/span&gt;
+&lt;a href="#configurer-un-%c3%a9diteur" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Go fournit un serveur de langage officiel, &lt;strong&gt;gopls&lt;/strong&gt;, utilisé par la plupart
+des éditeurs : complétion, navigation dans le code, renommage, diagnostics et
+corrections automatiques.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Recherchez &amp;ldquo;Go&amp;rdquo; dans la barre de recherche des extensions.&lt;/li&gt;
-&lt;li&gt;Installez l&amp;rsquo;extension &lt;strong&gt;&amp;ldquo;Go&amp;rdquo;&lt;/strong&gt; proposée par Microsoft, en cliquant sur le bouton &lt;strong&gt;&amp;ldquo;Installer&amp;rdquo;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Visual Studio Code&lt;/strong&gt; : installez l&amp;rsquo;extension &lt;strong&gt;Go&lt;/strong&gt; (éditée par l&amp;rsquo;équipe
+Go). À l&amp;rsquo;ouverture du premier fichier &lt;code&gt;.go&lt;/code&gt;, elle propose d&amp;rsquo;installer gopls et
+les outils nécessaires.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GoLand&lt;/strong&gt; (JetBrains) : un IDE dédié à Go, prêt à l&amp;rsquo;emploi.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Neovim, Helix, Zed, Emacs…&lt;/strong&gt; : configurez le client LSP pour utiliser
+&lt;code&gt;gopls&lt;/code&gt;, que vous pouvez installer avec :&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 data-hextra-search-id="configuration-de-lenvironnement-go-"&gt;Configuration de l&amp;rsquo;environnement Go :&lt;span class="hx:absolute hx:-mt-20" id="configuration-de-lenvironnement-go-"&gt;&lt;/span&gt;
-&lt;a href="#configuration-de-lenvironnement-go-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Ouvrez les paramètres de Visual Studio Code en appuyant sur Ctrl+, ou en sélectionnant &lt;strong&gt;&amp;ldquo;Fichier&amp;rdquo; &amp;gt; &amp;ldquo;Préférences&amp;rdquo; &amp;gt; &amp;ldquo;Paramètres&amp;rdquo;&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Recherchez &amp;ldquo;go.gopath&amp;rdquo; dans la barre de recherche des paramètres.&lt;/li&gt;
-&lt;li&gt;Spécifiez le chemin du répertoire gopath que vous avez configuré précédemment, par exemple &lt;strong&gt;&amp;quot;$HOME/Community/gopath&amp;quot;&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Enregistrez les modifications.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 data-hextra-search-id="vérification-de-linstallation--1"&gt;Vérification de l&amp;rsquo;installation :&lt;span class="hx:absolute hx:-mt-20" id="vérification-de-linstallation--1"&gt;&lt;/span&gt;
-&lt;a href="#v%c3%a9rification-de-linstallation--1" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Redémarrez Visual Studio Code pour appliquer les paramètres.&lt;/li&gt;
-&lt;li&gt;Créez un nouveau fichier Go ou ouvrez un projet existant.&lt;/li&gt;
-&lt;li&gt;Visual Studio Code devrait automatiquement détecter que c&amp;rsquo;est un projet Go et proposer des suggestions d&amp;rsquo;installation d&amp;rsquo;outils supplémentaires si nécessaire.&lt;/li&gt;
-&lt;li&gt;Vous êtes maintenant prêt à coder en Go avec Visual Studio Code !&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Avec Visual Studio Code et l&amp;rsquo;extension Go, vous bénéficierez d&amp;rsquo;un environnement de développement puissant et convivial pour vos projets en Go.&lt;/p&gt;</description></item><item><title>Les opérateurs</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/operateurs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/operateurs/</guid><description>
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install golang.org/x/tools/gopls@latest&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Pensez à activer le formatage automatique à l&amp;rsquo;enregistrement : avec Go, le
+formatage n&amp;rsquo;est pas une question de goût, c&amp;rsquo;est celui de &lt;code&gt;gofmt&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Les opérateurs</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/operateurs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/operateurs/</guid><description>
 &lt;p&gt;Voici la liste des principaux opérateurs en Go, avec des explications et des exemples pour chacun :&lt;/p&gt;
 &lt;h2 data-hextra-search-id="opérateurs-arithmétiques"&gt;Opérateurs arithmétiques&lt;span class="hx:absolute hx:-mt-20" id="opérateurs-arithmétiques"&gt;&lt;/span&gt;
 &lt;a href="#op%c3%a9rateurs-arithm%c3%a9tiques" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 data-hextra-search-id="addition-"&gt;Addition (+)&lt;span class="hx:absolute hx:-mt-20" id="addition-"&gt;&lt;/span&gt;
@@ -2200,47 +2446,7 @@ data-copied-label="Copié !"
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;config&lt;/strong&gt; : Contient les configurations de votre application.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;middleware&lt;/strong&gt; : Contient les middlewares HTTP.&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Exploration de l'environnement</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/exploration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/exploration/</guid><description>
-&lt;h2 data-hextra-search-id="goroot"&gt;$GOROOT&lt;span class="hx:absolute hx:-mt-20" id="goroot"&gt;&lt;/span&gt;
-&lt;a href="#goroot" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Voici une explication rapide des répertoires principaux présents dans &lt;strong&gt;$GOROOT&lt;/strong&gt;, qui est le répertoire où est installé Go :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; : Ce répertoire contient les exécutables binaires de Go, y compris le binaire de l&amp;rsquo;interpréteur Go (go) et d&amp;rsquo;autres outils comme le formateur de code (gofmt), l&amp;rsquo;outil de gestion de modules (go mod), etc.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;pkg/&lt;/strong&gt; : Ce répertoire contient les packages précompilés, c&amp;rsquo;est-à-dire les fichiers objets résultant de la compilation des fichiers source Go. Ces fichiers sont utilisés lors de la construction de programmes Go pour accélérer les temps de compilation.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;src/&lt;/strong&gt; : Bien que souvent vide dans le répertoire &lt;strong&gt;$GOROOT&lt;/strong&gt; standard, ce répertoire est destiné à contenir les fichiers source des packages standard de Go. Ces fichiers source sont généralement inclus dans le code source de Go lors de l&amp;rsquo;installation.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;include/&lt;/strong&gt; : Ce répertoire contient les fichiers d&amp;rsquo;en-tête nécessaires pour la construction de programmes Go qui utilisent des paquets C, C++ ou autres langages compatibles avec Go. Ces fichiers d&amp;rsquo;en-tête sont utilisés par le compilateur Go lors de la liaison avec des bibliothèques externes.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;misc/&lt;/strong&gt; : Ce répertoire contient diverses ressources et outils supplémentaires liés à Go, tels que des exemples de code, des scripts de test, etc. Ces ressources peuvent être utiles pour explorer et apprendre Go plus en profondeur.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Ces répertoires constituent l&amp;rsquo;infrastructure de base de l&amp;rsquo;installation de Go dans le répertoire &lt;strong&gt;$GOROOT&lt;/strong&gt;, et chacun joue un rôle spécifique dans le fonctionnement et le développement avec Go.&lt;/p&gt;
-&lt;h2 data-hextra-search-id="gopath"&gt;$GOPATH&lt;span class="hx:absolute hx:-mt-20" id="gopath"&gt;&lt;/span&gt;
-&lt;a href="#gopath" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Voici une explication rapide des répertoires principaux présents dans &lt;strong&gt;$GOPATH&lt;/strong&gt;, qui est le répertoire où sont stockés les projets et les dépendances pour les applications Go :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; : Ce répertoire contient les exécutables binaires des programmes Go que vous avez installés localement à l&amp;rsquo;aide de la commande &lt;strong&gt;go install&lt;/strong&gt;. Les binaires installés ici sont généralement des outils Go tiers que vous utilisez dans votre workflow de développement.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;pkg/&lt;/strong&gt; : Similaire au répertoire &lt;strong&gt;pkg/&lt;/strong&gt; dans &lt;strong&gt;$GOROOT&lt;/strong&gt;, ce répertoire contient les packages précompilés des projets Go que vous avez construits. Ces packages sont compilés à partir du code source des projets situés dans le répertoire &lt;strong&gt;src/&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;src/&lt;/strong&gt; : C&amp;rsquo;est le répertoire principal où vous stockez le code source de vos projets Go. Chaque sous-répertoire de src/ correspond généralement à un chemin d&amp;rsquo;importation pour les packages Go. Par exemple, si votre projet est &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt;, vous créerez un répertoire &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt; dans &lt;strong&gt;src/&lt;/strong&gt; et placerez votre code source là-dedans.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;pkg/mod/&lt;/strong&gt; : À partir de Go 1.11, ce répertoire est utilisé pour stocker les modules Go téléchargés. Lorsque vous utilisez les modules Go pour gérer les dépendances de vos projets, les fichiers source et les dépendances téléchargées sont stockés ici pour une gestion efficace des dépendances.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;bin/&lt;/strong&gt; (à l&amp;rsquo;intérieur de &lt;strong&gt;$GOPATH/pkg/mod/&lt;/strong&gt;) : Ce sous-répertoire contient également des binaires, mais spécifiquement pour les modules Go téléchargés. Ces binaires sont souvent des outils associés à des modules particuliers que vous avez téléchargés et qui sont nécessaires pour la construction ou la gestion de projets Go.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Ces répertoires forment la structure de base de &lt;strong&gt;$GOPATH&lt;/strong&gt; et sont utilisés pour stocker les projets, les dépendances et les binaires associés à votre environnement de développement Go.&lt;/p&gt;</description></item><item><title>Les structures</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</guid><description>
+&lt;/ul&gt;</description></item><item><title>Les structures</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/structures/</guid><description>
 &lt;p&gt;En Go, une structure (ou struct) est un type de données composite qui regroupe des champs sous un même nom. Une structure permet de définir des objets avec des propriétés et des méthodes associées.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="définition-dune-structure"&gt;Définition d&amp;rsquo;une structure&lt;span class="hx:absolute hx:-mt-20" id="définition-dune-structure"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9finition-dune-structure" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Une structure est définie en listant ses champs et leurs types. Voici un exemple simple :&lt;/p&gt;
@@ -2394,18 +2600,15 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Nous créons une nouvelle personne nommée Alice âgée de 30 ans en utilisant la fabrique &lt;strong&gt;NewPerson&lt;/strong&gt;. Nous utilisons ensuite les méthodes &lt;strong&gt;Display&lt;/strong&gt; et &lt;strong&gt;Birthday&lt;/strong&gt; pour afficher et modifier les propriétés de l&amp;rsquo;instance.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="résumé"&gt;Résumé&lt;span class="hx:absolute hx:-mt-20" id="résumé"&gt;&lt;/span&gt;
-&lt;a href="#r%c3%a9sum%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les structures en Go permettent de regrouper des données et des méthodes associées. L&amp;rsquo;utilisation d&amp;rsquo;une fabrique pour créer des instances de structures encapsule la logique de création, et les méthodes associées à la structure permettent de manipuler les données de manière organisée.&lt;/p&gt;</description></item><item><title>Les commandes go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/commandes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/commandes/</guid><description>
-&lt;p&gt;Voici une explication rapide des commandes les plus couramment utilisées avec Go :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;go mod init&lt;/strong&gt; : Initialise un nouveau module Go dans le répertoire courant. Un module est une collection de packages Go qui sont gérés ensemble, généralement stockés dans un référentiel versionné.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Supposons que vous souhaitez créer un nouveau module Go pour un projet appelé &lt;strong&gt;&amp;ldquo;monprojet&amp;rdquo;&lt;/strong&gt;. Vous pouvez utiliser go mod init pour initialiser un nouveau module dans le répertoire de votre projet.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Créez un nouveau répertoire pour votre projet et accédez-y dans votre terminal :&lt;/li&gt;
-&lt;/ul&gt;
+&lt;a href="#r%c3%a9sum%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les structures en Go permettent de regrouper des données et des méthodes associées. L&amp;rsquo;utilisation d&amp;rsquo;une fabrique pour créer des instances de structures encapsule la logique de création, et les méthodes associées à la structure permettent de manipuler les données de manière organisée.&lt;/p&gt;</description></item><item><title>Premier programme</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/premier-programme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/premier-programme/</guid><description>
+&lt;h2 data-hextra-search-id="créer-un-module"&gt;Créer un module&lt;span class="hx:absolute hx:-mt-20" id="créer-un-module"&gt;&lt;/span&gt;
+&lt;a href="#cr%c3%a9er-un-module" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Tout projet Go est un &lt;strong&gt;module&lt;/strong&gt; : un ensemble de packages versionnés ensemble,
+décrit par un fichier &lt;code&gt;go.mod&lt;/code&gt;. Créez un répertoire, puis initialisez le module
+avec son &lt;strong&gt;chemin d&amp;rsquo;importation&lt;/strong&gt;, en général l&amp;rsquo;adresse du dépôt où il sera
+publié :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir monprojet
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; monprojet&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir bonjour &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; bonjour
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod init example.com/bonjour&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copier le code"
@@ -2417,38 +2620,393 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;Initialisez un nouveau module Go en utilisant go mod init avec le nom de votre module. Par exemple, si vous avez l&amp;rsquo;intention de publier votre code sous &lt;strong&gt;github.com/utilisateur/monprojet&lt;/strong&gt;, vous pouvez utiliser :&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Le fichier &lt;code&gt;go.mod&lt;/code&gt; produit est minimal :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod init github.com/utilisateur/monprojet&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
-&lt;button
-class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-title="Copier le code"
-aria-label="Copier le code"
-data-copied-label="Copié !"
-&gt;
-&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
-&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
-&lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;Après avoir exécuté cette commande, un fichier &lt;strong&gt;go.mod&lt;/strong&gt; sera créé dans le répertoire de votre projet. Ce fichier contient des informations sur votre module, y compris son chemin d&amp;rsquo;importation et les dépendances (initialisées à ce stade comme étant les dépendances standard de Go).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;utilisateur&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;monprojet&lt;/span&gt;&lt;span class="w"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;bonjour&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.22&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.27.4&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="le-code"&gt;Le code&lt;span class="hx:absolute hx:-mt-20" id="le-code"&gt;&lt;/span&gt;
+&lt;a href="#le-code" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Créez le fichier &lt;code&gt;main.go&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// Le premier programme du livre.&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;package&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Gopher&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Bonjour, &amp;#34;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34; !&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Quelques remarques sur ces lignes :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;package main&lt;/code&gt;&lt;/strong&gt; : chaque fichier appartient à un package. Le package
+&lt;code&gt;main&lt;/code&gt; est spécial : il produit un exécutable, dont le point d&amp;rsquo;entrée est la
+fonction &lt;code&gt;main&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;import &amp;quot;fmt&amp;quot;&lt;/code&gt;&lt;/strong&gt; : importe le package de formatage de la bibliothèque
+standard. Un import inutilisé est une erreur de compilation, tout comme une
+variable locale inutilisée.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;func greeting(name string) string&lt;/code&gt;&lt;/strong&gt; : le type se place &lt;em&gt;après&lt;/em&gt; le nom,
+aussi bien pour les paramètres que pour la valeur de retour.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;fmt.Println&lt;/code&gt;&lt;/strong&gt; : seuls les noms qui commencent par une majuscule sont
+exportés, c&amp;rsquo;est-à-dire visibles hors de leur package. &lt;code&gt;greeting&lt;/code&gt; est donc
+privé au package &lt;code&gt;main&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pas de point-virgule&lt;/strong&gt; : le compilateur les insère automatiquement en fin
+de ligne. C&amp;rsquo;est pour cela que l&amp;rsquo;accolade ouvrante doit rester sur la même
+ligne que &lt;code&gt;func&lt;/code&gt;, &lt;code&gt;if&lt;/code&gt; ou &lt;code&gt;for&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;L&amp;rsquo;indentation se fait avec des tabulations&lt;/strong&gt;, comme l&amp;rsquo;impose &lt;code&gt;gofmt&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="exécuter-et-compiler"&gt;Exécuter et compiler&lt;span class="hx:absolute hx:-mt-20" id="exécuter-et-compiler"&gt;&lt;/span&gt;
+&lt;a href="#ex%c3%a9cuter-et-compiler" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;go run&lt;/code&gt; compile le programme dans un répertoire temporaire et l&amp;rsquo;exécute :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go run .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bonjour, Gopher !&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;go build&lt;/code&gt; produit un exécutable autonome, sans dépendance à une machine
+virtuelle ni à une bibliothèque partagée :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go build -o bonjour .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ ./bonjour
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bonjour, Gopher !&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;La compilation croisée ne demande que deux variables d&amp;rsquo;environnement. Pour
+produire un exécutable Windows ou un binaire pour un Raspberry Pi depuis Linux :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;windows &lt;span class="nv"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;amd64 go build -o bonjour.exe .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;GOOS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;linux &lt;span class="nv"&gt;GOARCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;arm64 go build -o bonjour-arm64 .&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;go tool dist list&lt;/code&gt; affiche toutes les plateformes prises en charge.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="un-premier-test"&gt;Un premier test&lt;span class="hx:absolute hx:-mt-20" id="un-premier-test"&gt;&lt;/span&gt;
+&lt;a href="#un-premier-test" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les tests sont intégrés à l&amp;rsquo;outil. Un fichier qui se termine par &lt;code&gt;_test.go&lt;/code&gt;
+contient des fonctions &lt;code&gt;TestXxx&lt;/code&gt; qui reçoivent un &lt;code&gt;*testing.T&lt;/code&gt;. Créez
+&lt;code&gt;main_test.go&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;package&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;testing&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;TestGreeting&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;got&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;greeting&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Gopher&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Bonjour, Gopher !&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;got&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Errorf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;greeting() = %q, attendu %q&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;got&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;want&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go &lt;span class="nb"&gt;test&lt;/span&gt; ./...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ok example.com/bonjour 0.002s&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Le motif &lt;code&gt;./...&lt;/code&gt; désigne tous les packages du module. Les tests sont détaillés
+dans le chapitre consacré au package &lt;code&gt;testing&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="ajouter-une-dépendance"&gt;Ajouter une dépendance&lt;span class="hx:absolute hx:-mt-20" id="ajouter-une-dépendance"&gt;&lt;/span&gt;
+&lt;a href="#ajouter-une-d%c3%a9pendance" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les dépendances sont des modules, référencés par leur chemin d&amp;rsquo;importation.
+Il suffit de les importer dans le code, puis de laisser &lt;code&gt;go mod tidy&lt;/code&gt; mettre à
+jour &lt;code&gt;go.mod&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;golang.org/x/text/language&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go mod tidy
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go: finding module &lt;span class="k"&gt;for&lt;/span&gt; package golang.org/x/text/language
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go: found golang.org/x/text/language in golang.org/x/text v0.44.0&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;go.mod&lt;/code&gt; contient alors une directive &lt;code&gt;require&lt;/code&gt;, et un fichier &lt;code&gt;go.sum&lt;/code&gt;
+apparaît. Il contient les empreintes cryptographiques de chaque dépendance :
+une dépendance modifiée après sa publication est détectée. Ces deux fichiers
+doivent être versionnés avec le code.&lt;/p&gt;
+&lt;div
+data-alert="tip" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Tip&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Le &lt;a href="https://go.dev/play/" target="_blank" rel="noopener"&gt;Go Playground&lt;/a&gt; permet d&amp;rsquo;exécuter du code Go dans le
+navigateur, sans rien installer. C&amp;rsquo;est pratique pour essayer un exemple de ce
+livre.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>L'outil go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/outil-go/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/outil-go/</guid><description>
+&lt;p&gt;La commande &lt;code&gt;go&lt;/code&gt; est le point d&amp;rsquo;entrée unique de tout l&amp;rsquo;outillage : elle
+compile, teste, formate, analyse, documente et gère les dépendances. Ce
+chapitre en fait le tour. &lt;code&gt;go help &amp;lt;commande&amp;gt;&lt;/code&gt; affiche l&amp;rsquo;aide détaillée de
+chacune.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="les-commandes-essentielles"&gt;Les commandes essentielles&lt;span class="hx:absolute hx:-mt-20" id="les-commandes-essentielles"&gt;&lt;/span&gt;
+&lt;a href="#les-commandes-essentielles" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Commande&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go run .&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compile et exécute le package courant&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go build ./...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compile tous les packages du module&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go test ./...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Exécute les tests&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go fmt ./...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Formate le code (appelle &lt;code&gt;gofmt&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go vet ./...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Détecte les erreurs probables que le compilateur laisse passer&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go fix ./...&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Modernise le code (Go 1.26)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go doc &amp;lt;symbole&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Affiche la documentation d&amp;rsquo;un package ou d&amp;rsquo;un symbole&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go mod tidy&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Synchronise &lt;code&gt;go.mod&lt;/code&gt; et &lt;code&gt;go.sum&lt;/code&gt; avec les imports du code&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go get &amp;lt;module&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Ajoute ou met à jour une dépendance&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go install &amp;lt;outil&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Compile et installe un exécutable dans &lt;code&gt;GOBIN&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go tool &amp;lt;outil&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Lance un outil (&lt;code&gt;pprof&lt;/code&gt;, &lt;code&gt;trace&lt;/code&gt;, &lt;code&gt;cover&lt;/code&gt;… ou un outil du module)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go env&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Affiche ou modifie la configuration&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;go clean -cache&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Vide le cache de compilation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="les-variables-denvironnement"&gt;Les variables d&amp;rsquo;environnement&lt;span class="hx:absolute hx:-mt-20" id="les-variables-denvironnement"&gt;&lt;/span&gt;
+&lt;a href="#les-variables-denvironnement" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;go env&lt;/code&gt; affiche la configuration complète. &lt;code&gt;go env -w VAR=valeur&lt;/code&gt; enregistre
+une valeur dans le fichier de configuration de l&amp;rsquo;utilisateur, sans toucher au
+profil du shell.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;th&gt;Valeur par défaut&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOROOT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Emplacement de l&amp;rsquo;installation de Go&lt;/td&gt;
+&lt;td&gt;Déduit de l&amp;rsquo;exécutable &lt;code&gt;go&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOPATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Répertoire de travail de Go&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$HOME/go&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOMODCACHE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Cache des modules téléchargés&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$GOPATH/pkg/mod&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOBIN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Destination de &lt;code&gt;go install&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;$GOPATH/bin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOCACHE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Cache de compilation et de tests&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;~/.cache/go-build&lt;/code&gt; (Linux)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOOS&lt;/code&gt;, &lt;code&gt;GOARCH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Système et architecture cibles&lt;/td&gt;
+&lt;td&gt;Ceux de la machine&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOPROXY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Proxy de téléchargement des modules&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;https://proxy.golang.org,direct&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOPRIVATE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Modules privés, à récupérer sans proxy ni base de sommes de contrôle&lt;/td&gt;
+&lt;td&gt;vide&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOTOOLCHAIN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Choix de la version de Go (voir « Installation »)&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;auto&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;GOFLAGS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Options ajoutées à chaque commande&lt;/td&gt;
+&lt;td&gt;vide&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;CGO_ENABLED&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Autorise l&amp;rsquo;appel de code C&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1&lt;/code&gt; si un compilateur C est présent&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 data-hextra-search-id="goroot--linstallation-de-go"&gt;GOROOT : l&amp;rsquo;installation de Go&lt;span class="hx:absolute hx:-mt-20" id="goroot--linstallation-de-go"&gt;&lt;/span&gt;
+&lt;a href="#goroot--linstallation-de-go" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;GOROOT&lt;/code&gt; contient la distribution de Go :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bin/&lt;/code&gt; : les commandes &lt;code&gt;go&lt;/code&gt; et &lt;code&gt;gofmt&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;src/&lt;/code&gt; : le code source de la bibliothèque standard, écrit en Go. Le lire est
+un excellent moyen d&amp;rsquo;apprendre ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/tool/&lt;/code&gt; : les outils internes (compilateur, éditeur de liens, &lt;code&gt;vet&lt;/code&gt;,
+&lt;code&gt;pprof&lt;/code&gt;…) ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;lib/&lt;/code&gt;, &lt;code&gt;misc/&lt;/code&gt;, &lt;code&gt;test/&lt;/code&gt; : données annexes et tests de la distribution.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Il n&amp;rsquo;est jamais nécessaire de le définir à la main.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="gopath--lhéritage-davant-les-modules"&gt;GOPATH : l&amp;rsquo;héritage d&amp;rsquo;avant les modules&lt;span class="hx:absolute hx:-mt-20" id="gopath--lhéritage-davant-les-modules"&gt;&lt;/span&gt;
+&lt;a href="#gopath--lh%c3%a9ritage-davant-les-modules" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Avant Go 1.11, tout le code devait se trouver dans &lt;code&gt;$GOPATH/src&lt;/code&gt;, et une seule
+version de chaque dépendance pouvait exister sur la machine. Les modules ont
+supprimé cette contrainte. &lt;code&gt;GOPATH&lt;/code&gt; ne sert plus qu&amp;rsquo;à deux choses :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$GOPATH/pkg/mod&lt;/code&gt; : le cache des modules téléchargés, partagé entre tous les
+projets et en lecture seule ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$GOPATH/bin&lt;/code&gt; : les exécutables installés par &lt;code&gt;go install&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 data-hextra-search-id="accéder-à-des-modules-privés"&gt;Accéder à des modules privés&lt;span class="hx:absolute hx:-mt-20" id="accéder-à-des-modules-privés"&gt;&lt;/span&gt;
+&lt;a href="#acc%c3%a9der-%c3%a0-des-modules-priv%c3%a9s" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Les modules publics sont téléchargés via &lt;code&gt;proxy.golang.org&lt;/code&gt;, et leur contenu est
+vérifié auprès de la base de sommes de contrôle &lt;code&gt;sum.golang.org&lt;/code&gt;. Pour un dépôt
+privé, indiquez à Go de le contacter directement :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go env -w &lt;span class="nv"&gt;GOPRIVATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;gitlab.monentreprise.fr/*&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="gérer-les-dépendances"&gt;Gérer les dépendances&lt;span class="hx:absolute hx:-mt-20" id="gérer-les-dépendances"&gt;&lt;/span&gt;
+&lt;a href="#g%c3%a9rer-les-d%c3%a9pendances" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 data-hextra-search-id="gomod"&gt;go.mod&lt;span class="hx:absolute hx:-mt-20" id="gomod"&gt;&lt;/span&gt;
+&lt;a href="#gomod" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;module&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;monservice&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;go&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;1.27.4&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v1&lt;/span&gt;&lt;span class="mf"&gt;.2.3&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.4.0&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;jackc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pgx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;v5&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v5&lt;/span&gt;&lt;span class="mf"&gt;.13.0&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;golang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;sync&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.25.0&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nf"&gt;replace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;utilisateur&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;pkg2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.4.1&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;golang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;v0&lt;/span&gt;&lt;span class="mf"&gt;.44.0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// indirect&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;tool&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;golang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;stringer&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;replace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;mabib&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nx"&gt;mabib&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copier le code"
@@ -2461,41 +3019,164 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;module github.com/utilisateur/monprojet&lt;/strong&gt; : Cette ligne spécifie le chemin d&amp;rsquo;importation de votre module Go. Cela permet à d&amp;rsquo;autres programmes Go de référencer votre module en important ce chemin.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go 1.22&lt;/strong&gt; : Cette ligne spécifie la version minimale de Go requise pour construire votre projet.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;require&lt;/strong&gt; : Cette section liste les dépendances de votre projet, avec leurs noms de module et leurs versions. Par exemple, &lt;strong&gt;github.com/pkg1 v1.2.3&lt;/strong&gt; signifie que votre projet dépend de la version 1.2.3 du module github.com/pkg1.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;replace&lt;/strong&gt; : Cette section permet de remplacer les dépendances par d&amp;rsquo;autres. Cela peut être utile pour utiliser des versions modifiées ou locales de dépendances. Par exemple, &lt;strong&gt;github.com/pkg2 =&amp;gt; github.com/utilisateur/pkg2 v0.4.1&lt;/strong&gt; remplace la dépendance github.com/pkg2 par github.com/utilisateur/pkg2 à la version v0.4.1.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Vous pouvez maintenant commencer à développer votre projet en Go ! Vous pouvez ajouter des dépendances à l&amp;rsquo;aide de la commande &lt;strong&gt;go get&lt;/strong&gt; et utiliser des packages externes sans crainte de perturber votre environnement de développement grâce à la gestion des modules.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;module&lt;/code&gt;&lt;/strong&gt; : le chemin d&amp;rsquo;importation du module.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;go&lt;/code&gt;&lt;/strong&gt; : la version minimale du langage. Elle détermine aussi certains
+comportements, par exemple la portée des variables de boucle depuis Go 1.22.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;require&lt;/code&gt;&lt;/strong&gt; : les dépendances et leur version minimale. Le commentaire
+&lt;code&gt;// indirect&lt;/code&gt; signale une dépendance de dépendance. Depuis Go 1.27, &lt;code&gt;go mod tidy&lt;/code&gt; regroupe toutes les dépendances en deux blocs, l&amp;rsquo;un direct et l&amp;rsquo;autre
+indirect.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;tool&lt;/code&gt;&lt;/strong&gt; (Go 1.24) : les outils de développement utilisés par le projet.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;replace&lt;/code&gt;&lt;/strong&gt; : remplace un module par une autre version ou par un
+répertoire local, pratique pour tester une modification.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Cet exemple illustre comment utiliser &lt;strong&gt;go mod init&lt;/strong&gt; pour initialiser un nouveau module Go dans un projet et démarrer le développement avec la gestion des modules.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go mod tidy&lt;/strong&gt; : Analyse les dépendances de votre projet et met à jour le fichier go.mod et, le cas échéant, le fichier go.sum pour refléter les dépendances réellement utilisées par votre code. Il supprime également les dépendances qui ne sont plus nécessaires.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go mod vendor&lt;/strong&gt; : Copie les dépendances de votre projet dans le répertoire &lt;strong&gt;vendor/&lt;/strong&gt; de votre projet. Cela permet de garantir que toutes les dépendances nécessaires sont présentes localement et que le code peut être construit et exécuté de manière isolée.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go run&lt;/strong&gt; : Compile et exécute immédiatement le fichier Go spécifié. Cela permet d&amp;rsquo;exécuter rapidement un programme Go sans avoir à le construire séparément.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go install&lt;/strong&gt; : Compile et installe le package ou le programme Go spécifié. Si le package ou le programme est un exécutable, il sera installé dans le répertoire &lt;strong&gt;bin/&lt;/strong&gt; de votre &lt;strong&gt;$GOPATH&lt;/strong&gt; ou de votre module.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;go test&lt;/strong&gt; : Exécute les tests unitaires pour le package Go spécifié. Il recherche les fichiers &lt;strong&gt;_test.go&lt;/strong&gt; dans le package et exécute les fonctions de test qu&amp;rsquo;ils contiennent.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Ces commandes constituent un ensemble de base pour gérer les dépendances, construire, exécuter et tester des programmes Go. Elles sont largement utilisées dans le développement quotidien avec Go.&lt;/p&gt;</description></item><item><title>Les interfaces</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</guid><description>
+&lt;p&gt;À partir de v2, la version majeure fait partie du chemin d&amp;rsquo;importation
+(&lt;code&gt;github.com/jackc/pgx/v5&lt;/code&gt;). Deux versions majeures d&amp;rsquo;un même module peuvent
+ainsi coexister dans un programme.&lt;/p&gt;
+&lt;p&gt;Go sélectionne pour chaque dépendance &lt;strong&gt;la version minimale&lt;/strong&gt; qui satisfait
+toutes les exigences (&lt;em&gt;Minimal Version Selection&lt;/em&gt;). Les builds sont donc
+reproductibles sans fichier de verrouillage : une nouvelle version d&amp;rsquo;une
+dépendance n&amp;rsquo;est jamais utilisée sans que &lt;code&gt;go.mod&lt;/code&gt; le dise.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="les-commandes-du-quotidien"&gt;Les commandes du quotidien&lt;span class="hx:absolute hx:-mt-20" id="les-commandes-du-quotidien"&gt;&lt;/span&gt;
+&lt;a href="#les-commandes-du-quotidien" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/jackc/pgx/v5@latest &lt;span class="c1"&gt;# ajouter ou mettre à jour&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/jackc/pgx/v5@v5.12.0 &lt;span class="c1"&gt;# choisir une version précise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get -u ./... &lt;span class="c1"&gt;# mettre à jour toutes les dépendances&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/old/dep@none &lt;span class="c1"&gt;# retirer une dépendance&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod tidy &lt;span class="c1"&gt;# nettoyer go.mod et go.sum&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go list -m -u all &lt;span class="c1"&gt;# lister les mises à jour disponibles&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod why golang.org/x/text &lt;span class="c1"&gt;# pourquoi cette dépendance ?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go mod graph &lt;span class="c1"&gt;# le graphe des dépendances&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 data-hextra-search-id="les-outils-dun-projet"&gt;Les outils d&amp;rsquo;un projet&lt;span class="hx:absolute hx:-mt-20" id="les-outils-dun-projet"&gt;&lt;/span&gt;
+&lt;a href="#les-outils-dun-projet" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Depuis &lt;strong&gt;Go 1.24&lt;/strong&gt;, les outils de développement (générateurs de code, linters…)
+se déclarent dans &lt;code&gt;go.mod&lt;/code&gt; avec la directive &lt;code&gt;tool&lt;/code&gt;. Leur version est alors
+figée comme celle de n&amp;rsquo;importe quelle dépendance :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get -tool golang.org/x/tools/cmd/stringer
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go tool stringer -type&lt;span class="o"&gt;=&lt;/span&gt;Couleur&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Avant Go 1.24, la convention était un fichier &lt;code&gt;tools.go&lt;/code&gt; qui importait ces outils
+avec une contrainte de build &lt;code&gt;//go:build tools&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="les-workspaces"&gt;Les workspaces&lt;span class="hx:absolute hx:-mt-20" id="les-workspaces"&gt;&lt;/span&gt;
+&lt;a href="#les-workspaces" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Depuis &lt;strong&gt;Go 1.18&lt;/strong&gt;, un fichier &lt;code&gt;go.work&lt;/code&gt; permet de travailler sur plusieurs
+modules à la fois, sans ajouter de directives &lt;code&gt;replace&lt;/code&gt; :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go work init ./monservice ./mabib&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Les modifications de &lt;code&gt;mabib&lt;/code&gt; sont alors immédiatement visibles dans
+&lt;code&gt;monservice&lt;/code&gt;. Le fichier &lt;code&gt;go.work&lt;/code&gt; est en général local et n&amp;rsquo;est pas versionné.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="analyser-et-moderniser-le-code"&gt;Analyser et moderniser le code&lt;span class="hx:absolute hx:-mt-20" id="analyser-et-moderniser-le-code"&gt;&lt;/span&gt;
+&lt;a href="#analyser-et-moderniser-le-code" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 data-hextra-search-id="go-vet"&gt;go vet&lt;span class="hx:absolute hx:-mt-20" id="go-vet"&gt;&lt;/span&gt;
+&lt;a href="#go-vet" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;go vet&lt;/code&gt; détecte des erreurs que le compilateur accepte : format de &lt;code&gt;Printf&lt;/code&gt;
+incohérent, copie d&amp;rsquo;un &lt;code&gt;sync.Mutex&lt;/code&gt;, code inaccessible, balise de structure
+mal formée… Une partie de ces vérifications est lancée automatiquement par
+&lt;code&gt;go test&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ go vet ./...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;./main.go:8:14: fmt.Printf format %d has arg name of wrong &lt;span class="nb"&gt;type&lt;/span&gt; string&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 data-hextra-search-id="go-fix-et-les--modernizers-"&gt;go fix et les « modernizers »&lt;span class="hx:absolute hx:-mt-20" id="go-fix-et-les--modernizers-"&gt;&lt;/span&gt;
+&lt;a href="#go-fix-et-les--modernizers-" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Réécrit en &lt;strong&gt;Go 1.26&lt;/strong&gt;, &lt;code&gt;go fix&lt;/code&gt; met le code à jour pour utiliser les
+fonctionnalités récentes du langage et de la bibliothèque standard. Par
+exemple, &lt;code&gt;interface{}&lt;/code&gt; devient &lt;code&gt;any&lt;/code&gt;, une boucle &lt;code&gt;for i := 0; i &amp;lt; n; i++&lt;/code&gt;
+devient &lt;code&gt;for i := range n&lt;/code&gt;, &lt;code&gt;errors.As&lt;/code&gt; devient &lt;code&gt;errors.AsType&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go fix -diff ./... &lt;span class="c1"&gt;# afficher les modifications proposées&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go fix ./... &lt;span class="c1"&gt;# les appliquer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go tool fix &lt;span class="nb"&gt;help&lt;/span&gt; &lt;span class="c1"&gt;# lister les correcteurs disponibles&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Une bibliothèque peut aussi marquer une fonction obsolète avec la directive
+&lt;code&gt;//go:fix inline&lt;/code&gt; : &lt;code&gt;go fix&lt;/code&gt; remplace alors ses appels par son nouveau code
+chez tous ses utilisateurs.&lt;/p&gt;
+&lt;h3 data-hextra-search-id="govulncheck"&gt;govulncheck&lt;span class="hx:absolute hx:-mt-20" id="govulncheck"&gt;&lt;/span&gt;
+&lt;a href="#govulncheck" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;&lt;code&gt;govulncheck&lt;/code&gt; compare les dépendances à la base de vulnérabilités de Go. Il ne
+signale que les vulnérabilités dont le code est réellement appelé par le
+programme :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go run golang.org/x/vuln/cmd/govulncheck@latest ./...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="lire-la-documentation"&gt;Lire la documentation&lt;span class="hx:absolute hx:-mt-20" id="lire-la-documentation"&gt;&lt;/span&gt;
+&lt;a href="#lire-la-documentation" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;code&gt;go doc&lt;/code&gt; affiche la documentation de n&amp;rsquo;importe quel package, type ou fonction,
+y compris pour les dépendances du module :&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go doc strings.Cut &lt;span class="c1"&gt;# une fonction&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go doc -all net/http.Client &lt;span class="c1"&gt;# un type et toutes ses méthodes&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go doc -src slices.Sort &lt;span class="c1"&gt;# le code source&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go doc -ex bytes &lt;span class="c1"&gt;# les exemples exécutables (Go 1.27)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go doc -http &lt;span class="c1"&gt;# la documentation dans le navigateur&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copier le code"
+aria-label="Copier le code"
+data-copied-label="Copié !"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;La documentation de tous les modules publics est aussi consultable sur
+&lt;a href="https://pkg.go.dev" target="_blank" rel="noopener"&gt;pkg.go.dev&lt;/a&gt;.&lt;/p&gt;</description></item><item><title>Les interfaces</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/langage/interfaces/</guid><description>
 &lt;p&gt;En Go, une interface est un type qui spécifie un ensemble de méthodes que d&amp;rsquo;autres types doivent implémenter. Les interfaces sont utilisées pour définir le comportement attendu sans spécifier l&amp;rsquo;implémentation concrète. Un type qui implémente toutes les méthodes d&amp;rsquo;une interface est considéré comme une instance de cette interface.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="définition-dune-interface"&gt;Définition d&amp;rsquo;une interface&lt;span class="hx:absolute hx:-mt-20" id="définition-dune-interface"&gt;&lt;/span&gt;
 &lt;a href="#d%c3%a9finition-dune-interface" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Une interface est définie en listant les méthodes qu&amp;rsquo;elle contient. Voici un exemple d&amp;rsquo;interface simple :&lt;/p&gt;

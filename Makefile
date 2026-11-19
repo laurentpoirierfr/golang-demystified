@@ -23,7 +23,7 @@ book-md:
 ## pdf : génère le livre PDF avec pandoc + eisvogel (via Docker)
 pdf: book-md
 	docker run --rm --volume "$(CURDIR):/data" --workdir /data $(CONTAINER_USER) \
-		$(PANDOC_IMAGE) $(BOOK_MD) --from gfm --metadata-file book/metadata.yaml \
+		$(PANDOC_IMAGE) $(BOOK_MD) --from gfm --metadata-file book/metadata.yaml --lua-filter book/callouts.lua \
 		--template eisvogel --syntax-highlighting=idiomatic --pdf-engine=xelatex --top-level-division=part \
 		--output $(BOOK_PDF)
 
