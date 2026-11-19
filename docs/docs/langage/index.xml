@@ -355,7 +355,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;Pour afficher le nom d&amp;rsquo;une valeur plutôt que son numéro, ajoutez une méthode
-&lt;code&gt;String()&lt;/code&gt;, que l&amp;rsquo;outil &lt;code&gt;stringer&lt;/code&gt; peut générer :&lt;/p&gt;
+&lt;code&gt;String()&lt;/code&gt;, que l&amp;rsquo;outil &lt;a href="https://pkg.go.dev/golang.org/x/tools/cmd/stringer" target="_blank" rel="noopener"&gt;&lt;code&gt;stringer&lt;/code&gt;&lt;/a&gt; peut générer :&lt;/p&gt;
 &lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
 &lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get -tool golang.org/x/tools/cmd/stringer
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go tool stringer -type&lt;span class="o"&gt;=&lt;/span&gt;JourSemaine&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
@@ -3491,7 +3491,7 @@ data-copied-label="Copié !"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;code&gt;goimports&lt;/code&gt;, intégré à gopls, ajoute et range les imports automatiquement : la
+&lt;p&gt;&lt;a href="https://pkg.go.dev/golang.org/x/tools/cmd/goimports" target="_blank" rel="noopener"&gt;&lt;code&gt;goimports&lt;/code&gt;&lt;/a&gt;, intégré à &lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt;, ajoute et range les imports automatiquement : la
 bibliothèque standard d&amp;rsquo;abord, puis les autres modules.&lt;/p&gt;
 &lt;p&gt;Un import peut être renommé (&lt;code&gt;import str &amp;quot;strings&amp;quot;&lt;/code&gt;) pour éviter un conflit de
 noms. L&amp;rsquo;import &lt;code&gt;_&lt;/code&gt; (&lt;code&gt;import _ &amp;quot;image/png&amp;quot;&lt;/code&gt;) exécute seulement les fonctions

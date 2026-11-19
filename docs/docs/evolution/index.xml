@@ -137,7 +137,7 @@ outils et la sécurité.&lt;/p&gt;
 &lt;a href="#outils" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;go vet&lt;/code&gt; est réécrit&lt;/strong&gt; sur le framework &lt;code&gt;golang.org/x/tools/go/analysis&lt;/code&gt;.
 Les analyseurs deviennent des composants réutilisables par d&amp;rsquo;autres outils,
-comme gopls ou staticcheck. L&amp;rsquo;ancienne commande &lt;code&gt;go tool vet&lt;/code&gt; disparaît.&lt;/li&gt;
+comme &lt;a href="https://pkg.go.dev/golang.org/x/tools/gopls" target="_blank" rel="noopener"&gt;gopls&lt;/a&gt; ou &lt;a href="https://staticcheck.dev" target="_blank" rel="noopener"&gt;staticcheck&lt;/a&gt;. L&amp;rsquo;ancienne commande &lt;code&gt;go tool vet&lt;/code&gt; disparaît.&lt;/li&gt;
 &lt;li&gt;Les commandes &lt;code&gt;go&lt;/code&gt; fonctionnent en mode module même hors d&amp;rsquo;un module, par
 exemple pour &lt;code&gt;go get&lt;/code&gt; d&amp;rsquo;un outil.&lt;/li&gt;
 &lt;li&gt;La directive &lt;code&gt;go&lt;/code&gt; de &lt;code&gt;go.mod&lt;/code&gt; indique la version du langage utilisée par le
@@ -295,7 +295,7 @@ beaucoup de cœurs.&lt;/li&gt;
 &lt;h2 data-hextra-search-id="bibliothèque-standard"&gt;Bibliothèque standard&lt;span class="hx:absolute hx:-mt-20" id="bibliothèque-standard"&gt;&lt;/span&gt;
 &lt;a href="#biblioth%c3%a8que-standard" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;time/tzdata&lt;/code&gt;&lt;/strong&gt; embarque la base des fuseaux horaires dans l&amp;rsquo;exécutable.
-C&amp;rsquo;est indispensable dans une image Docker minimale qui n&amp;rsquo;en contient pas.&lt;/li&gt;
+C&amp;rsquo;est indispensable dans une image &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; minimale qui n&amp;rsquo;en contient pas.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;crypto/x509&lt;/code&gt; ne prend plus en compte le champ obsolète &lt;code&gt;CommonName&lt;/code&gt; des
 certificats lorsque les noms alternatifs (SAN) sont absents.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;testing.T.TempDir&lt;/code&gt; crée un répertoire temporaire supprimé automatiquement.&lt;/li&gt;
@@ -837,7 +837,7 @@ fuzz tests et exemples.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="runtime"&gt;Runtime&lt;span class="hx:absolute hx:-mt-20" id="runtime"&gt;&lt;/span&gt;
 &lt;a href="#runtime" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Les &lt;strong&gt;maps&lt;/strong&gt; sont réimplémentées sur le modèle des &lt;strong&gt;Swiss Tables&lt;/strong&gt;, une
+&lt;li&gt;Les &lt;strong&gt;maps&lt;/strong&gt; sont réimplémentées sur le modèle des &lt;strong&gt;&lt;a href="https://abseil.io/about/design/swisstables" target="_blank" rel="noopener"&gt;Swiss Tables&lt;/a&gt;&lt;/strong&gt;, une
 structure plus rapide, notamment pour les grandes maps.&lt;/li&gt;
 &lt;li&gt;L&amp;rsquo;allocation des petits objets est plus rapide.&lt;/li&gt;
 &lt;li&gt;Au total, le coût CPU baisse de 2 à 3 % en moyenne.&lt;/li&gt;
@@ -951,7 +951,7 @@ data-copied-label="Copié !"
 &lt;/div&gt;
 &lt;p&gt;Testez toujours l&amp;rsquo;erreur &lt;strong&gt;avant&lt;/strong&gt; d&amp;rsquo;utiliser les autres valeurs renvoyées.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="à-retenir"&gt;À retenir&lt;span class="hx:absolute hx:-mt-20" id="à-retenir"&gt;&lt;/span&gt;
-&lt;a href="#%c3%a0-retenir" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pour un service déployé dans Kubernetes, passer à Go 1.25 règle d&amp;rsquo;office
+&lt;a href="#%c3%a0-retenir" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Pour un service déployé dans &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, passer à Go 1.25 règle d&amp;rsquo;office
 &lt;code&gt;GOMAXPROCS&lt;/code&gt; correctement. Voir le chapitre
 &lt;a href="../../langage/concurrence/"&gt;Goroutines et channels&lt;/a&gt; pour &lt;code&gt;WaitGroup.Go&lt;/code&gt;, et
 &lt;a href="../../bibliotheque/testing/"&gt;Tests&lt;/a&gt; pour &lt;code&gt;synctest&lt;/code&gt;.&lt;/p&gt;</description></item><item><title>Go 1.26</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/evolution/go1-26/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/evolution/go1-26/</guid><description>
