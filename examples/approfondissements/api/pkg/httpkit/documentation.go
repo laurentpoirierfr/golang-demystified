@@ -10,7 +10,7 @@ import (
 func Fichier(typeMIME string, contenu []byte) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", typeMIME)
-		w.Write(contenu)
+		_, _ = w.Write(contenu) // client parti : l'erreur ne peut plus être signalée
 	})
 }
 

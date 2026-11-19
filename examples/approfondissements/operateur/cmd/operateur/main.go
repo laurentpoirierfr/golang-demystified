@@ -51,8 +51,14 @@ func main() {
 		journal.Error(err, "création du contrôleur")
 		os.Exit(1)
 	}
-	mgr.AddHealthzCheck("healthz", healthz.Ping)
-	mgr.AddReadyzCheck("readyz", healthz.Ping)
+	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {
+		journal.Error(err, "sonde de santé")
+		os.Exit(1)
+	}
+	if err := mgr.AddReadyzCheck("readyz", healthz.Ping); err != nil {
+		journal.Error(err, "sonde de disponibilité")
+		os.Exit(1)
+	}
 
 	journal.Info("démarrage de l'opérateur")
 	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {

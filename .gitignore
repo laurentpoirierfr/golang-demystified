@@ -8,3 +8,4 @@ claude.sh
 docs/
 book/golang-demystified.pdf
 book/golang-demystified.epub
+examples/approfondissements/api/dist/

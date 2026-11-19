@@ -96,7 +96,9 @@ func (c *Catalogue) transaction(ctx context.Context, f func(*db.Queries) error) 
 	if err != nil {
 		return err
 	}
-	defer tx.Rollback(ctx) // sans effet après un Commit réussi
+	// Annule la transaction si elle n'a pas été validée ; sans effet après un
+	// Commit réussi, d'où l'erreur volontairement ignorée.
+	defer func() { _ = tx.Rollback(ctx) }()
 
 	if err := f(c.q.WithTx(tx)); err != nil {
 		return err

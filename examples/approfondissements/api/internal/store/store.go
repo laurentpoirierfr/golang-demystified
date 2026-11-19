@@ -140,8 +140,7 @@ func (s *Store) transaction(ctx context.Context, f func(*sql.Tx) error) error {
 		return err
 	}
 	if err := f(tx); err != nil {
-		tx.Rollback()
-		return err
+		return errors.Join(err, tx.Rollback()) // l'erreur d'annulation n'est pas perdue
 	}
 	return tx.Commit()
 }
