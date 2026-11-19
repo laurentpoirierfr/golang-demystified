@@ -162,4 +162,4 @@ l'autre, c'est le signe qu'une responsabilité est mal découpée. Une interface
 définie côté utilisateur permet souvent de casser le cycle.
 
 La partie Approfondissements présente des exemples complets d'organisation :
-un service web et une architecture hexagonale (*Clean Architecture*).
+un service web complet et une architecture hexagonale.
