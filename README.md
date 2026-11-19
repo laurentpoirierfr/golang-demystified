@@ -1,5 +1,9 @@
 # Golang Demystified
 
+<p align="center">
+  <a href="./book/golang-demystified.pdf"><img src="site/static/images/couverture.png" alt="Couverture du livre" width="280"></a>
+</p>
+
 Un livre en français qui présente Go dans son ensemble : le langage, ses outils,
 sa bibliothèque standard et son évolution au fil des versions.
 

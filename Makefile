@@ -29,6 +29,7 @@ book:
 	$(QUARTO) quarto render
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.pdf $(BOOK_PDF)
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.epub $(BOOK_EPUB)
+	cp $(QUARTO_DIR)/assets/couverture.png site/static/images/couverture.png
 
 ## pdf : alias de book
 pdf: book
