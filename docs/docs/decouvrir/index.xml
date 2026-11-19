@@ -11,7 +11,8 @@ quelques secondes, produit un binaire autonome et rend la concurrence naturelle.
 &lt;p&gt;Go a été rendu public en novembre 2009. La version &lt;strong&gt;Go 1.0&lt;/strong&gt;, publiée en mars
 2012, a marqué le début de la stabilité. Depuis, Go est devenu le langage de
 l&amp;rsquo;infrastructure moderne : &lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt;, &lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;, &lt;a href="https://www.terraform.io" target="_blank" rel="noopener"&gt;Terraform&lt;/a&gt;, &lt;a href="https://prometheus.io" target="_blank" rel="noopener"&gt;Prometheus&lt;/a&gt;, &lt;a href="https://etcd.io" target="_blank" rel="noopener"&gt;etcd&lt;/a&gt; ou
-&lt;a href="https://caddyserver.com" target="_blank" rel="noopener"&gt;Caddy&lt;/a&gt; sont écrits en Go.&lt;/p&gt;
+&lt;a href="https://caddyserver.com" target="_blank" rel="noopener"&gt;Caddy&lt;/a&gt; sont écrits en Go. Le chapitre « Les grands
+projets écrits en Go » en présente un panorama.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="une-philosophie-de-la-simplicité"&gt;Une philosophie de la simplicité&lt;span class="hx:absolute hx:-mt-20" id="une-philosophie-de-la-simplicité"&gt;&lt;/span&gt;
 &lt;a href="#une-philosophie-de-la-simplicit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Quelques principes guident la conception de Go et reviennent tout au long de ce
 livre :&lt;/p&gt;
@@ -128,7 +129,271 @@ data-alert="note" class="hextra-alert"
 &lt;/div&gt;
 &lt;p&gt;Le code des exemples se trouve dans le dossier &lt;code&gt;examples/&lt;/code&gt; du
 &lt;a href="https://github.com/laurentpoirierfr/golang-demystified" target="_blank" rel="noopener"&gt;dépôt du livre&lt;/a&gt;. Il est
-compilé et testé à chaque modification.&lt;/p&gt;</description></item><item><title>Installation</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</guid><description>
+compilé et testé à chaque modification.&lt;/p&gt;</description></item><item><title>Les grands projets écrits en Go</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/projets-go/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/projets-go/</guid><description>
+&lt;p&gt;Go s&amp;rsquo;est imposé comme &lt;strong&gt;le langage de l&amp;rsquo;infrastructure&lt;/strong&gt; : une grande partie
+des outils qui font fonctionner le cloud, les conteneurs et l&amp;rsquo;observabilité
+est écrite en Go. Ses qualités y sont décisives : des exécutables statiques
+faciles à déployer, une concurrence intégrée pour les services réseau, des
+performances proches du C pour une fraction de sa complexité, et une
+compilation croisée triviale.&lt;/p&gt;
+&lt;p&gt;Ce chapitre présente quelques-uns de ces projets. Les lire est une excellente
+façon d&amp;rsquo;apprendre : leur code est ouvert, et souvent exemplaire.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="conteneurs-et-orchestration"&gt;Conteneurs et orchestration&lt;span class="hx:absolute hx:-mt-20" id="conteneurs-et-orchestration"&gt;&lt;/span&gt;
+&lt;a href="#conteneurs-et-orchestration" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://kubernetes.io" target="_blank" rel="noopener"&gt;Kubernetes&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;L&amp;rsquo;orchestrateur de conteneurs devenu le standard du cloud&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://www.docker.com" target="_blank" rel="noopener"&gt;Docker&lt;/a&gt; (&lt;a href="https://mobyproject.org" target="_blank" rel="noopener"&gt;Moby&lt;/a&gt;)&lt;/td&gt;
+&lt;td&gt;Le moteur de conteneurs qui a popularisé Go dès 2013&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://containerd.io" target="_blank" rel="noopener"&gt;containerd&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;L&amp;rsquo;environnement d&amp;rsquo;exécution de conteneurs utilisé par Docker et Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://podman.io" target="_blank" rel="noopener"&gt;Podman&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Moteur de conteneurs sans démon, compatible avec Docker&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://helm.sh" target="_blank" rel="noopener"&gt;Helm&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Le gestionnaire de paquets de Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://kind.sigs.k8s.io" target="_blank" rel="noopener"&gt;kind&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Des grappes Kubernetes locales, dans des conteneurs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://k9scli.io" target="_blank" rel="noopener"&gt;k9s&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Une interface en terminal pour piloter Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developer.hashicorp.com/nomad" target="_blank" rel="noopener"&gt;Nomad&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Orchestrateur de conteneurs et d&amp;rsquo;applications de HashiCorp&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://dapr.io" target="_blank" rel="noopener"&gt;Dapr&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Briques réutilisables pour les applications distribuées&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="réseau-maillage-de-services-et-sécurité"&gt;Réseau, maillage de services et sécurité&lt;span class="hx:absolute hx:-mt-20" id="réseau-maillage-de-services-et-sécurité"&gt;&lt;/span&gt;
+&lt;a href="#r%c3%a9seau-maillage-de-services-et-s%c3%a9curit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://traefik.io/traefik/" target="_blank" rel="noopener"&gt;Traefik&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Proxy inverse et répartiteur de charge, configuré automatiquement&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://caddyserver.com" target="_blank" rel="noopener"&gt;Caddy&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Serveur web avec HTTPS automatique&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://coredns.io" target="_blank" rel="noopener"&gt;CoreDNS&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Le serveur DNS de Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developer.hashicorp.com/consul" target="_blank" rel="noopener"&gt;Consul&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Découverte de services et maillage de services&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://istio.io" target="_blank" rel="noopener"&gt;Istio&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Maillage de services : son plan de contrôle est en Go, son proxy (Envoy) en C++&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://linkerd.io" target="_blank" rel="noopener"&gt;Linkerd&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Maillage de services : plan de contrôle en Go, proxy en Rust&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://cilium.io" target="_blank" rel="noopener"&gt;Cilium&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Réseau et sécurité pour Kubernetes, avec eBPF&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developer.hashicorp.com/vault" target="_blank" rel="noopener"&gt;Vault&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Gestion des secrets et chiffrement&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="infrastructure-et-déploiement"&gt;Infrastructure et déploiement&lt;span class="hx:absolute hx:-mt-20" id="infrastructure-et-déploiement"&gt;&lt;/span&gt;
+&lt;a href="#infrastructure-et-d%c3%a9ploiement" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://developer.hashicorp.com/terraform" target="_blank" rel="noopener"&gt;Terraform&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;L&amp;rsquo;infrastructure décrite par du code&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://argo-cd.readthedocs.io" target="_blank" rel="noopener"&gt;Argo CD&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Déploiement continu « GitOps » sur Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://fluxcd.io" target="_blank" rel="noopener"&gt;Flux&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Déploiement continu « GitOps » sur Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://etcd.io" target="_blank" rel="noopener"&gt;etcd&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Base clé-valeur distribuée, cœur de Kubernetes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="observabilité"&gt;Observabilité&lt;span class="hx:absolute hx:-mt-20" id="observabilité"&gt;&lt;/span&gt;
+&lt;a href="#observabilit%c3%a9" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://prometheus.io" target="_blank" rel="noopener"&gt;Prometheus&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Collecte et stockage de métriques, alertes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://grafana.com/oss/grafana/" target="_blank" rel="noopener"&gt;Grafana&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Tableaux de bord : serveur en Go, interface en TypeScript&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://grafana.com/oss/loki/" target="_blank" rel="noopener"&gt;Loki&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Agrégation de journaux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://thanos.io" target="_blank" rel="noopener"&gt;Thanos&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Stockage à long terme et haute disponibilité pour Prometheus&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://www.jaegertracing.io" target="_blank" rel="noopener"&gt;Jaeger&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Traçage distribué&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://opentelemetry.io/docs/collector/" target="_blank" rel="noopener"&gt;OpenTelemetry Collector&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Collecte et transformation des traces, métriques et journaux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="bases-de-données-et-stockage"&gt;Bases de données et stockage&lt;span class="hx:absolute hx:-mt-20" id="bases-de-données-et-stockage"&gt;&lt;/span&gt;
+&lt;a href="#bases-de-donn%c3%a9es-et-stockage" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://www.cockroachlabs.com" target="_blank" rel="noopener"&gt;CockroachDB&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Base SQL distribuée, compatible avec PostgreSQL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://github.com/pingcap/tidb" target="_blank" rel="noopener"&gt;TiDB&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Base SQL distribuée, compatible avec MySQL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://vitess.io" target="_blank" rel="noopener"&gt;Vitess&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Mise à l&amp;rsquo;échelle horizontale de MySQL, née chez YouTube&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://min.io" target="_blank" rel="noopener"&gt;MinIO&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Stockage d&amp;rsquo;objets compatible avec Amazon S3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://nats.io" target="_blank" rel="noopener"&gt;NATS&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Messagerie et flux d&amp;rsquo;événements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://temporal.io" target="_blank" rel="noopener"&gt;Temporal&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Exécution durable de processus métier (&lt;em&gt;workflows&lt;/em&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="outils-du-quotidien"&gt;Outils du quotidien&lt;span class="hx:absolute hx:-mt-20" id="outils-du-quotidien"&gt;&lt;/span&gt;
+&lt;a href="#outils-du-quotidien" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Projet&lt;/th&gt;
+&lt;th&gt;Rôle&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://gohugo.io" target="_blank" rel="noopener"&gt;Hugo&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Générateur de sites statiques ; il produit le site de ce livre&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://cli.github.com" target="_blank" rel="noopener"&gt;GitHub CLI&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;gh&lt;/code&gt;, la ligne de commande de GitHub&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://about.gitea.com" target="_blank" rel="noopener"&gt;Gitea&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Forge Git légère, auto-hébergée&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://mattermost.com" target="_blank" rel="noopener"&gt;Mattermost&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Messagerie d&amp;rsquo;équipe : serveur en Go, interface en TypeScript&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://ollama.com" target="_blank" rel="noopener"&gt;Ollama&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Exécution locale de modèles de langage&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://syncthing.net" target="_blank" rel="noopener"&gt;Syncthing&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Synchronisation de fichiers de pair à pair&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://rclone.org" target="_blank" rel="noopener"&gt;rclone&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Synchronisation avec des dizaines de stockages en ligne&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://restic.net" target="_blank" rel="noopener"&gt;restic&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Sauvegardes chiffrées et dédupliquées&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://github.com/junegunn/fzf" target="_blank" rel="noopener"&gt;fzf&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Recherche floue interactive dans le terminal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://github.com/jesseduffield/lazygit" target="_blank" rel="noopener"&gt;lazygit&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;Interface Git en terminal&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 data-hextra-search-id="ce-que-ces-projets-ont-en-commun"&gt;Ce que ces projets ont en commun&lt;span class="hx:absolute hx:-mt-20" id="ce-que-ces-projets-ont-en-commun"&gt;&lt;/span&gt;
+&lt;a href="#ce-que-ces-projets-ont-en-commun" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Ces projets illustrent les points forts de Go mieux qu&amp;rsquo;un long discours :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ce sont souvent des services réseau&lt;/strong&gt; (proxys, serveurs DNS, bases
+distribuées) : les goroutines et la bibliothèque &lt;code&gt;net/http&lt;/code&gt; y font
+merveille ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ils se distribuent en un seul exécutable&lt;/strong&gt;, sans machine virtuelle ni
+bibliothèque partagée : &lt;code&gt;kubectl&lt;/code&gt;, &lt;code&gt;terraform&lt;/code&gt; ou &lt;code&gt;hugo&lt;/code&gt; s&amp;rsquo;installent en
+copiant un fichier ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ils sont compilés pour toutes les plateformes&lt;/strong&gt; depuis une même machine,
+grâce à la compilation croisée ;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ils sont développés par des équipes nombreuses&lt;/strong&gt;, parfois des milliers de
+contributeurs : la simplicité du langage et l&amp;rsquo;outillage commun (&lt;code&gt;gofmt&lt;/code&gt;,
+&lt;code&gt;go vet&lt;/code&gt;, &lt;code&gt;go test&lt;/code&gt;) rendent leur code lisible par tous.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Plusieurs chapitres de ce livre s&amp;rsquo;inspirent directement de ces projets : la
+ligne de commande avec cobra (utilisé par Kubernetes, Hugo et GitHub CLI), les
+tests avec Testcontainers, ou les opérateurs Kubernetes.&lt;/p&gt;</description></item><item><title>Installation</title><link>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://laurentpoirierfr.github.io/golang-demystified/docs/decouvrir/installation/</guid><description>
 &lt;h2 data-hextra-search-id="installer-go"&gt;Installer Go&lt;span class="hx:absolute hx:-mt-20" id="installer-go"&gt;&lt;/span&gt;
 &lt;a href="#installer-go" class="subheading-anchor" aria-label="Lien permanent vers cette section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Les distributions officielles sont disponibles sur
 &lt;a href="https://go.dev/dl/" target="_blank" rel="noopener"&gt;go.dev/dl&lt;/a&gt;. Une installation de Go est autonome : elle
