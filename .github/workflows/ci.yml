@@ -1,0 +1,78 @@
+# Intégration continue : vérifie le code des exemples et des outils du livre
+# à chaque push et à chaque pull request.
+name: CI
+
+on:
+  push:
+    branches: [main, develop, "feature/**", "release/**", "hotfix/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+# Un nouveau push sur la même branche annule la vérification en cours.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verifications:
+    name: Format, analyse, tests et vulnérabilités
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Formatage (gofmt)
+        run: |
+          fichiers=$(gofmt -l tools examples)
+          if [ -n "$fichiers" ]; then
+            echo "Fichiers à formater avec gofmt :"
+            echo "$fichiers"
+            exit 1
+          fi
+
+      - name: Analyse statique (go vet)
+        run: go vet ./...
+
+      - name: Tests, avec le détecteur de courses
+        run: go test -race -short ./...
+
+      - name: Vulnérabilités (govulncheck)
+        run: go tool govulncheck ./...
+
+  integration:
+    name: Tests d'intégration (Testcontainers)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      # Docker est disponible sur les machines ubuntu-latest : Testcontainers
+      # démarre PostgreSQL sans configuration.
+      - name: Tests avec PostgreSQL
+        run: go test -count=1 -run Postgres -v ./examples/...
+
+  code-genere:
+    name: Code généré à jour
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      # sqlc (par son image Docker), oapi-codegen et controller-gen.
+      - name: Régénération
+        run: make generate
+
+      - name: Aucune différence avec le code versionné
+        run: |
+          if ! git diff --exit-code; then
+            echo "::error::Le code généré n'est pas à jour : lancez « make generate » et versionnez le résultat."
+            exit 1
+          fi

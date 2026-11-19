@@ -7,13 +7,17 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site serve book pdf check test-integration sqlc generate clean
+.PHONY: all site publication serve book pdf check vuln test-integration sqlc generate clean
 
-all: check site book
+all: check book publication
 
-## site : génère le site statique dans docs/ (GitHub Pages)
+## site : génère le site statique dans site/public
 site:
 	cd site && hugo --minify --cleanDestinationDir
+
+## publication : le site, avec le PDF et l'EPUB téléchargeables (après make book)
+publication: site
+	cp $(BOOK_PDF) $(BOOK_EPUB) site/public/
 
 ## serve : prévisualise le site sur http://localhost:1313/golang-demystified/
 serve:
@@ -39,6 +43,10 @@ check:
 	test -z "$$(gofmt -l tools examples)"
 	go vet ./...
 	go test -short ./...
+
+## vuln : recherche les vulnérabilités connues dans le code et ses dépendances
+vuln:
+	go tool govulncheck ./...
 
 # Avec Podman, Testcontainers passe par l'API compatible Docker de Podman
 # (systemctl --user start podman.socket), sans le conteneur « Ryuk ».

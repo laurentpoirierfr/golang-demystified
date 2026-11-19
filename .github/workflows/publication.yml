@@ -1,0 +1,99 @@
+# Publication : à chaque push sur main (fin d'une release git flow), construit
+# le livre (PDF, EPUB) et le site, publie le site sur GitHub Pages, et, si le
+# commit porte un tag de version, crée la release GitHub avec le PDF et l'EPUB.
+name: Publication
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Une seule publication à la fois ; une publication en cours n'est pas annulée.
+concurrency:
+  group: publication
+  cancel-in-progress: false
+
+env:
+  HUGO_VERSION: 0.169.0
+
+jobs:
+  construction:
+    name: Construction du livre et du site
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # pour lire les tags
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Installation de Hugo
+        run: |
+          curl -sSL -o /tmp/hugo.tar.gz \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin hugo
+          hugo version
+
+      - name: Version publiée
+        id: version
+        run: echo "tag=$(git describe --exact-match --tags HEAD 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
+
+      # Quarto et Typst s'exécutent dans leur image Docker (voir le Makefile).
+      - name: Livre (PDF et EPUB)
+        run: make book
+
+      - name: Site, avec le livre téléchargeable
+        run: make publication
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/public
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: livre
+          path: |
+            book/golang-demystified.pdf
+            book/golang-demystified.epub
+
+  deploiement:
+    name: Déploiement sur GitHub Pages
+    needs: construction
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v5
+
+  release:
+    name: Release GitHub
+    needs: construction
+    if: needs.construction.outputs.tag != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: livre
+
+      - name: Création de la release avec le PDF et l'EPUB
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.construction.outputs.tag }}
+        run: |
+          gh release create "$TAG" golang-demystified.pdf golang-demystified.epub \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Golang Demystified ${TAG#v}" \
+            --notes "Le livre en PDF et en EPUB. Version en ligne : https://laurentpoirierfr.github.io/golang-demystified/"
