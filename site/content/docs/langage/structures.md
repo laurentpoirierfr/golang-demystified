@@ -1,118 +1,190 @@
 ---
-title: "Les structures"
-weight: 30
+title: "Structures et méthodes"
+weight: 60
 ---
 
-En Go, une structure (ou struct) est un type de données composite qui regroupe des champs sous un même nom. Une structure permet de définir des objets avec des propriétés et des méthodes associées.
+## Définir une structure
 
-
-## Définition d'une structure
-
-Une structure est définie en listant ses champs et leurs types. Voici un exemple simple :
+Une structure (`struct`) regroupe des champs nommés. C'est la brique de base
+pour modéliser des données en Go, qui n'a pas de classes.
 
 ```go
-type Person struct {
-    Name string
-    Age  int
-}
-
-var john Person
-```
-
-
-## Instanciation via une fabrique
-
-Une fabrique (**factory**) est une fonction qui retourne une instance de la structure. Cela permet d'encapsuler la logique de création de l'objet.
-
-## Exemple complet
-
-Voici un exemple complet montrant la définition d'une structure, une fabrique pour créer des instances, l'instanciation via un pointeur, et quelques méthodes associées à la structure :
-
-
-```go
-package main
-
-import (
-    "fmt"
-)
-
-// Définition de la structure Person
-type Person struct {
-    Name string
-    Age  int
-}
-
-// Fabrique pour créer une nouvelle instance de Person
-func NewPerson(name string, age int) *Person {
-    return &Person{Name: name, Age: age}
-}
-
-// Méthode pour afficher les détails de la personne
-func (p *Person) Display() {
-    fmt.Printf("Name: %s, Age: %d\n", p.Name, p.Age)
-}
-
-// Méthode pour faire vieillir la personne d'un an
-func (p *Person) Birthday() {
-    p.Age++
-}
-
-func main() {
-    // Instanciation d'une nouvelle personne via la fabrique
-    person := NewPerson("Alice", 30)
-
-    // Utilisation des méthodes de la structure
-    person.Display()  // Affiche: Name: Alice, Age: 30
-    person.Birthday() // Fait vieillir Alice d'un an
-    person.Display()  // Affiche: Name: Alice, Age: 31
+type Personne struct {
+	Nom     string
+	Age     int
+	Email   string
+	actif   bool // non exporté
+	Inscrit time.Time
 }
 ```
 
-## Explications
+La règle de visibilité s'applique aux champs : `Nom` est accessible depuis les
+autres packages, `actif` ne l'est pas. C'est le seul mécanisme
+d'encapsulation de Go, et il opère au niveau du **package**, pas du type.
 
-* Définition de la structure Person :
+## Créer des valeurs
 
 ```go
-type Person struct {
-    Name string
-    Age  int
+alice := Personne{Nom: "Alice", Age: 31}        // champs nommés
+bob := Personne{"Bob", 27, "bob@example.com", true, time.Time{}} // tous, dans l'ordre
+var vide Personne                               // valeur zéro
+
+alice.Age++
+fmt.Println(alice.Nom, alice.Age, bob.Email, vide.Nom == "")
+// Alice 32 bob@example.com true
+```
+
+Préférez **toujours** la forme avec les noms de champs : elle reste valide si
+la structure gagne un champ, et les champs omis prennent leur valeur zéro. `go
+vet` signale la forme positionnelle pour les types d'autres packages.
+
+`&Personne{…}` crée la valeur et renvoie un pointeur vers elle. On accède aux
+champs à travers un pointeur avec la même notation : `p.Nom` équivaut à
+`(*p).Nom`.
+
+Deux structures sont comparables avec `==` si tous leurs champs le sont. Le
+verbe `%+v` affiche les noms des champs, ce qui est pratique pour déboguer :
+
+```go
+type Point struct{ X, Y int }
+a := Point{1, 2}
+fmt.Println(a == Point{1, 2}, a)
+// true {1 2}
+fmt.Printf("%+v\n", a)
+// {X:1 Y:2}
+```
+
+Une **structure anonyme** convient pour une donnée locale à usage unique,
+comme les cas d'un test ou un document JSON ponctuel :
+
+```go
+config := struct {
+	Hote string
+	Port int
+}{"localhost", 8080}
+```
+
+## Les constructeurs
+
+Go n'a pas de constructeur au sens des langages objets. Par convention, une
+fonction `NewXxx` (ou `NouveauXxx`) crée une valeur valide, et peut renvoyer
+une erreur si les paramètres ne le permettent pas :
+
+```go
+func NouvellePersonne(nom string, age int) (*Personne, error) {
+	if strings.TrimSpace(nom) == "" {
+		return nil, fmt.Errorf("nom vide")
+	}
+	return &Personne{Nom: nom, Age: age, actif: true}, nil
 }
 ```
 
-La structure **Person** a deux champs : **Name** de type **string** et **Age** de type **int**.
+Lorsque la valeur zéro du type est directement utilisable, aucun constructeur
+n'est nécessaire. C'est l'idéal à viser.
 
-* Fabrique pour créer une nouvelle instance de Person :
+## Les méthodes
+
+Une méthode est une fonction dotée d'un **récepteur**. On peut définir des
+méthodes sur n'importe quel type nommé déclaré dans le même package, pas
+seulement sur les structures.
 
 ```go
-func NewPerson(name string, age int) *Person {
-    return &Person{Name: name, Age: age}
+type Compte struct {
+	Titulaire string
+	solde     float64
+}
+
+// Solde a un récepteur valeur : elle lit le compte sans le modifier.
+func (c Compte) Solde() float64 { return c.solde }
+
+// Depose a un récepteur pointeur : elle modifie le compte.
+func (c *Compte) Depose(montant float64) { c.solde += montant }
+
+// DeposeRate a un récepteur valeur : elle modifie une copie.
+func (c Compte) DeposeRate(montant float64) { c.solde += montant }
+
+c := Compte{Titulaire: "Alice"}
+c.Depose(100) // Go écrit (&c).Depose(100)
+c.DeposeRate(50)
+fmt.Println(c.Solde())
+// 100
+```
+
+### Récepteur valeur ou pointeur ?
+
+Le récepteur est un paramètre comme un autre : un récepteur valeur reçoit une
+**copie**. Utilisez un récepteur pointeur lorsque :
+
+- la méthode **modifie** le récepteur ;
+- la structure est **grande**, et la copier serait coûteux ;
+- la structure contient un champ qui ne doit pas être copié, comme un
+  `sync.Mutex`.
+
+Par cohérence, si une méthode du type a un récepteur pointeur, donnez-en un à
+toutes. Le choix a une conséquence sur les interfaces : les méthodes à
+récepteur pointeur n'appartiennent qu'au type pointeur `*T` (voir le chapitre
+sur les interfaces).
+
+## La composition par intégration
+
+Go n'a pas d'héritage. On compose des types en **intégrant** (*embedding*) un
+type dans une structure, en le déclarant sans nom de champ. Les champs et les
+méthodes du type intégré sont alors **promus** : accessibles directement depuis
+la structure englobante.
+
+```go
+type Animal struct{ Nom string }
+
+func (a Animal) Presente() string { return "Je suis " + a.Nom }
+
+type Chien struct {
+	Animal // champ intégré
+	Race   string
+}
+
+func (c Chien) Aboie() string { return c.Nom + " : Wouf !" }
+
+rex := Chien{Animal: Animal{Nom: "Rex"}, Race: "berger"}
+fmt.Println(rex.Presente()) // méthode promue
+fmt.Println(rex.Aboie())
+// Je suis Rex
+// Rex : Wouf !
+```
+
+Il ne s'agit pas d'héritage : un `Chien` **n'est pas** un `Animal`, on ne peut
+pas le passer à une fonction qui attend un `Animal`. Le champ intégré reste
+accessible par le nom de son type (`rex.Animal`). Si `Chien` définit lui aussi
+une méthode `Presente`, elle masque celle d'`Animal`, qui reste appelable avec
+`rex.Animal.Presente()`.
+
+> [!NOTE]
+> **Go 1.27** — un champ promu peut servir de clé dans un littéral :
+> `Chien{Nom: "Rex", Race: "berger"}`. Auparavant, il fallait écrire
+> `Chien{Animal: Animal{Nom: "Rex"}, …}`.
+
+L'intégration fonctionne aussi avec des interfaces, et c'est un moyen courant
+de construire un type qui « décore » un autre type en ne redéfinissant que
+certaines méthodes.
+
+## Les balises de champs
+
+Une **balise** (*struct tag*) est une chaîne attachée à un champ, lisible par
+réflexion. Les packages d'encodage s'en servent pour connaître le nom à
+utiliser et les options :
+
+```go
+type Article struct {
+	ID    int      `json:"id"`
+	Titre string   `json:"titre"`
+	Tags  []string `json:"tags,omitempty"`
 }
 ```
 
-La fonction **NewPerson** prend des paramètres pour le nom et l'âge, crée une nouvelle instance de **Person** et retourne un pointeur vers cette instance.
+Les balises sont utilisées par `encoding/json`, `encoding/xml`, les bibliothèques
+d'accès aux bases de données ou de validation. `go vet` vérifie leur syntaxe.
 
-* Méthode Birthday pour faire vieillir la personne d'un an :
+## La structure vide
 
-
-```go
-func (p *Person) Birthday() {
-    p.Age++
-}
-```
-
-La méthode Birthday incrémente l'âge de la personne.
-
-* Instanciation et utilisation :
-
-```go
-person := NewPerson("Alice", 30)
-person.Display()  // Affiche: Name: Alice, Age: 30
-person.Birthday() // Fait vieillir Alice d'un an
-person.Display()  // Affiche: Name: Alice, Age: 31
-```
-
-Nous créons une nouvelle personne nommée Alice âgée de 30 ans en utilisant la fabrique **NewPerson**. Nous utilisons ensuite les méthodes **Display** et **Birthday** pour afficher et modifier les propriétés de l'instance.
-
-## Résumé
-
-Les structures en Go permettent de regrouper des données et des méthodes associées. L'utilisation d'une fabrique pour créer des instances de structures encapsule la logique de création, et les méthodes associées à la structure permettent de manipuler les données de manière organisée.
+`struct{}` n'a aucun champ et occupe **zéro octet**. On l'utilise comme valeur
+d'un ensemble (`map[string]struct{}`) ou comme signal dans un channel
+(`chan struct{}`), lorsque seule l'existence de l'événement compte.

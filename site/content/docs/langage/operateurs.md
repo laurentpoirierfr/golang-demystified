@@ -3,441 +3,133 @@ title: "Les opérateurs"
 weight: 20
 ---
 
-Voici la liste des principaux opérateurs en Go, avec des explications et des exemples pour chacun :
-
 ## Opérateurs arithmétiques
 
-### Addition (+)
+| Opérateur | Rôle           | Exemple   | Résultat |
+|-----------|----------------|-----------|----------|
+| `+`       | Addition (et concaténation de chaînes) | `7 + 2` | `9` |
+| `-`       | Soustraction   | `7 - 2`   | `5`      |
+| `*`       | Multiplication | `7 * 2`   | `14`     |
+| `/`       | Division       | `7 / 2`   | `3`      |
+| `%`       | Reste          | `7 % 2`   | `1`      |
 
-* Ajoute deux valeurs.
-* Exemple :
+La division entre entiers est **entière** et tronque vers zéro :
+`7 / 2` vaut `3`, `-7 / 2` vaut `-3`. Le reste a le signe du dividende :
+`-7 % 2` vaut `-1`. Pour une division décimale, convertissez d'abord :
+`float64(7) / 2` vaut `3.5`.
 
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := a + b
-    fmt.Println("Addition :", result) // Affiche: Addition : 15
-}
-```
-
-### Soustraction (-)
-
-* Soustrait une valeur d'une autre.
-* Exemple:
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := a - b
-    fmt.Println("Soustraction :", result) // Affiche: Soustraction : 5
-}
-```
-
-### Multiplication (*)
-
-* Multiplie deux valeurs.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := a * b
-    fmt.Println("Multiplication :", result) // Affiche: Multiplication : 50
-}
-```
-
-### Division (/)
-
-* Divise une valeur par une autre.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := a / b
-    fmt.Println("Division :", result) // Affiche: Division : 2
-}
-```
-
-### Modulo (%)
-
-* Retourne le reste de la division entière de deux valeurs.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 3
-    result := a % b
-    fmt.Println("Modulo :", result) // Affiche: Modulo : 1
-}
-```
+Une division entière par zéro provoque un `panic` à l'exécution, ou une erreur
+de compilation si le diviseur est une constante. Une division flottante par
+zéro donne `+Inf`, `-Inf` ou `NaN`.
 
 ## Opérateurs de comparaison
 
-### Égal à (==)
+| Opérateur | Rôle                |
+|-----------|---------------------|
+| `==`      | Égal à              |
+| `!=`      | Différent de        |
+| `<`, `<=` | Inférieur (ou égal) |
+| `>`, `>=` | Supérieur (ou égal) |
 
-* Vérifie si deux valeurs sont égales.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 10
-    result := (a == b)
-    fmt.Println("Égal à :", result) // Affiche: Égal à : true
-}
-```
-
-### Différent de (!=)
-
-* Vérifie si deux valeurs sont différentes.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := (a != b)
-    fmt.Println("Différent de :", result) // Affiche: Différent de : true
-}
-```
-
-### Plus grand que (>)
-
-* Vérifie si une valeur est plus grande qu'une autre.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    result := (a > b)
-    fmt.Println("Plus grand que :", result) // Affiche: Plus grand que : true
-}
-```
-
-### Plus petit que (<)
-
-* Vérifie si une valeur est plus petite qu'une autre.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 5
-    b := 10
-    result := (a < b)
-    fmt.Println("Plus petit que :", result) // Affiche: Plus petit que : true
-}
-```
-
-### Plus grand ou égal à (>=)
-
-* Vérifie si une valeur est plus grande ou égale à une autre.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 10
-    result := (a >= b)
-    fmt.Println("Plus grand ou égal à :", result) // Affiche: Plus grand ou égal à : true
-}
-```
-
-### Plus petit ou égal à (<=)
-
-* Vérifie si une valeur est plus petite ou égale à une autre.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 5
-    b := 10
-    result := (a <= b)
-    fmt.Println("Plus petit ou égal à :", result) // Affiche: Plus petit ou égal à : true
-}
-```
+Les deux opérandes doivent être du **même type**. Les chaînes se comparent
+octet par octet (ordre lexicographique). Les structures et les tableaux sont
+comparables avec `==` si tous leurs champs le sont. Les slices, les maps et les
+fonctions ne sont comparables qu'à `nil`.
 
 ## Opérateurs logiques
 
-### Et logique (&&)
+| Opérateur | Rôle |
+|-----------|------|
+| `&&`      | Et   |
+| `\|\|`    | Ou   |
+| `!`       | Non  |
 
-* Retourne vrai si les deux opérandes sont vrais.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := true
-    b := false
-    result := a && b
-    fmt.Println("Et logique :", result) // Affiche: Et logique : false
-}
-```
-
-### Ou logique (||)
-
-* Retourne vrai si au moins un des opérandes est vrai.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := true
-    b := false
-    result := a || b
-    fmt.Println("Ou logique :", result) // Affiche: Ou logique : true
-}
-```
-
-### Non logique (!)
-
-* Inverse la valeur booléenne.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := true
-    result := !a
-    fmt.Println("Non logique :", result) // Affiche: Non logique : false
-}
-```
+`&&` et `||` sont évalués **en court-circuit** : l'opérande de droite n'est
+évaluée que si nécessaire. On peut donc écrire sans risque
+`if p != nil && p.Actif { … }`.
 
 ## Opérateurs de bits
 
-### Et bit à bit (&)
+| Opérateur | Rôle                    | Exemple (`a = 0b1100`, `b = 0b1010`) | Résultat |
+|-----------|-------------------------|--------------------------|----------|
+| `&`       | Et bit à bit            | `a & b`                  | `0b1000` |
+| `\|`      | Ou bit à bit            | `a \| b`                 | `0b1110` |
+| `^`       | Ou exclusif (binaire), complément (unaire) | `a ^ b` | `0b0110` |
+| `&^`      | Et non (*bit clear*)    | `a &^ b`                 | `0b0100` |
+| `<<`      | Décalage à gauche       | `1 << 4`                 | `16`     |
+| `>>`      | Décalage à droite       | `16 >> 2`                | `4`      |
 
-* Effectue un ET logique bit à bit sur deux valeurs.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10 // 1010 en binaire
-    b := 3  // 0011 en binaire
-    result := a & b // 0010 en binaire
-    fmt.Println("Et bit à bit :", result) // Affiche: Et bit à bit : 2
-}
-```
-
-### Ou bit à bit (|)
-
-* Effectue un OU logique bit à bit sur deux valeurs.
-* Exemple :
+`&^` est propre à Go : `a &^ b` met à zéro dans `a` les bits qui sont à 1 dans
+`b`. C'est l'opérateur idéal pour retirer un drapeau :
 
 ```go
-package main
-import "fmt"
-func main() {
-    a := 10 // 1010 en binaire
-    b := 3  // 0011 en binaire
-    result := a | b // 1011 en binaire
-    fmt.Println("Ou bit à bit :", result) // Affiche: Ou bit à bit : 11
-}
+const (
+	Lecture  = 1 << iota // 0b001
+	Ecriture             // 0b010
+	Execution            // 0b100
+)
+
+droits := Lecture | Ecriture | Execution
+droits &^= Execution                // retire le droit d'exécution
+peutEcrire := droits&Ecriture != 0  // teste un drapeau
 ```
 
-### XOR bit à bit (^)
-
-* Effectue un XOR logique bit à bit sur deux valeurs.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10 // 1010 en binaire
-    b := 3  // 0011 en binaire
-    result := a ^ b // 1001 en binaire
-    fmt.Println("XOR bit à bit :", result) // Affiche: XOR bit à bit : 9
-}
-```
-
-### Décalage à gauche (<<)
-
-* Décale les bits d'une valeur vers la gauche.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 3 // 0011 en binaire
-    result := a << 2 // 1100 en binaire
-    fmt.Println("Décalage à gauche :", result) // Affiche: Décalage à gauche : 12
-}
-```
-
-### Décalage à droite (>>)
-
-* Décalage à droite (>>)
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 12 // 1100 en binaire
-    result := a >> 2 // 0011 en binaire
-    fmt.Println("Décalage à droite :", result) // Affiche: Décalage à droite : 3
-}
-```
+Les littéraux binaires (`0b1010`), octaux (`0o755`) et le séparateur `_`
+(`1_000_000`) existent depuis **Go 1.13**.
 
 ## Opérateurs d'affectation
 
-### Affectation (=)
+`=` affecte une valeur à une variable existante, `:=` déclare et affecte.
+Chaque opérateur binaire a sa forme composée : `+=`, `-=`, `*=`, `/=`, `%=`,
+`&=`, `|=`, `^=`, `&^=`, `<<=`, `>>=`.
 
-* Assigne une valeur à une variable.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    b := 5
-    a = b
-    fmt.Println("Affectation :", a) // Affiche: Affectation : 5
-}
-```
-
-### Affectation et addition (+=)
-
-* Ajoute la valeur de droite à la variable de gauche.
-* Exemple :
+L'affectation multiple évalue toutes les expressions de droite **avant**
+d'affecter. Échanger deux variables ne demande pas de variable temporaire :
 
 ```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a += 5
-    fmt.Println("Affectation et addition :", a) // Affiche: Affectation et addition : 15
-}
+a, b = b, a
 ```
 
-### Affectation et soustraction (-=)
+## Incrémentation et décrémentation
 
-* Soustrait la valeur de droite à la variable de gauche.
-* Exemple :
+`i++` et `i--` sont des **instructions**, et non des expressions : on ne peut pas
+écrire `x := i++` ni `f(i++)`. Il n'existe pas de forme préfixe (`++i`).
 
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a -= 5
-    fmt.Println("Affectation et soustraction :", a) // Affiche: Affectation et soustraction : 5
-}
-```
+## Opérateurs d'adresse et de channel
 
-### Affectation et multiplication (*=)
+| Opérateur | Rôle                                     |
+|-----------|------------------------------------------|
+| `&x`      | Adresse de `x` (crée un pointeur)        |
+| `*p`      | Valeur pointée par `p`                   |
+| `<-ch`    | Reçoit une valeur depuis le channel `ch` |
+| `ch <- v` | Envoie `v` dans le channel `ch`          |
 
-* Multiplie la variable de gauche par la valeur de droite.
-* Exemple :
+Ils sont détaillés dans les chapitres sur les pointeurs et la concurrence.
 
+## Ce qui n'existe pas
 
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a *= 5
-    fmt.Println("Affectation et multiplication :", a) // Affiche: Affectation et multiplication : 50
-}
-```
+- **Pas d'opérateur ternaire** (`c ? a : b`) : on écrit un `if`. Pour choisir
+  le minimum ou le maximum, `min` et `max` sont intégrés depuis Go 1.21, et
+  `cmp.Or` (Go 1.22) renvoie la première valeur non nulle :
+  `port := cmp.Or(os.Getenv("PORT"), "8080")`.
+- **Pas de surcharge d'opérateurs** : `+` sur un type défini par l'utilisateur
+  n'est possible que si son type sous-jacent le permet.
+- **Pas de conversion implicite** : `int32 + int64` ne compile pas.
 
-### Affectation et division (/=)
+## Priorité des opérateurs
 
-* Divise la variable de gauche par la valeur de droite.
-* Exemple :
+Il n'y a que cinq niveaux de priorité pour les opérateurs binaires, du plus
+fort au plus faible :
 
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a /= 5
-    fmt.Println("Affectation et division :", a) // Affiche: Affectation et division : 2
-}
-```
+| Priorité | Opérateurs                        |
+|----------|-----------------------------------|
+| 5        | `*` `/` `%` `<<` `>>` `&` `&^`    |
+| 4        | `+` `-` `\|` `^`                  |
+| 3        | `==` `!=` `<` `<=` `>` `>=`       |
+| 2        | `&&`                              |
+| 1        | `\|\|`                            |
 
-### Affectation et modulo (%=)
-
-* Assigne à la variable de gauche le reste de la division par la valeur de droite.
-* Exemple :
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a %= 3
-    fmt.Println("Affectation et modulo :", a) // Affiche: Affectation et modulo : 1
-}
-```
-
-## Opérateurs divers
-
-### Opérateur d'incrément (++)
-
-* Incrémente la valeur de la variable de 1.
-* Exemple : 
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a++
-    fmt.Println("Incrément :", a) // Affiche: Incrément : 11
-}
-```
-
-### Opérateur de décrément (--)
-
-* Décrémente la valeur de la variable de 1.
-* Exemple : 
-
-```go
-package main
-import "fmt"
-func main() {
-    a := 10
-    a--
-    fmt.Println("Décrément :", a) // Affiche: Décrément : 9
-}
-```
-
-Ces opérateurs couvrent la plupart des besoins de manipulation des variables et des expressions en Go. Chaque opérateur est conçu pour une opération spécifique, et leur utilisation correcte est essentielle pour écrire du code Go efficace et lisible.
+À priorité égale, l'évaluation se fait de gauche à droite. Contrairement au C,
+`&` est plus prioritaire que `==` : `x&masque != 0` se lit
+`(x&masque) != 0`. Dans le doute, ajoutez des parenthèses ; `gofmt` ajuste les
+espaces pour refléter la priorité.
