@@ -50,9 +50,10 @@ func NouvelleRacine(o Options) *cobra.Command {
 La configuration se lit, par ordre de priorité décroissante : dans les options
 de la ligne de commande, dans les variables d'environnement TACHES_*, puis dans
 le fichier de configuration (par défaut ~/.config/taches/config.yaml).`,
-		Version:           Version,
-		SilenceUsage:      true, // pas d'aide affichée pour une erreur d'exécution
-		SilenceErrors:     true, // main affiche l'erreur lui-même
+		Version:       Version,
+		SilenceUsage:  true, // pas d'aide affichée pour une erreur d'exécution
+		SilenceErrors: true, // main affiche l'erreur lui-même
+		// Lien avec viper : avant chaque commande, la configuration est lue.
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error { return a.configure(cmd) },
 	}
 	racine.SetOut(o.Sortie)
@@ -78,15 +79,16 @@ le fichier de configuration (par défaut ~/.config/taches/config.yaml).`,
 // d'environnement et fichier de configuration.
 func (a *app) configure(cmd *cobra.Command) error {
 	v := a.v
-	// Les options déclarées sur la ligne de commande sont prioritaires.
+	// 1. Les options analysées par cobra, prioritaires.
 	if err := v.BindPFlags(cmd.Flags()); err != nil {
 		return err
 	}
-	// TACHES_SERVEUR, TACHES_DELAI, TACHES_FORMAT…
+	// 2. Les variables d'environnement : TACHES_SERVEUR, TACHES_DELAI, TACHES_FORMAT…
 	v.SetEnvPrefix("TACHES")
 	v.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	v.AutomaticEnv()
 
+	// 3. Le fichier de configuration, facultatif.
 	if fichier := v.GetString("config"); fichier != "" {
 		v.SetConfigFile(fichier) // fichier explicite : il doit exister
 		if err := v.ReadInConfig(); err != nil {
@@ -103,6 +105,7 @@ func (a *app) configure(cmd *cobra.Command) error {
 			return fmt.Errorf("configuration : %w", err)
 		}
 	}
+	// 4. Les valeurs par défaut sont celles des options déclarées sur la racine.
 	return nil
 }
 
