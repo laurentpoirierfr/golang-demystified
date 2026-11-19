@@ -3,6 +3,10 @@ title: "Golang Demystified"
 layout: hextra-home
 ---
 
+<div class="hx:mb-6">
+<img src="images/logo.png" alt="Le gopher de Golang Demystified" width="180" height="180">
+</div>
+
 {{< hextra/hero-headline >}}
   Golang Demystified
 {{< /hextra/hero-headline >}}

@@ -43,7 +43,7 @@ enableGitInfo = true
     displayTitle = true
     displayLogo = true
     [params.navbar.logo]
-      path = "images/gopher.png"
+      path = "images/logo.png"
       width = 32
       height = 32
 

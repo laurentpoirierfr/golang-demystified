@@ -1,144 +1,235 @@
 ---
-title: "Les interfaces"
-weight: 40
+title: "Interfaces"
+weight: 70
 ---
 
-En Go, une interface est un type qui spécifie un ensemble de méthodes que d'autres types doivent implémenter. Les interfaces sont utilisées pour définir le comportement attendu sans spécifier l'implémentation concrète. Un type qui implémente toutes les méthodes d'une interface est considéré comme une instance de cette interface.
+## Un contrat de comportement
 
-## Définition d'une interface
-
-Une interface est définie en listant les méthodes qu'elle contient. Voici un exemple d'interface simple :
+Une interface décrit un **ensemble de méthodes**. Tout type qui possède ces
+méthodes satisfait l'interface, **implicitement** : il n'y a pas de mot-clé
+`implements`.
 
 ```go
-type Speaker interface {
-    Speak() string
+type Forme interface {
+	Aire() float64
+	Perimetre() float64
+}
+
+type Rectangle struct{ Largeur, Hauteur float64 }
+
+func (r Rectangle) Aire() float64      { return r.Largeur * r.Hauteur }
+func (r Rectangle) Perimetre() float64 { return 2 * (r.Largeur + r.Hauteur) }
+
+type Cercle struct{ Rayon float64 }
+
+func (c Cercle) Aire() float64      { return math.Pi * c.Rayon * c.Rayon }
+func (c Cercle) Perimetre() float64 { return 2 * math.Pi * c.Rayon }
+
+formes := []Forme{Rectangle{3, 4}, Cercle{1}}
+total := 0.0
+for _, f := range formes {
+	total += f.Aire()
+}
+fmt.Printf("%.2f\n", total)
+// 15.14
+```
+
+Cette satisfaction implicite a une conséquence importante : le package qui
+**utilise** une interface peut la définir, sans que les types qui
+l'implémentent la connaissent. On découple ainsi les packages sans créer de
+dépendance.
+
+Pour vérifier à la compilation qu'un type satisfait une interface, on utilise
+une affectation à l'identifiant `_` :
+
+```go
+var _ Forme = Rectangle{}
+```
+
+## Les petites interfaces
+
+Les interfaces idiomatiques de Go sont **petites**, souvent réduites à une
+seule méthode, et nommées d'après cette méthode avec le suffixe *-er* :
+
+| Interface      | Package | Méthode                                  |
+|----------------|---------|------------------------------------------|
+| `io.Reader`    | `io`    | `Read(p []byte) (n int, err error)`      |
+| `io.Writer`    | `io`    | `Write(p []byte) (n int, err error)`     |
+| `io.Closer`    | `io`    | `Close() error`                          |
+| `fmt.Stringer` | `fmt`   | `String() string`                        |
+| `error`        | intégré | `Error() string`                         |
+| `sort.Interface` | `sort` | `Len`, `Less`, `Swap`                   |
+| `http.Handler` | `net/http` | `ServeHTTP(ResponseWriter, *Request)` |
+
+Plus une interface est petite, plus elle a d'implémentations. Une fonction qui
+accepte un `io.Reader` peut lire un fichier, une connexion réseau, une
+requête HTTP, une archive compressée ou une simple chaîne :
+
+```go
+func compteMots(r io.Reader) (int, error) {
+	data, err := io.ReadAll(r)
+	if err != nil {
+		return 0, err
+	}
+	return len(strings.Fields(string(data))), nil
+}
+
+n, _ := compteMots(strings.NewReader("le gopher creuse un terrier"))
+// 5
+```
+
+> « The bigger the interface, the weaker the abstraction. » — Rob Pike
+
+Un type qui implémente `fmt.Stringer` contrôle son affichage par les fonctions
+de `fmt` :
+
+```go
+type Temperature float64
+
+func (t Temperature) String() string { return fmt.Sprintf("%.1f °C", float64(t)) }
+
+fmt.Println(Temperature(21.456))
+// 21.5 °C
+```
+
+Les interfaces se composent par intégration :
+
+```go
+type ReadWriter interface {
+	io.Reader
+	io.Writer
 }
 ```
 
-## Implémentation de l'interface
+## Accepter des interfaces, renvoyer des structures
 
-Un type implémente une interface en définissant toutes les méthodes de cette interface. Il n'y a pas de mot-clé explicite pour indiquer qu'un type implémente une interface ; cela se fait implicitement.
+Ce principe résume l'usage des interfaces en Go :
 
-## Exemple complet
+- les **paramètres** d'une fonction sont des interfaces, aussi petites que
+  possible, pour accepter un maximum de types ;
+- les **valeurs de retour** sont des types concrets, pour que l'appelant ait
+  accès à toutes leurs méthodes.
 
-Voici un exemple complet montrant la définition d'une interface, l'implémentation de cette interface par différents types, et l'utilisation de l'interface :
+Évitez de définir une interface « au cas où », à côté de son unique
+implémentation. Définissez-la là où elle est utilisée, au moment où un second
+cas d'usage apparaît, par exemple un double de test.
+
+## any : l'interface vide
+
+L'interface sans méthode, `interface{}`, est satisfaite par tous les types.
+Depuis **Go 1.18**, elle a un alias plus lisible : `any`. Une valeur `any` peut
+contenir n'importe quoi, mais on ne peut rien en faire sans retrouver son type
+concret. À utiliser avec parcimonie : les génériques sont souvent une meilleure
+solution.
+
+## Retrouver le type concret
+
+### L'assertion de type
+
+`v.(T)` extrait la valeur concrète de type `T` contenue dans l'interface `v`.
+La forme à une valeur provoque un `panic` si le type ne correspond pas. La
+forme à deux valeurs ne panique jamais :
 
 ```go
-package main
+var f Forme = Cercle{2}
 
-import (
-    "fmt"
-)
+c := f.(Cercle) // panic si f n'est pas un Cercle
+fmt.Println(c.Rayon) // 2
 
-// Définition de l'interface Speaker
-type Speaker interface {
-    Speak() string
-}
-
-// Type Dog qui implémente l'interface Speaker
-type Dog struct {
-    Name string
-}
-
-func (d Dog) Speak() string {
-    return "Woof! My name is " + d.Name
-}
-
-// Type Cat qui implémente l'interface Speaker
-type Cat struct {
-    Name string
-}
-
-func (c Cat) Speak() string {
-    return "Meow! My name is " + c.Name
-}
-
-// Fonction qui prend un Speaker en paramètre
-func MakeSpeak(s Speaker) {
-    fmt.Println(s.Speak())
-}
-
-func main() {
-    // Création d'instances de Dog et Cat
-    dog := Dog{Name: "Buddy"}
-    cat := Cat{Name: "Whiskers"}
-
-    // Utilisation de la fonction MakeSpeak avec différentes implémentations de Speaker
-    MakeSpeak(dog)
-    MakeSpeak(cat)
+if r, ok := f.(Rectangle); ok {
+	fmt.Println("rectangle", r)
+} else {
+	fmt.Println("pas un rectangle")
 }
 ```
 
-## Explications
+`T` peut aussi être une interface : `v.(io.Closer)` teste si la valeur possède
+une méthode `Close`. C'est ainsi que la bibliothèque standard détecte des
+capacités optionnelles, comme `io.WriterTo`.
 
-* Définition de l'interface Speaker :
+### Le type switch
+
+Un `switch` sur `v.(type)` teste plusieurs types à la suite. Dans chaque
+`case` à un seul type, la variable a le type correspondant :
 
 ```go
-type Speaker interface {
-    Speak() string
+func decris(v any) string {
+	switch x := v.(type) {
+	case nil:
+		return "nil"
+	case int, int64:
+		return fmt.Sprintf("entier %v", x) // x est de type any
+	case string:
+		return "chaîne de " + fmt.Sprint(len(x)) + " octets"
+	case fmt.Stringer:
+		return "stringer : " + x.String()
+	case error:
+		return "erreur : " + x.Error()
+	default:
+		return fmt.Sprintf("autre (%T)", x)
+	}
 }
 ```
 
-L'interface Speaker contient une seule méthode Speak qui retourne une chaîne de caractères.
+## Récepteurs pointeurs et interfaces
 
-* Implémentation de l'interface par le type Dog :
-
-
-```go
-type Dog struct {
-    Name string
-}
-
-func (d Dog) Speak() string {
-    return "Woof! My name is " + d.Name
-}
-```
-
-Le type Dog implémente la méthode Speak définie par l'interface Speaker.
-
-* Implémentation de l'interface par le type Cat :
+L'**ensemble de méthodes** d'un type `T` ne contient que ses méthodes à
+récepteur valeur. Celui de `*T` contient toutes ses méthodes. Si une méthode
+requise par une interface a un récepteur pointeur, seul `*T` satisfait
+l'interface :
 
 ```go
-type Cat struct {
-    Name string
-}
+type Compteur struct{ n int }
 
-func (c Cat) Speak() string {
-    return "Meow! My name is " + c.Name
-}
+func (c *Compteur) Incremente() { c.n++ }
+
+type Incrementeur interface{ Incremente() }
+
+var i Incrementeur = &Compteur{} // Compteur{} ne compile pas
 ```
 
-Le type Cat implémente également la méthode Speak.
+## Le piège de l'interface nil
 
-* Utilisation de l'interface :
+Une valeur d'interface contient deux éléments : un **type** et une **valeur**.
+Elle n'est égale à `nil` que si les deux sont nil. Une interface qui contient
+un pointeur nil n'est donc **pas** nil :
 
 ```go
-func MakeSpeak(s Speaker) {
-    fmt.Println(s.Speak())
+type MonErreur struct{}
+
+func (*MonErreur) Error() string { return "mon erreur" }
+
+func peutEchouer(echec bool) error {
+	var e *MonErreur // nil
+	if echec {
+		e = &MonErreur{}
+	}
+	return e // interface non nil contenant un pointeur nil
 }
+
+err := peutEchouer(false)
+fmt.Println(err == nil)
+// false
 ```
 
-La fonction **MakeSpeak** prend un paramètre de type **Speaker** et appelle la méthode **Speak** sur ce paramètre.
+La règle est simple : une fonction qui renvoie une interface doit renvoyer
+`nil` **explicitement**, et non une variable d'un type concret qui vaut nil.
 
+## Décorer un comportement
 
-* Appel de la fonction avec différentes implémentations :
+Une interface permet d'envelopper une implémentation pour lui ajouter un
+comportement, sans la modifier. C'est le principe des middlewares HTTP, des
+compresseurs ou du chiffrement en flux :
 
 ```go
-dog := Dog{Name: "Buddy"}
-cat := Cat{Name: "Whiskers"}
+// majuscules décore un io.Writer en mettant le texte en majuscules.
+type majuscules struct{ w io.Writer }
 
-MakeSpeak(dog)
-MakeSpeak(cat)
+func (m majuscules) Write(p []byte) (int, error) {
+	return m.w.Write([]byte(strings.ToUpper(string(p))))
+}
+
+var w io.Writer = majuscules{os.Stdout}
+fmt.Fprintln(w, "bonjour, gopher")
+// BONJOUR, GOPHER
 ```
-
-Les instances de **Dog** et **Cat** sont passées à la fonction **MakeSpeak**, démontrant le polymorphisme en Go.
-
-
-## Résultat attendu
-
-```go
-Woof! My name is Buddy
-Meow! My name is Whiskers
-```
-
-Dans cet exemple, l'interface **Speaker** est utilisée pour abstraire le comportement de **Dog** et **Cat**, permettant de traiter des instances de ces types de manière uniforme via l'interface.
