@@ -3622,9 +3622,13 @@ la documentation apparaît sur pkg.go.dev.&lt;/p&gt;
 partagées :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;un petit projet tient dans un seul package, à la racine du module ;&lt;/li&gt;
-&lt;li&gt;les exécutables se placent dans &lt;code&gt;cmd/&amp;lt;nom&amp;gt;/main.go&lt;/code&gt; lorsqu&amp;rsquo;il y en a
-plusieurs ;&lt;/li&gt;
-&lt;li&gt;le code non destiné à être importé par d&amp;rsquo;autres modules va dans &lt;code&gt;internal/&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;les exécutables se placent dans &lt;code&gt;cmd/&amp;lt;nom&amp;gt;/main.go&lt;/code&gt;, avec un &lt;code&gt;main&lt;/code&gt;
+minimal qui se contente d&amp;rsquo;assembler le programme ;&lt;/li&gt;
+&lt;li&gt;le code propre au projet va dans &lt;code&gt;internal/&lt;/code&gt; : le compilateur interdit aux
+autres modules de l&amp;rsquo;importer ;&lt;/li&gt;
+&lt;li&gt;le code générique, réutilisable par d&amp;rsquo;autres projets, peut aller dans
+&lt;code&gt;pkg/&lt;/code&gt;. C&amp;rsquo;est une convention de la communauté, et non de l&amp;rsquo;outil &lt;code&gt;go&lt;/code&gt; :
+n&amp;rsquo;y placez que du code réellement indépendant du métier ;&lt;/li&gt;
 &lt;li&gt;on découpe en packages selon les &lt;strong&gt;responsabilités&lt;/strong&gt; métier (&lt;code&gt;commande&lt;/code&gt;,
 &lt;code&gt;facturation&lt;/code&gt;), plutôt que selon les couches techniques (&lt;code&gt;models&lt;/code&gt;,
 &lt;code&gt;controllers&lt;/code&gt;).&lt;/li&gt;
@@ -3633,4 +3637,4 @@ plusieurs ;&lt;/li&gt;
 l&amp;rsquo;autre, c&amp;rsquo;est le signe qu&amp;rsquo;une responsabilité est mal découpée. Une interface
 définie côté utilisateur permet souvent de casser le cycle.&lt;/p&gt;
 &lt;p&gt;La partie Approfondissements présente des exemples complets d&amp;rsquo;organisation :
-un service web et une architecture hexagonale (&lt;em&gt;Clean Architecture&lt;/em&gt;).&lt;/p&gt;</description></item></channel></rss>
+un service web complet et une architecture hexagonale.&lt;/p&gt;</description></item></channel></rss>
