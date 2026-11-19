@@ -36,7 +36,9 @@ layout: hextra-home
 </div>
 
 {{< hextra/feature-grid >}}
-  {{< hextra/feature-card title="Le langage" link="docs/langage/" subtitle="Types, fonctions, interfaces, génériques, erreurs : les bases solides." >}}
-  {{< hextra/feature-card title="L'évolution de Go" link="docs/evolution/" subtitle="Ce que chaque version a apporté, de Go 1.0 à aujourd'hui." >}}
-  {{< hextra/feature-card title="Par l'exemple" link="docs/approfondissements/" subtitle="Concurrence, templates, API web, architecture hexagonale, performance : des exemples complets et testés." >}}
+  {{< hextra/feature-card title="Découvrir Go" link="docs/decouvrir/" subtitle="Histoire et philosophie, installation, premier programme et l'outil go." >}}
+  {{< hextra/feature-card title="Le langage" link="docs/langage/" subtitle="Types, fonctions, interfaces, génériques, erreurs, concurrence : les bases solides." >}}
+  {{< hextra/feature-card title="La bibliothèque standard" link="docs/bibliotheque/" subtitle="Texte, collections, fichiers, JSON, HTTP, slog, context et tests." >}}
+  {{< hextra/feature-card title="L'évolution de Go" link="docs/evolution/" subtitle="Ce que chaque version a apporté, de Go 1.0 à Go 1.27." >}}
+  {{< hextra/feature-card title="Par l'exemple" link="docs/approfondissements/" subtitle="Concurrence, templates, API web, sqlc, architecture hexagonale, performance : des exemples complets et testés." >}}
 {{< /hextra/feature-grid >}}
