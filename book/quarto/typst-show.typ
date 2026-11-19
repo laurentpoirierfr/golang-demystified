@@ -3,15 +3,8 @@
 // Les variables du modèle sont remplies par Quarto.
 #import "@preview/orange-book:0.7.1": book, part, chapter, appendices
 
-// Palette tirée de l'identité visuelle de Go.
-#let go-blue = rgb("#00ADD8")
-#let go-blue-dark = rgb("#007D9C")
-#let go-ink = rgb("#202224")
-#let code-bg = rgb("#F3F8FA")
-
-#let font-text = "Source Serif 4"
-#let font-titles = "Source Sans 3"
-#let font-code = "Go Mono"
+// Couleurs, polices et couverture.
+#import "couverture.typ": *
 
 // Typographie : texte à empattements, titres et tableaux sans empattements.
 // Ces règles précèdent le modèle pour s'appliquer aussi à la couverture et
@@ -24,6 +17,9 @@
 // DejaVu Sans Mono complète Go Mono pour les caractères de dessin (├──).
 #show raw: set text(font: (font-code, "DejaVu Sans Mono"), size: 8.8pt)
 #show link: set text(fill: go-blue-dark)
+
+// La couverture pleine page, avant le modèle orange-book.
+#couverture()
 
 #show: book.with(
 $if(title)$
@@ -41,9 +37,10 @@ $endif$
   lang: "fr",
   main-color: go-blue,
   font-size: 10.5pt,
-  cover: image("assets/background.pdf"),
-  cover-background: white.transparentize(10%),
-  logo: image("assets/cover.png", width: 5.5cm),
+  // La couverture est dessinée plus haut : la page d'orange-book devient
+  // une simple page de titre.
+  cover-background: go-blue.lighten(88%),
+  logo: image("assets/cover.png", width: 3.5cm),
   copyright: [
     #set text(size: 9pt)
     *Golang Demystified* — édition à jour pour Go 1.27.

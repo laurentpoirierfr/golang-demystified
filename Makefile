@@ -4,6 +4,8 @@ BOOK_PDF     := book/golang-demystified.pdf
 BOOK_EPUB    := book/golang-demystified.epub
 # Podman rootless : keep-id conserve l'UID de l'utilisateur dans le conteneur.
 CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--userns=keep-id,--user $(shell id -u):$(shell id -g))
+QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
+	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
 .PHONY: all site serve book pdf check clean
 
@@ -21,9 +23,10 @@ serve:
 book:
 	go run ./tools/mkbook -content site/content/docs -static site/static \
 		-config book/quarto/_quarto.yml -out $(QUARTO_DIR)
-	cp -r book/assets book/quarto/fonts book/quarto/typst-show.typ $(QUARTO_DIR)/
-	docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) $(CONTAINER_USER) \
-		-e HOME=/tmp $(QUARTO_IMAGE) quarto render
+	cp -r book/assets book/quarto/fonts book/quarto/*.typ $(QUARTO_DIR)/
+	$(QUARTO) quarto typst compile couverture-epub.typ assets/couverture.png \
+		--font-path fonts --ppi 110
+	$(QUARTO) quarto render
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.pdf $(BOOK_PDF)
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.epub $(BOOK_EPUB)
 
