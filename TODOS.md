@@ -13,7 +13,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   - vérification que le code généré est à jour (sqlc, oapi-codegen, controller-gen)
 - [x] **Publication par l'intégration continue** : site, PDF et EPUB construits
   à chaque tag, au lieu d'être versionnés dans `docs/` et `book/`
-- [ ] **Chapitre « CI/CD d'un projet Go »** : GitHub Actions, golangci-lint,
+- [x] **Chapitre « CI/CD d'un projet Go »** : GitHub Actions, golangci-lint,
   govulncheck, GoReleaser, images multi-architectures, SBOM
 
 ## 2. Nouveaux chapitres d'approfondissement
