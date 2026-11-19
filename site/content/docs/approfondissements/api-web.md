@@ -38,8 +38,8 @@ api/
 ├── internal/
 │   ├── config/              lecture de la configuration
 │   ├── tache/               le domaine : type, validation, erreurs
-│   ├── store/               stockage SQLite (database/sql)
-│   │   └── migrations/      schéma SQL, embarqué dans l'exécutable
+│   ├── store/               stockage SQLite ou PostgreSQL (database/sql)
+│   │   └── migrations/      schéma SQL par base, embarqué dans l'exécutable
 │   └── web/                 handlers HTTP de l'API
 └── pkg/
     └── httpkit/             middlewares et JSON, réutilisables
@@ -108,25 +108,45 @@ func ValideTitre(titre string) (string, error) {
 ### Ouvrir la base
 
 `database/sql` définit une API commune, et un **pilote** l'implémente pour
-chaque base. Le pilote s'enregistre par un import « à blanc ». Ici,
-`modernc.org/sqlite` est écrit entièrement en Go : il ne demande pas de
-compilateur C, et l'exécutable reste autonome.
+chaque base. Le pilote s'enregistre par un import « à blanc ». Le service
+accepte deux bases, choisies par la chaîne de connexion :
+
+- **SQLite**, avec `modernc.org/sqlite`, écrit entièrement en Go : il ne
+  demande pas de compilateur C, et l'exécutable reste autonome. Idéal pour le
+  développement, les tests et les petits déploiements ;
+- **PostgreSQL**, avec `github.com/jackc/pgx/v5/stdlib`, pour la production.
+
+Ce qui diffère d'une base à l'autre tient dans une petite structure :
 
 ```go
-import _ "modernc.org/sqlite" // pilote enregistré sous le nom « sqlite »
+import (
+	_ "github.com/jackc/pgx/v5/stdlib" // pilote PostgreSQL, enregistré sous le nom « pgx »
+	_ "modernc.org/sqlite"             // pilote SQLite, enregistré sous le nom « sqlite »
+)
 
-func Ouvre(ctx context.Context, dsn string) (*SQLite, error) {
-	db, err := sql.Open("sqlite", dsn)
+type dialecte struct {
+	pilote     string // nom du pilote database/sql
+	migrations string // répertoire des migrations
+	dollars    bool   // paramètres $1, $2… au lieu de ?
+}
+
+func Ouvre(ctx context.Context, dsn string) (*Store, error) {
+	d := sqlite
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		d = postgres
+	}
+	db, err := sql.Open(d.pilote, dsn)
 	if err != nil {
 		return nil, err
 	}
-	db.SetMaxOpenConns(1) // SQLite n'accepte qu'un écrivain à la fois
-
+	if d == sqlite {
+		db.SetMaxOpenConns(1) // SQLite n'accepte qu'un écrivain à la fois
+	}
 	if err := db.PingContext(ctx); err != nil { // sql.Open ne se connecte pas
 		db.Close()
-		return nil, fmt.Errorf("connexion à %s : %w", dsn, err)
+		return nil, fmt.Errorf("connexion à la base %s : %w", d.pilote, err)
 	}
-	s := &SQLite{db: db, maintenant: time.Now}
+	s := &Store{db: db, d: d, maintenant: time.Now}
 	if err := s.migre(ctx); err != nil {
 		db.Close()
 		return nil, fmt.Errorf("migrations : %w", err)
@@ -135,10 +155,20 @@ func Ouvre(ctx context.Context, dsn string) (*SQLite, error) {
 }
 ```
 
-Avec PostgreSQL, seuls l'import du pilote (par exemple
-`github.com/jackc/pgx/v5/stdlib`), son nom et la syntaxe des paramètres (`$1`
-au lieu de `?`) changeraient. Un `*sql.DB` est un **pool de connexions** sûr
-pour un usage concurrent : on l'ouvre une fois au démarrage, et on le partage.
+Les requêtes sont écrites une seule fois, avec des `?`. Une méthode `q` les
+convertit en `$1`, `$2`… pour PostgreSQL :
+
+```go
+s.db.ExecContext(ctx, s.q(`DELETE FROM taches WHERE id = ?`), id)
+```
+
+Un `*sql.DB` est un **pool de connexions** sûr pour un usage concurrent : on
+l'ouvre une fois au démarrage, et on le partage.
+
+Le même stockage est testé sur les **deux** bases : SQLite en mémoire à chaque
+`go test`, et un vrai PostgreSQL démarré dans un conteneur par
+**Testcontainers**. Le chapitre sur le package `testing` détaille cette
+technique.
 
 ### Les migrations
 
@@ -148,15 +178,15 @@ l'est dans une transaction, et son nom est enregistré dans une table
 `migrations` :
 
 ```go
-//go:embed migrations/*.sql
+//go:embed migrations
 var migrations embed.FS
 
-func (s *SQLite) migre(ctx context.Context) error {
+func (s *Store) migre(ctx context.Context) error {
 	if _, err := s.db.ExecContext(ctx,
 		`CREATE TABLE IF NOT EXISTS migrations (nom TEXT PRIMARY KEY)`); err != nil {
 		return err
 	}
-	fichiers, err := fs.Glob(migrations, "migrations/*.sql") // triés par nom
+	fichiers, err := fs.Glob(migrations, s.d.migrations+"/*.sql") // triés par nom
 	if err != nil {
 		return err
 	}
@@ -170,7 +200,7 @@ func (s *SQLite) migre(ctx context.Context) error {
 			if _, err := tx.ExecContext(ctx, string(requete)); err != nil {
 				return fmt.Errorf("%s : %w", f, err)
 			}
-			_, err := tx.ExecContext(ctx, `INSERT INTO migrations (nom) VALUES (?)`, f)
+			_, err := tx.ExecContext(ctx, s.q(`INSERT INTO migrations (nom) VALUES (?)`), f)
 			return err
 		}); err != nil {
 			return err
@@ -194,7 +224,7 @@ Les trois méthodes de requête de `*sql.DB` couvrent tous les cas :
 | `ExecContext`      | Pas de résultat : `INSERT`, `UPDATE`, `DELETE` |
 
 ```go
-func (s *SQLite) Liste(ctx context.Context) ([]tache.Tache, error) {
+func (s *Store) Liste(ctx context.Context) ([]tache.Tache, error) {
 	lignes, err := s.db.QueryContext(ctx,
 		`SELECT id, titre, faite, creation FROM taches ORDER BY id`)
 	if err != nil {
@@ -213,9 +243,9 @@ func (s *SQLite) Liste(ctx context.Context) ([]tache.Tache, error) {
 	return taches, lignes.Err() // erreur éventuelle pendant le parcours
 }
 
-func (s *SQLite) Trouve(ctx context.Context, id int64) (tache.Tache, error) {
+func (s *Store) Trouve(ctx context.Context, id int64) (tache.Tache, error) {
 	ligne := s.db.QueryRowContext(ctx,
-		`SELECT id, titre, faite, creation FROM taches WHERE id = ?`, id)
+		s.q(`SELECT id, titre, faite, creation FROM taches WHERE id = ?`), id)
 	t, err := scanne(ligne)
 	if errors.Is(err, sql.ErrNoRows) {
 		return tache.Tache{}, tache.ErrIntrouvable // traduit en erreur du domaine
@@ -236,8 +266,8 @@ Trois règles à respecter :
 Une modification qui ne touche aucune ligne indique une tâche inexistante :
 
 ```go
-func (s *SQLite) Supprime(ctx context.Context, id int64) error {
-	res, err := s.db.ExecContext(ctx, `DELETE FROM taches WHERE id = ?`, id)
+func (s *Store) Supprime(ctx context.Context, id int64) error {
+	res, err := s.db.ExecContext(ctx, s.q(`DELETE FROM taches WHERE id = ?`), id)
 	return verifieUneLigne(res, err) // ErrIntrouvable si 0 ligne
 }
 ```
@@ -568,6 +598,8 @@ ENTRYPOINT ["/taches"]
 Ce service est volontairement simple, mais sa structure supporte la
 croissance. Les évolutions classiques sont :
 
+- le passage à **PostgreSQL** en production, sans changer le code :
+  `TACHES_BASE=postgres://utilisateur:motdepasse@hote:5432/taches` ;
 - l'**authentification**, par un middleware qui valide un jeton et place
   l'utilisateur dans le contexte ;
 - la **pagination** de la liste (`?apres=42&limite=50`) ;

@@ -206,6 +206,132 @@ go tool cover -func=couverture.out   # couverture par fonction
 Depuis **Go 1.20**, `go build -cover` produit aussi un exécutable instrumenté,
 pour mesurer la couverture de tests d'intégration ou de bout en bout.
 
+## Tests d'intégration avec Testcontainers
+
+Un double de test ou une base SQLite en mémoire ne disent pas tout : le code
+qui parle à PostgreSQL, Redis ou Kafka doit aussi être testé contre le **vrai**
+logiciel, dans la **vraie** version utilisée en production. Une différence de
+syntaxe SQL, une contrainte, un type de colonne : autant de bugs qu'aucun
+double ne révèle.
+
+[Testcontainers](https://golang.testcontainers.org) répond à ce besoin. Le
+module `github.com/testcontainers/testcontainers-go` démarre, depuis le test
+lui-même, un conteneur jetable (Docker ou Podman), attend qu'il soit prêt,
+fournit son adresse, puis le supprime à la fin du test. Il n'y a ni base
+partagée à maintenir, ni fichier `docker-compose` à lancer avant les tests.
+
+### Un exemple : le stockage de l'API
+
+Le stockage de l'API du chapitre « Une API web complète » fonctionne avec
+SQLite et avec PostgreSQL. Ses tests de comportement sont regroupés dans une
+**suite** qui reçoit le stockage à tester :
+
+```go
+// suite regroupe les tests de comportement du stockage. Elle s'exécute à
+// l'identique sur chaque base.
+func suite(t *testing.T, s *Store) {
+	t.Run("liste vide", func(t *testing.T) { … })
+	t.Run("cycle de vie", func(t *testing.T) { … })
+	t.Run("migrations idempotentes", func(t *testing.T) { … })
+}
+
+func TestSQLite(t *testing.T) {
+	suite(t, ouvre(t, ":memory:")) // rapide, toujours disponible
+}
+```
+
+Le test PostgreSQL démarre un conteneur grâce au module `postgres` de
+Testcontainers, et exécute **la même suite** :
+
+```go
+import (
+	"github.com/testcontainers/testcontainers-go"
+	tcpostgres "github.com/testcontainers/testcontainers-go/modules/postgres"
+)
+
+func TestPostgres(t *testing.T) {
+	if testing.Short() {
+		t.Skip("test d'intégration ignoré en mode -short")
+	}
+	testcontainers.SkipIfProviderIsNotHealthy(t) // ni Docker ni Podman : ignoré
+
+	ctx := t.Context()
+	conteneur, err := tcpostgres.Run(ctx, "docker.io/postgres:17-alpine",
+		tcpostgres.WithDatabase("taches"),
+		tcpostgres.WithUsername("gopher"),
+		tcpostgres.WithPassword("secret"),
+		tcpostgres.BasicWaitStrategies(), // attend que la base accepte les connexions
+	)
+	testcontainers.CleanupContainer(t, conteneur) // supprimé à la fin du test
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	dsn, err := conteneur.ConnectionString(ctx, "sslmode=disable")
+	if err != nil {
+		t.Fatal(err)
+	}
+	suite(t, ouvre(t, dsn))
+}
+```
+
+```
+$ go test -run TestPostgres -v ./internal/store
+🔔 Container is ready: acbd218c7c05
+    postgres_test.go:37: PostgreSQL : postgres://gopher:secret@localhost:41975/taches?sslmode=disable
+=== RUN   TestPostgres/liste_vide
+=== RUN   TestPostgres/cycle_de_vie
+=== RUN   TestPostgres/migrations_idempotentes
+--- PASS: TestPostgres/liste_vide (0.00s)
+--- PASS: TestPostgres/cycle_de_vie (0.00s)
+--- PASS: TestPostgres/migrations_idempotentes (0.00s)
+```
+
+Quelques points à retenir :
+
+- **`CleanupContainer`** est appelé juste après `Run`, **avant** le test de
+  l'erreur : même un conteneur partiellement démarré est supprimé.
+- **Les stratégies d'attente** (`BasicWaitStrategies`, ou `wait.ForLog`,
+  `wait.ForListeningPort`, `wait.ForHTTP` pour d'autres images) évitent les
+  tests qui échouent parce que le service n'était pas encore prêt.
+- **Le port est aléatoire** : plusieurs tests, ou plusieurs exécutions en
+  parallèle dans l'intégration continue, ne se gênent pas.
+- **L'image est versionnée** : le test utilise la même version de PostgreSQL
+  que la production.
+- **Le test se saute proprement** avec `-short`, ou si aucun moteur de
+  conteneurs n'est disponible. `go test -short ./...` reste rapide pour le
+  développement quotidien ; les tests d'intégration tournent avant chaque
+  fusion.
+
+> [!TIP]
+> Démarrer un conteneur prend quelques secondes. Pour de nombreux tests,
+> démarrez-le **une seule fois** dans `TestMain`, et isolez les tests entre eux :
+> une base par test, une transaction annulée à la fin de chaque test, ou les
+> fonctions `Snapshot` et `Restore` du module PostgreSQL, qui sauvegardent et
+> restaurent l'état de la base.
+
+### Avec Podman
+
+Testcontainers dialogue avec l'API Docker. Podman en propose une version
+compatible, qu'il suffit d'activer. Le conteneur « Ryuk », chargé de nettoyer
+les conteneurs orphelins, ne fonctionne pas en mode *rootless* : on le
+désactive, et c'est `CleanupContainer` qui fait le ménage.
+
+```bash
+systemctl --user enable --now podman.socket
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+export TESTCONTAINERS_RYUK_DISABLED=true
+go test -run TestPostgres ./...
+```
+
+Dans le dépôt du livre, `make test-integration` détecte Podman et définit ces
+variables automatiquement.
+
+Testcontainers propose des modules prêts à l'emploi pour la plupart des
+logiciels courants : MySQL, MongoDB, Redis, Kafka, RabbitMQ, Elasticsearch,
+LocalStack (services AWS)… et `testcontainers.GenericContainer` pour n'importe
+quelle image.
+
 ## Organiser les tests
 
 - Un fichier de test peut déclarer le package testé (`package tests`, accès aux
