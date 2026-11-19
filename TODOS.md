@@ -7,7 +7,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## 1. Qualité et publication
 
-- [~] **Intégration continue du dépôt** (GitHub Actions)
+- [x] **Intégration continue du dépôt** (GitHub Actions)
   - vérifications à chaque push : `gofmt`, `go vet`, `go test -race`, `govulncheck`
   - tests d'intégration avec Testcontainers (Docker est disponible sur les machines GitHub)
   - vérification que le code généré est à jour (sqlc, oapi-codegen, controller-gen)
