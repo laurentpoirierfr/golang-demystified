@@ -33,9 +33,12 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   microcontrôleurs
 - [x] **Les coulisses de Go** : réflexion, `unsafe`, cgo, fonctionnement de
   l'ordonnanceur et du ramasse-miettes
-- [ ] **Go idiomatique** : motifs récurrents (options fonctionnelles,
+- [x] **Go idiomatique** : motifs récurrents (options fonctionnelles,
   middlewares, injection de dépendances), anti-motifs fréquents, grille de
   relecture de code
+- [ ] **Rust et Go** : le positionnement des deux langages, les atouts de
+  chacun (sûreté mémoire, performances, concurrence, productivité,
+  écosystèmes), et comment choisir
 
 ## 3. Aides pédagogiques
 
@@ -59,7 +62,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## Fait
 
-- [x] Approfondissements réorganisés en parcours numéroté (17 chapitres, six étapes)
+- [x] Approfondissements réorganisés en parcours numéroté (18 chapitres, six étapes)
 - [x] Nouveau thème Hextra, site dans `docs/`
 - [x] Livre PDF et EPUB avec Quarto et Typst, couverture personnalisée
 - [x] Parties I à IV réécrites pour Go 1.27

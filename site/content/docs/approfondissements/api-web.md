@@ -1,7 +1,7 @@
 ---
 title: "Une API web complète"
-linkTitle: "3. Une API web complète"
-weight: 30
+linkTitle: "4. Une API web complète"
+weight: 40
 ---
 
 Ce chapitre construit un service web complet, prêt pour la production, avec la
@@ -806,8 +806,8 @@ fonction qui la reçoit et renvoie le middleware :
 type Middleware func(http.Handler) http.Handler
 
 func Chaine(h http.Handler, mws ...Middleware) http.Handler {
-	for i := len(mws) - 1; i >= 0; i-- {
-		h = mws[i](h)
+	for _, mw := range slices.Backward(mws) { // le premier de la liste à l'extérieur
+		h = mw(h)
 	}
 	return h
 }

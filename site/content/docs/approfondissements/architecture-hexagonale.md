@@ -1,7 +1,7 @@
 ---
 title: "Architecture hexagonale"
-linkTitle: "6. Architecture hexagonale"
-weight: 60
+linkTitle: "7. Architecture hexagonale"
+weight: 70
 ---
 
 Le chapitre « Une API web complète » a construit un service en couches simples : HTTP,

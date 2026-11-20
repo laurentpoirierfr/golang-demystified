@@ -8,6 +8,7 @@ import (
 	"errors"
 	"log/slog"
 	"net/http"
+	"slices"
 	"time"
 	"uuid"
 )
@@ -18,8 +19,8 @@ type Middleware func(http.Handler) http.Handler
 // Chaine applique les middlewares : le premier de la liste est le plus
 // extérieur, donc le premier à voir la requête.
 func Chaine(h http.Handler, mws ...Middleware) http.Handler {
-	for i := len(mws) - 1; i >= 0; i-- {
-		h = mws[i](h)
+	for _, mw := range slices.Backward(mws) {
+		h = mw(h)
 	}
 	return h
 }

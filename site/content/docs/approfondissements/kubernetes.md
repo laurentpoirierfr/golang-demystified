@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes : écrire un opérateur"
-linkTitle: "15. Kubernetes"
-weight: 150
+linkTitle: "16. Kubernetes"
+weight: 160
 ---
 
 [Kubernetes](https://kubernetes.io) est écrit en Go, et c'est en Go qu'on

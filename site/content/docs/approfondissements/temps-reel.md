@@ -1,7 +1,7 @@
 ---
 title: "Temps réel : WebSocket et Server-Sent Events"
-linkTitle: "12. Temps réel"
-weight: 120
+linkTitle: "13. Temps réel"
+weight: 130
 ---
 
 HTTP est fait de questions et de réponses : le client demande, le serveur

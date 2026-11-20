@@ -69,7 +69,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 		dir := fmt.Sprintf("%02d-%s", num, filepath.Base(p.Dir))
 		r := rubrique{Number: num, Title: p.Title, Edition: edition, Intro: p.Body,
 			URL: site + "docs/" + filepath.Base(p.Dir) + "/"}
-		pt := part{entry: entry{Number: num, Title: p.Title, File: dir + "/00-presentation"}}
+		pt := part{Number: num, Title: p.Title, File: dir + "/00-presentation"}
 		for _, c := range p.Children {
 			if c.Section {
 				continue

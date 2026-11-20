@@ -1,7 +1,7 @@
 ---
 title: "Les coulisses de Go : réflexion, unsafe, cgo, ordonnanceur et GC"
-linkTitle: "10. Les coulisses de Go"
-weight: 100
+linkTitle: "11. Les coulisses de Go"
+weight: 110
 ---
 
 Le chapitre « Profilage et performance » mesure ce que fait un programme. Ce

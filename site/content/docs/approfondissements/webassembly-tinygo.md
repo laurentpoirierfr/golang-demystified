@@ -1,7 +1,7 @@
 ---
 title: "WebAssembly et TinyGo : Go partout"
-linkTitle: "16. WebAssembly et TinyGo"
-weight: 160
+linkTitle: "17. WebAssembly et TinyGo"
+weight: 170
 ---
 
 [WebAssembly](https://webassembly.org) (Wasm) est un format de code binaire

@@ -1,7 +1,7 @@
 ---
 title: "Templates"
-linkTitle: "2. Templates"
-weight: 20
+linkTitle: "3. Templates"
+weight: 30
 ---
 
 Go fournit deux moteurs de gabarits qui partagent la même syntaxe :
