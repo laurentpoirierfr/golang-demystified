@@ -9,6 +9,7 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 - 🌐 [Lire en ligne](https://laurentpoirierfr.github.io/golang-demystified/)
 - 📄 [Télécharger le PDF](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf)
+- 🗒️ [Télécharger l'aide-mémoire](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/aide-memoire-go.pdf) (PDF, quatre pages en deux colonnes)
 - 📱 [Télécharger l'EPUB](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub) (liseuses)
 - 🎞️ [Diapositives](https://laurentpoirierfr.github.io/golang-demystified/diapositives/) : un diaporama par rubrique et par chapitre, en HTML et en PDF
 
@@ -44,6 +45,7 @@ sa bibliothèque standard et son évolution au fil des versions.
 make serve   # prévisualisation sur http://localhost:1313/golang-demystified/
 make site    # génère le site dans site/public
 make book    # génère book/golang-demystified.pdf et .epub (Quarto + Typst)
+make aide-memoire # génère book/aide-memoire-go.pdf seul (déjà inclus dans make book)
 make slides  # génère les diapositives dans slides/build/site (Marp)
 make slides-verif      # vérifie qu'aucune diapositive ne déborde (Chromium)
 make numerote # numérote les parties et les chapitres du menu du site

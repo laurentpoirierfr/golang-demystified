@@ -45,8 +45,8 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [x] **Exercices corrigés** à la fin de chaque chapitre des parties II et III
   (66 exercices, solutions testées dans `examples/exercices`, sommaire en
   partie VI) ; la partie I (installation, premier programme) n'en a pas
-- [ ] **Aide-mémoire** : syntaxe, idiomes courants, commandes `go` ; en annexe
-  et en PDF séparé
+- [x] **Aide-mémoire** : syntaxe, idiomes courants, commandes `go` ; en annexe
+  (partie VII) et en PDF séparé (quatre pages, deux colonnes), sorties testées
 - [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)
 - [ ] **Chapitre « Go pour les développeurs Java, Python ou JavaScript »** :
   comparaison des concepts

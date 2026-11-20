@@ -8,5 +8,6 @@ claude.sh
 /docs/
 book/golang-demystified.pdf
 book/golang-demystified.epub
+book/aide-memoire-go.pdf
 examples/approfondissements/api/dist/
 slides/build/
