@@ -51,9 +51,6 @@ func charge(t *testing.T, wasm []byte, o hote.Options) *hote.Greffon {
 }
 
 func TestAnalyse(t *testing.T) {
-	if testing.Short() {
-		t.Skip("compile un greffon WebAssembly")
-	}
 	g := charge(t, greffon(t), hote.Options{})
 	texteSource := "Go compile vers WebAssembly. Le WebAssembly tourne partout : navigateur, serveur, microcontrôleur !"
 	st, err := g.Analyse(t.Context(), texteSource)
@@ -65,6 +62,15 @@ func TestAnalyse(t *testing.T) {
 	if st.Mots != natif.Mots || st.Phrases != natif.Phrases || len(st.Frequents) != len(natif.Frequents) || st.Frequents[0] != natif.Frequents[0] {
 		t.Errorf("greffon %+v\nnatif   %+v", st, natif)
 	}
+}
+
+// TestFuite vérifie que les tampons sont libérés. Il fait 5 000 appels : il
+// est ignoré en mode -short.
+func TestFuite(t *testing.T) {
+	if testing.Short() {
+		t.Skip("5 000 appels")
+	}
+	g := charge(t, greffon(t), hote.Options{})
 
 	// Les tampons sont libérés. La mémoire d'un module WebAssembly ne
 	// rétrécit jamais, et le tas de Go grandit avant d'atteindre son régime
@@ -95,9 +101,6 @@ func memoire(t *testing.T, g *hote.Greffon) uint32 {
 }
 
 func TestTexteVide(t *testing.T) {
-	if testing.Short() {
-		t.Skip("compile un greffon WebAssembly")
-	}
 	g := charge(t, greffon(t), hote.Options{})
 	st, err := g.Analyse(t.Context(), "")
 	if err != nil || st.Mots != 0 || st.Frequents == nil {
@@ -106,9 +109,6 @@ func TestTexteVide(t *testing.T) {
 }
 
 func TestAppelsConcurrents(t *testing.T) {
-	if testing.Short() {
-		t.Skip("compile un greffon WebAssembly")
-	}
 	g := charge(t, greffon(t), hote.Options{})
 	var wg sync.WaitGroup
 	for range 8 {
@@ -126,9 +126,6 @@ func TestAppelsConcurrents(t *testing.T) {
 
 // Un greffon qui boucle est interrompu par l'annulation du contexte.
 func TestBoucleInfinie(t *testing.T) {
-	if testing.Short() {
-		t.Skip("compile un greffon WebAssembly")
-	}
 	g := charge(t, construit(t, "./testdata/boucle"), hote.Options{})
 	ctx, annule := context.WithTimeout(t.Context(), 200*time.Millisecond)
 	defer annule()
@@ -145,9 +142,6 @@ func TestBoucleInfinie(t *testing.T) {
 
 // Un greffon qui veut toute la mémoire se heurte à la limite fixée par l'hôte.
 func TestMemoireBornee(t *testing.T) {
-	if testing.Short() {
-		t.Skip("compile un greffon WebAssembly")
-	}
 	g := charge(t, construit(t, "./testdata/boucle"), hote.Options{MemoirePages: 512}) // 32 Mio
 	_, err := g.Analyse(t.Context(), "xx")
 	if err == nil {
