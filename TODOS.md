@@ -24,7 +24,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   entre services
 - [x] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
   validation des entrées, bonnes pratiques avec `crypto`
-- [ ] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
+- [x] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
   la section sur le traitement de flux)
 - [ ] **Temps réel** : WebSockets et Server-Sent Events
 - [ ] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
