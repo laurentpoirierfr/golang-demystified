@@ -1,5 +1,11 @@
 /*
- * Thème Marp de Golang Demystified : les couleurs et les polices du livre.
+ * Thème Marp de Golang Demystified : les couleurs et les polices du livre,
+ * dans un style épuré (titres à accent, code sur fond sombre, intercalaires
+ * sombres).
+ *
+ * Les tailles de texte, de code et de tableau sont celles sur lesquelles
+ * tools/mkslides calcule la pagination : les changer demande de vérifier le
+ * rendu (make slides-verif).
  *
  * @theme golang
  * @auto-scaling true
@@ -17,9 +23,12 @@
 section {
   --bleu: #00ADD8;
   --bleu-fonce: #007D9C;
-  --texte: #1f2937;
-  --doux: #6b7280;
-  --carte: #f3f7f9;
+  --bleu-pale: #e6f7fb;
+  --nuit: #0b1d26;
+  --encre: #0f172a;
+  --texte: #1e293b;
+  --doux: #64748b;
+  --trait: #e2e8f0;
   font-family: 'GD Sans', 'Source Sans 3', sans-serif;
   font-size: 28px;
   line-height: 1.4;
@@ -34,86 +43,192 @@ section {
 
 h1, h2, h3 { font-family: 'GD Sans', 'Source Sans 3', sans-serif; }
 
+/* Titre : une courte barre d'accent au-dessus, pas de soulignement. */
 h2 {
-  color: var(--bleu-fonce);
+  color: var(--encre);
   font-size: 1.55em;
-  margin: 0 0 .35em;
-  padding-bottom: .2em;
-  border-bottom: 4px solid var(--bleu);
+  font-weight: bold;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  /* Barre et marges comprises, le titre garde la hauteur que suppose la
+     pagination (tools/mkslides). */
+  margin: 0 0 .3em;
+  padding: 0;
+  border: none;
+}
+h2::before {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bleu);
+  margin-bottom: .25em;
 }
 
-h3 { color: var(--bleu); font-size: 1em; margin: -.1em 0 .6em; }
+/* Sous-titre : une étiquette discrète, en capitales. */
+h3 {
+  color: var(--bleu-fonce);
+  font-size: .62em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  margin: -.2em 0 .9em;
+}
 
-strong { color: var(--bleu-fonce); }
-a { color: var(--bleu-fonce); }
+p { margin: .3em 0 .6em; }
+strong { color: var(--encre); }
+a { color: var(--bleu-fonce); text-decoration: none; border-bottom: 2px solid rgba(0, 173, 216, .35); }
 
-code { font-family: 'GD Mono', 'Go Mono', monospace; font-size: .85em; background: var(--carte); padding: .05em .3em; border-radius: 4px; }
+/* Listes : de petits carrés arrondis. */
+ul { list-style: none; padding-left: 1.1em; margin: .2em 0; }
+ul > li { position: relative; margin: .3em 0; }
+ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.05em;
+  top: .55em;
+  width: .42em;
+  height: .42em;
+  border-radius: .12em;
+  background: var(--bleu);
+}
 
+/* Code en ligne : une pastille teintée. */
+code {
+  font-family: 'GD Mono', 'Go Mono', monospace;
+  font-size: .85em;
+  color: var(--bleu-fonce);
+  background: var(--bleu-pale);
+  padding: .05em .35em;
+  border-radius: 6px;
+}
+
+/* Blocs de code : fond sombre, coins arrondis, ombre légère. */
 pre {
-  background: var(--carte);
-  border-left: 6px solid var(--bleu);
-  border-radius: 4px;
-  padding: .6em .9em;
+  background: var(--encre);
+  color: #e2e8f0;
+  border: none;
+  border-radius: 14px;
+  padding: .7em 1em;
   font-size: .62em;
   line-height: 1.35;
+  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, .45);
 }
-pre code { background: none; padding: 0; font-size: 1em; }
+pre code { background: none; color: inherit; padding: 0; font-size: 1em; border-radius: 0; }
 
-ul { margin: .2em 0; }
-li { margin: .25em 0; }
-li::marker { color: var(--bleu); }
+/* Coloration syntaxique (highlight.js), lisible sur fond sombre. */
+pre code .hljs-keyword, pre code .hljs-selector-tag { color: #f472b6; }
+pre code .hljs-string, pre code .hljs-regexp { color: #86efac; }
+pre code .hljs-number, pre code .hljs-literal { color: #fcd34d; }
+pre code .hljs-comment, pre code .hljs-quote { color: #64748b; font-style: italic; }
+pre code .hljs-title, pre code .hljs-title.function_, pre code .hljs-section { color: #7dd3fc; }
+pre code .hljs-type, pre code .hljs-built_in, pre code .hljs-title.class_ { color: #c4b5fd; }
+pre code .hljs-attr, pre code .hljs-attribute, pre code .hljs-property, pre code .hljs-variable { color: #93c5fd; }
+pre code .hljs-meta, pre code .hljs-symbol, pre code .hljs-punctuation { color: #94a3b8; }
+pre code .hljs-params, pre code .hljs-subst { color: #e2e8f0; }
 
-table { font-size: .68em; border-collapse: collapse; margin: .3em 0; }
-th { background: var(--bleu-fonce); color: #fff; }
-th, td { padding: .3em .7em; border: 1px solid #d1d9de; }
-tr:nth-child(even) td { background: var(--carte); }
+/* Tableaux : sans quadrillage, en-tête souligné d'un accent. */
+/* Sélecteurs plus précis que ceux du thème « default », qui dessine une grille. */
+table { font-size: .68em; border-collapse: collapse; margin: .4em 0; border: none; }
+table tr th, table tr td {
+  padding: .35em .8em;
+  border: none;
+  border-bottom: 1px solid var(--trait);
+  background: transparent;
+}
+table tr th { color: var(--encre); font-weight: bold; text-align: left; border-bottom: 3px solid var(--bleu); }
+table tbody tr:nth-child(even) td { background: #f8fafc; }
+table thead tr, table tbody tr { background: transparent; border: none; }
 
+/* Encadrés (notes, alertes) : des cartes douces. */
 blockquote {
-  border-left: 6px solid var(--bleu);
-  background: #e6f7fb;
+  border: none;
+  border-left: 5px solid var(--bleu);
+  border-radius: 0 12px 12px 0;
+  background: var(--bleu-pale);
   color: var(--texte);
-  padding: .5em .9em;
-  margin: .6em 0;
+  padding: .55em 1em;
+  margin: .7em 0;
   font-size: .85em;
 }
+blockquote::before, blockquote::after { content: none; }
 blockquote strong { color: var(--bleu-fonce); }
 
-header, footer { color: var(--doux); font-size: 18px; }
-header { top: 22px; }
-footer { bottom: 18px; }
-section::after { color: var(--bleu-fonce); font-size: 18px; font-weight: bold; }
-
-/* Diapositive de titre. */
-section.titre {
-  background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-fonce) 100%);
-  color: #ffffff;
-  align-content: center !important;
-  padding-left: 110px;
+/* En-tête, pied et numéro de page. */
+header, footer { color: var(--doux); font-size: 16px; letter-spacing: .06em; text-transform: uppercase; }
+header { top: 24px; }
+footer { bottom: 20px; }
+section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  color: var(--doux);
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: .04em;
+  bottom: 18px;
+  right: 30px;
 }
-section.titre h1 { color: #ffffff; font-size: 2.6em; margin: 0; border: none; line-height: 1.1; }
-section.titre h2 { color: #e0f7fc; font-size: 1.1em; border: none; margin: .4em 0 1.6em; font-weight: normal; }
-section.titre p { color: #ffffff; opacity: .9; font-size: .8em; }
 
-/* Plan : la liste des sections, sur deux colonnes si elle est longue. */
-section.programme ul { columns: 2; column-gap: 2.5em; }
-section.programme li, section.chapitre li { break-inside: avoid; margin: 0 0 .4em; }
-section.programme ol { columns: 2; column-gap: 2.5em; }
-ol li::marker { color: var(--bleu-fonce); font-weight: bold; }
-
-/* Dernière diapositive. */
-section.fin { align-content: center !important; }
-section.fin li { margin: .5em 0; }
-
-/* Intercalaire d'un chapitre, dans le diaporama d'une rubrique. */
-section.chapitre {
-  background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-fonce) 100%);
-  color: #ffffff;
+/* Diapositive de titre et intercalaires : fond nuit, halos bleus. */
+section.titre, section.chapitre {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(0, 173, 216, .55) 0, rgba(0, 173, 216, 0) 42%),
+    radial-gradient(circle at 8% 100%, rgba(0, 125, 156, .6) 0, rgba(0, 125, 156, 0) 45%),
+    var(--nuit);
+  color: #e2e8f0;
   align-content: center !important;
 }
-section.chapitre h2 { color: #ffffff; border-bottom-color: #ffffff; font-size: 1.9em; }
-section.chapitre p { font-size: 1.05em; opacity: .95; }
+section.titre { padding-left: 110px; }
+section.titre h1 {
+  color: #ffffff;
+  font-size: 2.7em;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+  border: none;
+}
+section.titre h2 { color: var(--bleu); font-size: 1.05em; font-weight: bold; margin: .5em 0 1.4em; letter-spacing: .02em; }
+section.titre h2::before { display: none; }
+section.titre p {
+  display: inline-block;
+  color: #e2e8f0;
+  font-size: .62em;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .45em 1em;
+  border: 1px solid rgba(226, 232, 240, .35);
+  border-radius: 999px;
+}
+
+section.chapitre h2 { color: #ffffff; font-size: 2em; }
+section.chapitre h2::before { background: #ffffff; }
+section.chapitre p { color: #cbd5e1; font-size: 1em; }
 section.chapitre strong, section.chapitre a { color: #ffffff; }
-section.chapitre code { background: rgba(255, 255, 255, .18); color: #ffffff; }
-section.chapitre li::marker { color: #e0f7fc; }
+section.chapitre code { background: rgba(255, 255, 255, .12); color: #e0f7fc; }
 section.chapitre ul { columns: 2; column-gap: 2.5em; font-size: .8em; }
-section.chapitre header, section.chapitre footer, section.chapitre::after { color: #e0f7fc; }
+section.chapitre header, section.chapitre footer, section.chapitre::after { color: #94a3b8; }
+
+/* Plan : sur deux colonnes ; numéros en pastilles dans les rubriques. */
+section.programme ul, section.programme ol { columns: 2; column-gap: 2.5em; }
+section.programme li, section.chapitre li { break-inside: avoid; margin: 0 0 .45em; }
+section.programme ol { list-style: none; counter-reset: plan; padding-left: 1.9em; }
+section.programme ol > li { counter-increment: plan; position: relative; }
+section.programme ol > li::before {
+  content: counter(plan);
+  position: absolute;
+  left: -1.9em;
+  top: .12em;
+  width: 1.35em;
+  height: 1.35em;
+  border-radius: 50%;
+  background: var(--bleu-pale);
+  color: var(--bleu-fonce);
+  font-size: .8em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.35em;
+}
+
+/* Dernière diapositive : centrée. */
+section.fin { align-content: center !important; }
+section.fin li { margin: .55em 0; }

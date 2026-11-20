@@ -121,7 +121,7 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
   }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "GD Sans", "Source Sans 3", system-ui, sans-serif; color: var(--texte); background: var(--fond); }
-  header { background: linear-gradient(135deg, var(--bleu), var(--bleu-fonce)); color: #fff; padding: 2.5rem 1rem; }
+  header { background: radial-gradient(circle at 85% 0%, rgba(0, 173, 216, .55) 0, rgba(0, 173, 216, 0) 45%), radial-gradient(circle at 0% 100%, rgba(0, 125, 156, .55) 0, rgba(0, 125, 156, 0) 50%), #0b1d26; color: #fff; padding: 3rem 1rem; }
   header div, main { max-width: 64rem; margin: 0 auto; }
   header h1 { margin: 0 0 .5rem; font-size: 2.2rem; }
   header p { margin: 0; opacity: .9; }
@@ -130,7 +130,8 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
   h2 { color: var(--bleu-fonce); border-bottom: 3px solid var(--bleu); padding-bottom: .3rem; margin-top: 2.5rem; }
   @media (prefers-color-scheme: dark) { h2 { color: var(--bleu); } }
   ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .75rem; }
-  li { background: var(--carte); border-radius: .5rem; padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  li { background: var(--carte); border-radius: .75rem; padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: .5rem; border: 1px solid transparent; transition: border-color .15s; }
+  li:hover { border-color: var(--bleu); }
   li span { font-weight: bold; }
   li a { color: var(--bleu-fonce); text-decoration: none; font-size: .9rem; white-space: nowrap; }
   @media (prefers-color-scheme: dark) { li a { color: var(--bleu); } }
