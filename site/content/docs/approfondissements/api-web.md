@@ -1,5 +1,6 @@
 ---
 title: "Une API web complète"
+linkTitle: "3. Une API web complète"
 weight: 30
 ---
 
@@ -43,7 +44,7 @@ api/
 ├── cmd/
 │   ├── taches/              le serveur : assemblage, démarrage, arrêt propre
 │   ├── taches-huma/         la même API, écrite avec Huma
-│   └── taches-cli/          le client en ligne de commande (chapitre suivant)
+│   └── taches-cli/          le client en ligne de commande (chapitre « Ligne de commande »)
 ├── internal/
 │   ├── cli/                 les commandes de taches-cli (cobra, viper)
 │   ├── config/              lecture de la configuration
@@ -1026,5 +1027,5 @@ croissance. Les évolutions classiques sont :
 - une **documentation OpenAPI**, écrite à la main ou générée.
 
 Lorsque la logique métier grandit, il devient utile de la séparer plus
-nettement de l'infrastructure : c'est l'objet du chapitre suivant,
-l'architecture hexagonale.
+nettement de l'infrastructure : c'est l'objet du chapitre « Architecture
+hexagonale ».

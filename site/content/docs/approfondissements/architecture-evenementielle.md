@@ -1,6 +1,7 @@
 ---
 title: "Architecture événementielle : Watermill et NATS"
-weight: 42
+linkTitle: "12. Architecture événementielle"
+weight: 120
 ---
 
 Le chapitre « Concurrence en pratique » relie des goroutines par des canaux,
@@ -137,7 +138,7 @@ l'acquitte.
 
 Le package `boutique` ignore tout du transport et du stockage. Il ne connaît
 que deux interfaces, `Depot` et `Notifieur`, comme le cœur de l'architecture
-hexagonale du chapitre précédent.
+hexagonale (chapitre « Architecture hexagonale »).
 
 ## Le routeur et ses middlewares
 

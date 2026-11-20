@@ -1,9 +1,10 @@
 ---
 title: "Architecture hexagonale"
-weight: 40
+linkTitle: "6. Architecture hexagonale"
+weight: 60
 ---
 
-Le chapitre précédent a construit un service web en couches simples : HTTP,
+Le chapitre « Une API web complète » a construit un service en couches simples : HTTP,
 stockage, domaine. C'est suffisant tant que la logique métier reste mince.
 Lorsqu'elle grandit, avec des règles, des calculs et des processus, il devient
 précieux de la **protéger** de la technique : la base de données, le
@@ -326,7 +327,7 @@ Grâce au typage implicite des interfaces, `horloge.Systeme` satisfait le port
 `application.Horloge` sans que le package `horloge` le connaisse : c'est ce qui
 lui permet de rester générique.
 
-Un adaptateur [PostgreSQL](https://www.postgresql.org), construit comme le stockage du chapitre précédent,
+Un adaptateur [PostgreSQL](https://www.postgresql.org), construit comme le stockage du chapitre « Accès aux données »,
 remplacerait le dépôt en mémoire **sans toucher** au domaine ni à
 l'application.
 
@@ -447,7 +448,7 @@ une traduction des données entre les couches. Elle se justifie lorsque :
 - les **tests** du métier doivent être rapides et nombreux.
 
 Pour un service qui se contente de lire et d'écrire des données, la structure
-plus simple du chapitre précédent suffit. Rien n'empêche de commencer simple,
+plus simple du chapitre « Une API web complète » suffit. Rien n'empêche de commencer simple,
 puis d'extraire le domaine et les ports le jour où la complexité métier le
 demande : en Go, déplacer une interface vers son utilisateur est une
 refactorisation légère.

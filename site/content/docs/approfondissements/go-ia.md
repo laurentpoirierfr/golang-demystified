@@ -1,6 +1,7 @@
 ---
 title: "Go et l'IA : modèles de langage, outils et MCP"
-weight: 43
+linkTitle: "16. Go et l'IA"
+weight: 160
 ---
 
 Les modèles de langage s'appellent par une API HTTP : une application Go n'a

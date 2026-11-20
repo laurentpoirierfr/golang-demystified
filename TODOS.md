@@ -59,6 +59,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## Fait
 
+- [x] Approfondissements réorganisés en parcours numéroté (16 chapitres, six étapes)
 - [x] Nouveau thème Hextra, site dans `docs/`
 - [x] Livre PDF et EPUB avec Quarto et Typst, couverture personnalisée
 - [x] Parties I à IV réécrites pour Go 1.27

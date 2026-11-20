@@ -1,5 +1,6 @@
 ---
 title: "Templates"
+linkTitle: "2. Templates"
 weight: 20
 ---
 

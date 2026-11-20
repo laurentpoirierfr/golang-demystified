@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"regexp"
+	"slices"
 	"strings"
 	"unicode/utf8"
 )
@@ -25,6 +26,8 @@ const (
 var (
 	linkRe     = regexp.MustCompile(`\[([^\]]+)\]\(([^)]+)\)`)
 	examplesRe = regexp.MustCompile(`https://github\.com/laurentpoirierfr/golang-demystified/tree/main/examples/[^)\s]+`)
+	numberedRe = regexp.MustCompile(`^(\d+)\. (.*)$`)
+	labelRe    = regexp.MustCompile(`^\*\*[^*]+\*\*:?$`)
 )
 
 var alertLabels = map[string]string{
@@ -120,6 +123,12 @@ func summarize(title, sub string, blocks []block) []slide {
 	for _, b := range blocks {
 		switch b.kind {
 		case paragraph:
+			// Un paragraphe tout en gras est une étiquette (« **Construire un
+			// service** ») : il reste au-dessus de la liste qui le suit.
+			if labelRe.MatchString(strings.TrimSpace(b.text)) {
+				parts = append(parts, part{inline(strings.TrimSpace(b.text)), 1.1})
+				continue
+			}
 			if !sentence {
 				s := firstSentence(inline(b.text))
 				parts = append(parts, part{s, lines(s)})
@@ -174,6 +183,14 @@ func summarize(title, sub string, blocks []block) []slide {
 				parts = append(parts, part{"> " + s, alertWeight(s)})
 			}
 			alerts++
+		}
+	}
+	// Une étiquette reste avec ce qui la suit : jamais seule en bas d'une
+	// diapositive.
+	for i := 0; i < len(parts)-1; i++ {
+		if labelRe.MatchString(parts[i].md) {
+			parts[i] = part{parts[i].md + "\n\n" + parts[i+1].md, parts[i].weight + parts[i+1].weight}
+			parts = slices.Delete(parts, i+1, i+2)
 		}
 	}
 	if len(parts) == 0 {
@@ -510,8 +527,12 @@ func shrinkList(items []string) (string, float64) {
 			w++
 			break
 		}
+		puce := "- "
+		if m := numberedRe.FindStringSubmatch(it); m != nil { // « 3. texte » : liste numérotée
+			puce, it = m[1]+". ", m[2]
+		}
 		s := firstSentence(inline(it))
-		out = append(out, "- "+s)
+		out = append(out, puce+s)
 		w += math.Ceil(float64(utf8.RuneCountInString(s))/80) + 0.3 // indented, with a margin
 	}
 	return strings.Join(out, "\n"), w

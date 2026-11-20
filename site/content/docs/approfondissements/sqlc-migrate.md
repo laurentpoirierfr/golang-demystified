@@ -1,6 +1,7 @@
 ---
 title: "Accès aux données : sqlc et golang-migrate"
-weight: 35
+linkTitle: "5. Accès aux données"
+weight: 50
 ---
 
 Le chapitre « Une API web complète » écrit ses requêtes SQL à la main, avec

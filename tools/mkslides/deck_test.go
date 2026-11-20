@@ -210,3 +210,35 @@ func TestRubriqueDeck(t *testing.T) {
 		}
 	}
 }
+
+// Une étiquette en gras et une liste numérotée gardent leur forme.
+func TestEtiquettesEtNumeros(t *testing.T) {
+	md := deck(chapter{Title: "T"}, "## Parcours\n\nIntroduction du parcours.\n\n**Construire un service**\n\n3. [Une API](api/) : la base.\n4. Le client : en ligne de commande.\n\n- une puce\n")
+	for _, attendu := range []string{
+		"**Construire un service**\n\n3. Une API : la base.\n4. Le client : en ligne de commande.",
+		"- une puce",
+	} {
+		if !strings.Contains(md, attendu) {
+			t.Errorf("%q absent de :\n%s", attendu, md)
+		}
+	}
+}
+
+// Une étiquette n'est jamais séparée de sa liste par un changement de page.
+func TestEtiquetteJamaisSeule(t *testing.T) {
+	var b strings.Builder
+	b.WriteString("## Parcours\n\n")
+	for g := range 4 {
+		fmt.Fprintf(&b, "**Groupe %d**\n\n", g)
+		for i := range 4 {
+			fmt.Fprintf(&b, "%d. Un élément assez long pour occuper une bonne partie de la ligne, voire davantage.\n", g*4+i+1)
+		}
+		b.WriteString("\n")
+	}
+	for diapo := range strings.SplitSeq(deck(chapter{Title: "T"}, b.String()), "\n---\n") {
+		lignes := strings.Split(strings.TrimSpace(diapo), "\n")
+		if dernier := lignes[len(lignes)-1]; strings.HasPrefix(dernier, "**Groupe") {
+			t.Errorf("étiquette seule en bas de diapositive :\n%s", diapo)
+		}
+	}
+}

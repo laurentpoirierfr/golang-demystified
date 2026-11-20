@@ -1,5 +1,6 @@
 ---
 title: "Concurrence en pratique"
+linkTitle: "1. Concurrence en pratique"
 weight: 10
 ---
 

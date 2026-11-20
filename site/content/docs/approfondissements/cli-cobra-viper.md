@@ -1,6 +1,7 @@
 ---
 title: "Ligne de commande : cobra et viper"
-weight: 33
+linkTitle: "4. Ligne de commande"
+weight: 40
 ---
 
 Le chapitre « Une API web complète » a construit un service HTTP. Ce chapitre
