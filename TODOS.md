@@ -26,7 +26,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   validation des entrées, bonnes pratiques avec `crypto`
 - [x] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
   la section sur le traitement de flux)
-- [ ] **Temps réel** : WebSockets et Server-Sent Events
+- [x] **Temps réel** : WebSockets et Server-Sent Events
 - [ ] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
   Go, utiliser Ollama en local
 - [ ] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
@@ -46,6 +46,10 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)
 - [ ] **Chapitre « Go pour les développeurs Java, Python ou JavaScript »** :
   comparaison des concepts
+- [ ] **Diapositives de présentation** avec [Marp](https://marp.app) : un jeu de
+  diapositives par rubrique, généré à partir du Markdown du livre (titres,
+  extraits de code, tableaux), en HTML et en PDF, construit par la CI et
+  publié avec le site
 
 ## 4. Diffusion
 
