@@ -169,3 +169,43 @@ for {
 > sont devenus non bufferisés, ce qui évite de recevoir une valeur périmée
 > après un `Reset` ou un `Stop`. Depuis **Go 1.27**, l'ancien comportement
 > (`asynctimerchan`) n'est plus disponible.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/temps`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/temps),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Un âge ★
+
+```go
+func Age(naissance, aujourdhui time.Time) int
+```
+
+L'âge en années révolues : on n'a 36 ans qu'à partir de son anniversaire.
+Pourquoi passer `aujourdhui` en argument plutôt qu'appeler `time.Now()` ?
+(Pour que le test soit reproductible.)
+
+### Des jours ouvrés ★★
+
+```go
+func JoursOuvres(debut, fin time.Time) int
+```
+
+Comptez les jours du lundi au vendredi, de `debut` inclus à `fin` exclue. Le
+test traverse le passage à l'heure d'hiver : avancez d'un jour avec
+`AddDate(0, 0, 1)`, pas avec `Add(24 * time.Hour)`.
+
+### Une date française, en UTC ★★★
+
+```go
+func LitDateParis(s string) (time.Time, error)
+```
+
+`LitDateParis("20/11/2026 14:30")` renvoie 13 h 30 UTC (heure d'hiver),
+`LitDateParis("14/07/2026 22:00")` renvoie 20 h UTC (heure d'été). Indices :
+`time.LoadLocation`, `time.ParseInLocation`, et la date de référence
+`02/01/2006 15:04`. Importez `time/tzdata` pour ne pas dépendre des fuseaux
+installés sur la machine.

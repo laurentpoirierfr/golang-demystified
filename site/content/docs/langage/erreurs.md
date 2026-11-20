@@ -205,3 +205,46 @@ fmt.Println(divisionSure(1, 0))
 Un serveur HTTP utilise ce mécanisme pour qu'une requête qui panique
 n'arrête pas tout le serveur. `recover` ne fonctionne que dans la goroutine
 qui a paniqué : une panique dans une autre goroutine arrête le programme.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/erreurs`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/erreurs),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Envelopper une erreur ★
+
+```go
+var ErrHorsLimites = errors.New("âge hors limites")
+
+func LitAge(s string) (int, error)
+```
+
+Convertissez le texte avec `strconv.Atoi`, et refusez un âge hors de [0, 150].
+Les erreurs doivent garder leur cause : `errors.Is(err, strconv.ErrSyntax)`
+pour `"douze"`, `errors.Is(err, ErrHorsLimites)` pour `"200"`. Le message
+d'erreur cite la valeur fautive.
+
+### Un type d'erreur ★★
+
+```go
+type ErrChamp struct{ Champ, Raison string }
+
+func Valide(u Utilisateur) error // Utilisateur{Nom, Email string}
+```
+
+Signalez un nom vide et une adresse sans `@`, **toutes** les erreurs à la
+fois (`errors.Join`), et `nil` si tout va bien. L'appelant retrouve le premier
+champ fautif avec `errors.As(err, &champ)`.
+
+### Une panique devenue erreur ★★★
+
+```go
+func Protege(f func()) (err error)
+```
+
+Appelez `f` ; si elle panique, renvoyez une erreur « panique : … » au lieu de
+laisser le programme s'arrêter. Indice : `defer`, `recover`, et une valeur de
+retour nommée, que la fonction différée peut modifier.

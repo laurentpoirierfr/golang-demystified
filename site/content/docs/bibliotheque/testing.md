@@ -404,3 +404,37 @@ quelle image.
 - Pour les dépendances externes, injectez une **interface** et fournissez un
   double de test (*fake*) écrit à la main : c'est souvent plus simple qu'une
   bibliothèque de *mocks*.
+
+## Exercices
+
+Ici, les rôles s'inversent : le code est donné, dans
+[`examples/exercices/bibliotheque/testing/exercices.go`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/testing/exercices.go),
+et ce sont **les tests** qu'il faut écrire. Une solution est dans
+`exercices_test.go`, à côté. Les étoiles indiquent la difficulté.
+
+### Un test de table ★
+
+`Slug` transforme un titre en identifiant d'URL : `"L'été à Paris !"` devient
+`"l-ete-a-paris"`. Écrivez un test de table, avec un sous-test par cas
+(`t.Run`) : accents, ponctuation en début et en fin, texte vide.
+
+### Un test de fuzzing ★★
+
+`Chiffre(texte, decalage)` applique le chiffre de César. Plutôt que des
+exemples, testez une **propriété** : déchiffrer ce qu'on a chiffré redonne le
+texte, `Chiffre(Chiffre(t, d), -d) == t`. Lancez `go test -fuzz=FuzzChiffre`.
+
+> [!NOTE]
+> En écrivant cet exercice, la première version de `Chiffre` utilisait
+> `strings.Map`. Le fuzzing a trouvé en une seconde un texte qui ne survivait
+> pas à l'aller-retour : `"\x9a"`, un octet qui n'est pas de l'UTF-8 valide,
+> que `strings.Map` remplace par `�`. L'entrée est gardée dans
+> `testdata/fuzz/FuzzChiffre/` : elle est rejouée à chaque `go test`.
+
+### Tester le temps ★★★
+
+`Reessaie(ctx, essais, attente, f)` rappelle `f` jusqu'à son succès, en
+doublant l'attente à chaque échec. Vérifiez qu'avec 4 essais et une attente
+d'une seconde, l'attente totale vaut **exactement** 7 secondes, et qu'un
+délai du contexte interrompt les essais, sans que le test attende
+réellement. Indice : `testing/synctest`.

@@ -244,3 +244,44 @@ resp, err := client.Get(srv.URL + "/taches")
 > **Go 1.27** — `httptest.NewTestServer` utilise un réseau simulé en mémoire,
 > compatible avec `testing/synctest` pour tester les délais et les timeouts
 > sans attendre réellement.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/http`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/http),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+Les tests utilisent `httptest` : aucun serveur n'est démarré.
+
+### Une route avec un paramètre ★
+
+```go
+func Bonjour(w http.ResponseWriter, r *http.Request)
+```
+
+Enregistrée sur `GET /bonjour/{nom}`, elle répond `Bonjour, Ada !`.
+
+### Une petite API JSON ★★
+
+```go
+func Additionne(w http.ResponseWriter, r *http.Request)
+func Routes() http.Handler
+```
+
+`POST /additions` avec `{"a": 40, "b": 2}` répond `{"somme":42}`, de type
+`application/json`. Un JSON invalide reçoit 400, un corps de plus de 1 Kio
+aussi (`http.MaxBytesReader`). `Routes` assemble les deux handlers : un `GET
+/additions` doit recevoir 405.
+
+### Un middleware d'authentification ★★★
+
+```go
+func ExigeCle(cle string, suivant http.Handler) http.Handler
+```
+
+Refusez (401) les requêtes dont l'en-tête `X-Cle` est absent ou faux.
+Comparez avec `subtle.ConstantTimeCompare` : une comparaison ordinaire
+s'arrête au premier caractère différent, et son temps de réponse renseigne un
+attaquant.

@@ -134,3 +134,50 @@ fort au plus faible :
 `&` est plus prioritaire que `==` : `x&masque != 0` se lit
 `(x&masque) != 0`. Dans le doute, ajoutez des parenthèses ; `gofmt` ajuste les
 espaces pour refléter la priorité.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/operateurs`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/operateurs),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Pair ou impair ★
+
+```go
+func EstPair(n int) bool
+```
+
+Attention aux nombres négatifs : en Go, `-3 % 2` vaut `-1`.
+
+### Des droits en bits ★★
+
+Un ensemble de droits tient dans un entier, un bit par droit :
+
+```go
+type Droit uint8
+
+const (
+	Lecture Droit = 1 << iota
+	Ecriture
+	Execution
+)
+
+func A(d, demandes Droit) bool      // d contient-il tous les droits demandés ?
+func Retire(d, retires Droit) Droit // d, privé des droits retirés
+```
+
+`A(Lecture|Ecriture, Lecture)` est vrai, `A(Lecture, Lecture|Execution)` est
+faux. Indice : l'opérateur `&^` (ET NON) efface des bits.
+
+### Compter les bits ★★★
+
+Comptez les bits à 1 d'un entier, sans le package `math/bits` :
+
+```go
+func Bits(n uint64) int
+```
+
+`Bits(0b1011)` vaut 3. Indice : `n & (n - 1)` efface le bit à 1 le plus faible
+de `n`. Le test compare votre résultat à celui de `bits.OnesCount64`.

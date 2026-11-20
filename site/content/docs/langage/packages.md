@@ -168,3 +168,51 @@ définie côté utilisateur permet souvent de casser le cycle.
 
 La partie Approfondissements présente des exemples complets d'organisation :
 un service web complet et une architecture hexagonale.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/packages`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/packages),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+Le test est écrit dans un package externe (`packages_test`) : il ne voit que
+ce que le package exporte. Il importe le package par son chemin : adaptez la
+ligne `import` au chemin de votre module.
+
+### Encapsuler ★
+
+```go
+type Temperature struct{ /* champ non exporté */ }
+
+func DepuisCelsius(c float64) (Temperature, error) // refuse moins de -273,15 °C
+func (t Temperature) Celsius() float64
+```
+
+Parce que le champ n'est pas exporté, aucun code extérieur ne peut créer une
+température sous le zéro absolu.
+
+### Un registre ★★
+
+```go
+func Enregistre(nom string, f func(string) string) // panique si le nom est pris
+func Formate(nom, texte string) (string, error)
+func Formats() []string                           // triés
+```
+
+Le package enregistre lui-même « majuscules » et « minuscules » dans une
+fonction `init`, comme les pilotes de `database/sql`. Protégez la map par un
+`sync.Mutex`.
+
+### Une version fixée à la compilation ★★★
+
+Écrivez un programme `cmd/version` qui affiche `version dev`, et dont la
+version change sans modifier le code :
+
+```bash
+go run -ldflags "-X main.version=1.2.3" ./cmd/version   # version 1.2.3
+```
+
+Indice : `-X` ne fonctionne que sur une **variable** de type `string`, pas
+sur une constante.

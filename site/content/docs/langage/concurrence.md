@@ -213,3 +213,44 @@ continue.
 >
 > **Go 1.27** — le profil `goroutineleak` du package `runtime/pprof` détecte
 > ces fuites.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/concurrence`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/concurrence),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+Lancez les tests avec `go test -race` : le détecteur de courses fait partie
+de la spécification.
+
+### Une somme en parallèle ★
+
+```go
+func SommeParallele(nombres []int, parts int) int
+```
+
+Découpez la slice en `parts` morceaux, additionnez chacun dans une goroutine,
+puis réunissez les sommes. Le résultat doit être juste quel que soit `parts`,
+même plus grand que la slice.
+
+### Un pipeline ★★
+
+```go
+func Genere(n int) <-chan int          // 1, 2… n, puis ferme
+func Carres(entree <-chan int) <-chan int // le carré de chaque valeur
+```
+
+`for v := range Carres(Genere(5))` reçoit 1, 4, 9, 16, 25, puis s'arrête :
+chaque étape ferme sa sortie quand son entrée est épuisée.
+
+### Un groupe de travailleurs ★★★
+
+```go
+func Traite[T, R any](taches []T, n int, f func(T) R) []R
+```
+
+Appliquez `f` à chaque tâche avec **au plus n** appels simultanés, et
+renvoyez les résultats **dans l'ordre des tâches**. Le test mesure le nombre
+d'appels simultanés.

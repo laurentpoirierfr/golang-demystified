@@ -140,3 +140,41 @@ niveau.Set(slog.LevelDebug)
   le journal global : c'est plus facile à tester.
 - En production, journalisez en JSON sur la sortie standard, et laissez la
   plateforme ([Docker](https://www.docker.com), [Kubernetes](https://kubernetes.io), [systemd](https://systemd.io)) collecter les messages.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/slog`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/slog),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Un journal JSON ★
+
+```go
+func Nouveau(w io.Writer, niveau slog.Level, service string) *slog.Logger
+```
+
+Le journal écrit du JSON, ignore les messages sous `niveau`, et ajoute
+l'attribut `service` à chaque message.
+
+### Masquer un secret ★★
+
+```go
+type Secret string
+```
+
+Faites qu'un `Secret` s'affiche `***` dans tous les journaux, quel que soit le
+handler. Indice : l'interface `slog.LogValuer`.
+
+### Un handler qui compte ★★★
+
+```go
+func NouveauCompteur(suivant slog.Handler) *Compteur
+func (c *Compteur) Nombre(l slog.Level) int
+```
+
+`Compteur` satisfait `slog.Handler` : il compte les messages par niveau, et
+les transmet à `suivant`. Les journaux dérivés (`log.With(…)`,
+`log.WithGroup(…)`) comptent dans les mêmes compteurs. Le test vérifie aussi
+le contrat complet d'un handler avec `testing/slogtest`.

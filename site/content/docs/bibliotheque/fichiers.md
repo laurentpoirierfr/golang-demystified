@@ -238,3 +238,42 @@ commande. `os/exec` lance d'autres programmes :
 ```go
 sortie, err := exec.Command("git", "rev-parse", "HEAD").Output()
 ```
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/fichiers`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/fichiers),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Compter les lignes ★
+
+```go
+func CompteLignes(r io.Reader) (int, error)
+```
+
+Comptez les lignes non vides avec un `bufio.Scanner`. La fonction reçoit un
+`io.Reader` : elle sert aussi bien pour un fichier que pour une chaîne
+(`strings.NewReader`) ou une réponse HTTP.
+
+### Parcourir un système de fichiers ★★
+
+```go
+func ParExtension(fsys fs.FS, ext string) ([]string, error)
+```
+
+Renvoyez les chemins des fichiers d'extension `ext`, avec `fs.WalkDir`. Le
+test n'utilise pas le disque : il passe un `fstest.MapFS`, un système de
+fichiers en mémoire.
+
+### Écrire un fichier de façon atomique ★★★
+
+```go
+func EcritAtomique(chemin string, donnees []byte) error
+```
+
+Un programme interrompu au milieu d'une écriture laisse un fichier à moitié
+écrit. Écrivez plutôt dans un fichier temporaire **du même répertoire**
+(`os.CreateTemp`), forcez l'écriture sur le disque (`Sync`), puis renommez-le
+(`os.Rename`, atomique). En cas d'erreur, ne laissez aucun fichier temporaire.
