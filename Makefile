@@ -18,7 +18,7 @@ MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g
 	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
-.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo generate clean
+.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go generate clean
 
 all: check book slides publication
 
@@ -125,6 +125,18 @@ wasm-tinygo:
 		-o $(TINYGO_SORTIE)/greffon-tinygo.wasm ./examples/approfondissements/wasm/cmd/greffon
 	GREFFON_TINYGO=$(CURDIR)/$(TINYGO_SORTIE)/greffon-tinygo.wasm \
 		go test -count=1 -run TinyGo -v ./examples/approfondissements/wasm/internal/hote
+
+## rust-et-go : compile et teste la version Rust de l'article « Rust et Go »,
+##   et vérifie que la course de données y est refusée à la compilation
+RUST_IMAGE := docker.io/library/rust:1.99.1-slim
+rust-et-go:
+	go test -count=1 ./examples/decouvrir/rust-et-go/...
+	docker run --rm $(MARP_USERNS) --user "$(shell id -u):$(shell id -g)" -e HOME=/tmp -e CARGO_HOME=/tmp/cargo \
+		-e CARGO_TARGET_DIR=/tmp/cible --volume "$(CURDIR)/examples/decouvrir/rust-et-go/rust:/orig:ro" \
+		$(RUST_IMAGE) sh -c 'cp -r /orig /tmp/p && cd /tmp/p/mots && cargo test --release && \
+		if rustc --edition 2024 -o /tmp/course ../course/main.rs 2>/dev/null; \
+		then echo "la course aurait dû être refusée"; exit 1; \
+		else echo "course refusée par le compilateur Rust, comme attendu"; fi'
 
 ## generate : régénère tout le code généré (oapi-codegen, sqlc, buf)
 generate: sqlc buf

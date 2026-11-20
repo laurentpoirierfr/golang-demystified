@@ -36,7 +36,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [x] **Go idiomatique** : motifs récurrents (options fonctionnelles,
   middlewares, injection de dépendances), anti-motifs fréquents, grille de
   relecture de code
-- [ ] **Rust et Go** : le positionnement des deux langages, les atouts de
+- [x] **Rust et Go** : le positionnement des deux langages, les atouts de
   chacun (sûreté mémoire, performances, concurrence, productivité,
   écosystèmes), et comment choisir
 
