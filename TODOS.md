@@ -22,7 +22,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   corrélation des journaux `slog` avec les traces, appliqués à l'API des tâches
 - [x] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
   entre services
-- [ ] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
+- [x] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
   validation des entrées, bonnes pratiques avec `crypto`
 - [ ] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
   la section sur le traitement de flux)
