@@ -1,5 +1,6 @@
 ---
 title: "L'évolution de Go"
+linkTitle: "IV - L'évolution de Go"
 weight: 40
 ---
 

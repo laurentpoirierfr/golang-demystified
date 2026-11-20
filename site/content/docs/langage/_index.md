@@ -1,5 +1,6 @@
 ---
 title: "Le langage"
+linkTitle: "II - Le langage"
 weight: 20
 ---
 

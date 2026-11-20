@@ -1,5 +1,6 @@
 ---
 title: "Tableaux, slices et maps"
+linkTitle: "4. Tableaux, slices et maps"
 weight: 40
 ---
 

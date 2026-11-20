@@ -7,6 +7,8 @@ import (
 	"slices"
 	"strings"
 	"unicode/utf8"
+
+	"github.com/laurentpoirierfr/golang-demystified/tools/internal/content"
 )
 
 // Limits that keep a slide readable, measured on the rendered slides : the
@@ -422,8 +424,8 @@ type rubriqueChapter struct {
 // for each chapter a divider slide and up to two key slides. Short enough to
 // be presented, it complements the detailed deck of each chapter.
 func rubriqueDeck(r rubrique) string {
-	ch := chapter{Part: fmt.Sprintf("%d. %s", r.Number, r.Title), Title: r.Title, URL: r.URL, Edition: r.Edition}
-	slides := []slide{{class: "titre", title: r.Title, subtitle: fmt.Sprintf("Rubrique %d", r.Number),
+	ch := chapter{Part: content.Romain(r.Number) + " - " + r.Title, Title: r.Title, URL: r.URL, Edition: r.Edition}
+	slides := []slide{{class: "titre", title: r.Title, subtitle: "Rubrique " + content.Romain(r.Number),
 		body: []string{"Golang Demystified · Édition " + r.Edition}}}
 	slides = append(slides, summarize("En bref", "", parse(r.Intro))...)
 

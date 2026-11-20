@@ -1,5 +1,6 @@
 ---
 title: "Rust et Go : deux réponses à des questions différentes"
+linkTitle: "3. Rust et Go"
 weight: 17
 ---
 

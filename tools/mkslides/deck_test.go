@@ -198,7 +198,7 @@ func TestRubriqueDeck(t *testing.T) {
 			{Number: 2, Title: "Vide", Body: "Rien à dire.\n"},
 		}})
 	for _, attendu := range []string{
-		"## Rubrique 2",
+		"## Rubrique II",
 		"1. Interfaces\n2. Vide",                      // le plan
 		"<!-- _class: chapitre -->\n## 1. Interfaces", // l'intercalaire
 		"### Les petites interfaces",                  // diapositive clé : le tableau

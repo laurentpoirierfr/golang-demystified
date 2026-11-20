@@ -1,5 +1,6 @@
 ---
 title: "Les grands projets écrits en Go"
+linkTitle: "2. Les grands projets écrits en Go"
 weight: 15
 ---
 

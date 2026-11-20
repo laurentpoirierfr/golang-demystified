@@ -81,7 +81,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 				return n, err
 			}
 			ch := chapter{
-				Part:    fmt.Sprintf("%d. %s", num, p.Title),
+				Part:    content.Romain(num) + " - " + p.Title,
 				Title:   c.Title,
 				URL:     site + "docs/" + filepath.ToSlash(strings.TrimSuffix(rel, ".md")) + "/",
 				Edition: edition,
@@ -106,7 +106,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 	return n, index.Execute(f, map[string]any{"Parts": parts, "Site": site, "Edition": edition})
 }
 
-var index = template.Must(template.New("index").Parse(`<!doctype html>
+var index = template.Must(template.New("index").Funcs(template.FuncMap{"romain": content.Romain}).Parse(`<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -149,11 +149,11 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
 </div></header>
 <main>
 {{range .Parts}}<section>
-<h2>{{printf "%02d" .Number}} · {{.Title}}</h2>
+<h2>{{romain .Number}} - {{.Title}}</h2>
 <p class="rubrique"><strong>Présentation de la rubrique</strong> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></p>
 <p class="detail">Une présentation détaillée par chapitre :</p>
 <ul>
-{{range .Entries}}  <li><span>{{printf "%02d" .Number}} · {{.Title}}</span> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></li>
+{{range .Entries}}  <li><span>{{.Number}}. {{.Title}}</span> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></li>
 {{end}}</ul>
 </section>
 {{end}}</main>

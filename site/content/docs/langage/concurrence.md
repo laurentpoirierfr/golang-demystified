@@ -1,5 +1,6 @@
 ---
 title: "Goroutines et channels"
+linkTitle: "11. Goroutines et channels"
 weight: 110
 ---
 

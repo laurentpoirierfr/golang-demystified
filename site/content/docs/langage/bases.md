@@ -1,5 +1,6 @@
 ---
 title: "Variables, constantes et types"
+linkTitle: "1. Variables, constantes et types"
 weight: 10
 ---
 

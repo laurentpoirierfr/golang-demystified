@@ -1,5 +1,6 @@
 ---
 title: "Collections : slices, maps, iter, cmp"
+linkTitle: "2. Collections"
 weight: 20
 ---
 

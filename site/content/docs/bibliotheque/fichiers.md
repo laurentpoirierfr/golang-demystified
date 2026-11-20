@@ -1,5 +1,6 @@
 ---
 title: "Fichiers et flux : io, os, bufio"
+linkTitle: "3. Fichiers et flux"
 weight: 30
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Approfondissements"
+linkTitle: "V - Approfondissements"
 weight: 50
 ---
 

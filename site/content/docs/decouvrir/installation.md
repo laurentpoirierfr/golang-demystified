@@ -1,5 +1,6 @@
 ---
 title: "Installation"
+linkTitle: "4. Installation"
 weight: 20
 ---
 

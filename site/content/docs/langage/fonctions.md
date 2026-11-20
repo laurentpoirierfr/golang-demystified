@@ -1,5 +1,6 @@
 ---
 title: "Fonctions"
+linkTitle: "5. Fonctions"
 weight: 50
 ---
 

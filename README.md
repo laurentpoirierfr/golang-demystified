@@ -46,6 +46,7 @@ make site    # génère le site dans site/public
 make book    # génère book/golang-demystified.pdf et .epub (Quarto + Typst)
 make slides  # génère les diapositives dans slides/build/site (Marp)
 make slides-verif      # vérifie qu'aucune diapositive ne déborde (Chromium)
+make numerote # numérote les parties et les chapitres du menu du site
 make check   # gofmt, go vet et go test (rapide, sans conteneur)
 make generate          # régénère le code (oapi-codegen, sqlc, controller-gen)
 make vuln              # vulnérabilités connues (govulncheck)
@@ -64,6 +65,10 @@ Le même Markdown alimente le site, le PDF, l'EPUB et les diapositives :
   `> [!IMPORTANT]`, `> [!WARNING]`, `> [!CAUTION]`), converties en callouts
   Quarto dans le livre ;
 - les images sont placées à côté de la page (page bundle) et référencées en relatif ;
+- l'ordre des parties et des chapitres vient de leur champ `weight` ; après un
+  ajout ou un déplacement, `make numerote` met à jour les numéros du menu
+  (« V - Approfondissements », « 3. Une API web complète »), et `make check`
+  échoue tant qu'ils ne sont pas à jour ;
 - les diapositives reprennent la **première phrase** de chaque section (`##`,
   `###`), ses listes, son premier tableau, son premier exemple de code et sa
   première alerte : cette première phrase doit se suffire à elle-même ;

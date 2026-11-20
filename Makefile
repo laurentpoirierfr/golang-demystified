@@ -18,7 +18,7 @@ MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g
 	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
-.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go generate clean
+.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go numerote generate clean
 
 all: check book slides publication
 
@@ -71,6 +71,7 @@ pdf: book
 ## check : vérifie et teste les outils et les exemples du livre (sans conteneur)
 check:
 	test -z "$$(gofmt -l tools examples)"
+	go run ./tools/numerote -verifie
 	go vet ./...
 	go test -short ./...
 
@@ -137,6 +138,11 @@ rust-et-go:
 		if rustc --edition 2024 -o /tmp/course ../course/main.rs 2>/dev/null; \
 		then echo "la course aurait dû être refusée"; exit 1; \
 		else echo "course refusée par le compilateur Rust, comme attendu"; fi'
+
+## numerote : numérote les parties (I, II…) et les chapitres du menu du site,
+##   d'après leur poids (weight)
+numerote:
+	go run ./tools/numerote
 
 ## generate : régénère tout le code généré (oapi-codegen, sqlc, buf)
 generate: sqlc buf

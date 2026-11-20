@@ -124,3 +124,18 @@ func exists(p string) bool {
 	_, err := os.Stat(p)
 	return err == nil
 }
+
+// Romain écrit n en chiffres romains (1 à 3999) : les parties du livre sont
+// numérotées ainsi (« V - Approfondissements »).
+func Romain(n int) string {
+	valeurs := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	symboles := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	var b strings.Builder
+	for i, v := range valeurs {
+		for n >= v {
+			b.WriteString(symboles[i])
+			n -= v
+		}
+	}
+	return b.String()
+}

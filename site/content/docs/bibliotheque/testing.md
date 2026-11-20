@@ -1,5 +1,6 @@
 ---
 title: "Tests : testing"
+linkTitle: "9. Tests"
 weight: 90
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Interfaces"
+linkTitle: "7. Interfaces"
 weight: 70
 ---
 

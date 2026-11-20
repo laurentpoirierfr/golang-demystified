@@ -1,5 +1,6 @@
 ---
 title: "Découvrir Go"
+linkTitle: "I - Découvrir Go"
 weight: 10
 ---
 
