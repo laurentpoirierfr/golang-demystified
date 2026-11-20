@@ -1,0 +1,20 @@
+---
+# En-tête du PDF séparé de l'aide-mémoire : le contenu est celui du chapitre
+# « Aide-mémoire », converti par tools/mkbook (make aide-memoire).
+title: "Aide-mémoire Go"
+subtitle: "Golang Demystified · laurentpoirierfr.github.io/golang-demystified"
+lang: fr
+format:
+  typst:
+    papersize: a4
+    columns: 2
+    margin:
+      x: 1.2cm
+      y: 1.1cm
+    fontsize: 8pt
+    mainfont: "Source Sans 3"
+    font-paths:
+      - fonts
+    include-in-header: aide-memoire.typ
+---
+

@@ -2,6 +2,8 @@ QUARTO_IMAGE := ghcr.io/quarto-dev/quarto:1.11.9
 QUARTO_DIR   := book/build/quarto
 BOOK_PDF     := book/golang-demystified.pdf
 BOOK_EPUB    := book/golang-demystified.epub
+AIDE_DIR     := book/build/aide-memoire
+AIDE_PDF     := book/aide-memoire-go.pdf
 # Podman rootless : keep-id conserve l'UID de l'utilisateur dans le conteneur.
 CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--userns=keep-id,--user $(shell id -u):$(shell id -g))
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
@@ -18,7 +20,7 @@ MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g
 	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
-.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go numerote generate clean
+.PHONY: all site publication serve book aide-memoire pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go numerote generate clean
 
 all: check book slides publication
 
@@ -29,7 +31,7 @@ site:
 ## publication : le site, avec le PDF, l'EPUB et les diapositives (après make
 ## book et make slides)
 publication: site
-	cp $(BOOK_PDF) $(BOOK_EPUB) site/public/
+	cp $(BOOK_PDF) $(BOOK_EPUB) $(AIDE_PDF) site/public/
 	cp -r $(SLIDES_DIR)/site site/public/diapositives
 
 ## slides : un diaporama Marp par rubrique et par chapitre, en HTML et en PDF
@@ -64,6 +66,20 @@ book:
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.pdf $(BOOK_PDF)
 	cp $(QUARTO_DIR)/_book/Golang-Demystified.epub $(BOOK_EPUB)
 	cp $(QUARTO_DIR)/assets/couverture.png site/static/images/couverture.png
+	$(MAKE) aide-memoire
+
+## aide-memoire : le PDF séparé de l'aide-mémoire (annexe), en deux colonnes
+aide-memoire:
+	go run ./tools/mkbook -content site/content/docs -static site/static \
+		-config book/quarto/_quarto.yml -out $(QUARTO_DIR) >/dev/null
+	rm -rf $(AIDE_DIR) && mkdir -p $(AIDE_DIR)
+	cp -r book/quarto/fonts book/aide-memoire/aide-memoire.typ $(AIDE_DIR)/
+	# Le contenu du chapitre, sans son titre ni son introduction.
+	{ cat book/aide-memoire/entete.yml; sed '1,/^## /{/^## /!d}' $(QUARTO_DIR)/*-aide-memoire.qmd; } \
+		> $(AIDE_DIR)/aide-memoire-go.qmd
+	docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(AIDE_DIR) \
+		$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE) quarto render aide-memoire-go.qmd --to typst
+	cp $(AIDE_DIR)/aide-memoire-go.pdf $(AIDE_PDF)
 
 ## pdf : alias de book
 pdf: book

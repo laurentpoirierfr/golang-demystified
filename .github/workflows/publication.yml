@@ -67,6 +67,7 @@ jobs:
           path: |
             book/golang-demystified.pdf
             book/golang-demystified.epub
+            book/aide-memoire-go.pdf
 
   deploiement:
     name: Déploiement sur GitHub Pages
@@ -99,7 +100,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.construction.outputs.tag }}
         run: |
-          gh release create "$TAG" golang-demystified.pdf golang-demystified.epub \
+          gh release create "$TAG" golang-demystified.pdf golang-demystified.epub aide-memoire-go.pdf \
             --repo "$GITHUB_REPOSITORY" \
             --title "Golang Demystified ${TAG#v}" \
-            --notes "Le livre en PDF et en EPUB. Version en ligne : https://laurentpoirierfr.github.io/golang-demystified/"
+            --notes "Le livre en PDF et en EPUB, et l'aide-mémoire en PDF. Version en ligne : https://laurentpoirierfr.github.io/golang-demystified/"
