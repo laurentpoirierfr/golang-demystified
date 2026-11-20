@@ -7,17 +7,47 @@ CONTAINER_USER := $(if $(shell docker --version 2>/dev/null | grep -i podman),--
 QUARTO = docker run --rm --volume "$(CURDIR):/data" --workdir /data/$(QUARTO_DIR) \
 	$(CONTAINER_USER) -e HOME=/tmp $(QUARTO_IMAGE)
 
-.PHONY: all site publication serve book pdf check vuln lint test-integration sqlc buf generate clean
+# Diapositives : l'image Marp démarre en root et prend l'identité MARP_USER.
+# Avec Podman rootless, keep-id fait correspondre cette identité à la nôtre.
+SLIDES_DIR := slides/build
+MARP_IMAGE := docker.io/marpteam/marp-cli:v4.5.1
+MARP_USERNS := $(if $(shell docker --version 2>/dev/null | grep -i podman),--userns=keep-id,)
+MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g)" \
+	--volume "$(CURDIR)/$(SLIDES_DIR):/home/marp/app" \
+	--volume "$(CURDIR)/slides/theme:/theme:ro" \
+	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
+	$(MARP_IMAGE)
 
-all: check book publication
+.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf generate clean
+
+all: check book slides publication
 
 ## site : génère le site statique dans site/public
 site:
 	cd site && hugo --minify --cleanDestinationDir
 
-## publication : le site, avec le PDF et l'EPUB téléchargeables (après make book)
+## publication : le site, avec le PDF, l'EPUB et les diapositives (après make
+## book et make slides)
 publication: site
 	cp $(BOOK_PDF) $(BOOK_EPUB) site/public/
+	cp -r $(SLIDES_DIR)/site site/public/diapositives
+
+## slides : un diaporama Marp par rubrique et par chapitre, en HTML et en PDF
+slides:
+	rm -rf $(SLIDES_DIR)
+	go run ./tools/mkslides -content site/content/docs -out $(SLIDES_DIR)/md
+	mkdir -p $(SLIDES_DIR)/md/polices
+	cp book/quarto/fonts/SourceSans3-*.otf book/quarto/fonts/Go-Mono.ttf book/quarto/fonts/Go-Mono-Bold.ttf $(SLIDES_DIR)/md/polices/
+	$(MARP) --input-dir md --output site --allow-local-files --theme-set /theme/golang.css
+	$(MARP) --input-dir md --output site --allow-local-files --pdf --theme-set /theme/golang.css
+	cp -r $(SLIDES_DIR)/md/polices $(SLIDES_DIR)/md/index.html $(SLIDES_DIR)/site/
+
+## slides-verif : mesure le rendu de chaque diapositive dans Chromium, et
+## échoue si un contenu déborde (après make slides)
+PUPPETEER_IMAGE := docker.io/zenika/alpine-chrome:124-with-puppeteer
+slides-verif:
+	docker run --rm --volume "$(CURDIR)/slides/verif:/usr/src/app/test:ro" \
+		--volume "$(CURDIR)/$(SLIDES_DIR)/site:/diapos:ro" $(PUPPETEER_IMAGE) node test/debordements.js
 
 ## serve : prévisualise le site sur http://localhost:1313/golang-demystified/
 serve:

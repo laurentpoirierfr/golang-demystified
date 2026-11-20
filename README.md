@@ -10,18 +10,21 @@ sa bibliothèque standard et son évolution au fil des versions.
 - 🌐 [Lire en ligne](https://laurentpoirierfr.github.io/golang-demystified/)
 - 📄 [Télécharger le PDF](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf)
 - 📱 [Télécharger l'EPUB](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub) (liseuses)
+- 🎞️ [Diapositives](https://laurentpoirierfr.github.io/golang-demystified/diapositives/) : un diaporama par rubrique et par chapitre, en HTML et en PDF
 
 ## Organisation du dépôt
 
 | Répertoire          | Rôle                                                         |
 |---------------------|--------------------------------------------------------------|
 | `site/`             | Site [Hugo](https://gohugo.io) (thème [Hextra](https://imfing.github.io/hextra/)) |
-| `site/content/docs` | Contenu du livre, source unique du site, du PDF et de l'EPUB |
+| `site/content/docs` | Contenu du livre, source unique du site, du PDF, de l'EPUB et des diapositives |
 | `book/quarto/`      | Configuration Quarto, modèle [Typst](https://typst.app) et polices du livre       |
 | `book/`             | Couverture et ressources du livre                            |
 | `.github/workflows` | Intégration continue et publication (GitHub Actions)         |
 | `examples/`         | Code des exemples du livre, compilé et testé                 |
 | `tools/mkbook`      | Transforme le contenu du site en projet de livre Quarto      |
+| `tools/mkslides`    | Transforme chaque rubrique et chaque chapitre en diaporama [Marp](https://marp.app) |
+| `slides/`           | Thème Marp et vérification du rendu des diapositives         |
 
 ## Prérequis
 
@@ -41,6 +44,8 @@ sa bibliothèque standard et son évolution au fil des versions.
 make serve   # prévisualisation sur http://localhost:1313/golang-demystified/
 make site    # génère le site dans site/public
 make book    # génère book/golang-demystified.pdf et .epub (Quarto + Typst)
+make slides  # génère les diapositives dans slides/build/site (Marp)
+make slides-verif      # vérifie qu'aucune diapositive ne déborde (Chromium)
 make check   # gofmt, go vet et go test (rapide, sans conteneur)
 make generate          # régénère le code (oapi-codegen, sqlc, controller-gen)
 make vuln              # vulnérabilités connues (govulncheck)
@@ -50,7 +55,7 @@ make all     # tout à la fois
 
 ## Règles d'écriture
 
-Le même Markdown alimente le site, le PDF et l'EPUB :
+Le même Markdown alimente le site, le PDF, l'EPUB et les diapositives :
 
 - l'ordre des parties et des chapitres est donné par le champ `weight` du front matter ;
 - le titre vient du front matter : le contenu commence au niveau `##` ;
@@ -59,6 +64,9 @@ Le même Markdown alimente le site, le PDF et l'EPUB :
   `> [!IMPORTANT]`, `> [!WARNING]`, `> [!CAUTION]`), converties en callouts
   Quarto dans le livre ;
 - les images sont placées à côté de la page (page bundle) et référencées en relatif ;
+- les diapositives reprennent la **première phrase** de chaque section (`##`,
+  `###`), ses listes, son premier tableau, son premier exemple de code et sa
+  première alerte : cette première phrase doit se suffire à elle-même ;
 - une page peut être exclue du livre avec `pdf: false`.
 
 ## Gestion des versions
@@ -69,8 +77,8 @@ release (`release/x.y.z`) est fusionnée dans `main` avec un tag `vx.y.z`.
 
 L'intégration continue (GitHub Actions) vérifie chaque push : format, analyse,
 tests avec le détecteur de courses, vulnérabilités, tests d'intégration avec
-Testcontainers, et code généré à jour. Chaque push sur `main` construit le livre
-et le site, publie le site sur GitHub Pages et, pour un tag, crée la release
+Testcontainers, et code généré à jour. Chaque push sur `main` construit le livre,
+les diapositives et le site, publie le site sur GitHub Pages et, pour un tag, crée la release
 GitHub avec le PDF et l'EPUB. Ces fichiers générés ne sont pas versionnés.
 
 ## Licences des polices

@@ -28,6 +28,10 @@ enableGitInfo = true
     url = "https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub"
     weight = 2
   [[menu.main]]
+    name = "Diapositives"
+    url = "https://laurentpoirierfr.github.io/golang-demystified/diapositives/"
+    weight = 2
+  [[menu.main]]
     name = "Rechercher"
     weight = 3
     [menu.main.params]
