@@ -46,6 +46,10 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)
 - [ ] **Chapitre « Go pour les développeurs Java, Python ou JavaScript »** :
   comparaison des concepts
+- [ ] **Diapositives de présentation** avec [Marp](https://marp.app) : un jeu de
+  diapositives par rubrique, généré à partir du Markdown du livre (titres,
+  extraits de code, tableaux), en HTML et en PDF, construit par la CI et
+  publié avec le site
 
 ## 4. Diffusion
 
