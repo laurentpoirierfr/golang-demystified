@@ -133,7 +133,7 @@ func Example_erreurs() {
 }
 
 func Example_interfaceNil() {
-	var p *monErreur                  // pointeur nil
+	var p *monErreur                  //nolint:staticcheck // pointeur nil, mis dans une interface : le piège démontré
 	var err error = p                 //nolint:staticcheck // le piège démontré
 	fmt.Println(p == nil, err == nil) //nolint:staticcheck // l'interface porte un type : elle n'est pas nil
 	// Output:
