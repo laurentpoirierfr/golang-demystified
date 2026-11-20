@@ -1,7 +1,7 @@
 ---
 title: "Architecture événementielle : Watermill et NATS"
-linkTitle: "12. Architecture événementielle"
-weight: 120
+linkTitle: "13. Architecture événementielle"
+weight: 130
 ---
 
 Le chapitre « Concurrence en pratique » relie des goroutines par des canaux,

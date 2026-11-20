@@ -1,7 +1,7 @@
 ---
 title: "CI/CD d'un projet Go"
-linkTitle: "13. CI/CD"
-weight: 130
+linkTitle: "14. CI/CD"
+weight: 140
 ---
 
 L'outillage de Go se prête particulièrement bien à l'automatisation : une

@@ -26,28 +26,30 @@ peut aussi se lire seul.
 6. [Architecture hexagonale](architecture-hexagonale/) : séparer le domaine
    de l'infrastructure quand la logique métier grandit.
 
-**Rendre le service fiable**
+**Rendre le service fiable, et comprendre le runtime**
 
 7. [Sécurité](securite/) : OpenID Connect et JWT, TLS, secrets, validation
    des entrées.
 8. [Observabilité](observabilite/) : traces, métriques et journaux avec
    OpenTelemetry.
 9. [Profilage et performance](performance/) : mesurer avant d'optimiser.
+10. [Les coulisses de Go](coulisses/) : réflexion, `unsafe`, cgo,
+    l'ordonnanceur et le ramasse-miettes.
 
 **Relier les services**
 
-10. [gRPC et Connect](grpc-connect/) : des API à contrat Protobuf.
-11. [Temps réel](temps-reel/) : WebSocket et Server-Sent Events.
-12. [Architecture événementielle](architecture-evenementielle/) : Watermill,
+11. [gRPC et Connect](grpc-connect/) : des API à contrat Protobuf.
+12. [Temps réel](temps-reel/) : WebSocket et Server-Sent Events.
+13. [Architecture événementielle](architecture-evenementielle/) : Watermill,
     NATS, outbox et saga.
 
 **Livrer et exploiter**
 
-13. [CI/CD](ci-cd/) : intégration continue, analyse, publication.
-14. [Kubernetes](kubernetes/) : écrire un opérateur.
+14. [CI/CD](ci-cd/) : intégration continue, analyse, publication.
+15. [Kubernetes](kubernetes/) : écrire un opérateur.
 
 **Au-delà du serveur**
 
-15. [WebAssembly et TinyGo](webassembly-tinygo/) : le même code dans le
+16. [WebAssembly et TinyGo](webassembly-tinygo/) : le même code dans le
     navigateur, dans un greffon et sur un microcontrôleur.
-16. [Go et l'IA](go-ia/) : modèles de langage, outils et serveur MCP.
+17. [Go et l'IA](go-ia/) : modèles de langage, outils et serveur MCP.

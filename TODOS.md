@@ -31,7 +31,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   Go, utiliser Ollama en local
 - [x] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
   microcontrôleurs
-- [ ] **Les coulisses de Go** : réflexion, `unsafe`, cgo, fonctionnement de
+- [x] **Les coulisses de Go** : réflexion, `unsafe`, cgo, fonctionnement de
   l'ordonnanceur et du ramasse-miettes
 - [ ] **Go idiomatique** : motifs récurrents (options fonctionnelles,
   middlewares, injection de dépendances), anti-motifs fréquents, grille de
@@ -59,7 +59,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## Fait
 
-- [x] Approfondissements réorganisés en parcours numéroté (16 chapitres, six étapes)
+- [x] Approfondissements réorganisés en parcours numéroté (17 chapitres, six étapes)
 - [x] Nouveau thème Hextra, site dans `docs/`
 - [x] Livre PDF et EPUB avec Quarto et Typst, couverture personnalisée
 - [x] Parties I à IV réécrites pour Go 1.27
