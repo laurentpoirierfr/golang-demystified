@@ -42,8 +42,9 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 ## 3. Aides pédagogiques
 
-- [ ] **Exercices corrigés** à la fin de chaque chapitre des parties I à III,
-  avec les solutions testées dans `examples/`
+- [x] **Exercices corrigés** à la fin de chaque chapitre des parties II et III
+  (66 exercices, solutions testées dans `examples/exercices`, sommaire en
+  partie VI) ; la partie I (installation, premier programme) n'en a pas
 - [ ] **Aide-mémoire** : syntaxe, idiomes courants, commandes `go` ; en annexe
   et en PDF séparé
 - [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)

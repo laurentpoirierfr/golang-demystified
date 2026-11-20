@@ -54,6 +54,12 @@ func writeQuarto(root *content.Node, static, config, out string) (int, error) {
 			return 0, err
 		}
 		pages++
+		if len(part.Children) == 0 {
+			// Une partie sans chapitre (le sommaire des exercices) : Quarto
+			// exige une liste, même vide.
+			fmt.Fprintf(&chapters, "    - part: %s\n      chapters: []\n", partFile)
+			continue
+		}
 		fmt.Fprintf(&chapters, "    - part: %s\n      chapters:\n", partFile)
 		for j, ch := range part.Children {
 			name := fmt.Sprintf("%02d-%02d-%s.qmd", i+1, j+1, slug(ch.Title))

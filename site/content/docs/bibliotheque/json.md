@@ -210,3 +210,47 @@ permet temporairement de revenir à l'ancienne implémentation.
 
 Pour un nouveau projet, `encoding/json/v2` est le choix recommandé. Pour un
 projet existant, `encoding/json` reste parfaitement supporté.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/json`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/json),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Des tags ★
+
+Écrivez le type `Produit` (champs `Nom`, `Prix`, `Stock`, `Tags`, `Interne`)
+pour que `json.Marshal` produise :
+
+```json
+{"nom":"Gopher","prix":12.5}
+```
+
+Le stock et les tags sont omis s'ils sont vides, et `Interne` n'est jamais
+encodé.
+
+### Décoder strictement ★★
+
+```go
+type Config struct {
+	Adresse string `json:"adresse"`
+	Port    int    `json:"port"`
+}
+
+func LitConfig(r io.Reader) (Config, error)
+```
+
+Refusez les champs inconnus (`"prot"` au lieu de `"port"` est une faute de
+frappe, pas une option), une adresse absente et un port hors de [1, 65535].
+
+### Un encodage personnalisé ★★★
+
+```go
+type Duree time.Duration
+```
+
+Faites que `Duree` s'encode en texte lisible, `"1h30m0s"`, et se décode
+depuis ce texte, en satisfaisant `json.Marshaler` et `json.Unmarshaler`.
+Lequel des deux récepteurs doit être un pointeur ?

@@ -270,3 +270,46 @@ if condition {
 ```
 
 Dans ce cas, déclarez `resultat` avant le bloc et utilisez `=`.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/bases`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/bases),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Celsius et Fahrenheit ★
+
+Écrivez la conversion d'une température, sachant que F = C × 9/5 + 32 :
+
+```go
+func Fahrenheit(celsius float64) float64
+```
+
+`Fahrenheit(100)` vaut 212, et `Fahrenheit(-40)` vaut -40.
+
+### Des unités avec iota ★★
+
+Déclarez, avec `iota`, les constantes `Octet`, `Kio`, `Mio`, `Gio` et `Tio`,
+chacune 1 024 fois plus grande que la précédente (indice : `1 << (10 * iota)`).
+Puis écrivez une fonction qui affiche une taille avec la plus grande unité qui
+convient et une décimale :
+
+```go
+func FormateTaille(n int64) string
+```
+
+`FormateTaille(512)` renvoie `"512 o"`, `FormateTaille(1536)` renvoie `"1.5 Kio"`.
+
+### Détecter un dépassement ★★★
+
+Un `int8` contient les entiers de -128 à 127 ; au-delà, le calcul « fait le
+tour » sans erreur. Écrivez une addition qui signale le dépassement :
+
+```go
+func AdditionneInt8(a, b int8) (int8, bool)
+```
+
+`AdditionneInt8(100, 28)` renvoie `-128, true`. Indice : faites le calcul dans
+un type plus grand, puis convertissez.

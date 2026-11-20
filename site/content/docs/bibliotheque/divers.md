@@ -187,3 +187,42 @@ injections SQL.
 | `iter`, `unique`, `weak` | Itérateurs, internement, pointeurs faibles            |
 
 La documentation complète est sur [pkg.go.dev/std](https://pkg.go.dev/std).
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/divers`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/divers),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Extraire des adresses ★
+
+```go
+func Emails(texte string) []string
+```
+
+Trouvez les adresses électroniques d'un texte avec `regexp`. Compilez
+l'expression une seule fois, dans une variable du package.
+
+### Totaliser un CSV ★★
+
+```go
+func TotalParCategorie(r io.Reader) (map[string]float64, error)
+```
+
+Lisez un CSV `produit,categorie,prix` (avec une ligne d'en-tête), et
+additionnez les prix par catégorie. Un champ entre guillemets peut contenir
+une virgule ; un prix invalide donne une erreur qui cite sa ligne :
+`ligne 3 : prix "six" invalide`.
+
+### Signer un message ★★★
+
+```go
+func Signe(cle []byte, message string) string        // HMAC-SHA256, en hexadécimal
+func Verifie(cle []byte, message, signature string) bool
+```
+
+Une signature HMAC prouve qu'un message vient de quelqu'un qui connaît la clé,
+et qu'il n'a pas été modifié. Comparez avec `hmac.Equal`, en temps constant.
+Le test vérifie votre résultat sur une valeur de référence de la RFC 4231.

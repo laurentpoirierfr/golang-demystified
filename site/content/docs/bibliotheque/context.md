@@ -164,3 +164,41 @@ fmt.Println(parent.Err(), detache.Err())
 
 Dans un test, `t.Context()` (**Go 1.24**) fournit un contexte annulé
 automatiquement à la fin du test.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/context`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/context),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Une attente annulable ★
+
+```go
+func Attends(ctx context.Context, d time.Duration) error
+```
+
+Attendez `d`, sauf si le contexte est annulé avant : renvoyez alors
+`ctx.Err()`. Indice : `select` sur un timer et sur `ctx.Done()`.
+
+### Une valeur typée ★★
+
+```go
+func AvecUtilisateur(ctx context.Context, nom string) context.Context
+func Utilisateur(ctx context.Context) (string, bool)
+```
+
+Utilisez une clé d'un type non exporté : le test ajoute une valeur sous la
+clé `"cleUtilisateur"` (une chaîne), qui ne doit pas écraser la vôtre.
+
+### Le premier qui réussit ★★★
+
+```go
+func Premier(ctx context.Context, sources ...func(context.Context) (string, error)) (string, error)
+```
+
+Interrogez toutes les sources en parallèle, renvoyez la première réponse
+réussie, et **annulez les autres** ; si toutes échouent, renvoyez leurs
+erreurs réunies. Attention aux goroutines qui resteraient bloquées sur un
+channel que plus personne ne lit.

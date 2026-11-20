@@ -238,3 +238,43 @@ var w io.Writer = majuscules{os.Stdout}
 fmt.Fprintln(w, "bonjour, gopher")
 // BONJOUR, GOPHER
 ```
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/interfaces`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/interfaces),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Des formes ★
+
+Déclarez une interface `Forme`, avec une méthode `Aire() float64`, et deux
+types qui la satisfont : `Carre{Cote float64}` et `Cercle{Rayon float64}`.
+Puis :
+
+```go
+func AireTotale(formes ...Forme) float64
+```
+
+### Une durée lisible ★★
+
+```go
+type Duree int // un nombre de secondes
+```
+
+Donnez à `Duree` une méthode `String() string`, pour que `fmt.Println`
+affiche `5s`, `1m05s` ou `1h02m05s`. En satisfaisant `fmt.Stringer`, le type
+choisit lui-même son affichage.
+
+### Un lecteur en majuscules ★★★
+
+```go
+func Majuscules(source io.Reader) io.Reader
+```
+
+Le lecteur renvoyé lit `source` et met en majuscules ce qu'il lit :
+`io.ReadAll(Majuscules(strings.NewReader("l'été")))` donne `L'ÉTÉ`. C'est un
+décorateur : il satisfait `io.Reader`, et se combine donc avec tout ce qui
+lit (fichiers, réponses HTTP). Indice : `unicode.ToUpper` et le package
+`unicode/utf8`.

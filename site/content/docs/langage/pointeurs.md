@@ -165,3 +165,51 @@ en dessous de la limite évite les arrêts pour manque de mémoire.
 > **Go 1.27** — les petites allocations (moins de 80 octets) sont jusqu'à
 > 30 % moins coûteuses grâce à des fonctions d'allocation spécialisées par
 > taille.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/pointeurs`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/pointeurs),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Échanger deux variables ★
+
+```go
+func Echange(a, b *int)
+```
+
+Après `Echange(&a, &b)`, les deux variables de l'appelant ont échangé leurs
+valeurs.
+
+### Inverser une liste chaînée ★★
+
+```go
+type Noeud struct {
+	Valeur  int
+	Suivant *Noeud
+}
+
+func Inverse(tete *Noeud) *Noeud
+```
+
+Retournez la liste **sur place**, sans créer de nœud, et renvoyez la nouvelle
+tête. Le test vérifie que les nœuds d'origine sont réutilisés.
+
+### Un arbre binaire de recherche ★★★
+
+```go
+type Arbre struct {
+	Valeur        int
+	Gauche, Droit *Arbre
+}
+
+func (a *Arbre) Insere(v int) *Arbre // renvoie la racine
+func (a *Arbre) Contient(v int) bool
+func (a *Arbre) EnOrdre() []int      // valeurs croissantes
+```
+
+Un `*Arbre` nil est un arbre vide : `var a *Arbre; a = a.Insere(5)` doit
+fonctionner. Une méthode peut en effet être appelée sur un pointeur nil, tant
+qu'elle ne le déréférence pas.

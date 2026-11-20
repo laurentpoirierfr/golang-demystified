@@ -209,3 +209,45 @@ w.Flush()
 Pour des besoins plus avancés, `regexp` gère les expressions régulières
 (syntaxe RE2, en temps linéaire garanti), et `text/template` génère du texte à
 partir de gabarits (voir le chapitre consacré aux templates).
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/texte`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/texte),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Des initiales ★
+
+```go
+func Initiales(nom string) string
+```
+
+`Initiales("ada lovelace")` renvoie `"A.L."`, et `Initiales("  Émile   Zola ")`
+renvoie `"É.Z."`. Indice : `strings.Fields` découpe sur les espaces ; la
+première lettre peut occuper plusieurs octets.
+
+### Un palindrome ★★
+
+```go
+func EstPalindrome(s string) bool
+```
+
+Ignorez la casse, les espaces et la ponctuation : « Engage le jeu que je le
+gagne » est un palindrome. Comparez des runes, pas des octets.
+
+### Aligner des colonnes ★★★
+
+```go
+func Tableau(lignes [][]string) string
+```
+
+Alignez les cellules en colonnes, à gauche, séparées par deux espaces au
+moins, avec `text/tabwriter` :
+
+```text
+Langage  Version  Étoiles
+Go       1.27     130000
+Rust     1.99     105000
+```

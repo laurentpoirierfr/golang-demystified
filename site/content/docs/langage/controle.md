@@ -263,3 +263,44 @@ fmt.Println("fin")
 > ouvre de nombreux fichiers, placez le traitement de chaque fichier dans une
 > fonction séparée, sinon tous les fichiers restent ouverts jusqu'à la fin de
 > la boucle.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/controle`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/controle),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### FizzBuzz ★
+
+```go
+func FizzBuzz(n int) string
+```
+
+Renvoyez `"Fizz"` pour un multiple de 3, `"Buzz"` pour un multiple de 5,
+`"FizzBuzz"` pour un multiple des deux, et le nombre lui-même sinon
+(`strconv.Itoa` convertit un entier en texte).
+
+### Une mention ★★
+
+```go
+func Mention(note float64) string
+```
+
+Pour une note sur 20 : « très bien » à partir de 16, « bien » à partir de 14,
+« assez bien » à partir de 12, « passable » à partir de 10, « ajourné »
+en dessous, et « invalide » hors de [0, 20]. Un `switch` sans expression s'y
+prête bien.
+
+### La suite de Syracuse ★★★
+
+Partant d'un entier n > 0, on le divise par 2 s'il est pair, on le remplace
+par 3n + 1 sinon, et on recommence jusqu'à atteindre 1. Comptez les étapes :
+
+```go
+func Syracuse(n int) int
+```
+
+`Syracuse(6)` vaut 8 (6, 3, 10, 5, 16, 8, 4, 2, 1), `Syracuse(27)` vaut 111.
+Renvoyez -1 si n <= 0.

@@ -184,3 +184,46 @@ port := cmp.Or(os.Getenv("PORT"), "8080")
   et accélère les comparaisons ;
 - `weak` (**Go 1.24**) : pointeurs faibles, qui n'empêchent pas le
   ramasse-miettes de libérer un objet. Ils servent à construire des caches.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/bibliotheque/collections`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/bibliotheque/collections),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Trier sur deux critères ★
+
+```go
+type Personne struct {
+	Nom string
+	Age int
+}
+
+func TrieParAge(p []Personne)
+```
+
+Triez par âge croissant, puis par nom à âge égal. Indice : `slices.SortFunc`
+et `cmp.Or`, qui renvoie la première comparaison non nulle.
+
+### Regrouper ★★
+
+```go
+func Regroupe[T any, K comparable](s []T, cle func(T) K) map[K][]T
+```
+
+Regroupez des mots par leur première lettre, des nombres par leur parité… en
+gardant l'ordre dans chaque groupe.
+
+### Combiner des itérateurs ★★★
+
+```go
+func Naturels() iter.Seq[int]                                 // 1, 2, 3… sans fin
+func Filtre[T any](seq iter.Seq[T], garde func(T) bool) iter.Seq[T]
+func Premiers[T any](seq iter.Seq[T], n int) iter.Seq[T]
+```
+
+`slices.Collect(Premiers(Filtre(Naturels(), multipleDe7), 4))` renvoie
+`[7 14 21 28]` : une suite infinie, consommée paresseusement. Le point
+délicat : s'arrêter quand `yield` renvoie faux.

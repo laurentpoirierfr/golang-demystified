@@ -206,3 +206,47 @@ Ils sont inutiles lorsque :
 
 Une bonne règle : commencez par écrire le code pour un type concret. Lorsque
 vous le dupliquez pour un second type, il est temps de le rendre générique.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/generiques`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/generiques),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Un maximum ★
+
+```go
+func Max[T cmp.Ordered](s []T) (T, bool)
+```
+
+La même fonction sert pour des entiers, des flottants et des textes. Pour une
+slice vide, renvoyez la valeur zéro de `T` et `false`.
+
+### Transformer et filtrer ★★
+
+```go
+func Transforme[T, U any](s []T, f func(T) U) []U
+func Filtre[T any](s []T, garde func(T) bool) []T
+```
+
+`Transforme([]int{1, 2, 3}, strconv.Itoa)` renvoie `["1" "2" "3"]` : les deux
+paramètres de type sont déduits des arguments.
+
+### Un ensemble générique ★★★
+
+```go
+type Ensemble[T comparable] struct{ /* … */ }
+
+func NouvelEnsemble[T comparable](elements ...T) *Ensemble[T]
+func (e *Ensemble[T]) Ajoute(v T)
+func (e *Ensemble[T]) Contient(v T) bool
+func (e *Ensemble[T]) Taille() int
+func (e *Ensemble[T]) Union(autre *Ensemble[T]) *Ensemble[T]
+func Trie[T cmp.Ordered](e *Ensemble[T]) []T
+```
+
+Pourquoi `Trie` est-elle une fonction, et non une méthode ? (Une méthode ne
+peut pas ajouter de contrainte à celles du type : `comparable` ne permet pas
+de trier.)

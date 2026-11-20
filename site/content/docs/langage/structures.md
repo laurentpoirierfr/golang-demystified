@@ -193,3 +193,53 @@ d'accès aux bases de données ou de validation. `go vet` vérifie leur syntaxe.
 `struct{}` n'a aucun champ et occupe **zéro octet**. On l'utilise comme valeur
 d'un ensemble (`map[string]struct{}`) ou comme signal dans un channel
 (`chan struct{}`), lorsque seule l'existence de l'événement compte.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/structures`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/structures),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Un rectangle ★
+
+```go
+type Rectangle struct {
+	Largeur, Hauteur float64
+}
+
+func (r Rectangle) Aire() float64
+func (r Rectangle) Perimetre() float64
+```
+
+### Une pile ★★
+
+```go
+type Pile struct{ /* à vous de choisir */ }
+
+func (p *Pile) Empile(v int)
+func (p *Pile) Depile() (int, bool) // faux si la pile est vide
+func (p *Pile) Taille() int
+```
+
+La valeur zéro, `var p Pile`, doit être une pile vide utilisable. Pourquoi
+ces méthodes ont-elles un récepteur pointeur ?
+
+### Un compte avec historique ★★★
+
+Écrivez un type `Historique` avec deux méthodes, `Note(format string, args
+...any)` et `Lignes() []string`. Puis un type `Compte` qui **intègre**
+`Historique` :
+
+```go
+var ErrSoldeInsuffisant = errors.New("solde insuffisant")
+
+func (c *Compte) Depose(montant int)
+func (c *Compte) Retire(montant int) error
+func (c *Compte) Solde() int
+```
+
+Chaque opération est notée (« dépôt de 100 », « retrait de 30 », « retrait de
+500 refusé »), et le test lit l'historique par `c.Lignes()`, une méthode
+promue depuis `Historique`.

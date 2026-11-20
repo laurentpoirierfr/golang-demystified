@@ -236,3 +236,39 @@ clear(m) // supprime toutes les entrées
 fmt.Println(min(3, 1, 2), max(2.5, 1))
 // 1 2.5
 ```
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/collections`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/collections),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Inverser une slice ★
+
+```go
+func Inverse(s []int) []int
+```
+
+Renvoyez une **nouvelle** slice, dans l'ordre inverse : la slice reçue ne
+doit pas changer. `make([]int, len(s))` crée la slice du résultat.
+
+### Compter des mots ★★
+
+```go
+func Frequences(mots []string) map[string]int
+```
+
+`Frequences([]string{"go", "rust", "go"})` renvoie `map[go:2 rust:1]`.
+Indice : lire une clé absente d'une map renvoie la valeur zéro, ici 0.
+
+### Dédoublonner en gardant l'ordre ★★★
+
+```go
+func Uniques(s []string) []string
+```
+
+`Uniques([]string{"b", "a", "b", "c", "a"})` renvoie `[b a c]` : chaque
+élément une fois, dans l'ordre de sa première apparition. Une map des
+éléments déjà vus évite de parcourir le résultat à chaque fois.

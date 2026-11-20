@@ -237,3 +237,40 @@ paramètre ni retour. Elles sont exécutées automatiquement une seule fois, apr
 l'initialisation des variables du package et avant `main`. Elles sont utiles
 pour enregistrer un pilote ou vérifier une configuration, mais à utiliser avec
 modération : leur effet est implicite et difficile à tester.
+
+## Exercices
+
+Les solutions sont dans
+[`examples/exercices/langage/fonctions`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/exercices/langage/fonctions),
+avec leurs tests. Les tests servent de **spécification** : pour vous exercer,
+copiez `exercices_test.go` dans un dossier à vous, écrivez les fonctions
+demandées, puis lancez `go test`. Les étoiles indiquent la difficulté.
+
+### Une moyenne variadique ★
+
+```go
+func Moyenne(nombres ...float64) (float64, bool)
+```
+
+`Moyenne(10, 12, 17)` renvoie `13, true` ; `Moyenne()` renvoie `0, false`.
+Le test appelle aussi `Moyenne(notes...)` avec une slice.
+
+### Un compteur ★★
+
+```go
+func Compteur(depart int) func() int
+```
+
+La fonction renvoyée donne `depart`, puis `depart+1`, et ainsi de suite à
+chaque appel. Deux compteurs créés séparément sont indépendants : chaque
+fermeture capture sa propre variable.
+
+### Mémoïser ★★★
+
+```go
+func Memoise(f func(int) int) func(int) int
+```
+
+La fonction renvoyée calcule comme `f`, mais ne l'appelle qu'une fois par
+argument : elle garde les résultats dans une map capturée. Le test compte
+les appels à `f`.
