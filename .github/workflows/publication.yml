@@ -1,5 +1,5 @@
 # Publication : à chaque push sur main (fin d'une release git flow), construit
-# le livre (PDF, EPUB) et le site, publie le site sur GitHub Pages, et, si le
+# le livre (PDF, EPUB), les diapositives et le site, publie le site sur GitHub Pages, et, si le
 # commit porte un tag de version, crée la release GitHub avec le PDF et l'EPUB.
 name: Publication
 
@@ -48,7 +48,13 @@ jobs:
       - name: Livre (PDF et EPUB)
         run: make book
 
-      - name: Site, avec le livre téléchargeable
+      # Marp et la vérification du rendu s'exécutent aussi dans des conteneurs.
+      - name: Diapositives (HTML et PDF)
+        run: |
+          make slides
+          make slides-verif
+
+      - name: Site, avec le livre et les diapositives
         run: make publication
 
       - uses: actions/upload-pages-artifact@v5

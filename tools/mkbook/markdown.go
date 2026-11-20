@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"github.com/laurentpoirierfr/golang-demystified/tools/internal/content"
 )
 
 var (
@@ -28,9 +30,9 @@ type converter struct {
 
 // convert renvoie le corps de la page, avec ses titres décalés de shift
 // niveaux, ses images résolues et ses liens internes réduits à leur texte.
-func (c *converter) convert(p page, shift int) string {
+func (c *converter) convert(p content.Page, shift int) string {
 	var b strings.Builder
-	sc := bufio.NewScanner(strings.NewReader(p.body))
+	sc := bufio.NewScanner(strings.NewReader(p.Body))
 	inCode, inCallout := false, false
 	for line := 1; sc.Scan(); line++ {
 		l := sc.Text()
@@ -56,7 +58,7 @@ func (c *converter) convert(p page, shift int) string {
 		}
 		if !inCode {
 			if shortcodeRe.MatchString(l) {
-				c.err = errors.Join(c.err, fmt.Errorf("%s:%d : shortcode Hugo interdit dans le livre", p.path, line))
+				c.err = errors.Join(c.err, fmt.Errorf("%s:%d : shortcode Hugo interdit dans le livre", p.Path, line))
 			}
 			if m := headingRe.FindStringSubmatch(l); m != nil {
 				level := min(len(m[1])+shift, 6)
@@ -64,7 +66,7 @@ func (c *converter) convert(p page, shift int) string {
 			}
 			l = imageRe.ReplaceAllStringFunc(l, func(s string) string {
 				m := imageRe.FindStringSubmatch(s)
-				return "![" + m[1] + "](" + c.resolve(p.dir, m[2])
+				return "![" + m[1] + "](" + c.resolve(p.Dir, m[2])
 			})
 			// Les liens internes n'ont pas de sens dans un livre : on garde le texte.
 			l = linkRe.ReplaceAllStringFunc(l, func(s string) string {

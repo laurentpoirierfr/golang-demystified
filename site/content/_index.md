@@ -40,5 +40,5 @@ layout: hextra-home
   {{< hextra/feature-card title="Le langage" link="docs/langage/" subtitle="Types, fonctions, interfaces, génériques, erreurs, concurrence : les bases solides." >}}
   {{< hextra/feature-card title="La bibliothèque standard" link="docs/bibliotheque/" subtitle="Texte, collections, fichiers, JSON, HTTP, slog, context et tests." >}}
   {{< hextra/feature-card title="L'évolution de Go" link="docs/evolution/" subtitle="Ce que chaque version a apporté, de Go 1.0 à Go 1.27." >}}
-  {{< hextra/feature-card title="Par l'exemple" link="docs/approfondissements/" subtitle="Concurrence, templates, API web, ligne de commande, sqlc, architecture hexagonale, Kubernetes, CI/CD, observabilité, performance : des exemples complets et testés." >}}
+  {{< hextra/feature-card title="Par l'exemple" link="docs/approfondissements/" subtitle="Concurrence, templates, API web, temps réel, gRPC, ligne de commande, sqlc, architecture hexagonale, événements, IA et MCP, Kubernetes, CI/CD, sécurité, observabilité, performance : des exemples complets et testés." >}}
 {{< /hextra/feature-grid >}}

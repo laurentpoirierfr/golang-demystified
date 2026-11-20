@@ -1,0 +1,11 @@
+# Génération du code Go (buf generate) : les messages avec protoc-gen-go, le
+# serveur et le client avec protoc-gen-connect-go. Les greffons sont exécutés
+# par le registre de buf : rien à installer.
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/go:v1.36.12
+    out: pkg/rpc
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go:v2.0.2
+    out: pkg/rpc
+    opt: paths=source_relative

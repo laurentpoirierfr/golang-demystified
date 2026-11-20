@@ -1,4 +1,8 @@
-package main
+// Package content lit les pages du site Hugo (site/content/docs) : front
+// matter, corps Markdown, et arborescence des parties et des chapitres, dans
+// l'ordre du champ « weight ». Il est partagé par mkbook (le livre) et
+// mkslides (les diapositives).
+package content
 
 import (
 	"cmp"
@@ -10,27 +14,29 @@ import (
 	"strings"
 )
 
-type page struct {
-	title  string
-	weight int
-	body   string
-	dir    string // répertoire de la page, pour résoudre les images relatives
-	path   string
+// Page est une page du site.
+type Page struct {
+	Title  string
+	Weight int
+	Body   string // Markdown, sans le front matter
+	Dir    string // répertoire de la page, pour résoudre les images relatives
+	Path   string
 }
 
-type node struct {
-	page
-	children []*node
-	section  bool
+// Node est une page et ses enfants (pour une section).
+type Node struct {
+	Page
+	Children []*Node
+	Section  bool
 }
 
-// loadSection lit une section Hugo (un répertoire contenant _index.md).
-func loadSection(dir string) (*node, error) {
-	idx, err := loadPage(filepath.Join(dir, "_index.md"))
+// LoadSection lit une section Hugo (un répertoire contenant _index.md).
+func LoadSection(dir string) (*Node, error) {
+	idx, err := LoadPage(filepath.Join(dir, "_index.md"))
 	if err != nil {
 		return nil, err
 	}
-	n := &node{page: *idx, section: true}
+	n := &Node{Page: *idx, Section: true}
 	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return nil, err
@@ -39,40 +45,40 @@ func loadSection(dir string) (*node, error) {
 		p := filepath.Join(dir, e.Name())
 		switch {
 		case e.IsDir() && exists(filepath.Join(p, "_index.md")):
-			child, err := loadSection(p)
+			child, err := LoadSection(p)
 			if err != nil {
 				return nil, err
 			}
 			if child != nil {
-				n.children = append(n.children, child)
+				n.Children = append(n.Children, child)
 			}
 		case e.IsDir() && exists(filepath.Join(p, "index.md")): // page bundle
-			pg, err := loadPage(filepath.Join(p, "index.md"))
+			pg, err := LoadPage(filepath.Join(p, "index.md"))
 			if err != nil {
 				return nil, err
 			}
 			if pg != nil {
-				n.children = append(n.children, &node{page: *pg})
+				n.Children = append(n.Children, &Node{Page: *pg})
 			}
 		case !e.IsDir() && strings.HasSuffix(e.Name(), ".md") && e.Name() != "_index.md":
-			pg, err := loadPage(p)
+			pg, err := LoadPage(p)
 			if err != nil {
 				return nil, err
 			}
 			if pg != nil {
-				n.children = append(n.children, &node{page: *pg})
+				n.Children = append(n.Children, &Node{Page: *pg})
 			}
 		}
 	}
-	slices.SortStableFunc(n.children, func(a, b *node) int {
-		return cmp.Or(cmp.Compare(a.weight, b.weight), cmp.Compare(a.path, b.path))
+	slices.SortStableFunc(n.Children, func(a, b *Node) int {
+		return cmp.Or(cmp.Compare(a.Weight, b.Weight), cmp.Compare(a.Path, b.Path))
 	})
 	return n, nil
 }
 
-// loadPage lit une page et son front matter YAML (clés simples uniquement).
+// LoadPage lit une page et son front matter YAML (clés simples uniquement).
 // Elle renvoie nil pour une page en brouillon ou marquée « pdf: false ».
-func loadPage(path string) (*page, error) {
+func LoadPage(path string) (*Page, error) {
 	raw, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -85,7 +91,7 @@ func loadPage(path string) (*page, error) {
 	if end < 0 {
 		return nil, fmt.Errorf("%s : front matter non terminé", path)
 	}
-	p := &page{path: path, dir: filepath.Dir(path), body: s[4+end+5:]}
+	p := &Page{Path: path, Dir: filepath.Dir(path), Body: s[4+end+5:]}
 	for line := range strings.SplitSeq(s[4:4+end], "\n") {
 		k, v, ok := strings.Cut(line, ":")
 		if !ok {
@@ -99,16 +105,16 @@ func loadPage(path string) (*page, error) {
 			} else {
 				v = strings.Trim(v, `'`)
 			}
-			p.title = v
+			p.Title = v
 		case "weight":
-			p.weight, _ = strconv.Atoi(v)
+			p.Weight, _ = strconv.Atoi(v)
 		case "draft", "pdf":
 			if (k == "draft") == (v == "true") {
 				return nil, nil
 			}
 		}
 	}
-	if p.title == "" {
+	if p.Title == "" {
 		return nil, fmt.Errorf("%s : titre manquant", path)
 	}
 	return p, nil

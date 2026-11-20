@@ -4,6 +4,6 @@ weight: 50
 ---
 
 Des chapitres construits autour d'exemples complets et testés : concurrence,
-templates, API web, ligne de commande, accès aux données avec [sqlc](https://sqlc.dev),
-architecture hexagonale, opérateurs Kubernetes, CI/CD, observabilité, profilage. Ils mettent en œuvre
+templates, API web, temps réel, gRPC et Connect, ligne de commande, accès aux données avec [sqlc](https://sqlc.dev),
+architecture hexagonale, architecture événementielle, Go et l'IA, opérateurs Kubernetes, CI/CD, sécurité, observabilité, profilage. Ils mettent en œuvre
 ensemble ce que les parties précédentes ont présenté séparément.

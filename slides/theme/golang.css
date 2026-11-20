@@ -1,0 +1,119 @@
+/*
+ * Thème Marp de Golang Demystified : les couleurs et les polices du livre.
+ *
+ * @theme golang
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ */
+
+@import 'default';
+
+/* Polices du livre, copiées à côté des diapositives (make slides). */
+@font-face { font-family: 'GD Sans'; src: url('../polices/SourceSans3-Regular.otf'); }
+@font-face { font-family: 'GD Sans'; font-weight: bold; src: url('../polices/SourceSans3-Bold.otf'); }
+@font-face { font-family: 'GD Mono'; src: url('../polices/Go-Mono.ttf'); }
+@font-face { font-family: 'GD Mono'; font-weight: bold; src: url('../polices/Go-Mono-Bold.ttf'); }
+
+section {
+  --bleu: #00ADD8;
+  --bleu-fonce: #007D9C;
+  --texte: #1f2937;
+  --doux: #6b7280;
+  --carte: #f3f7f9;
+  font-family: 'GD Sans', 'Source Sans 3', sans-serif;
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--texte);
+  background: #ffffff;
+  padding: 70px 80px 60px;
+  /* Le thème « default » centre le contenu verticalement (place-content,
+     appliqué par Chromium aux blocs via align-content) : les titres
+     changeraient de hauteur d'une diapositive à l'autre. */
+  align-content: start !important;
+}
+
+h1, h2, h3 { font-family: 'GD Sans', 'Source Sans 3', sans-serif; }
+
+h2 {
+  color: var(--bleu-fonce);
+  font-size: 1.55em;
+  margin: 0 0 .35em;
+  padding-bottom: .2em;
+  border-bottom: 4px solid var(--bleu);
+}
+
+h3 { color: var(--bleu); font-size: 1em; margin: -.1em 0 .6em; }
+
+strong { color: var(--bleu-fonce); }
+a { color: var(--bleu-fonce); }
+
+code { font-family: 'GD Mono', 'Go Mono', monospace; font-size: .85em; background: var(--carte); padding: .05em .3em; border-radius: 4px; }
+
+pre {
+  background: var(--carte);
+  border-left: 6px solid var(--bleu);
+  border-radius: 4px;
+  padding: .6em .9em;
+  font-size: .62em;
+  line-height: 1.35;
+}
+pre code { background: none; padding: 0; font-size: 1em; }
+
+ul { margin: .2em 0; }
+li { margin: .25em 0; }
+li::marker { color: var(--bleu); }
+
+table { font-size: .68em; border-collapse: collapse; margin: .3em 0; }
+th { background: var(--bleu-fonce); color: #fff; }
+th, td { padding: .3em .7em; border: 1px solid #d1d9de; }
+tr:nth-child(even) td { background: var(--carte); }
+
+blockquote {
+  border-left: 6px solid var(--bleu);
+  background: #e6f7fb;
+  color: var(--texte);
+  padding: .5em .9em;
+  margin: .6em 0;
+  font-size: .85em;
+}
+blockquote strong { color: var(--bleu-fonce); }
+
+header, footer { color: var(--doux); font-size: 18px; }
+header { top: 22px; }
+footer { bottom: 18px; }
+section::after { color: var(--bleu-fonce); font-size: 18px; font-weight: bold; }
+
+/* Diapositive de titre. */
+section.titre {
+  background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-fonce) 100%);
+  color: #ffffff;
+  align-content: center !important;
+  padding-left: 110px;
+}
+section.titre h1 { color: #ffffff; font-size: 2.6em; margin: 0; border: none; line-height: 1.1; }
+section.titre h2 { color: #e0f7fc; font-size: 1.1em; border: none; margin: .4em 0 1.6em; font-weight: normal; }
+section.titre p { color: #ffffff; opacity: .9; font-size: .8em; }
+
+/* Plan : la liste des sections, sur deux colonnes si elle est longue. */
+section.programme ul { columns: 2; column-gap: 2.5em; }
+section.programme li, section.chapitre li { break-inside: avoid; margin: 0 0 .4em; }
+section.programme ol { columns: 2; column-gap: 2.5em; }
+ol li::marker { color: var(--bleu-fonce); font-weight: bold; }
+
+/* Dernière diapositive. */
+section.fin { align-content: center !important; }
+section.fin li { margin: .5em 0; }
+
+/* Intercalaire d'un chapitre, dans le diaporama d'une rubrique. */
+section.chapitre {
+  background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-fonce) 100%);
+  color: #ffffff;
+  align-content: center !important;
+}
+section.chapitre h2 { color: #ffffff; border-bottom-color: #ffffff; font-size: 1.9em; }
+section.chapitre p { font-size: 1.05em; opacity: .95; }
+section.chapitre strong, section.chapitre a { color: #ffffff; }
+section.chapitre code { background: rgba(255, 255, 255, .18); color: #ffffff; }
+section.chapitre li::marker { color: #e0f7fc; }
+section.chapitre ul { columns: 2; column-gap: 2.5em; font-size: .8em; }
+section.chapitre header, section.chapitre footer, section.chapitre::after { color: #e0f7fc; }

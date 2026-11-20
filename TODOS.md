@@ -20,14 +20,14 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 
 - [x] **Observabilité** : OpenTelemetry (traces et métriques), Prometheus,
   corrélation des journaux `slog` avec les traces, appliqués à l'API des tâches
-- [ ] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
+- [x] **gRPC et Connect** : Protocol Buffers, Buf, connect-go, communication
   entre services
-- [ ] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
+- [x] **Sécurité** : authentification OIDC et JWT, TLS, gestion des secrets,
   validation des entrées, bonnes pratiques avec `crypto`
-- [ ] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
+- [x] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
   la section sur le traitement de flux)
-- [ ] **Temps réel** : WebSockets et Server-Sent Events
-- [ ] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
+- [x] **Temps réel** : WebSockets et Server-Sent Events
+- [x] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
   Go, utiliser Ollama en local
 - [ ] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
   microcontrôleurs
@@ -46,6 +46,10 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)
 - [ ] **Chapitre « Go pour les développeurs Java, Python ou JavaScript »** :
   comparaison des concepts
+- [x] **Diapositives de présentation** avec [Marp](https://marp.app) : un
+  diaporama par rubrique et un par chapitre, numérotés dans l'ordre du livre,
+  générés à partir du Markdown (tools/mkslides), en HTML et en PDF, vérifiés
+  dans Chromium, construits par la CI et publiés avec le site
 
 ## 4. Diffusion
 

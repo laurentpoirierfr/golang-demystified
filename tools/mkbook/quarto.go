@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"github.com/laurentpoirierfr/golang-demystified/tools/internal/content"
 )
 
 // writeQuarto produit un projet de livre Quarto dans le répertoire out :
@@ -15,7 +17,7 @@ import (
 //
 // La configuration commune (titre, formats, couverture) vient du fichier
 // config, auquel la liste des chapitres est ajoutée.
-func writeQuarto(root *node, static, config, out string) (int, error) {
+func writeQuarto(root *content.Node, static, config, out string) (int, error) {
 	if err := os.RemoveAll(out); err != nil {
 		return 0, err
 	}
@@ -32,32 +34,32 @@ func writeQuarto(root *node, static, config, out string) (int, error) {
 	}
 	c := &converter{static: staticAbs, base: abs, callouts: true}
 
-	write := func(name, title string, p page, shift int) error {
+	write := func(name, title string, p content.Page, shift int) error {
 		body := c.convert(p, shift)
 		content := fmt.Sprintf("# %s\n\n%s", title, body)
 		return os.WriteFile(filepath.Join(out, name), []byte(content), 0o644)
 	}
 
 	// La préface : la page racine du contenu, non numérotée.
-	if err := write("index.qmd", "Avant-propos {.unnumbered}", root.page, 0); err != nil {
+	if err := write("index.qmd", "Avant-propos {.unnumbered}", root.Page, 0); err != nil {
 		return 0, err
 	}
 	pages := 1
 
 	var chapters strings.Builder
 	chapters.WriteString("  chapters:\n    - index.qmd\n")
-	for i, part := range root.children {
-		partFile := fmt.Sprintf("%02d-%s.qmd", i+1, slug(part.title))
-		if err := write(partFile, part.title, part.page, 0); err != nil {
+	for i, part := range root.Children {
+		partFile := fmt.Sprintf("%02d-%s.qmd", i+1, slug(part.Title))
+		if err := write(partFile, part.Title, part.Page, 0); err != nil {
 			return 0, err
 		}
 		pages++
 		fmt.Fprintf(&chapters, "    - part: %s\n      chapters:\n", partFile)
-		for j, ch := range part.children {
-			name := fmt.Sprintf("%02d-%02d-%s.qmd", i+1, j+1, slug(ch.title))
+		for j, ch := range part.Children {
+			name := fmt.Sprintf("%02d-%02d-%s.qmd", i+1, j+1, slug(ch.Title))
 			// Les pages commencent au niveau 2 : elles restent sous le titre
 			// du chapitre (niveau 1) sans décalage.
-			if err := write(name, ch.title, ch.page, 0); err != nil {
+			if err := write(name, ch.Title, ch.Page, 0); err != nil {
 				return 0, err
 			}
 			pages++

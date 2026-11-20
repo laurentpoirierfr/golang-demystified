@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salon</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+  #messages { list-style: none; padding: 0; border: 1px solid #ccc; min-height: 12rem; }
+  #messages li { padding: .25rem .5rem; border-bottom: 1px solid #eee; }
+  #etat { color: #666; font-size: .9rem; }
+  form { display: flex; gap: .5rem; margin-top: .5rem; }
+  input[name=texte] { flex: 1; }
+</style>
+</head>
+<body>
+<h1>Salon <span id="salon"></span></h1>
+<p id="etat">connexion…</p>
+<ul id="messages"></ul>
+<form id="envoi">
+  <input name="texte" autocomplete="off" placeholder="Votre message" maxlength="500" required>
+  <button>Envoyer</button>
+</form>
+<script>
+  // /?salon=golang&pseudo=alice
+  const params = new URLSearchParams(location.search);
+  const salon = params.get("salon") || "golang";
+  const pseudo = params.get("pseudo") || "invite";
+  document.getElementById("salon").textContent = salon;
+  const etat = document.getElementById("etat");
+  const liste = document.getElementById("messages");
+
+  // Les messages viennent d'autres utilisateurs : textContent, jamais
+  // innerHTML, pour qu'un message ne puisse pas injecter de HTML.
+  function affiche(m) {
+    const li = document.createElement("li");
+    const auteur = document.createElement("strong");
+    auteur.textContent = m.auteur + " : ";
+    li.append(auteur, document.createTextNode(m.texte));
+    liste.append(li);
+  }
+
+  // Lecture : un flux SSE. EventSource se reconnecte seul, et renvoie
+  // Last-Event-ID pour rattraper les messages manqués.
+  const flux = new EventSource(`/salons/${encodeURIComponent(salon)}/flux`);
+  flux.addEventListener("bienvenue", () => { etat.textContent = "connecté en tant que " + pseudo; });
+  flux.addEventListener("message", (e) => affiche(JSON.parse(e.data)));
+  flux.onerror = () => { etat.textContent = "reconnexion…"; };
+
+  // Écriture : un WebSocket.
+  const proto = location.protocol === "https:" ? "wss" : "ws";
+  const ws = new WebSocket(`${proto}://${location.host}/salons/${encodeURIComponent(salon)}/ws?pseudo=${encodeURIComponent(pseudo)}`);
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.type === "erreur") etat.textContent = "erreur : " + m.erreur;
+  };
+  document.getElementById("envoi").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const champ = e.target.texte;
+    ws.send(JSON.stringify({ texte: champ.value }));
+    champ.value = "";
+  });
+</script>
+</body>
+</html>
