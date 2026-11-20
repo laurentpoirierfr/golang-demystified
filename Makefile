@@ -18,7 +18,7 @@ MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g
 	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
-.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf generate clean
+.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo generate clean
 
 all: check book slides publication
 
@@ -106,6 +106,25 @@ BUF := docker run --rm --volume "$(CURDIR)/examples/approfondissements/grpc:/wor
 buf:
 	$(BUF) lint
 	$(BUF) generate
+
+## wasm : la démonstration WebAssembly dans examples/approfondissements/wasm/web
+##   (puis : cd examples/approfondissements/wasm && go run ./cmd/site)
+wasm:
+	cd examples/approfondissements/wasm && GOOS=js GOARCH=wasm go build -o web/analyse.wasm ./cmd/navigateur
+	cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" examples/approfondissements/wasm/web/
+
+## wasm-tinygo : le greffon WASI compilé par TinyGo, puis essayé par l'hôte wazero
+TINYGO_IMAGE := docker.io/tinygo/tinygo:0.44.0
+TINYGO_SORTIE := examples/approfondissements/wasm/build
+TINYGO = docker run --rm --volume "$(CURDIR):/src" --volume "$(shell go env GOMODCACHE):/go/pkg/mod:ro" \
+	--workdir /src $(CONTAINER_USER) -e HOME=/tmp -e GOCACHE=/tmp/cache -e GOMODCACHE=/go/pkg/mod \
+	-e GOFLAGS="-mod=mod -buildvcs=false" $(TINYGO_IMAGE)
+wasm-tinygo:
+	mkdir -p $(TINYGO_SORTIE)
+	$(TINYGO) tinygo build -target=wasip1 -buildmode=c-shared -no-debug \
+		-o $(TINYGO_SORTIE)/greffon-tinygo.wasm ./examples/approfondissements/wasm/cmd/greffon
+	GREFFON_TINYGO=$(CURDIR)/$(TINYGO_SORTIE)/greffon-tinygo.wasm \
+		go test -count=1 -run TinyGo -v ./examples/approfondissements/wasm/internal/hote
 
 ## generate : régénère tout le code généré (oapi-codegen, sqlc, buf)
 generate: sqlc buf

@@ -29,7 +29,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [x] **Temps réel** : WebSockets et Server-Sent Events
 - [x] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
   Go, utiliser Ollama en local
-- [ ] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
+- [x] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
   microcontrôleurs
 - [ ] **Les coulisses de Go** : réflexion, `unsafe`, cgo, fonctionnement de
   l'ordonnanceur et du ramasse-miettes

@@ -211,6 +211,9 @@ section.chapitre header, section.chapitre footer, section.chapitre::after { colo
 /* Plan : sur deux colonnes ; numéros en pastilles dans les rubriques. */
 section.programme ul, section.programme ol { columns: 2; column-gap: 2.5em; }
 section.programme li, section.chapitre li { break-inside: avoid; margin: 0 0 .45em; }
+/* Un long plan (13 éléments ou plus) se resserre un peu. */
+section.programme ol:has(> li:nth-child(13)), section.programme ul:has(> li:nth-child(13)) { font-size: .92em; }
+section.programme ol:has(> li:nth-child(13)) > li, section.programme ul:has(> li:nth-child(13)) > li { margin-bottom: .3em; }
 section.programme ol { list-style: none; counter-reset: plan; padding-left: 1.9em; }
 section.programme ol > li { counter-increment: plan; position: relative; }
 section.programme ol > li::before {

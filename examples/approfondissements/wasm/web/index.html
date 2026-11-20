@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Analyse de texte en Go et WebAssembly</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; color: #1e293b; }
+  textarea { width: 100%; min-height: 10rem; font: inherit; padding: .75rem; box-sizing: border-box; }
+  dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+  dl div { background: #e6f7fb; border-radius: .5rem; padding: .5rem .75rem; }
+  dt { font-size: .8rem; color: #007d9c; }
+  dd { margin: 0; font-size: 1.6rem; font-weight: bold; }
+  #etat { color: #64748b; font-size: .9rem; }
+</style>
+</head>
+<body>
+<h1>Analyse de texte</h1>
+<p id="etat">Chargement du module Go…</p>
+<textarea id="texte" disabled>Go compile vers WebAssembly. Le WebAssembly tourne partout : navigateur, serveur, microcontrôleur !</textarea>
+<dl>
+  <div><dt>Mots</dt><dd id="mots">–</dd></div>
+  <div><dt>Phrases</dt><dd id="phrases">–</dd></div>
+  <div><dt>Caractères</dt><dd id="caracteres">–</dd></div>
+  <div><dt>Lecture</dt><dd id="lecture">–</dd></div>
+</dl>
+<p>Mots fréquents : <span id="frequents">–</span></p>
+<script src="wasm_exec.js"></script>
+<script>
+  const zone = document.getElementById("texte");
+  function analyse() {
+    // analyseTexte est une fonction Go, enregistrée par le module.
+    const st = globalThis.analyseTexte(zone.value);
+    document.getElementById("mots").textContent = st.mots;
+    document.getElementById("phrases").textContent = st.phrases;
+    document.getElementById("caracteres").textContent = st.caracteres;
+    document.getElementById("lecture").textContent = st.minutesLecture + " min";
+    document.getElementById("frequents").textContent =
+      st.frequents.map((f) => `${f.mot} (${f.nombre})`).join(", ") || "–";
+  }
+  addEventListener("go-pret", () => {
+    document.getElementById("etat").textContent = "Module Go chargé : l'analyse se fait dans le navigateur.";
+    zone.disabled = false;
+    zone.addEventListener("input", analyse);
+    analyse();
+  });
+  // wasm_exec.js fournit Go, le lien entre le runtime Go et JavaScript.
+  const go = new Go();
+  WebAssembly.instantiateStreaming(fetch("analyse.wasm"), go.importObject)
+    .then((r) => go.run(r.instance))
+    .catch((e) => { document.getElementById("etat").textContent = "Échec du chargement : " + e; });
+</script>
+</body>
+</html>
