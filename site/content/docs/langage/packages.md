@@ -1,5 +1,6 @@
 ---
 title: "Packages et modules"
+linkTitle: "12. Packages et modules"
 weight: 120
 ---
 

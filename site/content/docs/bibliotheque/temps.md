@@ -1,5 +1,6 @@
 ---
 title: "Le temps : time"
+linkTitle: "4. Le temps"
 weight: 40
 ---
 

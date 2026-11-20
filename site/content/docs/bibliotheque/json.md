@@ -1,5 +1,6 @@
 ---
 title: "JSON : encoding/json"
+linkTitle: "5. JSON"
 weight: 50
 ---
 

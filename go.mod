@@ -27,6 +27,7 @@ require (
 	github.com/testcontainers/testcontainers-go v0.45.0
 	github.com/testcontainers/testcontainers-go/modules/nats v0.45.0
 	github.com/testcontainers/testcontainers-go/modules/postgres v0.45.0
+	github.com/tetratelabs/wazero v1.12.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.72.0
 	go.opentelemetry.io/otel v1.47.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.47.0

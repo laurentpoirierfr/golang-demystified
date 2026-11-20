@@ -1,5 +1,6 @@
 ---
 title: "Gestion des erreurs"
+linkTitle: "8. Gestion des erreurs"
 weight: 80
 ---
 

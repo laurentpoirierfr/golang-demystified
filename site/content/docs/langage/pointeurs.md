@@ -1,5 +1,6 @@
 ---
 title: "Pointeurs et mémoire"
+linkTitle: "10. Pointeurs et mémoire"
 weight: 100
 ---
 

@@ -34,6 +34,9 @@ jobs:
             exit 1
           fi
 
+      - name: Numérotation des parties et des chapitres
+        run: go run ./tools/numerote -verifie
+
       - name: Analyse statique (go vet)
         run: go vet ./...
 

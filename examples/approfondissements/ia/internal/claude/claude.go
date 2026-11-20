@@ -7,6 +7,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/anthropics/anthropic-sdk-go/v2"
 
@@ -147,11 +148,11 @@ func (a *Agent) tour(ctx context.Context, ecrit func(string)) (anthropic.BetaMes
 }
 
 func texte(m anthropic.BetaMessage) string {
-	var s string
+	var s strings.Builder
 	for _, bloc := range m.Content {
 		if t, ok := bloc.AsAny().(anthropic.BetaTextBlock); ok {
-			s += t.Text
+			s.WriteString(t.Text)
 		}
 	}
-	return s
+	return s.String()
 }

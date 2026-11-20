@@ -69,7 +69,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 		dir := fmt.Sprintf("%02d-%s", num, filepath.Base(p.Dir))
 		r := rubrique{Number: num, Title: p.Title, Edition: edition, Intro: p.Body,
 			URL: site + "docs/" + filepath.Base(p.Dir) + "/"}
-		pt := part{entry: entry{Number: num, Title: p.Title, File: dir + "/00-presentation"}}
+		pt := part{Number: num, Title: p.Title, File: dir + "/00-presentation"}
 		for _, c := range p.Children {
 			if c.Section {
 				continue
@@ -81,7 +81,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 				return n, err
 			}
 			ch := chapter{
-				Part:    fmt.Sprintf("%d. %s", num, p.Title),
+				Part:    content.Romain(num) + " - " + p.Title,
 				Title:   c.Title,
 				URL:     site + "docs/" + filepath.ToSlash(strings.TrimSuffix(rel, ".md")) + "/",
 				Edition: edition,
@@ -106,7 +106,7 @@ func write(root *content.Node, docs, out, site, edition string) (int, error) {
 	return n, index.Execute(f, map[string]any{"Parts": parts, "Site": site, "Edition": edition})
 }
 
-var index = template.Must(template.New("index").Parse(`<!doctype html>
+var index = template.Must(template.New("index").Funcs(template.FuncMap{"romain": content.Romain}).Parse(`<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -121,7 +121,7 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
   }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "GD Sans", "Source Sans 3", system-ui, sans-serif; color: var(--texte); background: var(--fond); }
-  header { background: linear-gradient(135deg, var(--bleu), var(--bleu-fonce)); color: #fff; padding: 2.5rem 1rem; }
+  header { background: radial-gradient(circle at 85% 0%, rgba(0, 173, 216, .55) 0, rgba(0, 173, 216, 0) 45%), radial-gradient(circle at 0% 100%, rgba(0, 125, 156, .55) 0, rgba(0, 125, 156, 0) 50%), #0b1d26; color: #fff; padding: 3rem 1rem; }
   header div, main { max-width: 64rem; margin: 0 auto; }
   header h1 { margin: 0 0 .5rem; font-size: 2.2rem; }
   header p { margin: 0; opacity: .9; }
@@ -130,7 +130,8 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
   h2 { color: var(--bleu-fonce); border-bottom: 3px solid var(--bleu); padding-bottom: .3rem; margin-top: 2.5rem; }
   @media (prefers-color-scheme: dark) { h2 { color: var(--bleu); } }
   ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .75rem; }
-  li { background: var(--carte); border-radius: .5rem; padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  li { background: var(--carte); border-radius: .75rem; padding: .75rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: .5rem; border: 1px solid transparent; transition: border-color .15s; }
+  li:hover { border-color: var(--bleu); }
   li span { font-weight: bold; }
   li a { color: var(--bleu-fonce); text-decoration: none; font-size: .9rem; white-space: nowrap; }
   @media (prefers-color-scheme: dark) { li a { color: var(--bleu); } }
@@ -148,11 +149,11 @@ var index = template.Must(template.New("index").Parse(`<!doctype html>
 </div></header>
 <main>
 {{range .Parts}}<section>
-<h2>{{printf "%02d" .Number}} · {{.Title}}</h2>
+<h2>{{romain .Number}} - {{.Title}}</h2>
 <p class="rubrique"><strong>Présentation de la rubrique</strong> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></p>
 <p class="detail">Une présentation détaillée par chapitre :</p>
 <ul>
-{{range .Entries}}  <li><span>{{printf "%02d" .Number}} · {{.Title}}</span> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></li>
+{{range .Entries}}  <li><span>{{.Number}}. {{.Title}}</span> <a href="{{.File}}.html">diaporama</a> <a href="{{.File}}.pdf">PDF</a></li>
 {{end}}</ul>
 </section>
 {{end}}</main>

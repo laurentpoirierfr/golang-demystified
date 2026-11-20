@@ -1,5 +1,6 @@
 ---
 title: "Journalisation : log/slog"
+linkTitle: "7. Journalisation"
 weight: 70
 ---
 

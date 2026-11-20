@@ -1,5 +1,6 @@
 ---
 title: "Introduction"
+linkTitle: "1. Introduction"
 weight: 10
 ---
 

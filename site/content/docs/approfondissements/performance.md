@@ -1,6 +1,7 @@
 ---
 title: "Profilage et performance"
-weight: 50
+linkTitle: "10. Profilage et performance"
+weight: 100
 ---
 
 Go est rapide par défaut, mais un programme lent l'est presque toujours pour

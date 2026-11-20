@@ -1,5 +1,6 @@
 ---
 title: "Tour d'horizon"
+linkTitle: "10. Tour d'horizon"
 weight: 100
 ---
 

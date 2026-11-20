@@ -1,5 +1,6 @@
 ---
 title: "La bibliothèque standard"
+linkTitle: "III - La bibliothèque standard"
 weight: 30
 ---
 

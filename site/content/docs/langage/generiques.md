@@ -1,5 +1,6 @@
 ---
 title: "Génériques"
+linkTitle: "9. Génériques"
 weight: 90
 ---
 

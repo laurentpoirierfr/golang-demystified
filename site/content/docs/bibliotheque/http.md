@@ -1,5 +1,6 @@
 ---
 title: "HTTP : net/http"
+linkTitle: "6. HTTP"
 weight: 60
 ---
 

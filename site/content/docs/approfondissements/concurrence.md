@@ -1,6 +1,7 @@
 ---
 title: "Concurrence en pratique"
-weight: 10
+linkTitle: "2. Concurrence en pratique"
+weight: 20
 ---
 
 Le chapitre « Goroutines et channels » a présenté les briques de base. Ce

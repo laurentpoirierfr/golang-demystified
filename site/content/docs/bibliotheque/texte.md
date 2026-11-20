@@ -1,5 +1,6 @@
 ---
 title: "Texte : fmt, strings, strconv"
+linkTitle: "1. Texte"
 weight: 10
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "gRPC et Connect : des API à contrat"
-weight: 32
+linkTitle: "12. gRPC et Connect"
+weight: 120
 ---
 
 Le chapitre « Une API web complète » part d'un contrat OpenAPI pour décrire

@@ -18,7 +18,7 @@ MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g
 	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
-.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf generate clean
+.PHONY: all site publication serve book pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go numerote generate clean
 
 all: check book slides publication
 
@@ -71,6 +71,7 @@ pdf: book
 ## check : vérifie et teste les outils et les exemples du livre (sans conteneur)
 check:
 	test -z "$$(gofmt -l tools examples)"
+	go run ./tools/numerote -verifie
 	go vet ./...
 	go test -short ./...
 
@@ -106,6 +107,42 @@ BUF := docker run --rm --volume "$(CURDIR)/examples/approfondissements/grpc:/wor
 buf:
 	$(BUF) lint
 	$(BUF) generate
+
+## wasm : la démonstration WebAssembly dans examples/approfondissements/wasm/web
+##   (puis : cd examples/approfondissements/wasm && go run ./cmd/site)
+wasm:
+	cd examples/approfondissements/wasm && GOOS=js GOARCH=wasm go build -o web/analyse.wasm ./cmd/navigateur
+	cp "$$(go env GOROOT)/lib/wasm/wasm_exec.js" examples/approfondissements/wasm/web/
+
+## wasm-tinygo : le greffon WASI compilé par TinyGo, puis essayé par l'hôte wazero
+TINYGO_IMAGE := docker.io/tinygo/tinygo:0.44.0
+TINYGO_SORTIE := examples/approfondissements/wasm/build
+TINYGO = docker run --rm --volume "$(CURDIR):/src" --volume "$(shell go env GOMODCACHE):/go/pkg/mod:ro" \
+	--workdir /src $(CONTAINER_USER) -e HOME=/tmp -e GOCACHE=/tmp/cache -e GOMODCACHE=/go/pkg/mod \
+	-e GOFLAGS="-mod=mod -buildvcs=false" $(TINYGO_IMAGE)
+wasm-tinygo:
+	mkdir -p $(TINYGO_SORTIE)
+	$(TINYGO) tinygo build -target=wasip1 -buildmode=c-shared -no-debug \
+		-o $(TINYGO_SORTIE)/greffon-tinygo.wasm ./examples/approfondissements/wasm/cmd/greffon
+	GREFFON_TINYGO=$(CURDIR)/$(TINYGO_SORTIE)/greffon-tinygo.wasm \
+		go test -count=1 -run TinyGo -v ./examples/approfondissements/wasm/internal/hote
+
+## rust-et-go : compile et teste la version Rust de l'article « Rust et Go »,
+##   et vérifie que la course de données y est refusée à la compilation
+RUST_IMAGE := docker.io/library/rust:1.99.1-slim
+rust-et-go:
+	go test -count=1 ./examples/decouvrir/rust-et-go/...
+	docker run --rm $(MARP_USERNS) --user "$(shell id -u):$(shell id -g)" -e HOME=/tmp -e CARGO_HOME=/tmp/cargo \
+		-e CARGO_TARGET_DIR=/tmp/cible --volume "$(CURDIR)/examples/decouvrir/rust-et-go/rust:/orig:ro" \
+		$(RUST_IMAGE) sh -c 'cp -r /orig /tmp/p && cd /tmp/p/mots && cargo test --release && \
+		if rustc --edition 2024 -o /tmp/course ../course/main.rs 2>/dev/null; \
+		then echo "la course aurait dû être refusée"; exit 1; \
+		else echo "course refusée par le compilateur Rust, comme attendu"; fi'
+
+## numerote : numérote les parties (I, II…) et les chapitres du menu du site,
+##   d'après leur poids (weight)
+numerote:
+	go run ./tools/numerote
 
 ## generate : régénère tout le code généré (oapi-codegen, sqlc, buf)
 generate: sqlc buf

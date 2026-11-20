@@ -1,5 +1,6 @@
 ---
 title: "Les opérateurs"
+linkTitle: "2. Les opérateurs"
 weight: 20
 ---
 

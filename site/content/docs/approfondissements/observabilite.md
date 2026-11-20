@@ -1,6 +1,7 @@
 ---
 title: "Observabilité : traces, métriques et journaux"
-weight: 49
+linkTitle: "9. Observabilité"
+weight: 90
 ---
 
 Un service en production doit pouvoir répondre à trois questions : **que

@@ -1,5 +1,6 @@
 ---
 title: "Structures et méthodes"
+linkTitle: "6. Structures et méthodes"
 weight: 60
 ---
 

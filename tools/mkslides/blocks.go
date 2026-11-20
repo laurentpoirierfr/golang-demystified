@@ -126,7 +126,12 @@ func parseList(lines []string, i int, b *block) int {
 		case isFence(l):
 			inFence, keep = true, false
 		case itemRe.MatchString(l): // new first-level item
-			b.items = append(b.items, itemRe.FindStringSubmatch(l)[2])
+			m := itemRe.FindStringSubmatch(l)
+			item := m[2]
+			if n := strings.TrimRight(m[1], ".)"); n != m[1] { // liste numérotée : on garde le numéro
+				item = n + ". " + item
+			}
+			b.items = append(b.items, item)
 			keep = true
 		case strings.TrimSpace(l) == "":
 			keep = false

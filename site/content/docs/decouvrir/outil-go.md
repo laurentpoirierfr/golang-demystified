@@ -1,5 +1,6 @@
 ---
 title: "L'outil go"
+linkTitle: "6. L'outil go"
 weight: 40
 ---
 

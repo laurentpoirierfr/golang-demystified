@@ -1,6 +1,7 @@
 ---
 title: "Sécurité : authentification, TLS et secrets"
-weight: 48
+linkTitle: "8. Sécurité"
+weight: 80
 ---
 
 Go a la réputation d'un langage sûr : pas de dépassement de tampon, une
