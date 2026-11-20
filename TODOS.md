@@ -26,7 +26,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   validation des entrées, bonnes pratiques avec `crypto`
 - [x] **Architecture événementielle** : Kafka ou NATS avec Watermill (suite de
   la section sur le traitement de flux)
-- [ ] **Temps réel** : WebSockets et Server-Sent Events
+- [x] **Temps réel** : WebSockets et Server-Sent Events
 - [ ] **Go et l'IA** : appeler des modèles de langage, écrire un serveur MCP en
   Go, utiliser Ollama en local
 - [ ] **WebAssembly et TinyGo** : Go dans le navigateur, `go:wasmexport`,
