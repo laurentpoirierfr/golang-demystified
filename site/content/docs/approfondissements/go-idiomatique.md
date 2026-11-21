@@ -181,6 +181,196 @@ func (c *courrierEspion) Envoie(_ context.Context, a, sujet, _ string) error {
 }
 ```
 
+### Câbler à la main, Wire ou Fx ?
+
+Dans l'industrie, l'outil d'injection de dépendances le plus utilisé en Go
+est… **aucun outil**. Kubernetes, Docker, Terraform ou la bibliothèque
+standard assemblent leurs composants à la main. Deux bibliothèques
+reviennent pourtant souvent : **Wire**, de Google, et **Fx**, d'Uber. Pour les
+comparer, l'exemple
+[`idiomatique/cmd`](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/approfondissements/idiomatique/cmd)
+assemble trois fois le même graphe : le service d'inscription, un dépôt en
+mémoire, un courrier qui journalise, et un serveur HTTP qui expose
+`POST /membres`. Les trois programmes passent le même test, et répondent de
+la même façon :
+
+```console
+$ curl -X POST localhost:8080/membres -d '{"courriel":"Ada@Exemple.fr","nom":"Ada"}'
+{"courriel":"ada@exemple.fr","nom":"Ada"}          (201 ; 409 la seconde fois)
+```
+
+#### À la main : la norme
+
+Tout le câblage tient dans une fonction ordinaire, appelée par `main` :
+
+```go
+func assemble(cfg web.Config, log *slog.Logger) *http.Server {
+	depot := infra.NouveauDepotMemoire()
+	courrier := infra.NouveauCourrierJournal(log)
+	service := inscription.Nouveau(depot, courrier, time.Now)
+	return web.NouveauServeur(cfg, web.Routes(service))
+}
+```
+
+C'est explicite : on lit l'ordre de construction de haut en bas, l'éditeur
+navigue d'un constructeur à l'autre, et **le compilateur vérifie tout** : un
+argument oublié ou du mauvais type est une erreur de compilation. Le cycle
+de vie s'écrit aussi à la main : démarrer le serveur, attendre un signal
+(`signal.NotifyContext`), puis `srv.Shutdown`. Quand le graphe grandit,
+`assemble` grandit avec lui ; découpée en quelques fonctions (`assembleDonnees`,
+`assembleHTTP`…), elle reste lisible bien au-delà de ce que l'on imagine.
+
+#### Wire : générer le même code
+
+[Wire](https://github.com/google/wire) **génère** l'assemblage à la
+compilation. On décrit le graphe dans un fichier marqué `wireinject`, jamais
+compilé dans le programme :
+
+```go
+//go:build wireinject
+
+var ensembleInfra = wire.NewSet(
+	infra.NouveauDepotMemoire,
+	wire.Bind(new(inscription.Depot), new(*infra.DepotMemoire)),
+	infra.NouveauCourrierJournal,
+	wire.Bind(new(inscription.Courrier), new(*infra.CourrierJournal)),
+)
+
+func assemble(cfg web.Config, log *slog.Logger) *http.Server {
+	wire.Build(ensembleInfra, horloge, inscription.Nouveau,
+		wire.Bind(new(web.Inscripteur), new(*inscription.Service)),
+		web.Routes, web.NouveauServeur)
+	return nil // remplacé par le code généré
+}
+```
+
+`go tool wire` (ou `go generate`) écrit alors `wire_gen.go`, qui est
+**exactement** l'assemblage manuel, au nom des variables près :
+
+```go
+func assemble(cfg web.Config, log *slog.Logger) *http.Server {
+	depotMemoire := infra.NouveauDepotMemoire()
+	courrierJournal := infra.NouveauCourrierJournal(log)
+	v := horloge()
+	service := inscription.Nouveau(depotMemoire, courrierJournal, v)
+	handler := web.Routes(service)
+	server := web.NouveauServeur(cfg, handler)
+	return server
+}
+```
+
+Pas de réflexion, pas de conteneur à l'exécution : un graphe incomplet est
+refusé **avant la compilation du programme**, avec la chaîne de dépendances
+qui y mène :
+
+```console
+$ go tool wire check ./testdata/incomplet
+wire: …/incomplet/wire.go:17:1: inject assemble: no provider found for func() time.Time
+	needed by *…/inscription.Service in provider "Nouveau" (…)
+	needed by …/web.Inscripteur in wire.Bind (…)
+	needed by net/http.Handler in provider "Routes" (…)
+	needed by *net/http.Server in provider "NouveauServeur" (…)
+```
+
+Wire ne s'occupe que de la construction : le cycle de vie reste à écrire.
+Deux contraintes : un fournisseur est choisi **par son type**, d'où la
+fonction `horloge` (un `func() time.Time`) et les `wire.Bind` pour chaque
+interface ; et le code généré doit être versionné et tenu à jour (la CI de ce
+dépôt le vérifie).
+
+> [!WARNING]
+> Google a **archivé** le dépôt de Wire le 25 août 2025 : il n'est plus
+> maintenu. La dernière version fonctionne, et le code qu'elle a généré reste
+> du Go ordinaire, sans dépendance à Wire à l'exécution. Des forks existent,
+> mais pour un nouveau projet, Wire n'est plus un choix sûr.
+
+#### Fx : un conteneur, et un cycle de vie
+
+[Fx](https://github.com/uber-go/fx), construit sur dig, résout le graphe **à
+l'exécution**, par réflexion. On lui donne des constructeurs, dans n'importe
+quel ordre ; il les appelle quand leur résultat est demandé, une seule fois
+chacun :
+
+```go
+var module = fx.Options(
+	fx.Provide(
+		fx.Annotate(infra.NouveauDepotMemoire, fx.As(new(inscription.Depot))),
+		fx.Annotate(infra.NouveauCourrierJournal, fx.As(new(inscription.Courrier))),
+		func() func() time.Time { return time.Now },
+		fx.Annotate(inscription.Nouveau, fx.As(new(web.Inscripteur))),
+		web.Routes,
+		web.NouveauServeur,
+	),
+	fx.Invoke(demarre), // demande le serveur : tout le graphe est construit
+)
+```
+
+Sa force est le **cycle de vie**. Chaque composant accroche ses fonctions de
+démarrage et d'arrêt ; Fx les appelle dans l'ordre, puis dans l'ordre inverse
+à l'arrêt, et `Run` attend lui-même `SIGINT` ou `SIGTERM` :
+
+```go
+func demarre(lc fx.Lifecycle, srv *http.Server, log *slog.Logger) {
+	lc.Append(fx.Hook{
+		OnStart: func(context.Context) error {
+			ln, err := net.Listen("tcp", srv.Addr) // une erreur arrête le démarrage
+			if err != nil {
+				return err
+			}
+			go srv.Serve(ln)
+			return nil
+		},
+		OnStop: srv.Shutdown,
+	})
+}
+
+func main() {
+	fx.New(fx.Supply(cfg, log), module).Run()
+}
+```
+
+Le prix : une dépendance manquante n'est découverte **qu'à l'exécution**,
+quand Fx construit l'application. Le compilateur ne voit rien ; le programme
+échoue au démarrage :
+
+```console
+missing dependencies for function "…/cmd/avecfx".demarre (…/main.go:40):
+missing type: *slog.Logger
+```
+
+D'où un test à écrire dans tout projet Fx : `fx.ValidateApp` construit le
+graphe sans rien démarrer, et échoue de la même façon. S'y ajoutent une
+lecture plus difficile (qui fournit ce `*http.Server` ? il faut chercher), et
+un démarrage un peu plus lent, négligeable pour un service. Fx est maintenu activement, et Uber le présente comme le socle
+de presque tous ses services Go.
+
+#### Choisir
+
+| | À la main | Wire | Fx |
+|-|-----------|------|----|
+| Résolution | votre code | code généré, à la compilation | réflexion, à l'exécution |
+| Graphe incomplet | erreur de compilation | erreur de génération | erreur au démarrage (testable par `fx.ValidateApp`) |
+| Cycle de vie | à écrire | à écrire | intégré (`OnStart`, `OnStop`, signaux) |
+| Lisibilité | maximale | bonne (le code généré se lit) | indirecte |
+| Dépendance | aucune | outil de génération | bibliothèque, à l'exécution |
+| Maintenance | — | archivé depuis août 2025 | active |
+
+- **Par défaut, câblez à la main.** C'est le choix de la plupart des projets
+  Go, y compris les plus grands.
+- **Fx** se justifie quand une organisation fait vivre **beaucoup de
+  services** sur un socle commun (journal, métriques, traces, cycle de vie) :
+  chaque équipe ajoute ses modules au même squelette. C'est le contexte pour
+  lequel Uber l'a conçu.
+- **Wire** : gardez-le dans un projet qui l'utilise déjà (le code généré ne
+  vieillit pas), mais ne l'introduisez plus.
+
+Quel que soit le choix, les règles précédentes ne changent pas : des
+constructeurs qui reçoivent leurs dépendances, de petites interfaces
+déclarées par leur utilisateur, et pas de variable globale. Wire et Fx ne
+font qu'**appeler ces constructeurs** à votre place ; un code bien découpé
+passe de l'un à l'autre sans réécriture, comme le montrent les trois
+programmes de l'exemple, qui partagent tout sauf leur `main`.
+
 ## Motif : posséder chaque goroutine
 
 Une goroutine lancée sans savoir comment elle se terminera finit souvent
@@ -364,6 +554,9 @@ Une relecture de code Go peut suivre ces questions, dans l'ordre :
 - **Injection de dépendances** sans framework : de petites interfaces
   déclarées par leur utilisateur, des implémentations passées au
   constructeur, assemblées par `main`.
+  C'est aussi le choix de l'industrie ; Fx (Uber) apporte un cycle de
+  vie pour de nombreux services, au prix d'erreurs découvertes au démarrage ;
+  Wire (Google) génère le même code, mais il est archivé depuis 2025.
 - **Chaque goroutine a un propriétaire** ; le profil `goroutineleak`
   (Go 1.27) détecte celles qui fuient.
 - **gofmt, go vet, go fix** : la mise en forme, les erreurs probables et la
