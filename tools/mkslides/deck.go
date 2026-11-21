@@ -112,15 +112,17 @@ func deck(ch chapter, md string) string {
 	return render(ch, slides)
 }
 
+// A piece is the markdown of one part of a slide, and its estimated height.
+type piece struct {
+	md     string
+	weight float64
+}
+
 // summarize turns the blocks of a section into one or more slides: the
 // first sentence of the text, the lists, the first table, the first code
 // block and the first alert, cut into slides that fit the budget.
 func summarize(title, sub string, blocks []block) []slide {
-	type part struct {
-		md     string
-		weight float64
-	}
-	var parts []part
+	var parts []piece
 	sentence, tables, codes, alerts := false, 0, 0, 0
 	for _, b := range blocks {
 		switch b.kind {
@@ -128,12 +130,12 @@ func summarize(title, sub string, blocks []block) []slide {
 			// Un paragraphe tout en gras est une étiquette (« **Construire un
 			// service** ») : il reste au-dessus de la liste qui le suit.
 			if labelRe.MatchString(strings.TrimSpace(b.text)) {
-				parts = append(parts, part{inline(strings.TrimSpace(b.text)), 1.1})
+				parts = append(parts, piece{inline(strings.TrimSpace(b.text)), 1.1})
 				continue
 			}
 			if !sentence {
 				s := firstSentence(inline(b.text))
-				parts = append(parts, part{s, lines(s)})
+				parts = append(parts, piece{s, lines(s)})
 				sentence = true
 			}
 		case list:
@@ -148,7 +150,7 @@ func summarize(title, sub string, blocks []block) []slide {
 			flush := func() {
 				if len(chunk) > 0 {
 					l, w := shrinkList(chunk)
-					parts = append(parts, part{l, w})
+					parts = append(parts, piece{l, w})
 					chunk = nil
 				}
 			}
@@ -168,21 +170,20 @@ func summarize(title, sub string, blocks []block) []slide {
 			// three slides, its header repeated.
 			if tables == 0 {
 				for _, rows := range chunkTable(b.items, maxTableRows, 3) {
-					t, w := shrinkTable(rows, maxTableRows)
-					parts = append(parts, part{t, w})
+					parts = append(parts, fitTable(rows)...)
 				}
 			}
 			tables++
 		case code:
 			if codes == 0 && len(b.items) > 0 {
 				c, w := shrinkCode(b, maxCodeLines)
-				parts = append(parts, part{c, w})
+				parts = append(parts, piece{c, w})
 			}
 			codes++
 		case alert:
 			if alerts == 0 {
 				s := "**" + alertLabels[b.alert] + "** : " + firstSentence(inline(b.text))
-				parts = append(parts, part{"> " + s, alertWeight(s)})
+				parts = append(parts, piece{"> " + s, alertWeight(s)})
 			}
 			alerts++
 		}
@@ -191,7 +192,7 @@ func summarize(title, sub string, blocks []block) []slide {
 	// diapositive.
 	for i := 0; i < len(parts)-1; i++ {
 		if labelRe.MatchString(parts[i].md) {
-			parts[i] = part{parts[i].md + "\n\n" + parts[i+1].md, parts[i].weight + parts[i+1].weight}
+			parts[i] = piece{parts[i].md + "\n\n" + parts[i+1].md, parts[i].weight + parts[i+1].weight}
 			parts = slices.Delete(parts, i+1, i+2)
 		}
 	}
@@ -579,6 +580,21 @@ func fit(b block, sentence string) []string {
 // chunkTable cuts a table into tables of at most size rows, each with the
 // header and separator, at most max of them : the last one then ends with
 // the ellipsis row of shrinkTable.
+// fitTable turns a chunk of rows into one slide part or, when its long cells
+// make it too high for a slide, into two halves (recursively), each with the
+// header.
+func fitTable(rows []string) []piece {
+	t, w := shrinkTable(rows, maxTableRows)
+	if w <= budget-subtitleWeight-1 || len(rows) <= 3 {
+		return []piece{{t, w}}
+	}
+	head, body := rows[:2], rows[2:]
+	half := (len(body) + 1) / 2
+	first := append(append([]string{}, head...), body[:half]...)
+	second := append(append([]string{}, head...), body[half:]...)
+	return append(fitTable(first), fitTable(second)...)
+}
+
 func chunkTable(rows []string, size, max int) [][]string {
 	if len(rows) < 2 {
 		return [][]string{rows}
