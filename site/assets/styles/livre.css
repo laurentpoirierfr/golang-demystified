@@ -16,15 +16,20 @@
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono.ttf"); font-weight: 400; font-style: normal; }
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Bold.ttf"); font-weight: 700; font-style: normal; }
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Italic.ttf"); font-weight: 400; font-style: italic; }
-/* Les quelques symboles absents des trois polices : ★ (difficulté des
-   exercices), ↳ et ␣. Placée en tête de chaque famille, limitée à ces
-   caractères par unicode-range. */
-@font-face { font-family: "Symboles"; src: url("/polices/DejaVuSans.ttf"); unicode-range: U+2605, U+21B3, U+2423; }
+/* Symboles absents des trois polices (★, ◇, ↳, ␣…) : DejaVu Sans, placée
+   juste après la police principale de chaque famille, ne sert qu'aux
+   caractères que celle-ci n'a pas. Les emojis viennent de la police emoji du
+   conteneur d'impression. */
+@font-face {
+  font-family: "Symboles";
+  src: url("/polices/DejaVuSans.ttf");
+  unicode-range: U+2190-21FF, U+2300-23FF, U+2423, U+2500-257F, U+25A0-25FF, U+2600-26FF, U+2700-27BF;
+}
 
 :root {
-  --book-serif: "Symboles", "Source Serif 4", "Iowan Old Style", Palatino, Georgia, serif;
-  --book-mono: "Symboles", "Go Mono", ui-monospace, monospace;
-  --book-sans: "Symboles", "Source Sans 3", system-ui, sans-serif;
+  --book-serif: "Source Serif 4", "Symboles", "Iowan Old Style", Palatino, Georgia, serif;
+  --book-mono: "Go Mono", "Symboles", ui-monospace, monospace;
+  --book-sans: "Source Sans 3", "Symboles", system-ui, sans-serif;
   --book-measure: none;          /* toute la largeur de la page */
   font-size: 9.5pt;
 }
