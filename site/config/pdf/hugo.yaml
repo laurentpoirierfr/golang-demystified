@@ -1,0 +1,15 @@
+# Environnement « pdf » (hugo --environment pdf), utilisé par make book : il
+# ajoute à la page d'accueil le format « livre », tout le livre sur une seule
+# page (layouts/home.livre.html), que book/pdf/imprime.js pagine et imprime.
+# Le site publié ne contient pas cette page.
+outputFormats:
+  livre:
+    mediaType: text/html
+    baseName: index
+    path: livre
+    isHTML: true
+    notAlternative: true
+    permalinkable: false
+
+outputs:
+  home: [html, livre]

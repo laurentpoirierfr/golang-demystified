@@ -1,0 +1,143 @@
+/* Mise en page du livre PDF (layouts/home.livre.html, paginé par Paged.js).
+   Le texte garde le style du site (custom.css) ; cette feuille ne règle que
+   les pages : format, marges, titres courants, sauts de page, couverture. */
+
+/* Polices embarquées, servies par book/pdf/imprime.js : le rendu ne dépend
+   pas des polices de la machine qui construit le livre. */
+@font-face { font-family: "Source Serif 4"; src: url("/polices/SourceSerif4-Regular.otf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Source Serif 4"; src: url("/polices/SourceSerif4-It.otf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Source Serif 4"; src: url("/polices/SourceSerif4-Semibold.otf"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Source Serif 4"; src: url("/polices/SourceSerif4-Bold.otf"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Source Serif 4"; src: url("/polices/SourceSerif4-BoldIt.otf"); font-weight: 700; font-style: italic; }
+@font-face { font-family: "Source Sans 3"; src: url("/polices/SourceSans3-Regular.otf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Source Sans 3"; src: url("/polices/SourceSans3-It.otf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Source Sans 3"; src: url("/polices/SourceSans3-Semibold.otf"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Source Sans 3"; src: url("/polices/SourceSans3-Bold.otf"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Bold.ttf"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Italic.ttf"); font-weight: 400; font-style: italic; }
+
+:root {
+  --book-serif: "Source Serif 4", "Iowan Old Style", Palatino, Georgia, serif;
+  --book-mono: "Go Mono", ui-monospace, monospace;
+  --book-sans: "Source Sans 3", system-ui, sans-serif;
+  --book-measure: none;          /* toute la largeur de la page */
+  font-size: 9.5pt;
+}
+
+body {
+  font-family: var(--book-sans);
+  background: #fff;
+}
+
+/* ==== Pages ==== */
+@page {
+  size: A4;
+  margin: 22mm 20mm 24mm 20mm;
+  @top-center {
+    content: string(chapitre);
+    font-family: var(--book-sans);
+    font-size: 8pt;
+    color: #64748b;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: var(--book-sans);
+    font-size: 8.5pt;
+    color: #64748b;
+  }
+}
+@page couverture {
+  margin: 0;
+  @top-center { content: none; }
+  @bottom-center { content: none; }
+}
+@page liminaire {
+  @top-center { content: none; }
+  @bottom-center { content: none; }
+}
+@page partie {
+  @top-center { content: none; }
+}
+
+/* ==== Couverture, page de titre ==== */
+.couverture {
+  page: couverture;
+  background: #0b2533;
+}
+.couverture svg {
+  display: block;
+  width: 210mm;
+  height: 297mm;
+  object-fit: contain;
+}
+.titre {
+  page: liminaire;
+  break-before: page;
+  text-align: center;
+  padding-top: 70mm;
+}
+.titre p { margin: 0; }
+.titre .titre-livre { font-family: var(--book-serif); font-size: 32pt; font-weight: 600; }
+.titre .sous-titre { font-family: var(--book-serif); font-style: italic; font-size: 14pt; margin-top: 6mm; color: #334155; }
+.titre .edition { font-size: 10pt; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 10mm; color: #0b7fa5; }
+.titre .auteur { font-size: 12pt; margin-top: 50mm; }
+.titre .colophon { font-size: 8.5pt; margin-top: 30mm; color: #64748b; line-height: 1.6; }
+.titre .colophon a { color: inherit; }
+
+.preface, .sommaire {
+  page: liminaire;
+  break-before: page;
+}
+
+/* ==== Table des matières : numéros de page calculés par Paged.js ==== */
+.sommaire ul { list-style: none; padding: 0; margin: 0; }
+.sommaire li { margin: 0; line-height: 1.55; }
+.sommaire li.partie { margin-top: 0.9em; font-weight: 600; }
+.sommaire li.chapitre { padding-left: 1.5em; }
+.sommaire a { color: inherit; text-decoration: none; display: flex; gap: 0.4em; }
+.sommaire a::after {
+  content: target-counter(attr(href url), page);
+  margin-left: auto;
+  padding-left: 0.6em;
+}
+
+/* ==== Parties et chapitres ==== */
+section.partie {
+  page: partie;
+  break-before: right;
+  padding-top: 40mm;
+}
+section.chapitre {
+  break-before: page;
+}
+section.chapitre h1 {
+  string-set: chapitre content(text);
+}
+section.partie h1 {
+  font-size: 2.6rem;
+}
+
+/* Le texte garde le style du site ; seuls les réglages propres au papier
+   changent. */
+.markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+  break-after: avoid;
+}
+.markdown p { orphans: 3; widows: 3; }
+.markdown pre {
+  white-space: pre-wrap;          /* pas de défilement sur papier */
+  overflow-wrap: anywhere;
+  overflow: visible;
+}
+.markdown table, .markdown .book-hint, .markdown li, .markdown tr {
+  break-inside: avoid;
+}
+
+/* Liens : le site les imprime suivis de leur adresse (print.css de
+   hugo-book) ; dans le livre, un renvoi interne donne la page. */
+a::after { content: none; }
+.markdown a.renvoi::after {
+  content: " (p. " target-counter(attr(href url), page) ")";
+  font-size: 0.85em;
+  color: #64748b;
+}

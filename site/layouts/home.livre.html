@@ -1,0 +1,100 @@
+{{- /*
+  Tout le livre sur une seule page, pour le PDF (environnement « pdf », voir
+  config/pdf/hugo.yaml). Les feuilles de style sont celles du site (hugo-book
+  et assets/styles/custom.css), complétées par assets/styles/livre.css pour
+  la mise en page : Paged.js pagine le document, puis book/pdf/imprime.js
+  l'imprime avec Chromium.
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Locale }}" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ .Site.Title }}</title>
+  {{- $styles := slice -}}
+  {{- range resources.Get "styles/index.yaml" | transform.Unmarshal -}}
+    {{- $styles = $styles | append (resources.Get (printf "styles/%s" .)) -}}
+  {{- end -}}
+  {{- $styles = $styles | append (resources.Get "styles/livre.css") -}}
+  {{- $styles = $styles | resources.Concat "livre.css" | resources.Minify }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+</head>
+<body>
+
+{{- $pages := slice -}}
+{{- $section := partialCached "docs/menu-section" .Site -}}
+{{- range partialCached "docs/menu-section-pages" $section -}}
+  {{- /* « pdf: false » exclut une page du livre. */ -}}
+  {{- if and (ne . $section) (ne .Params.pdf false) }}{{ $pages = $pages | append . }}{{ end -}}
+{{- end }}
+
+<section class="couverture">
+  {{- /* Incorporée plutôt que chargée par <img> : une image SVG n'a pas
+         accès aux polices de la page (@font-face de livre.css). */}}
+  {{ readFile "static/couverture.svg" | safeHTML }}
+</section>
+
+<section class="titre markdown">
+  <p class="titre-livre">{{ .Site.Title }}</p>
+  <p class="sous-titre">Le langage Go, ses outils et son évolution</p>
+  <p class="edition">Édition Go 1.27</p>
+  <p class="auteur">The Gang of Three</p>
+  <p class="colophon">
+    {{- /* make book passe la version par HUGO_PARAMS_VERSION. */}}
+    Version {{ .Site.Params.version | default "de développement" }} · {{ now.Format "2006-01-02" }}<br>
+    En ligne : <a href="https://laurentpoirierfr.github.io/golang-demystified/">laurentpoirierfr.github.io/golang-demystified</a>
+  </p>
+</section>
+
+{{- /* La préface : la section « ## Préface » de la page d'accueil. */}}
+{{- with findRESubmatch `(?s)## Préface\n(.*?)\n## ` .RawContent 1 }}
+<section class="preface markdown" id="preface" data-url="{{ ($.OutputFormats.Get "html").RelPermalink }}">
+  <h1>Préface</h1>
+  {{ index (index . 0) 1 | $.RenderString }}
+</section>
+{{- end }}
+
+<nav class="sommaire markdown">
+  <h1>Table des matières</h1>
+  <ul>
+  {{- range $pages }}
+    <li class="{{ if .IsSection }}partie{{ else }}chapitre{{ end }}"><a href="#{{ .RelPermalink | anchorize }}">{{ .Title }}</a></li>
+  {{- end }}
+  </ul>
+</nav>
+
+{{- range $pages }}
+<section class="{{ if .IsSection }}partie{{ else }}chapitre{{ end }} markdown" id="{{ .RelPermalink | anchorize }}" data-url="{{ .RelPermalink }}">
+  {{ .Content }}
+</section>
+{{- end }}
+
+<script>
+// Les liens internes pointent vers les pages du site ; dans le livre, ils
+// pointent vers la section correspondante. Les identifiants des titres sont
+// préfixés par celui de leur section : « exercices » existe dans plusieurs
+// chapitres.
+(function () {
+  const sections = new Map();
+  for (const s of document.querySelectorAll("section[data-url]")) {
+    sections.set(s.dataset.url, s);
+    for (const e of s.querySelectorAll("[id]")) e.id = s.id + "--" + e.id;
+  }
+  for (const a of document.querySelectorAll("section[data-url] a[href]")) {
+    const href = a.getAttribute("href");
+    if (/^[a-z]+:/i.test(href)) continue;
+    const base = new URL(a.closest("section").dataset.url, location.origin);
+    const cible = new URL(href, base);
+    if (cible.origin !== location.origin) continue;
+    const s = sections.get(cible.pathname);
+    if (!s) continue;
+    const ancre = decodeURIComponent(cible.hash.slice(1));
+    const id = ancre && document.getElementById(s.id + "--" + ancre) ? s.id + "--" + ancre : s.id;
+    a.setAttribute("href", "#" + id);
+    a.classList.add("renvoi");
+  }
+})();
+window.PagedConfig = { after: () => { window.livrePagine = true; } };
+</script>
+<script src="/paged.polyfill.min.js"></script>
+</body>
+</html>

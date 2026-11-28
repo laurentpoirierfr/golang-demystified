@@ -449,7 +449,7 @@ jobs:
       - name: Version publiée
         id: version
         run: echo "tag=$(git describe --exact-match --tags HEAD 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
-      - name: Livre (PDF et EPUB)
+      - name: Livre (PDF)
         run: make book
       - name: Site, avec le livre téléchargeable
         run: make publication
@@ -477,7 +477,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: livre
-      - run: gh release create "$TAG" golang-demystified.pdf golang-demystified.epub …
+      - run: gh release create "$TAG" golang-demystified.pdf aide-memoire-go.pdf …
 ```
 
 Trois jobs, trois responsabilités, trois niveaux de permissions : construire

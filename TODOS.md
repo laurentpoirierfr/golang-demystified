@@ -11,7 +11,7 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   - vérifications à chaque push : `gofmt`, `go vet`, `go test -race`, `govulncheck`
   - tests d'intégration avec Testcontainers (Docker est disponible sur les machines GitHub)
   - vérification que le code généré est à jour (sqlc, oapi-codegen, controller-gen)
-- [x] **Publication par l'intégration continue** : site, PDF et EPUB construits
+- [x] **Publication par l'intégration continue** : site et PDF construits
   à chaque tag, au lieu d'être versionnés dans `docs/` et `book/`
 - [x] **Chapitre « CI/CD d'un projet Go »** : GitHub Actions, golangci-lint,
   govulncheck, GoReleaser, images multi-architectures, SBOM
@@ -67,6 +67,8 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
 - [x] Approfondissements réorganisés en parcours numéroté (18 chapitres, six étapes)
 - [x] Nouveau thème Hextra, site dans `docs/`
 - [x] Livre PDF et EPUB avec Quarto et Typst, couverture personnalisée
+- [x] Site au style de basic-knowledge (hugo-book), couverture SVG ; livre PDF
+  imprimé depuis le site (Paged.js et Chromium) ; EPUB abandonné
 - [x] Parties I à IV réécrites pour Go 1.27
 - [x] Approfondissements : concurrence, templates, API web, ligne de commande,
   sqlc et golang-migrate, architecture hexagonale, Kubernetes, performance

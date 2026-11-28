@@ -1,7 +1,8 @@
-// Command mkbook transforme les pages du site Hugo en projet de livre Quarto,
-// rendu ensuite en PDF (via Typst) et en EPUB. L'ordre des parties et des
-// chapitres suit le champ « weight » du front matter, exactement comme sur le
-// site.
+// Command mkbook transforme les pages du site Hugo en projet de livre Quarto.
+// L'ordre des parties et des chapitres suit le champ « weight » du front
+// matter, exactement comme sur le site. Il ne sert plus qu'à l'aide-mémoire
+// (make aide-memoire), qui en reprend le chapitre : le livre PDF est imprimé
+// depuis le site (make book).
 package main
 
 import (

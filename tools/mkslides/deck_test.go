@@ -110,7 +110,7 @@ func Example_deck() {
 	//
 	// - Le chapitre complet : [Interfaces](https://exemple.org/docs/langage/interfaces/)
 	// - Le code des exemples : [examples/langage/interfaces](https://github.com/laurentpoirierfr/golang-demystified/tree/main/examples/langage/interfaces)
-	// - Le livre en PDF et en EPUB : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)
+	// - Le livre en PDF : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)
 
 }
 

@@ -1,6 +1,6 @@
 # Publication : à chaque push sur main (fin d'une release git flow), construit
-# le livre (PDF, EPUB), les diapositives et le site, publie le site sur GitHub Pages, et, si le
-# commit porte un tag de version, crée la release GitHub avec le PDF et l'EPUB.
+# le livre (PDF), les diapositives et le site, publie le site sur GitHub Pages, et, si le
+# commit porte un tag de version, crée la release GitHub avec les PDF.
 name: Publication
 
 on:
@@ -44,8 +44,9 @@ jobs:
         id: version
         run: echo "tag=$(git describe --exact-match --tags HEAD 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
 
-      # Quarto et Typst s'exécutent dans leur image Docker (voir le Makefile).
-      - name: Livre (PDF et EPUB)
+      # Le livre est imprimé depuis le site par Chromium et Paged.js, l'aide-mémoire
+      # par Quarto et Typst, chacun dans son image Docker (voir le Makefile).
+      - name: Livre (PDF)
         run: make book
 
       # Marp et la vérification du rendu s'exécutent aussi dans des conteneurs.
@@ -66,7 +67,6 @@ jobs:
           name: livre
           path: |
             book/golang-demystified.pdf
-            book/golang-demystified.epub
             book/aide-memoire-go.pdf
 
   deploiement:
@@ -95,12 +95,12 @@ jobs:
         with:
           name: livre
 
-      - name: Création de la release avec le PDF et l'EPUB
+      - name: Création de la release avec les PDF
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.construction.outputs.tag }}
         run: |
-          gh release create "$TAG" golang-demystified.pdf golang-demystified.epub aide-memoire-go.pdf \
+          gh release create "$TAG" golang-demystified.pdf aide-memoire-go.pdf \
             --repo "$GITHUB_REPOSITORY" \
             --title "Golang Demystified ${TAG#v}" \
-            --notes "Le livre en PDF et en EPUB, et l'aide-mémoire en PDF. Version en ligne : https://laurentpoirierfr.github.io/golang-demystified/"
+            --notes "Le livre et l'aide-mémoire en PDF. Version en ligne : https://laurentpoirierfr.github.io/golang-demystified/"
