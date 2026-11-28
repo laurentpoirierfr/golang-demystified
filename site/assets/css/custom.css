@@ -1,0 +1,85 @@
+/* Mise en page de livre : texte à empattements, colonne de lecture étroite.
+   Le code, les tableaux et les schémas gardent toute la largeur du contenu.
+   Hextra charge ce fichier après ses propres styles (assets/css/custom.css). */
+:root {
+  --book-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --book-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+  --book-measure: 42rem;
+}
+
+/* Corps du texte des pages du livre (pas la page d'accueil) */
+article .content {
+  font-family: var(--book-serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* Colonne de lecture : seulement pour la prose */
+article .content > p,
+article .content > ul,
+article .content > ol,
+article .content > blockquote,
+article .content > .hextra-alert,
+article .content > h2,
+article .content > h3,
+article .content > h4 {
+  max-width: var(--book-measure);
+}
+
+article .content > p,
+article .content > ul > li,
+article .content > ol > li {
+  text-align: justify;
+  hyphens: auto;
+}
+
+article .content h1,
+article .content h2,
+article .content h3,
+article .content h4 {
+  font-family: var(--book-serif);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Le titre de l'alerte (« Note », « Attention ») reste dans la police de
+   l'interface, comme un libellé. */
+article .content .hextra-alert-title {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.95rem;
+}
+
+/* Code : taille fixe, indépendante du corps de texte agrandi */
+article .content code,
+article .content pre {
+  font-family: var(--book-mono);
+}
+
+article .content code {
+  font-size: 0.85em;
+}
+
+article .content pre,
+article .content pre code {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  text-align: left;
+  hyphens: none;
+}
+
+/* Tableaux : police sans empattements, plus compacte */
+article .content table {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+/* Un identifiant ne se coupe pas dans un tableau */
+article .content table code {
+  white-space: nowrap;
+}
+
+/* Les schémas seuls dans un paragraphe prennent toute la largeur */
+article .content > p:has(> img:only-child) {
+  max-width: none;
+}
