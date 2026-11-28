@@ -1,6 +1,6 @@
-# Environnement « pdf » (hugo --environment pdf), utilisé par make book : il
-# ajoute à la page d'accueil le format « livre », tout le livre sur une seule
-# page (layouts/home.livre.html), que book/pdf/imprime.js pagine et imprime.
+# Environnement « pdf » (hugo --environment pdf), utilisé par pdf/construit.sh :
+# il ajoute à la page d'accueil le format « livre », tout le livre sur une
+# seule page (layouts/home.livre.html), que pdf/imprime.js pagine et imprime.
 # Le site publié ne contient pas cette page.
 outputFormats:
   livre:
@@ -13,3 +13,7 @@ outputFormats:
 
 outputs:
   home: [html, livre]
+
+params:
+  # Adresse du site publié, rappelée sous la table des matières du PDF.
+  enLigne: laurentpoirierfr.github.io/golang-demystified

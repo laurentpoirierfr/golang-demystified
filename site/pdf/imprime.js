@@ -1,11 +1,11 @@
 // Imprime le livre en PDF : sert le site construit dans l'environnement
-// « pdf » (site/config/pdf), ouvre la page /livre/ dans Chromium, attend que
-// Paged.js l'ait paginée, puis l'imprime. Lancé par make book, dans l'image
-// zenika/alpine-chrome:*-with-puppeteer :
+// « pdf » (config/pdf/hugo.yaml), ouvre la page /livre/ dans Chromium, attend
+// que Paged.js l'ait paginée, puis l'imprime. Lancé par pdf/construit.sh, dans
+// l'image zenika/alpine-chrome:*-with-puppeteer :
 //
 //   /site    le site construit (hugo --environment pdf), avec les polices
 //            (polices/) et paged.polyfill.min.js
-//   /sortie  où écrire golang-demystified.pdf
+//   /sortie  où écrire livre.pdf
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
@@ -14,7 +14,8 @@ const puppeteer = require("puppeteer");
 const PORT = 8123;
 const types = {
   ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript",
-  ".svg": "image/svg+xml", ".png": "image/png", ".otf": "font/otf", ".ttf": "font/ttf",
+  ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp",
+  ".otf": "font/otf", ".ttf": "font/ttf", ".woff2": "font/woff2",
 };
 
 function fichier(url) {
@@ -55,12 +56,12 @@ const serveur = http.createServer((req, res) => {
     console.log(`livre paginé : ${pages} pages en ${Math.round((Date.now() - debut) / 1000)} s`);
 
     await page.pdf({
-      path: "/sortie/golang-demystified.pdf",
+      path: "/sortie/livre.pdf",
       preferCSSPageSize: true,
       printBackground: true,
       timeout: 15 * 60 * 1000,
     });
-    console.log("écrit : golang-demystified.pdf");
+    console.log("écrit : livre.pdf");
   } finally {
     await navigateur.close();
     serveur.close();

@@ -2,13 +2,14 @@
   Tout le livre sur une seule page, pour le PDF (environnement « pdf », voir
   config/pdf/hugo.yaml). Les feuilles de style sont celles du site (hugo-book
   et assets/styles/custom.css), complétées par assets/styles/livre.css pour
-  la mise en page : Paged.js pagine le document, puis book/pdf/imprime.js
-  l'imprime avec Chromium.
+  la mise en page : Paged.js pagine le document, puis pdf/imprime.js
+  l'imprime avec Chromium (pdf/construit.sh enchaîne le tout).
 */ -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Locale }}" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="data:,">
   <title>{{ .Site.Title }}</title>
   {{- $styles := slice -}}
   {{- range resources.Get "styles/index.yaml" | transform.Unmarshal -}}
@@ -20,6 +21,7 @@
 </head>
 <body>
 
+{{- /* Les pages dans l'ordre du menu : parties, chapitres, pages. */}}
 {{- $pages := slice -}}
 {{- $section := partialCached "docs/menu-section" .Site -}}
 {{- range partialCached "docs/menu-section-pages" $section -}}
@@ -39,34 +41,40 @@
 <section class="accueil markdown" id="accueil" data-url="{{ ($.OutputFormats.Get "html").RelPermalink }}">
   {{ .Content }}
   <p class="colophon">
-    {{- /* make book passe la version par HUGO_PARAMS_VERSION. */}}
-    Version {{ .Site.Params.version | default "de développement" }} · {{ now.Format "2006-01-02" }} ·
-    en ligne : laurentpoirierfr.github.io/golang-demystified
+    {{- /* pdf/construit.sh passe la version par HUGO_PARAMS_VERSION. */}}
+    Version {{ .Site.Params.version | default "de développement" }} · {{ now.Format "2006-01-02" }}
+    {{- with .Site.Params.enLigne }} · en ligne : {{ . }}{{ end }}
   </p>
 </section>
 
+{{- /* Une partie (section directement sous docs/) commence sur une page de
+       droite ; chapitres et pages, sur une nouvelle page. */}}
 {{- range $pages }}
-<section class="{{ if .IsSection }}partie{{ else }}chapitre{{ end }} markdown" id="{{ .RelPermalink | anchorize }}" data-url="{{ .RelPermalink }}">
-  {{ .Content }}
+<section class="{{ if and .IsSection (eq .Parent $section) }}partie{{ else }}chapitre{{ end }} markdown" id="{{ .RelPermalink | anchorize }}" data-url="{{ .RelPermalink }}">
+  {{- /* Les images relatives (schémas rangés à côté de leur page) sont
+         résolues depuis l'adresse de leur page, avant tout chargement. */}}
+  {{ .Content | replaceRE `(<img[^>]*\ssrc=")([^"/#][^":]*")` (printf "${1}%s${2}" .RelPermalink) | safeHTML }}
 </section>
 {{- end }}
 
 <script>
-// Les liens internes pointent vers les pages du site ; dans le livre, ils
-// pointent vers la section correspondante. Les identifiants des titres sont
-// préfixés par celui de leur section : « exercices » existe dans plusieurs
-// chapitres.
+// Le contenu de chaque page est écrit pour son adresse sur le site ; ici,
+// toutes les pages sont réunies sur /livre/.
+// - Les identifiants des titres sont préfixés par celui de leur section :
+//   « exercices » ou « a-retenir » existent dans plusieurs pages.
+// - Les liens internes pointent vers la section correspondante (classe
+//   « renvoi », à laquelle livre.css ajoute le numéro de page).
 (function () {
   const sections = new Map();
   for (const s of document.querySelectorAll("section[data-url]")) {
     sections.set(s.dataset.url, s);
     for (const e of s.querySelectorAll("[id]")) e.id = s.id + "--" + e.id;
   }
+  const base = (e) => new URL(e.closest("section").dataset.url, location.origin);
   for (const a of document.querySelectorAll("section[data-url] a[href]")) {
     const href = a.getAttribute("href");
     if (/^[a-z]+:/i.test(href) || href.startsWith("#")) continue;
-    const base = new URL(a.closest("section").dataset.url, location.origin);
-    const cible = new URL(href, base);
+    const cible = new URL(href, base(a));
     if (cible.origin !== location.origin) continue;
     const s = sections.get(cible.pathname);
     if (!s) continue;

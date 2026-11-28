@@ -16,7 +16,7 @@ MARP_USERNS := $(if $(shell docker --version 2>/dev/null | grep -i podman),--use
 MARP = docker run --rm $(MARP_USERNS) -e MARP_USER="$(shell id -u):$(shell id -g)" \
 	--volume "$(CURDIR)/$(SLIDES_DIR):/home/marp/app" \
 	--volume "$(CURDIR)/slides/theme:/theme:ro" \
-	--volume "$(CURDIR)/book/quarto/fonts:/home/marp/.fonts:ro" \
+	--volume "$(CURDIR)/site/pdf/polices:/home/marp/.fonts:ro" \
 	$(MARP_IMAGE)
 
 .PHONY: all site publication serve book aide-memoire pdf slides slides-verif check vuln lint test-integration sqlc buf wasm wasm-tinygo rust-et-go numerote generate clean
@@ -38,7 +38,7 @@ slides:
 	rm -rf $(SLIDES_DIR)
 	go run ./tools/mkslides -content site/content/docs -out $(SLIDES_DIR)/md
 	mkdir -p $(SLIDES_DIR)/md/polices
-	cp book/quarto/fonts/SourceSans3-*.otf book/quarto/fonts/Go-Mono.ttf book/quarto/fonts/Go-Mono-Bold.ttf $(SLIDES_DIR)/md/polices/
+	cp site/pdf/polices/SourceSans3-*.otf site/pdf/polices/Go-Mono.ttf site/pdf/polices/Go-Mono-Bold.ttf $(SLIDES_DIR)/md/polices/
 	$(MARP) --input-dir md --output site --allow-local-files --theme-set /theme/golang.css
 	$(MARP) --input-dir md --output site --allow-local-files --pdf --theme-set /theme/golang.css
 	cp -r $(SLIDES_DIR)/md/polices $(SLIDES_DIR)/md/index.html $(SLIDES_DIR)/site/
@@ -54,35 +54,12 @@ slides-verif:
 serve:
 	cd site && hugo server --buildDrafts --renderToMemory
 
-## book : génère le livre en PDF, avec le rendu du site. Hugo construit tout
-## le livre sur une seule page (environnement « pdf », site/config/pdf), que
-## Paged.js pagine et que Chromium imprime (book/pdf/imprime.js).
-PAGED_VERSION := 0.4.3
-PAGED_SHA256  := f44e35a6d5106d819c3415fd38591de04d3834343c14e50a562b84257e204692
-PAGED_JS      := book/build/paged/paged.polyfill.min.js
-LIVRE_VERSION := $(shell git describe --tags --always 2>/dev/null)
-
-$(PAGED_JS):
-	mkdir -p $(dir $@)
-	curl -fsSL -o $@.tmp https://unpkg.com/pagedjs@$(PAGED_VERSION)/dist/paged.polyfill.min.js
-	echo "$(PAGED_SHA256)  $@.tmp" | sha256sum --check --quiet
-	mv $@.tmp $@
-
-book: $(PAGED_JS)
-	rm -rf book/build/site-pdf book/build/pdf
-	cd site && HUGO_PARAMS_VERSION=$(LIVRE_VERSION) hugo --environment pdf --minify \
-		--baseURL http://localhost:8123/ --destination ../book/build/site-pdf
-	# Les polices et Paged.js sont servis avec le site.
-	cp -r book/quarto/fonts book/build/site-pdf/polices
-	cp $(PAGED_JS) book/build/site-pdf/
-	# Le conteneur écrit le PDF sous son propre utilisateur.
-	mkdir -p book/build/pdf && chmod 777 book/build/pdf
-	docker run --rm -e HOME=/tmp \
-		--volume "$(CURDIR)/book/build/site-pdf:/site:ro" \
-		--volume "$(CURDIR)/book/pdf:/usr/src/app/livre:ro" \
-		--volume "$(CURDIR)/book/build/pdf:/sortie" \
-		$(PUPPETEER_IMAGE) node livre/imprime.js
-	cp book/build/pdf/golang-demystified.pdf $(BOOK_PDF)
+## book : génère le livre en PDF, avec le rendu du site (site/pdf/construit.sh,
+## modèle du skill livre-technique) : Hugo construit tout le livre sur une
+## seule page (environnement « pdf »), que Paged.js pagine et que Chromium
+## imprime. Puis l'aide-mémoire.
+book:
+	site/pdf/construit.sh $(BOOK_PDF)
 	$(MAKE) aide-memoire
 
 ## aide-memoire : le PDF séparé de l'aide-mémoire (annexe), en deux colonnes
@@ -90,7 +67,8 @@ aide-memoire:
 	go run ./tools/mkbook -content site/content/docs -static site/static \
 		-config book/quarto/_quarto.yml -out $(QUARTO_DIR) >/dev/null
 	rm -rf $(AIDE_DIR) && mkdir -p $(AIDE_DIR)
-	cp -r book/quarto/fonts book/aide-memoire/aide-memoire.typ $(AIDE_DIR)/
+	cp -r site/pdf/polices $(AIDE_DIR)/fonts
+	cp book/aide-memoire/aide-memoire.typ $(AIDE_DIR)/
 	# Le contenu du chapitre, sans son titre ni son introduction.
 	{ cat book/aide-memoire/entete.yml; sed '1,/^## /{/^## /!d}' $(QUARTO_DIR)/*-aide-memoire.qmd; } \
 		> $(AIDE_DIR)/aide-memoire-go.qmd

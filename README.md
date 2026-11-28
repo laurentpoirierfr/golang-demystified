@@ -18,8 +18,8 @@ sa bibliothèque standard et son évolution au fil des versions.
 |---------------------|--------------------------------------------------------------|
 | `site/`             | Site [Hugo](https://gohugo.io) (thème [hugo-book](https://github.com/alex-shpak/hugo-book), mise en page de livre) |
 | `site/content/docs` | Contenu du livre, source unique du site, du PDF et des diapositives |
-| `book/pdf/`         | Impression du livre PDF depuis le site ([Paged.js](https://pagedjs.org) et Chromium) |
-| `book/quarto/`      | Polices du livre, et projet [Quarto](https://quarto.org) de l'aide-mémoire |
+| `site/pdf/`         | Livre PDF au rendu du site ([Paged.js](https://pagedjs.org) et Chromium) : `construit.sh`, et les polices du livre, des diapositives et de l'aide-mémoire |
+| `book/quarto/`      | Projet [Quarto](https://quarto.org) de l'aide-mémoire |
 | `book/aide-memoire/` | Modèle [Typst](https://typst.app) de l'aide-mémoire          |
 | `.github/workflows` | Intégration continue et publication (GitHub Actions)         |
 | `examples/`         | Code des exemples du livre, compilé et testé                 |
@@ -97,4 +97,4 @@ GitHub avec les PDF. Ces fichiers générés ne sont pas versionnés.
 Le livre PDF et l'aide-mémoire sont composés en Source Serif 4 et Source Sans 3
 (Adobe, SIL Open Font License) et en Go Mono (Bigelow & Holmes, licence BSD).
 Trois symboles absents de ces polices (★, ↳, ␣) viennent de DejaVu Sans
-(licence Bitstream Vera). Les licences sont dans `book/quarto/fonts/`.
+(licence Bitstream Vera). Les licences sont dans `site/pdf/polices/`.
