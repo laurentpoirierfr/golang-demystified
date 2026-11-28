@@ -176,8 +176,9 @@ const (
 )
 ```
 
-Une constante sans type explicite est **non typée** : elle a une précision
-arbitraire et prend le type requis par son utilisation. Elle peut donc
+Une constante sans type explicite est une **constante non typée** (*untyped
+constant*) : elle a une précision arbitraire et prend le type requis par son
+utilisation. Elle peut donc
 dépasser la capacité de tous les types numériques, du moment que le résultat
 final tient dans le type cible :
 

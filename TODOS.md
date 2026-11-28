@@ -47,7 +47,8 @@ Légende : `[ ]` à faire, `[~]` en cours, `[x]` fait.
   partie VI) ; la partie I (installation, premier programme) n'en a pas
 - [x] **Aide-mémoire** : syntaxe, idiomes courants, commandes `go` ; en annexe
   (partie VII) et en PDF séparé (quatre pages, deux colonnes), sorties testées
-- [ ] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…)
+- [x] **Glossaire français-anglais** (goroutine, *receiver*, *embedding*…) :
+  75 termes en annexe, table inverse, renvois vérifiés par un test
 - [ ] **Chapitre « Go pour les développeurs Java, Python ou JavaScript »** :
   comparaison des concepts
 - [x] **Diapositives de présentation** avec [Marp](https://marp.app) : un

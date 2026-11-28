@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -239,6 +240,30 @@ func TestEtiquetteJamaisSeule(t *testing.T) {
 		lignes := strings.Split(strings.TrimSpace(diapo), "\n")
 		if dernier := lignes[len(lignes)-1]; strings.HasPrefix(dernier, "**Groupe") {
 			t.Errorf("étiquette seule en bas de diapositive :\n%s", diapo)
+		}
+	}
+}
+
+// A table whose rows are short stays on one slide ; the same number of rows
+// with long cells is split, each half keeping the header.
+func TestTableauTropHaut(t *testing.T) {
+	ligne := func(cellule string) string { return "| terme | english | " + cellule + " | voir |" }
+	tete := []string{"| Terme | Anglais | Définition | Voir |", "|---|---|---|---|"}
+	courtes, longues := slices.Clone(tete), slices.Clone(tete)
+	for range 8 {
+		courtes = append(courtes, ligne("courte"))
+		longues = append(longues, ligne(strings.Repeat("une définition longue ", 5)))
+	}
+	if p := fitTable(courtes); len(p) != 1 {
+		t.Errorf("lignes courtes : %d morceaux, attendu 1", len(p))
+	}
+	p := fitTable(longues)
+	if len(p) < 2 {
+		t.Fatalf("lignes longues : %d morceau, attendu au moins 2", len(p))
+	}
+	for _, m := range p {
+		if !strings.HasPrefix(m.md, "| Terme") || m.weight > budget-subtitleWeight-1 {
+			t.Errorf("morceau sans en-tête ou trop haut (%.1f) :\n%s", m.weight, m.md)
 		}
 	}
 }
