@@ -1,0 +1,14 @@
+{{- /* Alertes GitHub (> [!NOTE]…) : le style de hugo-book (book-hint), avec
+       un libellé en français au-dessus du texte. */ -}}
+{{- $libelles := dict "note" "Note" "tip" "Astuce" "important" "Important" "warning" "Attention" "caution" "Prudence" -}}
+{{- if .AlertType -}}
+{{- $type := lower .AlertType -}}
+<blockquote class="book-hint {{ $type }}">
+<p class="book-hint-titre">{{ or .AlertTitle (index $libelles $type) (title $type) }}</p>
+{{ .Text -}}
+</blockquote>
+{{- else -}}
+<blockquote>
+{{ .Text -}}
+</blockquote>
+{{- end -}}

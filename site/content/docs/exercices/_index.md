@@ -2,6 +2,7 @@
 title: "Exercices corrigés"
 linkTitle: "VI - Exercices corrigés"
 weight: 60
+bookCollapseSection: false   # partie sans chapitre : rien à replier
 ---
 
 Les chapitres des parties II et III se terminent par trois exercices, de

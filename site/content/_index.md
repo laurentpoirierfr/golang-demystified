@@ -1,44 +1,37 @@
 ---
 title: "Golang Demystified"
-layout: hextra-home
+bookToC: false
+bookBreadcrumbs: false
 ---
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 2.5rem; margin-bottom: 2rem;">
-<div style="flex: 1 1 22rem;">
+# Golang Demystified
 
-{{< hextra/hero-badge >}}
-  Édition Go 1.27
-{{< /hextra/hero-badge >}}
+*Le langage Go, ses outils et son évolution. Édition Go 1.27.*
 
-<div style="margin-top: 1rem;"></div>
+Go a été conçu pour relever les défis du développement moderne avec
+simplicité et efficacité. Ce livre le présente dans son ensemble : le langage,
+ses outils, sa bibliothèque standard, et la façon dont il a évolué au fil des
+versions. Chaque exemple est compilé et testé à chaque modification.
 
-{{< hextra/hero-headline >}}
-  Golang Demystified
-{{< /hextra/hero-headline >}}
+[Lire le livre](docs/) ·
+[Télécharger le PDF](https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf) ·
+[Diapositives](https://laurentpoirierfr.github.io/golang-demystified/diapositives/)
 
-{{< hextra/hero-subtitle >}}
-  Découvrez la puissance et la simplicité de Go, le langage conçu pour relever
-  les défis du développement moderne avec efficacité et élégance.
-{{< /hextra/hero-subtitle >}}
+## Table des matières
 
-<div style="margin-top: 1.5rem;">
-{{< hextra/hero-button text="Lire le livre" link="docs" >}}
-{{< hextra/hero-button text="PDF" link="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
-{{< hextra/hero-button text="EPUB" link="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.epub" style="background: transparent; color: inherit; border: 1px solid currentColor;" >}}
-</div>
-
-</div>
-<div style="flex: 0 1 18rem; margin: 0 auto;">
-<a href="https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf" title="Télécharger le livre en PDF">
-<img src="images/couverture.png" alt="Couverture du livre Golang Demystified, édition Go 1.27" width="288" height="407" style="width: 100%; height: auto; border-radius: 6px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);">
-</a>
-</div>
-</div>
-
-{{< hextra/feature-grid >}}
-  {{< hextra/feature-card title="Découvrir Go" link="docs/decouvrir/" subtitle="Histoire et philosophie, installation, premier programme et l'outil go." >}}
-  {{< hextra/feature-card title="Le langage" link="docs/langage/" subtitle="Types, fonctions, interfaces, génériques, erreurs, concurrence : les bases solides." >}}
-  {{< hextra/feature-card title="La bibliothèque standard" link="docs/bibliotheque/" subtitle="Texte, collections, fichiers, JSON, HTTP, slog, context et tests." >}}
-  {{< hextra/feature-card title="L'évolution de Go" link="docs/evolution/" subtitle="Ce que chaque version a apporté, de Go 1.0 à Go 1.27." >}}
-  {{< hextra/feature-card title="Par l'exemple" link="docs/approfondissements/" subtitle="Go idiomatique, concurrence, templates, API web, temps réel, gRPC, ligne de commande, sqlc, architecture hexagonale, événements, IA et MCP, WebAssembly, Kubernetes, CI/CD, sécurité, observabilité, performance, coulisses du runtime : des exemples complets et testés." >}}
-{{< /hextra/feature-grid >}}
+- **I.** [Découvrir Go](docs/decouvrir/) : histoire et philosophie, installation,
+  premier programme et l'outil `go`.
+- **II.** [Le langage](docs/langage/) : types, fonctions, interfaces, génériques,
+  erreurs, concurrence : les bases solides.
+- **III.** [La bibliothèque standard](docs/bibliotheque/) : texte, collections,
+  fichiers, JSON, HTTP, slog, context et tests.
+- **IV.** [L'évolution de Go](docs/evolution/) : ce que chaque version a apporté, de
+  Go 1.0 à Go 1.27.
+- **V.** [Approfondissements](docs/approfondissements/) : Go idiomatique,
+  concurrence, templates, API web, temps réel, gRPC, ligne de commande, sqlc,
+  architecture hexagonale, événements, IA et MCP, WebAssembly, Kubernetes,
+  CI/CD, sécurité, observabilité, performance, coulisses du runtime : des
+  exemples complets et testés.
+- **VI.** [Exercices corrigés](docs/exercices/) : les exercices de chaque chapitre,
+  classés par difficulté.
+- **VII.** [Annexes](docs/annexes/) : aide-mémoire et glossaire français-anglais.

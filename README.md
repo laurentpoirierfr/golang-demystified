@@ -17,7 +17,7 @@ sa bibliothèque standard et son évolution au fil des versions.
 
 | Répertoire          | Rôle                                                         |
 |---------------------|--------------------------------------------------------------|
-| `site/`             | Site [Hugo](https://gohugo.io) (thème [Hextra](https://imfing.github.io/hextra/)) |
+| `site/`             | Site [Hugo](https://gohugo.io) (thème [hugo-book](https://github.com/alex-shpak/hugo-book), mise en page de livre) |
 | `site/content/docs` | Contenu du livre, source unique du site, du PDF, de l'EPUB et des diapositives |
 | `book/quarto/`      | Configuration Quarto, modèle [Typst](https://typst.app) et polices du livre       |
 | `book/`             | Couverture et ressources du livre                            |

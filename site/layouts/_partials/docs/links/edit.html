@@ -1,0 +1,5 @@
+{{- /* Remplace celui de hugo-book : son partial docs/text/template met le
+       lien en cache sous une clé qui ne dépend pas de la page, si bien que
+       toutes les pages reçoivent le même lien. */ -}}
+{{- $chemin := strings.TrimPrefix hugo.WorkingDir .Page.File.Filename -}}
+{{- return urls.JoinPath .Site.Params.BookRepo "edit/main/site" $chemin -}}
