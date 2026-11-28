@@ -1,5 +1,6 @@
 ---
 title: "II.6 Structures et méthodes"
+description: "structures, constructeurs, méthodes, composition par intégration et balises de champs."
 weight: 60
 ---
 

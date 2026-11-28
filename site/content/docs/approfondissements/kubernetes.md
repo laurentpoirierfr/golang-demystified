@@ -1,5 +1,6 @@
 ---
 title: "V.16 Kubernetes"
+description: "une ressource personnalisée et sa boucle de réconciliation."
 weight: 160
 ---
 

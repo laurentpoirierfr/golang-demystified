@@ -28,12 +28,9 @@ menu:
     - name: Livre en PDF
       url: https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf
       weight: 10
-    - name: Diapositives
-      url: https://laurentpoirierfr.github.io/golang-demystified/diapositives/
-      weight: 20
     - name: Dépôt GitHub
       url: https://github.com/laurentpoirierfr/golang-demystified
-      weight: 30
+      weight: 20
 
 params:
   description: Go dans son ensemble, le langage, ses outils et son évolution, rassemblés comme un livre.

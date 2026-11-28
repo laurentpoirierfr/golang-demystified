@@ -1,5 +1,6 @@
 ---
 title: "V.14 Architecture événementielle"
+description: "une saga de commande avec Watermill et NATS, sans double écriture ni doublon."
 weight: 140
 ---
 

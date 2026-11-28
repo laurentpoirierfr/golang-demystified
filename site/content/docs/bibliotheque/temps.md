@@ -1,5 +1,6 @@
 ---
 title: "III.4 Le temps"
+description: "instants, durées, formats, fuseaux horaires, timers et tickers."
 weight: 40
 ---
 

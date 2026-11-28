@@ -1,5 +1,6 @@
 ---
 title: "V.6 Accès aux données"
+description: "du SQL typé avec sqlc, des migrations embarquées, et Testcontainers."
 weight: 60
 ---
 

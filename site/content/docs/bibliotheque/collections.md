@@ -1,5 +1,6 @@
 ---
 title: "III.2 Collections"
+description: "trier, chercher et modifier avec slices et maps, itérateurs et cmp."
 weight: 20
 ---
 

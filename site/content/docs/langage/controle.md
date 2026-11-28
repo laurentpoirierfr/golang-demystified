@@ -1,5 +1,6 @@
 ---
 title: "II.3 Contrôle de flux"
+description: "if, la seule boucle for, switch et defer."
 weight: 30
 ---
 

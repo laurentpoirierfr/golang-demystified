@@ -1,5 +1,6 @@
 ---
 title: "II.9 Génériques"
+description: "fonctions et types génériques, contraintes, et quand s'en passer."
 weight: 90
 ---
 

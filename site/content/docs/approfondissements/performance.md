@@ -1,5 +1,6 @@
 ---
 title: "V.10 Profilage et performance"
+description: "mesurer, profiler avec pprof, et corriger étape par étape."
 weight: 100
 ---
 

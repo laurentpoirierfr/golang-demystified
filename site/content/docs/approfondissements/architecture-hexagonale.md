@@ -1,5 +1,6 @@
 ---
 title: "V.7 Architecture hexagonale"
+description: "domaine, ports et adaptateurs, chaque cercle testé séparément."
 weight: 70
 ---
 

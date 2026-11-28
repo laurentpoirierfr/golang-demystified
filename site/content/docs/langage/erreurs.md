@@ -1,5 +1,6 @@
 ---
 title: "II.8 Gestion des erreurs"
+description: "des erreurs qui sont des valeurs : les créer, les envelopper, les inspecter, et panic."
 weight: 80
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "B. Glossaire"
+description: "les termes anglais de l'écosystème Go et leur traduction dans ce livre."
 weight: 20
 ---
 

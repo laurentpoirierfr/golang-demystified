@@ -1,5 +1,6 @@
 ---
 title: "III.1 Texte"
+description: "formater avec fmt, manipuler avec strings, convertir avec strconv, et l'UTF-8."
 weight: 10
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "II.1 Variables, constantes et types"
+description: "déclarations, valeur zéro, types de base, conversions, chaînes et constantes."
 weight: 10
 ---
 

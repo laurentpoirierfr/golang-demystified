@@ -1,5 +1,6 @@
 ---
 title: "V.15 CI/CD"
+description: "vérifications, Dependabot, GoReleaser, images de conteneurs et SBOM."
 weight: 150
 ---
 
@@ -221,7 +222,7 @@ PostgreSQL sans aucune configuration.
 ```
 
 ```
-🔔 Container is ready: c241370f3985
+Container is ready: c241370f3985
 --- PASS: TestPostgres (14.39s)
 --- PASS: TestPostgresCatalogue (14.64s)
 --- PASS: TestPostgresMigrationsReversibles (2.70s)

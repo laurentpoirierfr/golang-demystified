@@ -1,5 +1,6 @@
 ---
 title: "I.5 Premier programme"
+description: "un module, un programme, un test et une dépendance, de bout en bout."
 weight: 30
 ---
 

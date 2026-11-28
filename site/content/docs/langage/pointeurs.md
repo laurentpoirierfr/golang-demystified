@@ -1,5 +1,6 @@
 ---
 title: "II.10 Pointeurs et mémoire"
+description: "pointeurs, pile et tas, analyse d'échappement et ramasse-miettes."
 weight: 100
 ---
 

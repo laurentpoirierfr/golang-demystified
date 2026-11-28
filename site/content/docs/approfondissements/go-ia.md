@@ -1,5 +1,6 @@
 ---
 title: "V.18 Go et l'IA"
+description: "modèles de langage, outils, un serveur MCP, et la sécurité face à un modèle."
 weight: 180
 ---
 

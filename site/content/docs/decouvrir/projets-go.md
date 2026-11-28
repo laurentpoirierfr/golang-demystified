@@ -1,5 +1,6 @@
 ---
 title: "I.2 Les grands projets écrits en Go"
+description: "ce que l'infrastructure moderne doit à Go, des conteneurs aux bases de données."
 weight: 15
 ---
 

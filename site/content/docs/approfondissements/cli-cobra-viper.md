@@ -1,5 +1,6 @@
 ---
 title: "V.5 Ligne de commande"
+description: "un outil en ligne de commande avec cobra, viper et un client généré."
 weight: 50
 ---
 

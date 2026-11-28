@@ -1,5 +1,6 @@
 ---
 title: "V.4 Une API web complète"
+description: "du contrat OpenAPI aux tests, une API réelle avec la bibliothèque standard."
 weight: 40
 ---
 

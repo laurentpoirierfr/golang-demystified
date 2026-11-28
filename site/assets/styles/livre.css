@@ -16,18 +16,31 @@
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono.ttf"); font-weight: 400; font-style: normal; }
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Bold.ttf"); font-weight: 700; font-style: normal; }
 @font-face { font-family: "Go Mono"; src: url("/polices/Go-Mono-Italic.ttf"); font-weight: 400; font-style: italic; }
+/* Les quelques symboles absents des trois polices : ★ (difficulté des
+   exercices), ↳ et ␣. Placée en tête de chaque famille, limitée à ces
+   caractères par unicode-range. */
+@font-face { font-family: "Symboles"; src: url("/polices/DejaVuSans.ttf"); unicode-range: U+2605, U+21B3, U+2423; }
 
 :root {
-  --book-serif: "Source Serif 4", "Iowan Old Style", Palatino, Georgia, serif;
-  --book-mono: "Go Mono", ui-monospace, monospace;
-  --book-sans: "Source Sans 3", system-ui, sans-serif;
+  --book-serif: "Symboles", "Source Serif 4", "Iowan Old Style", Palatino, Georgia, serif;
+  --book-mono: "Symboles", "Go Mono", ui-monospace, monospace;
+  --book-sans: "Symboles", "Source Sans 3", system-ui, sans-serif;
   --book-measure: none;          /* toute la largeur de la page */
   font-size: 9.5pt;
 }
 
-body {
+/* Toutes les familles pointent vers les polices embarquées : une famille
+   système (system-ui, sans-serif) se résoudrait, dans le conteneur Chromium,
+   en une police de repli quelconque. */
+html, body {
   font-family: var(--book-sans);
   background: #fff;
+}
+code, kbd, samp, pre {
+  font-family: var(--book-mono);
+}
+.markdown table {
+  font-family: var(--book-sans);   /* custom.css : system-ui */
 }
 
 /* ==== Pages ==== */
@@ -60,7 +73,7 @@ body {
   @top-center { content: none; }
 }
 
-/* ==== Couverture, page de titre ==== */
+/* ==== Couverture ==== */
 .couverture {
   page: couverture;
   background: #0b2533;
@@ -69,37 +82,28 @@ body {
   display: block;
   width: 210mm;
   height: 297mm;
-  object-fit: contain;
 }
-.titre {
-  page: liminaire;
-  break-before: page;
-  text-align: center;
-  padding-top: 70mm;
-}
-.titre p { margin: 0; }
-.titre .titre-livre { font-family: var(--book-serif); font-size: 32pt; font-weight: 600; }
-.titre .sous-titre { font-family: var(--book-serif); font-style: italic; font-size: 14pt; margin-top: 6mm; color: #334155; }
-.titre .edition { font-size: 10pt; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 10mm; color: #0b7fa5; }
-.titre .auteur { font-size: 12pt; margin-top: 50mm; }
-.titre .colophon { font-size: 8.5pt; margin-top: 30mm; color: #64748b; line-height: 1.6; }
-.titre .colophon a { color: inherit; }
 
-.preface, .sommaire {
+/* ==== Page d'accueil : celle du site, avec les numéros de page ==== */
+.accueil {
   page: liminaire;
   break-before: page;
 }
-
-/* ==== Table des matières : numéros de page calculés par Paged.js ==== */
-.sommaire ul { list-style: none; padding: 0; margin: 0; }
-.sommaire li { margin: 0; line-height: 1.55; }
-.sommaire li.partie { margin-top: 0.9em; font-weight: 600; }
-.sommaire li.chapitre { padding-left: 1.5em; }
-.sommaire a { color: inherit; text-decoration: none; display: flex; gap: 0.4em; }
-.sommaire a::after {
+.accueil h3 { break-after: avoid; }
+/* La dernière phrase de l'accueil décrit le menu du site. */
+.accueil > p:nth-last-child(2) { display: none; }
+.accueil .colophon {
+  margin-top: 2em;
+  font-family: var(--book-sans);
+  font-size: 0.8rem;
+  color: #64748b;
+}
+.accueil li a.renvoi::after {
   content: target-counter(attr(href url), page);
-  margin-left: auto;
-  padding-left: 0.6em;
+  float: right;
+  margin-left: 1em;
+  font-size: 1em;
+  color: inherit;
 }
 
 /* ==== Parties et chapitres ==== */
@@ -136,7 +140,7 @@ section.partie h1 {
 /* Liens : le site les imprime suivis de leur adresse (print.css de
    hugo-book) ; dans le livre, un renvoi interne donne la page. */
 a::after { content: none; }
-.markdown a.renvoi::after {
+section.partie a.renvoi::after, section.chapitre a.renvoi::after {
   content: " (p. " target-counter(attr(href url), page) ")";
   font-size: 0.85em;
   color: #64748b;
