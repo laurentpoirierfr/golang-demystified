@@ -1,8 +1,9 @@
 ---
-title: "Annulation et délais : context"
-linkTitle: "8. Annulation et délais"
+title: "III.8 Annulation et délais"
 weight: 80
 ---
+
+# Chapitre III.8 — Annulation et délais : context
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

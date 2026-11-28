@@ -1,5 +1,7 @@
-# Configuration du livre Quarto. La liste des chapitres est ajoutée par
-# tools/mkbook à l'emplacement du marqueur ci-dessous.
+# Projet Quarto produit par tools/mkbook, qui y ajoute la liste des chapitres
+# à l'emplacement du marqueur ci-dessous. Il ne sert plus qu'à l'aide-mémoire
+# (make aide-memoire), qui en reprend le chapitre ; le livre PDF est imprimé
+# depuis le site (make book).
 project:
   type: book
   output-dir: _book
@@ -8,28 +10,4 @@ lang: fr
 
 book:
   title: "Golang Demystified"
-  subtitle: "Le langage Go, ses outils et son évolution"
-  author: "The Gang of Three"
-  date: "2026-11-19"
-  cover-image: assets/couverture.png
   # chapters: généré par mkbook
-
-number-sections: true
-toc: true
-toc-depth: 2
-
-format:
-  typst:
-    papersize: a4
-    page-numbering: false
-    template-partials:
-      - typst-show.typ
-    font-paths:
-      - fonts
-    margin:
-      x: 2.2cm
-      y: 2.5cm
-    section-numbering: 1.1.1
-    code-line-numbers: false
-  epub:
-    toc-depth: 2

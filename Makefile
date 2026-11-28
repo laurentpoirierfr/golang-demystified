@@ -1,7 +1,6 @@
 QUARTO_IMAGE := ghcr.io/quarto-dev/quarto:1.11.9
 QUARTO_DIR   := book/build/quarto
 BOOK_PDF     := book/golang-demystified.pdf
-BOOK_EPUB    := book/golang-demystified.epub
 AIDE_DIR     := book/build/aide-memoire
 AIDE_PDF     := book/aide-memoire-go.pdf
 # Podman rootless : keep-id conserve l'UID de l'utilisateur dans le conteneur.
@@ -28,10 +27,10 @@ all: check book slides publication
 site:
 	cd site && hugo --minify --cleanDestinationDir
 
-## publication : le site, avec le PDF, l'EPUB et les diapositives (après make
-## book et make slides)
+## publication : le site, avec le PDF et les diapositives (après make book et
+## make slides)
 publication: site
-	cp $(BOOK_PDF) $(BOOK_EPUB) $(AIDE_PDF) site/public/
+	cp $(BOOK_PDF) $(AIDE_PDF) site/public/
 	cp -r $(SLIDES_DIR)/site site/public/diapositives
 
 ## slides : un diaporama Marp par rubrique et par chapitre, en HTML et en PDF
@@ -55,17 +54,35 @@ slides-verif:
 serve:
 	cd site && hugo server --buildDrafts --renderToMemory
 
-## book : génère le livre en PDF (Quarto + Typst) et en EPUB
-book:
-	go run ./tools/mkbook -content site/content/docs -static site/static \
-		-config book/quarto/_quarto.yml -out $(QUARTO_DIR)
-	cp -r book/assets book/quarto/fonts book/quarto/*.typ $(QUARTO_DIR)/
-	$(QUARTO) quarto typst compile couverture-epub.typ assets/couverture.png \
-		--font-path fonts --ppi 110
-	$(QUARTO) quarto render
-	cp $(QUARTO_DIR)/_book/Golang-Demystified.pdf $(BOOK_PDF)
-	cp $(QUARTO_DIR)/_book/Golang-Demystified.epub $(BOOK_EPUB)
-	cp $(QUARTO_DIR)/assets/couverture.png site/static/images/couverture.png
+## book : génère le livre en PDF, avec le rendu du site. Hugo construit tout
+## le livre sur une seule page (environnement « pdf », site/config/pdf), que
+## Paged.js pagine et que Chromium imprime (book/pdf/imprime.js).
+PAGED_VERSION := 0.4.3
+PAGED_SHA256  := f44e35a6d5106d819c3415fd38591de04d3834343c14e50a562b84257e204692
+PAGED_JS      := book/build/paged/paged.polyfill.min.js
+LIVRE_VERSION := $(shell git describe --tags --always 2>/dev/null)
+
+$(PAGED_JS):
+	mkdir -p $(dir $@)
+	curl -fsSL -o $@.tmp https://unpkg.com/pagedjs@$(PAGED_VERSION)/dist/paged.polyfill.min.js
+	echo "$(PAGED_SHA256)  $@.tmp" | sha256sum --check --quiet
+	mv $@.tmp $@
+
+book: $(PAGED_JS)
+	rm -rf book/build/site-pdf book/build/pdf
+	cd site && HUGO_PARAMS_VERSION=$(LIVRE_VERSION) hugo --environment pdf --minify \
+		--baseURL http://localhost:8123/ --destination ../book/build/site-pdf
+	# Les polices et Paged.js sont servis avec le site.
+	cp -r book/quarto/fonts book/build/site-pdf/polices
+	cp $(PAGED_JS) book/build/site-pdf/
+	# Le conteneur écrit le PDF sous son propre utilisateur.
+	mkdir -p book/build/pdf && chmod 777 book/build/pdf
+	docker run --rm -e HOME=/tmp \
+		--volume "$(CURDIR)/book/build/site-pdf:/site:ro" \
+		--volume "$(CURDIR)/book/pdf:/usr/src/app/livre:ro" \
+		--volume "$(CURDIR)/book/build/pdf:/sortie" \
+		$(PUPPETEER_IMAGE) node livre/imprime.js
+	cp book/build/pdf/golang-demystified.pdf $(BOOK_PDF)
 	$(MAKE) aide-memoire
 
 ## aide-memoire : le PDF séparé de l'aide-mémoire (annexe), en deux colonnes

@@ -1,8 +1,9 @@
 ---
-title: "Fichiers et flux : io, os, bufio"
-linkTitle: "3. Fichiers et flux"
+title: "III.3 Fichiers et flux"
 weight: 30
 ---
+
+# Chapitre III.3 — Fichiers et flux : io, os, bufio
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

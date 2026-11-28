@@ -1,8 +1,9 @@
 ---
-title: "Packages et modules"
-linkTitle: "12. Packages et modules"
+title: "II.12 Packages et modules"
 weight: 120
 ---
+
+# Chapitre II.12 — Packages et modules
 
 ## Les packages
 

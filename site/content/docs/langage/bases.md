@@ -1,8 +1,9 @@
 ---
-title: "Variables, constantes et types"
-linkTitle: "1. Variables, constantes et types"
+title: "II.1 Variables, constantes et types"
 weight: 10
 ---
+
+# Chapitre II.1 — Variables, constantes et types
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

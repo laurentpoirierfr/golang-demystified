@@ -1,0 +1,8 @@
+{{/* Remplace la marque du thème : la couverture du livre dans le menu,
+     le titre seul dans l'en-tête mobile (voir assets/styles/custom.css). */}}
+<div class="book-brand">
+  <a class="flex align-center" href="{{ partial "docs/links/home" . }}">
+    <img class="book-couverture" src="{{ "couverture.svg" | relURL }}" alt="Couverture du livre {{ .Site.Title }}" width="600" height="900" />
+    <span class="book-titre">{{ .Site.Title }}</span>
+  </a>
+</div>

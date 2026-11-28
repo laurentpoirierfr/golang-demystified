@@ -1,8 +1,9 @@
 ---
-title: "Génériques"
-linkTitle: "9. Génériques"
+title: "II.9 Génériques"
 weight: 90
 ---
+
+# Chapitre II.9 — Génériques
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

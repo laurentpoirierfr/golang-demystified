@@ -1,8 +1,9 @@
 ---
-title: "Collections : slices, maps, iter, cmp"
-linkTitle: "2. Collections"
+title: "III.2 Collections"
 weight: 20
 ---
+
+# Chapitre III.2 — Collections : slices, maps, iter, cmp
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

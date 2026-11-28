@@ -1,8 +1,9 @@
 ---
-title: "CI/CD d'un projet Go"
-linkTitle: "15. CI/CD"
+title: "V.15 CI/CD"
 weight: 150
 ---
+
+# Chapitre V.15 — CI/CD d'un projet Go
 
 L'outillage de Go se prête particulièrement bien à l'automatisation : une
 seule commande compile, teste, analyse et formate, sans configuration. Ce
@@ -448,7 +449,7 @@ jobs:
       - name: Version publiée
         id: version
         run: echo "tag=$(git describe --exact-match --tags HEAD 2>/dev/null || true)" >> "$GITHUB_OUTPUT"
-      - name: Livre (PDF et EPUB)
+      - name: Livre (PDF)
         run: make book
       - name: Site, avec le livre téléchargeable
         run: make publication
@@ -476,7 +477,7 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: livre
-      - run: gh release create "$TAG" golang-demystified.pdf golang-demystified.epub …
+      - run: gh release create "$TAG" golang-demystified.pdf aide-memoire-go.pdf …
 ```
 
 Trois jobs, trois responsabilités, trois niveaux de permissions : construire

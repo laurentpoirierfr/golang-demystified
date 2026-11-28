@@ -1,8 +1,9 @@
 ---
-title: "Tableaux, slices et maps"
-linkTitle: "4. Tableaux, slices et maps"
+title: "II.4 Tableaux, slices et maps"
 weight: 40
 ---
+
+# Chapitre II.4 — Tableaux, slices et maps
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

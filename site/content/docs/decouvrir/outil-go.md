@@ -1,8 +1,9 @@
 ---
-title: "L'outil go"
-linkTitle: "6. L'outil go"
+title: "I.6 L'outil go"
 weight: 40
 ---
+
+# Chapitre I.6 — L'outil go
 
 La commande `go` est le point d'entrée unique de tout l'outillage : elle
 compile, teste, formate, analyse, documente et gère les dépendances. Ce

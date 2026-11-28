@@ -1,8 +1,9 @@
 ---
-title: "JSON : encoding/json"
-linkTitle: "5. JSON"
+title: "III.5 JSON"
 weight: 50
 ---
+
+# Chapitre III.5 — JSON : encoding/json
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

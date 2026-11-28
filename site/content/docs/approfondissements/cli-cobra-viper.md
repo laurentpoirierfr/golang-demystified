@@ -1,8 +1,9 @@
 ---
-title: "Ligne de commande : cobra et viper"
-linkTitle: "5. Ligne de commande"
+title: "V.5 Ligne de commande"
 weight: 50
 ---
+
+# Chapitre V.5 — Ligne de commande : cobra et viper
 
 Le chapitre « Une API web complète » a construit un service HTTP. Ce chapitre
 construit l'outil qui permet de le piloter depuis un terminal : **`taches-cli`**.

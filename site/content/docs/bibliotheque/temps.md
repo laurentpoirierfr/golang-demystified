@@ -1,8 +1,9 @@
 ---
-title: "Le temps : time"
-linkTitle: "4. Le temps"
+title: "III.4 Le temps"
 weight: 40
 ---
+
+# Chapitre III.4 — Le temps : time
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

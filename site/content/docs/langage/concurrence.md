@@ -1,8 +1,9 @@
 ---
-title: "Goroutines et channels"
-linkTitle: "11. Goroutines et channels"
+title: "II.11 Goroutines et channels"
 weight: 110
 ---
+
+# Chapitre II.11 — Goroutines et channels
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

@@ -106,7 +106,7 @@ func deck(ch chapter, md string) string {
 	if ex := examplesRe.FindString(md); ex != "" {
 		more = append(more, fmt.Sprintf("- Le code des exemples : [%s](%s)", strings.TrimPrefix(ex, "https://github.com/laurentpoirierfr/golang-demystified/tree/main/"), ex))
 	}
-	more = append(more, "- Le livre en PDF et en EPUB : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)")
+	more = append(more, "- Le livre en PDF : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)")
 	slides = append(slides, slide{title: "Pour aller plus loin", class: "fin", body: []string{strings.Join(more, "\n")}})
 
 	return render(ch, slides)
@@ -461,7 +461,7 @@ func rubriqueDeck(r rubrique) string {
 	more := []string{
 		fmt.Sprintf("- La rubrique sur le site : [%s](%s)", r.Title, r.URL),
 		"- Une présentation détaillée par chapitre : le répertoire voisin, du même numéro",
-		"- Le livre en PDF et en EPUB : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)",
+		"- Le livre en PDF : [github.com/laurentpoirierfr/golang-demystified](https://github.com/laurentpoirierfr/golang-demystified/releases/latest)",
 	}
 	slides = append(slides, slide{title: "Pour aller plus loin", class: "fin", body: []string{strings.Join(more, "\n")}})
 	return render(ch, slides)

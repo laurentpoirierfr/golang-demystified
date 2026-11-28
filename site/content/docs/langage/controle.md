@@ -1,8 +1,9 @@
 ---
-title: "Contrôle de flux"
-linkTitle: "3. Contrôle de flux"
+title: "II.3 Contrôle de flux"
 weight: 30
 ---
+
+# Chapitre II.3 — Contrôle de flux
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

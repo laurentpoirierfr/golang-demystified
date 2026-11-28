@@ -1,8 +1,9 @@
 ---
-title: "Glossaire français-anglais"
-linkTitle: "2. Glossaire"
+title: "B. Glossaire"
 weight: 20
 ---
+
+# Annexe B — Glossaire français-anglais
 
 Ce livre traduit la plupart des termes techniques, mais en garde certains en
 anglais : ceux que toute la communauté Go emploie tels quels, en français

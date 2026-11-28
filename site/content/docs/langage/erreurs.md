@@ -1,8 +1,9 @@
 ---
-title: "Gestion des erreurs"
-linkTitle: "8. Gestion des erreurs"
+title: "II.8 Gestion des erreurs"
 weight: 80
 ---
+
+# Chapitre II.8 — Gestion des erreurs
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

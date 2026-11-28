@@ -1,8 +1,9 @@
 ---
-title: "Premier programme"
-linkTitle: "5. Premier programme"
+title: "I.5 Premier programme"
 weight: 30
 ---
+
+# Chapitre I.5 — Premier programme
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

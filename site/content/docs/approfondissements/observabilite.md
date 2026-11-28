@@ -1,8 +1,9 @@
 ---
-title: "Observabilité : traces, métriques et journaux"
-linkTitle: "9. Observabilité"
+title: "V.9 Observabilité"
 weight: 90
 ---
+
+# Chapitre V.9 — Observabilité : traces, métriques et journaux
 
 Un service en production doit pouvoir répondre à trois questions : **que
 s'est-il passé ?** (les journaux), **combien et à quelle vitesse ?** (les

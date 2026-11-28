@@ -1,8 +1,9 @@
 ---
-title: "Profilage et performance"
-linkTitle: "10. Profilage et performance"
+title: "V.10 Profilage et performance"
 weight: 100
 ---
+
+# Chapitre V.10 — Profilage et performance
 
 Go est rapide par défaut, mais un programme lent l'est presque toujours pour
 une raison précise, souvent inattendue. Ce chapitre présente la démarche et les

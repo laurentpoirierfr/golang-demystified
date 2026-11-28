@@ -1,8 +1,9 @@
 ---
-title: "Rust et Go : deux réponses à des questions différentes"
-linkTitle: "3. Rust et Go"
+title: "I.3 Rust et Go"
 weight: 17
 ---
+
+# Chapitre I.3 — Rust et Go : deux réponses à des questions différentes
 
 Rust et Go sont souvent comparés : deux langages compilés, récents, qui
 produisent des binaires rapides et ont conquis l'infrastructure logicielle.

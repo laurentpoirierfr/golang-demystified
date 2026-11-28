@@ -1,8 +1,9 @@
 ---
-title: "Templates"
-linkTitle: "3. Templates"
+title: "V.3 Templates"
 weight: 30
 ---
+
+# Chapitre V.3 — Templates
 
 Go fournit deux moteurs de gabarits qui partagent la même syntaxe :
 

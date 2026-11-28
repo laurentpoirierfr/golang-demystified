@@ -1,8 +1,9 @@
 ---
-title: "Architecture hexagonale"
-linkTitle: "7. Architecture hexagonale"
+title: "V.7 Architecture hexagonale"
 weight: 70
 ---
+
+# Chapitre V.7 — Architecture hexagonale
 
 Le chapitre « Une API web complète » a construit un service en couches simples : HTTP,
 stockage, domaine. C'est suffisant tant que la logique métier reste mince.
