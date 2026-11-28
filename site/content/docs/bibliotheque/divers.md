@@ -1,8 +1,9 @@
 ---
-title: "Tour d'horizon"
-linkTitle: "10. Tour d'horizon"
+title: "III.10 Tour d'horizon"
 weight: 100
 ---
+
+# Chapitre III.10 — Tour d'horizon
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

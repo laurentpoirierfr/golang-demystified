@@ -1,8 +1,10 @@
 ---
-title: "L'évolution de Go"
-linkTitle: "IV - L'évolution de Go"
+title: "IV. L'évolution de Go"
+bookCollapseSection: true
 weight: 40
 ---
+
+# Partie IV — L'évolution de Go
 
 Go a beaucoup évolué depuis sa version 1.0, sans jamais casser les programmes
 existants. Cette partie retrace, version par version, ce qui a été ajouté au
@@ -11,6 +13,29 @@ langage, à la bibliothèque standard, aux outils et au runtime.
 Chaque page suit le même plan : le contexte de la version, ses apports
 principaux, puis ce qu'il faut en retenir aujourd'hui. Les nouveautés les plus
 importantes sont détaillées dans les chapitres des parties précédentes.
+
+<!-- sommaire -->
+
+- **IV.1** [De Go 1.0 à Go 1.10](go1-0-a-1-10/)
+- **IV.2** [Go 1.11](go1-11/)
+- **IV.3** [Go 1.12](go1-12/)
+- **IV.4** [Go 1.13](go1-13/)
+- **IV.5** [Go 1.14](go1-14/)
+- **IV.6** [Go 1.15](go1-15/)
+- **IV.7** [Go 1.16](go1-16/)
+- **IV.8** [Go 1.17](go1-17/)
+- **IV.9** [Go 1.18](go1-18/)
+- **IV.10** [Go 1.19](go1-19/)
+- **IV.11** [Go 1.20](go1-20/)
+- **IV.12** [Go 1.21](go1-21/)
+- **IV.13** [Go 1.22](go1-22/)
+- **IV.14** [Go 1.23](go1-23/)
+- **IV.15** [Go 1.24](go1-24/)
+- **IV.16** [Go 1.25](go1-25/)
+- **IV.17** [Go 1.26](go1-26/)
+- **IV.18** [Go 1.27](go1-27/)
+
+<!-- /sommaire -->
 
 ## La frise des versions
 

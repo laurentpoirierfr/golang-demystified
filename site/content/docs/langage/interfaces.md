@@ -1,8 +1,9 @@
 ---
-title: "Interfaces"
-linkTitle: "7. Interfaces"
+title: "II.7 Interfaces"
 weight: 70
 ---
+
+# Chapitre II.7 — Interfaces
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

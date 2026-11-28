@@ -1,8 +1,9 @@
 ---
-title: "Une API web complète"
-linkTitle: "4. Une API web complète"
+title: "V.4 Une API web complète"
 weight: 40
 ---
+
+# Chapitre V.4 — Une API web complète
 
 Ce chapitre construit un service web complet, prêt pour la production, avec la
 seule bibliothèque standard et un pilote de base de données : une API JSON de

@@ -1,8 +1,9 @@
 ---
-title: "Texte : fmt, strings, strconv"
-linkTitle: "1. Texte"
+title: "III.1 Texte"
 weight: 10
 ---
+
+# Chapitre III.1 — Texte : fmt, strings, strconv
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

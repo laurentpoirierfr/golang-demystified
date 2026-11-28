@@ -1,8 +1,9 @@
 ---
-title: "Journalisation : log/slog"
-linkTitle: "7. Journalisation"
+title: "III.7 Journalisation"
 weight: 70
 ---
+
+# Chapitre III.7 — Journalisation : log/slog
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

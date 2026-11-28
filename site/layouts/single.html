@@ -1,8 +1,0 @@
-{{/* Le gabarit « main » de hugo-book (baseof.html) n'affiche pas le titre de
-     la page : on l'ajoute ici, pour ne pas le répéter dans chaque fichier. */}}
-{{ define "main" }}
-  <article class="markdown book-article">
-    {{- partial "titre-page" . -}}
-    {{- .Content -}}
-  </article>
-{{ end }}

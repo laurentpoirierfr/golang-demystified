@@ -1,8 +1,9 @@
 ---
-title: "Installation"
-linkTitle: "4. Installation"
+title: "I.4 Installation"
 weight: 20
 ---
+
+# Chapitre I.4 — Installation
 
 ## Installer Go
 

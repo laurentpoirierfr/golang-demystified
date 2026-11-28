@@ -1,8 +1,9 @@
 ---
-title: "Introduction"
-linkTitle: "1. Introduction"
+title: "I.1 Introduction"
 weight: 10
 ---
+
+# Chapitre I.1 — Introduction
 
 ## Pourquoi Go ?
 

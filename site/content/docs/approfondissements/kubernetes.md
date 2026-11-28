@@ -1,8 +1,9 @@
 ---
-title: "Kubernetes : écrire un opérateur"
-linkTitle: "16. Kubernetes"
+title: "V.16 Kubernetes"
 weight: 160
 ---
+
+# Chapitre V.16 — Kubernetes : écrire un opérateur
 
 [Kubernetes](https://kubernetes.io) est écrit en Go, et c'est en Go qu'on
 l'étend. Ce chapitre présente les outils de l'écosystème, puis construit un

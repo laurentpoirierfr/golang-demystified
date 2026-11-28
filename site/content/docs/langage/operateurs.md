@@ -1,8 +1,9 @@
 ---
-title: "Les opérateurs"
-linkTitle: "2. Les opérateurs"
+title: "II.2 Les opérateurs"
 weight: 20
 ---
+
+# Chapitre II.2 — Les opérateurs
 
 ## Opérateurs arithmétiques
 

@@ -1,8 +1,9 @@
 ---
-title: "Temps réel : WebSocket et Server-Sent Events"
-linkTitle: "13. Temps réel"
+title: "V.13 Temps réel"
 weight: 130
 ---
+
+# Chapitre V.13 — Temps réel : WebSocket et Server-Sent Events
 
 HTTP est fait de questions et de réponses : le client demande, le serveur
 répond, puis se tait. Une discussion, un tableau de bord, une notification ou

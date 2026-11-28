@@ -1,8 +1,9 @@
 ---
-title: "WebAssembly et TinyGo : Go partout"
-linkTitle: "17. WebAssembly et TinyGo"
+title: "V.17 WebAssembly et TinyGo"
 weight: 170
 ---
+
+# Chapitre V.17 — WebAssembly et TinyGo : Go partout
 
 [WebAssembly](https://webassembly.org) (Wasm) est un format de code binaire
 portable : un module compilé une fois s'exécute dans un navigateur, sur un

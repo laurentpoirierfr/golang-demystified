@@ -1,8 +1,9 @@
 ---
-title: "Les grands projets écrits en Go"
-linkTitle: "2. Les grands projets écrits en Go"
+title: "I.2 Les grands projets écrits en Go"
 weight: 15
 ---
+
+# Chapitre I.2 — Les grands projets écrits en Go
 
 Go s'est imposé comme **le langage de l'infrastructure** : une grande partie
 des outils qui font fonctionner le cloud, les conteneurs et l'observabilité

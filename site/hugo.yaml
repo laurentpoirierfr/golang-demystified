@@ -1,0 +1,52 @@
+baseURL: https://laurentpoirierfr.github.io/golang-demystified/
+locale: fr-FR
+defaultContentLanguage: fr
+title: Golang Demystified
+enableRobotsTXT: true
+enableGitInfo: true
+
+module:
+  imports:
+    - path: github.com/alex-shpak/hugo-book
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    parser:
+      attribute:
+        block: true
+        title: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+  highlight:
+    noClasses: false   # couleurs par classes CSS, voir assets/styles/custom.css
+
+menu:
+  after:
+    - name: Livre en PDF
+      url: https://github.com/laurentpoirierfr/golang-demystified/releases/latest/download/golang-demystified.pdf
+      weight: 10
+    - name: Diapositives
+      url: https://laurentpoirierfr.github.io/golang-demystified/diapositives/
+      weight: 20
+    - name: Dépôt GitHub
+      url: https://github.com/laurentpoirierfr/golang-demystified
+      weight: 30
+
+params:
+  description: Go dans son ensemble, le langage, ses outils et son évolution, rassemblés comme un livre.
+  BookTheme: auto
+  BookSection: docs
+  BookToC: true
+  BookBreadcrumbs: true
+  BookSearch: true
+  BookComments: false
+  BookRepo: https://github.com/laurentpoirierfr/golang-demystified
+  # Les deux liens suivants sont calculés par layouts/_partials/docs/links/ :
+  # le partial docs/text/template de hugo-book met le lien en cache sous une
+  # clé indépendante de la page, et toutes les pages recevraient le même.
+  BookLastChangeLink: true
+  BookEditLink: true
+  BookDateFormat: "2 January 2006"

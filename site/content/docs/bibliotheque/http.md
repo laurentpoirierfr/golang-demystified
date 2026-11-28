@@ -1,8 +1,9 @@
 ---
-title: "HTTP : net/http"
-linkTitle: "6. HTTP"
+title: "III.6 HTTP"
 weight: 60
 ---
+
+# Chapitre III.6 — HTTP : net/http
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

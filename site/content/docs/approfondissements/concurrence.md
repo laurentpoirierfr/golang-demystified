@@ -1,8 +1,9 @@
 ---
-title: "Concurrence en pratique"
-linkTitle: "2. Concurrence en pratique"
+title: "V.2 Concurrence en pratique"
 weight: 20
 ---
+
+# Chapitre V.2 — Concurrence en pratique
 
 Le chapitre « Goroutines et channels » a présenté les briques de base. Ce
 chapitre les assemble en **motifs** éprouvés, que l'on retrouve dans la plupart

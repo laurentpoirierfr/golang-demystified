@@ -1,8 +1,9 @@
 ---
-title: "Go et l'IA : modèles de langage, outils et MCP"
-linkTitle: "18. Go et l'IA"
+title: "V.18 Go et l'IA"
 weight: 180
 ---
+
+# Chapitre V.18 — Go et l'IA : modèles de langage, outils et MCP
 
 Les modèles de langage s'appellent par une API HTTP : une application Go n'a
 besoin ni de Python, ni de GPU. Go apporte ce qu'il fait bien ailleurs : la

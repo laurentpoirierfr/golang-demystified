@@ -1,8 +1,9 @@
 ---
-title: "Pointeurs et mémoire"
-linkTitle: "10. Pointeurs et mémoire"
+title: "II.10 Pointeurs et mémoire"
 weight: 100
 ---
+
+# Chapitre II.10 — Pointeurs et mémoire
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

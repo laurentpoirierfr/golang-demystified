@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"slices"
 	"strconv"
 	"strings"
@@ -117,7 +118,31 @@ func LoadPage(path string) (*Page, error) {
 	if p.Title == "" {
 		return nil, fmt.Errorf("%s : titre manquant", path)
 	}
+	normalise(p)
 	return p, nil
+}
+
+var (
+	// Numéro en tête du champ title : « II. », « II.1 », « A. ».
+	numeroTitreRe = regexp.MustCompile(`^([IVXLC]+\.(\d+)?|[A-Z]\.) `)
+	// Numéro en tête du titre de niveau 1 : « Chapitre II.1 — ».
+	numeroH1Re = regexp.MustCompile(`^(Partie [IVXLC]+|Chapitre [IVXLC]+\.\d+|Annexe [A-Z]) — `)
+	// Sommaire tenu à jour par numerote, inutile au livre et aux diapositives.
+	sommaireRe = regexp.MustCompile(`(?s)\n*<!-- sommaire -->.*?<!-- /sommaire -->\n*`)
+)
+
+// normalise retire la numérotation du site, que le livre PDF et les
+// diapositives calculent eux-mêmes : le numéro du titre, le titre de niveau 1
+// qui ouvre la page (le titre complet, qui remplace alors Title) et les
+// sommaires.
+func normalise(p *Page) {
+	p.Title = numeroTitreRe.ReplaceAllString(p.Title, "")
+	corps := strings.TrimLeft(p.Body, "\n")
+	if ligne, reste, _ := strings.Cut(corps, "\n"); strings.HasPrefix(ligne, "# ") {
+		p.Title = numeroH1Re.ReplaceAllString(strings.TrimSpace(ligne[2:]), "")
+		p.Body = strings.TrimLeft(reste, "\n")
+	}
+	p.Body = sommaireRe.ReplaceAllString(p.Body, "\n\n")
 }
 
 func exists(p string) bool {

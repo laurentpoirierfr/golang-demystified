@@ -1,8 +1,9 @@
 ---
-title: "Structures et méthodes"
-linkTitle: "6. Structures et méthodes"
+title: "II.6 Structures et méthodes"
 weight: 60
 ---
+
+# Chapitre II.6 — Structures et méthodes
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

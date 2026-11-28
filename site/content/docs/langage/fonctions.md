@@ -1,8 +1,9 @@
 ---
-title: "Fonctions"
-linkTitle: "5. Fonctions"
+title: "II.5 Fonctions"
 weight: 50
 ---
+
+# Chapitre II.5 — Fonctions
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

@@ -1,8 +1,9 @@
 ---
-title: "Tests : testing"
-linkTitle: "9. Tests"
+title: "III.9 Tests"
 weight: 90
 ---
+
+# Chapitre III.9 — Tests : testing
 
 > [!NOTE]
 > Les exemples de ce chapitre sont compilés et testés à chaque modification :

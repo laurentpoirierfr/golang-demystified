@@ -1,8 +1,9 @@
 ---
-title: "Sécurité : authentification, TLS et secrets"
-linkTitle: "8. Sécurité"
+title: "V.8 Sécurité"
 weight: 80
 ---
+
+# Chapitre V.8 — Sécurité : authentification, TLS et secrets
 
 Go a la réputation d'un langage sûr : pas de dépassement de tampon, une
 bibliothèque `crypto` maintenue par des spécialistes, des valeurs par défaut

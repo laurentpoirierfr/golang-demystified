@@ -1,8 +1,9 @@
 ---
-title: "CI/CD d'un projet Go"
-linkTitle: "15. CI/CD"
+title: "V.15 CI/CD"
 weight: 150
 ---
+
+# Chapitre V.15 — CI/CD d'un projet Go
 
 L'outillage de Go se prête particulièrement bien à l'automatisation : une
 seule commande compile, teste, analyse et formate, sans configuration. Ce

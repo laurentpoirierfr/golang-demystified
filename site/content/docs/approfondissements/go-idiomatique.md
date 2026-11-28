@@ -1,8 +1,9 @@
 ---
-title: "Go idiomatique : motifs, anti-motifs et relecture"
-linkTitle: "1. Go idiomatique"
+title: "V.1 Go idiomatique"
 weight: 10
 ---
+
+# Chapitre V.1 — Go idiomatique : motifs, anti-motifs et relecture
 
 Un programme Go peut compiler, passer ses tests et rester **non
 idiomatique** : écrit comme du Java, du Python ou du C, avec les détours que

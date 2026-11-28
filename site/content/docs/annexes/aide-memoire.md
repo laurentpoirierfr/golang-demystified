@@ -1,8 +1,9 @@
 ---
-title: "Aide-mémoire"
-linkTitle: "1. Aide-mémoire"
+title: "A. Aide-mémoire"
 weight: 10
 ---
+
+# Annexe A — Aide-mémoire
 
 L'essentiel de Go en quelques pages : la syntaxe, les idiomes, les pièges et
 les commandes. Il existe aussi en
