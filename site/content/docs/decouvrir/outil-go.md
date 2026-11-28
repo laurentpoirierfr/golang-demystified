@@ -1,5 +1,6 @@
 ---
 title: "I.6 L'outil go"
+description: "les commandes du quotidien, les dépendances, l'analyse et la modernisation du code."
 weight: 40
 ---
 

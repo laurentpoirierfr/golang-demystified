@@ -1,5 +1,6 @@
 ---
 title: "II.11 Goroutines et channels"
+description: "goroutines, channels, select, mutex et détecteur d'accès concurrents."
 weight: 110
 ---
 

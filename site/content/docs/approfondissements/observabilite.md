@@ -1,5 +1,6 @@
 ---
 title: "V.9 Observabilité"
+description: "traces, métriques et journaux reliés par OpenTelemetry."
 weight: 90
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "I.3 Rust et Go"
+description: "ramasse-miettes ou propriété, la même mesure dans les deux langages, et comment choisir."
 weight: 17
 ---
 

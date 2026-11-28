@@ -1,5 +1,6 @@
 ---
 title: "V.13 Temps réel"
+description: "un hub, Server-Sent Events, WebSocket, et le passage à plusieurs instances."
 weight: 130
 ---
 

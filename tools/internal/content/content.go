@@ -17,11 +17,12 @@ import (
 
 // Page est une page du site.
 type Page struct {
-	Title  string
-	Weight int
-	Body   string // Markdown, sans le front matter
-	Dir    string // répertoire de la page, pour résoudre les images relatives
-	Path   string
+	Title       string
+	Description string // phrase reprise par les sommaires
+	Weight      int
+	Body        string // Markdown, sans le front matter
+	Dir         string // répertoire de la page, pour résoudre les images relatives
+	Path        string
 }
 
 // Node est une page et ses enfants (pour une section).
@@ -107,6 +108,11 @@ func LoadPage(path string) (*Page, error) {
 				v = strings.Trim(v, `'`)
 			}
 			p.Title = v
+		case "description":
+			if u, err := strconv.Unquote(v); err == nil {
+				v = u
+			}
+			p.Description = v
 		case "weight":
 			p.Weight, _ = strconv.Atoi(v)
 		case "draft", "pdf":

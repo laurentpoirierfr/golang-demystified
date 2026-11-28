@@ -33,34 +33,17 @@
   {{ readFile "static/couverture.svg" | safeHTML }}
 </section>
 
-<section class="titre markdown">
-  <p class="titre-livre">{{ .Site.Title }}</p>
-  <p class="sous-titre">Le langage Go, ses outils et son évolution</p>
-  <p class="edition">Édition Go 1.27</p>
-  <p class="auteur">The Gang of Three</p>
+{{- /* La page d'accueil du site, telle quelle : titre, préface et table des
+       matières. Les liens des chapitres deviennent des renvois internes, et
+       livre.css leur ajoute le numéro de page. */}}
+<section class="accueil markdown" id="accueil" data-url="{{ ($.OutputFormats.Get "html").RelPermalink }}">
+  {{ .Content }}
   <p class="colophon">
     {{- /* make book passe la version par HUGO_PARAMS_VERSION. */}}
-    Version {{ .Site.Params.version | default "de développement" }} · {{ now.Format "2006-01-02" }}<br>
-    En ligne : <a href="https://laurentpoirierfr.github.io/golang-demystified/">laurentpoirierfr.github.io/golang-demystified</a>
+    Version {{ .Site.Params.version | default "de développement" }} · {{ now.Format "2006-01-02" }} ·
+    en ligne : laurentpoirierfr.github.io/golang-demystified
   </p>
 </section>
-
-{{- /* La préface : la section « ## Préface » de la page d'accueil. */}}
-{{- with findRESubmatch `(?s)## Préface\n(.*?)\n## ` .RawContent 1 }}
-<section class="preface markdown" id="preface" data-url="{{ ($.OutputFormats.Get "html").RelPermalink }}">
-  <h1>Préface</h1>
-  {{ index (index . 0) 1 | $.RenderString }}
-</section>
-{{- end }}
-
-<nav class="sommaire markdown">
-  <h1>Table des matières</h1>
-  <ul>
-  {{- range $pages }}
-    <li class="{{ if .IsSection }}partie{{ else }}chapitre{{ end }}"><a href="#{{ .RelPermalink | anchorize }}">{{ .Title }}</a></li>
-  {{- end }}
-  </ul>
-</nav>
 
 {{- range $pages }}
 <section class="{{ if .IsSection }}partie{{ else }}chapitre{{ end }} markdown" id="{{ .RelPermalink | anchorize }}" data-url="{{ .RelPermalink }}">
@@ -81,7 +64,7 @@
   }
   for (const a of document.querySelectorAll("section[data-url] a[href]")) {
     const href = a.getAttribute("href");
-    if (/^[a-z]+:/i.test(href)) continue;
+    if (/^[a-z]+:/i.test(href) || href.startsWith("#")) continue;
     const base = new URL(a.closest("section").dataset.url, location.origin);
     const cible = new URL(href, base);
     if (cible.origin !== location.origin) continue;

@@ -1,5 +1,6 @@
 ---
 title: "II.2 Les opérateurs"
+description: "arithmétique, comparaison, logique, bits, affectation, et ce que Go a choisi de ne pas avoir."
 weight: 20
 ---
 

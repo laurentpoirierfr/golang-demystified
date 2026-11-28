@@ -1,5 +1,6 @@
 ---
 title: "II.12 Packages et modules"
+description: "visibilité, documentation, modules et organisation d'un projet."
 weight: 120
 ---
 

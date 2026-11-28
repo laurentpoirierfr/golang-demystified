@@ -1,5 +1,6 @@
 ---
 title: "I.1 Introduction"
+description: "pourquoi Go, sa philosophie de la simplicité, la promesse de compatibilité et le rythme des versions."
 weight: 10
 ---
 

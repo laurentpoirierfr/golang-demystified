@@ -1,5 +1,6 @@
 ---
 title: "V.1 Go idiomatique"
+description: "options fonctionnelles, middlewares, injection de dépendances, anti-motifs et grille de relecture."
 weight: 10
 ---
 

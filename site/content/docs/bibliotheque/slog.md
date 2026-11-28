@@ -1,5 +1,6 @@
 ---
 title: "III.7 Journalisation"
+description: "des journaux structurés, contextualisés, sans données sensibles, au niveau réglable à chaud."
 weight: 70
 ---
 

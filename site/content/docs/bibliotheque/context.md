@@ -1,5 +1,6 @@
 ---
 title: "III.8 Annulation et délais"
+description: "délais, annulation et valeurs transmis d'un appel à l'autre."
 weight: 80
 ---
 

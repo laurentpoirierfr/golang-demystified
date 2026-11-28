@@ -1,5 +1,6 @@
 ---
 title: "I.4 Installation"
+description: "installer Go, gérer plusieurs versions et configurer son éditeur."
 weight: 20
 ---
 

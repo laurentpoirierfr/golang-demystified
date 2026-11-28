@@ -1,5 +1,6 @@
 ---
 title: "A. Aide-mémoire"
+description: "la syntaxe et les commandes de Go sur quelques pages."
 weight: 10
 ---
 

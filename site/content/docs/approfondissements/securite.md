@@ -1,5 +1,6 @@
 ---
 title: "V.8 Sécurité"
+description: "OpenID Connect et JWT, TLS, secrets, mots de passe et validation des entrées."
 weight: 80
 ---
 

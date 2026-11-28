@@ -1,5 +1,6 @@
 ---
 title: "III.9 Tests"
+description: "tests de table, exemples, benchmarks, fuzzing, synctest et Testcontainers."
 weight: 90
 ---
 
@@ -283,7 +284,7 @@ func TestPostgres(t *testing.T) {
 
 ```
 $ go test -run TestPostgres -v ./internal/store
-🔔 Container is ready: acbd218c7c05
+Container is ready: acbd218c7c05
     postgres_test.go:37: PostgreSQL : postgres://gopher:secret@localhost:41975/taches?sslmode=disable
 === RUN   TestPostgres/liste_vide
 === RUN   TestPostgres/cycle_de_vie

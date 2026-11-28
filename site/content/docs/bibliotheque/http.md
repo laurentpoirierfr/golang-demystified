@@ -1,5 +1,6 @@
 ---
 title: "III.6 HTTP"
+description: "serveur, routage, middlewares, client et tests avec net/http seul."
 weight: 60
 ---
 

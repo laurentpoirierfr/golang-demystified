@@ -16,24 +16,24 @@ importantes sont détaillées dans les chapitres des parties précédentes.
 
 <!-- sommaire -->
 
-- **IV.1** [De Go 1.0 à Go 1.10](go1-0-a-1-10/)
-- **IV.2** [Go 1.11](go1-11/)
-- **IV.3** [Go 1.12](go1-12/)
-- **IV.4** [Go 1.13](go1-13/)
-- **IV.5** [Go 1.14](go1-14/)
-- **IV.6** [Go 1.15](go1-15/)
-- **IV.7** [Go 1.16](go1-16/)
-- **IV.8** [Go 1.17](go1-17/)
-- **IV.9** [Go 1.18](go1-18/)
-- **IV.10** [Go 1.19](go1-19/)
-- **IV.11** [Go 1.20](go1-20/)
-- **IV.12** [Go 1.21](go1-21/)
-- **IV.13** [Go 1.22](go1-22/)
-- **IV.14** [Go 1.23](go1-23/)
-- **IV.15** [Go 1.24](go1-24/)
-- **IV.16** [Go 1.25](go1-25/)
-- **IV.17** [Go 1.26](go1-26/)
-- **IV.18** [Go 1.27](go1-27/)
+- **IV.1** [De Go 1.0 à Go 1.10](go1-0-a-1-10/) : la promesse de compatibilité, le compilateur réécrit en Go et le ramasse-miettes concurrent.
+- **IV.2** [Go 1.11](go1-11/) : les modules et WebAssembly.
+- **IV.3** [Go 1.12](go1-12/) : TLS 1.3 en option, l'affichage trié des maps et les outils.
+- **IV.4** [Go 1.13](go1-13/) : l'enveloppement des erreurs, les nouveaux littéraux numériques et le proxy des modules.
+- **IV.5** [Go 1.14](go1-14/) : la préemption asynchrone des goroutines et un defer presque gratuit.
+- **IV.6** [Go 1.15](go1-15/) : un éditeur de liens réécrit, des exécutables plus petits et time/tzdata.
+- **IV.7** [Go 1.16](go1-16/) : embed, io/fs, les modules par défaut et Apple Silicon.
+- **IV.8** [Go 1.17](go1-17/) : les appels par registres et le graphe de modules élagué.
+- **IV.9** [Go 1.18](go1-18/) : les génériques, le fuzzing et les workspaces.
+- **IV.10** [Go 1.19](go1-19/) : GOMEMLIMIT, le modèle mémoire et les types atomiques.
+- **IV.11** [Go 1.20](go1-20/) : les erreurs multiples, l'optimisation guidée par profil et la couverture des programmes.
+- **IV.12** [Go 1.21](go1-21/) : min, max et clear, les toolchains automatiques, slices, maps et slog.
+- **IV.13** [Go 1.22](go1-22/) : une variable par itération, range sur un entier et le routage HTTP.
+- **IV.14** [Go 1.23](go1-23/) : range sur des fonctions, les itérateurs et les nouveaux timers.
+- **IV.15** [Go 1.24](go1-24/) : les alias génériques, les maps en Swiss Tables, la directive tool et os.Root.
+- **IV.16** [Go 1.25](go1-25/) : GOMAXPROCS adapté aux conteneurs, WaitGroup.Go, synctest et le ramasse-miettes Green Tea.
+- **IV.17** [Go 1.26](go1-26/) : new(expr), le ramasse-miettes Green Tea par défaut et la renaissance de go fix.
+- **IV.18** [Go 1.27](go1-27/) : les méthodes génériques, encoding/json/v2 et de nouveaux packages.
 
 <!-- /sommaire -->
 

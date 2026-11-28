@@ -1,5 +1,6 @@
 ---
 title: "V.17 WebAssembly et TinyGo"
+description: "Go dans le navigateur, en greffon côté serveur et sur microcontrôleur."
 weight: 170
 ---
 

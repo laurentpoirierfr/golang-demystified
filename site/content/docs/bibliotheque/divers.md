@@ -1,5 +1,6 @@
 ---
 title: "III.10 Tour d'horizon"
+description: "uuid, hasard, cryptographie, CSV, regexp, flag, sync.Once et database/sql."
 weight: 100
 ---
 

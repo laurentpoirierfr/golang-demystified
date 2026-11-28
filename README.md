@@ -96,4 +96,5 @@ GitHub avec les PDF. Ces fichiers générés ne sont pas versionnés.
 
 Le livre PDF et l'aide-mémoire sont composés en Source Serif 4 et Source Sans 3
 (Adobe, SIL Open Font License) et en Go Mono (Bigelow & Holmes, licence BSD).
-Les licences sont dans `book/quarto/fonts/`.
+Trois symboles absents de ces polices (★, ↳, ␣) viennent de DejaVu Sans
+(licence Bitstream Vera). Les licences sont dans `book/quarto/fonts/`.

@@ -1,5 +1,6 @@
 ---
 title: "V.2 Concurrence en pratique"
+description: "pipeline, fan-out et fan-in, pool de workers, errgroup, sémaphore et singleflight."
 weight: 20
 ---
 

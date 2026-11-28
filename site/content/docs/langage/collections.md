@@ -1,5 +1,6 @@
 ---
 title: "II.4 Tableaux, slices et maps"
+description: "tableaux de taille fixe, slices qui partagent leur mémoire, et maps."
 weight: 40
 ---
 

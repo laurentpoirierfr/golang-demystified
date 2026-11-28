@@ -1,5 +1,6 @@
 ---
 title: "V.3 Templates"
+description: "text/template et html/template, échappement contextuel, mise en page commune et génération de code."
 weight: 30
 ---
 

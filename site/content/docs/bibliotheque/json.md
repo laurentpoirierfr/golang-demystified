@@ -1,5 +1,6 @@
 ---
 title: "III.5 JSON"
+description: "encoder, décoder, personnaliser, traiter des flux, et encoding/json/v2."
 weight: 50
 ---
 

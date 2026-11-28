@@ -1,5 +1,6 @@
 ---
 title: "II.7 Interfaces"
+description: "des contrats implicites et petits, le type concret retrouvé, et le piège de l'interface nil."
 weight: 70
 ---
 

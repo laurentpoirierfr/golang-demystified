@@ -1,5 +1,6 @@
 ---
 title: "III.3 Fichiers et flux"
+description: "io.Reader et io.Writer, fichiers, lecture ligne par ligne, io/fs, embed et os.Root."
 weight: 30
 ---
 

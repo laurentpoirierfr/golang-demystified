@@ -60,6 +60,7 @@ func main() {
 type chapitre struct {
 	numero string // « II.1 », ou « A » pour une annexe
 	court  string
+	desc   string // champ description, repris par les sommaires
 	lien   string // relatif à la partie : « bases/ »
 }
 
@@ -158,7 +159,7 @@ func numerote(racine *content.Node, accueil string, ecrit bool) ([]string, error
 			if nom == "index" {
 				nom = filepath.Base(filepath.Dir(c.Path))
 			}
-			pt.chapitres = append(pt.chapitres, chapitre{numero: num, court: court, lien: nom + "/"})
+			pt.chapitres = append(pt.chapitres, chapitre{numero: num, court: court, desc: c.Description, lien: nom + "/"})
 		}
 		parties = append(parties, pt)
 	}
@@ -192,15 +193,21 @@ func numerote(racine *content.Node, accueil string, ecrit bool) ([]string, error
 	return changements, nil
 }
 
-func listeChapitres(b *strings.Builder, chapitres []chapitre, prefixe string) {
+// listeChapitres écrit un chapitre par ligne, suivi de sa description si
+// avecDesc est vrai (accueil et parties, comme dans basic-knowledge).
+func listeChapitres(b *strings.Builder, chapitres []chapitre, prefixe string, avecDesc bool) {
 	for _, c := range chapitres {
-		fmt.Fprintf(b, "- **%s** [%s](%s%s)\n", c.numero, c.court, prefixe, c.lien)
+		fmt.Fprintf(b, "- **%s** [%s](%s%s)", c.numero, c.court, prefixe, c.lien)
+		if avecDesc && c.desc != "" {
+			fmt.Fprintf(b, " : %s", c.desc)
+		}
+		b.WriteString("\n")
 	}
 }
 
 func sommairePartie(pt partie) string {
 	var b strings.Builder
-	listeChapitres(&b, pt.chapitres, "")
+	listeChapitres(&b, pt.chapitres, "", true)
 	return b.String()
 }
 
@@ -213,7 +220,7 @@ func sommaireChapitres(parties []partie, prefixe string) string {
 		fmt.Fprintf(&b, "**[%s](%s%s)**\n", pt.titre, prefixe, pt.lien)
 		if len(pt.chapitres) > 0 {
 			b.WriteString("\n")
-			listeChapitres(&b, pt.chapitres, prefixe+pt.lien)
+			listeChapitres(&b, pt.chapitres, prefixe+pt.lien, false)
 		}
 	}
 	return b.String()
@@ -228,7 +235,7 @@ func sommaireAccueil(parties []partie) string {
 		fmt.Fprintf(&b, "### %s\n", pt.titre)
 		if len(pt.chapitres) > 0 {
 			b.WriteString("\n")
-			listeChapitres(&b, pt.chapitres, "docs/"+pt.lien)
+			listeChapitres(&b, pt.chapitres, "docs/"+pt.lien, true)
 		}
 	}
 	return b.String()

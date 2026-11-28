@@ -1,5 +1,6 @@
 ---
 title: "V.11 Les coulisses de Go"
+description: "réflexion, unsafe, cgo, ordonnanceur et ramasse-miettes."
 weight: 110
 ---
 

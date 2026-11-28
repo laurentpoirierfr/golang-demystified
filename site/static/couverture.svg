@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-labelledby="titre">
   <title id="titre">Couverture : Golang Demystified, le langage Go, ses outils et son évolution</title>
   <style>
-    .serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Source Serif 4",serif}
-    .sans{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Source Sans 3",sans-serif}
-    .mono{font-family:ui-monospace,"SFMono-Regular","JetBrains Mono",Menlo,Consolas,"Go Mono",monospace}
+    .serif{font-family:"Source Serif 4","Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif}
+    .sans{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+    .mono{font-family:"Go Mono",ui-monospace,"SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace}
     .tr{fill:none;stroke:#5fd0e8;stroke-width:2}
     .bx{fill:#123a4d;stroke:#5fd0e8;stroke-width:2}
     .bx2{fill:#0b2533;stroke:#5fd0e8;stroke-width:2}

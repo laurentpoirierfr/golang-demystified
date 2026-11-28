@@ -1,5 +1,6 @@
 ---
 title: "II.5 Fonctions"
+description: "retours multiples, fonctions variadiques, closures et itérateurs."
 weight: 50
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "V.12 gRPC et Connect"
+description: "un contrat protobuf, buf, intercepteurs, et REST ou gRPC."
 weight: 120
 ---
 
